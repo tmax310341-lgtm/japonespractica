@@ -3245,14 +3245,20 @@
 
                     <!-- Opciones Auxiliares y Botón de Inicio -->
                     <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-xl">
-                        <div class="flex flex-wrap items-center gap-6 text-sm">
-                            <!-- Timer toggle -->
-                            <label class="flex items-center gap-2.5 cursor-pointer select-none">
-                                <input type="checkbox" id="stagesTimerToggle" class="w-4 h-4 rounded text-amber-500 bg-slate-950 border-slate-700">
-                                <span class="text-slate-300 font-semibold flex items-center gap-1.5">
-                                    <i class="fa-solid fa-stopwatch text-amber-400"></i> Temporizador (15s)
+                        <div class="flex flex-wrap items-center gap-5 sm:gap-6 text-sm">
+                            <!-- Selector de Velocidad del Temporizador -->
+                            <div class="flex flex-col gap-1.5">
+                                <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-stopwatch text-amber-400"></i> Temporizador:
                                 </span>
-                            </label>
+                                <div class="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800 text-xs font-bold" id="stagesTimerSpeedSelector">
+                                    <button type="button" onclick="setStagesTimerSpeed('off')" data-speed="off" class="stages-speed-btn px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition">⏹️ Apagado</button>
+                                    <button type="button" onclick="setStagesTimerSpeed('slow')" data-speed="slow" class="stages-speed-btn px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition">🐢 Lento</button>
+                                    <button type="button" onclick="setStagesTimerSpeed('medium')" data-speed="medium" class="stages-speed-btn px-2.5 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition">⚡ Medio</button>
+                                    <button type="button" onclick="setStagesTimerSpeed('fast')" data-speed="fast" class="stages-speed-btn px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition">🔥 Rápido</button>
+                                </div>
+                                <input type="checkbox" id="stagesTimerToggle" class="hidden">
+                            </div>
                             <!-- Auto Audio toggle -->
                             <label class="flex items-center gap-2.5 cursor-pointer select-none">
                                 <input type="checkbox" id="stagesAutoAudioToggle" checked class="w-4 h-4 rounded text-sky-500 bg-slate-950 border-slate-700">
@@ -3262,9 +3268,9 @@
                             </label>
                             <!-- Stage Lock toggle -->
                             <label class="flex items-center gap-2.5 cursor-pointer select-none">
-                                <input type="checkbox" id="stagesLockModeToggle" class="w-4 h-4 rounded text-rose-500 bg-slate-950 border-slate-700">
+                                <input type="checkbox" id="stagesLockModeToggle" class="w-4 h-4 rounded text-amber-500 bg-slate-950 border-slate-700">
                                 <span class="text-slate-300 font-semibold flex items-center gap-1.5">
-                                    <i class="fa-solid fa-lock text-rose-400"></i> Modo Dominio (Repetir fallos)
+                                    <i class="fa-solid fa-lock text-amber-400"></i> Bloquear Etapas (Bucle infinito)
                                 </span>
                             </label>
                         </div>
@@ -3309,9 +3315,10 @@
                                 <div id="stageSessionProgressBar" class="h-full rounded-full bg-gradient-to-r from-sakura-500 to-amber-400 transition-all duration-300"></div>
                             </div>
 
-                            <div id="stageTimerBadge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-bold font-mono">
-                                <i class="fa-solid fa-stopwatch text-rose-400"></i>
-                                <span id="stageTimerSeconds">15s</span>
+                            <div id="stageTimerBadge" class="hidden items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold font-mono transition-all">
+                                <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                                <span id="stageTimerSpeedIcon">⚡</span>
+                                <span id="stageTimerSeconds">10s</span>
                             </div>
                         </div>
                     </div>
@@ -3350,9 +3357,9 @@
                             <i class="fa-solid fa-forward-step text-sakura-400"></i>
                             <span>Saltar ejercicio</span>
                         </button>
-                        <button type="button" onclick="toggleStageTimerInSession()" id="stageTimerToggleBtn" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-slate-300 font-bold flex items-center justify-center gap-2 transition active:scale-95">
+                        <button type="button" onclick="toggleStageTimerInSession()" id="stageTimerToggleBtn" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-slate-300 font-bold flex items-center justify-center gap-2 transition active:scale-95" title="Toca para cambiar la velocidad del temporizador">
                             <i class="fa-solid fa-stopwatch text-amber-400"></i>
-                            <span id="stageTimerToggleLabel">Temporizador</span>
+                            <span id="stageTimerToggleLabel">Temporizador: ⚡ Medio</span>
                         </button>
                         <button type="button" onclick="toggleStageAudioInSession()" id="stageAudioToggleBtn" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-slate-300 font-bold flex items-center justify-center gap-2 transition active:scale-95">
                             <i class="fa-solid fa-volume-high text-sky-400" id="stageAudioToggleIcon"></i>
@@ -5958,7 +5965,8 @@
             stagesConfig: {
                 selectedSoundGroups: ['a', 'ka'], // Default: A + Ka (10)
                 selectedStages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                timerEnabled: false,
+                timerSpeed: 'medium', // 'off' | 'slow' | 'medium' | 'fast'
+                timerEnabled: true,
                 autoAudio: true,
                 lockMode: false
             },
@@ -7339,28 +7347,36 @@
         }
 
         function getActiveStagesConfig() {
+            let cfg;
             if (state.currentSyllabary === 'katakana') {
                 if (!state.stagesConfig_katakana) {
                     state.stagesConfig_katakana = {
                         selectedSoundGroups: ['a', 'ka'],
                         selectedStages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                        timerEnabled: false,
+                        timerSpeed: 'medium',
+                        timerEnabled: true,
                         autoAudio: true,
                         lockMode: false
                     };
                 }
-                return state.stagesConfig_katakana;
+                cfg = state.stagesConfig_katakana;
+            } else {
+                if (!state.stagesConfig) {
+                    state.stagesConfig = {
+                        selectedSoundGroups: ['a', 'ka'],
+                        selectedStages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        timerSpeed: 'medium',
+                        timerEnabled: true,
+                        autoAudio: true,
+                        lockMode: false
+                    };
+                }
+                cfg = state.stagesConfig;
             }
-            if (!state.stagesConfig) {
-                state.stagesConfig = {
-                    selectedSoundGroups: ['a', 'ka'],
-                    selectedStages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                    timerEnabled: false,
-                    autoAudio: true,
-                    lockMode: false
-                };
+            if (!cfg.timerSpeed) {
+                cfg.timerSpeed = cfg.timerEnabled ? 'medium' : 'off';
             }
-            return state.stagesConfig;
+            return cfg;
         }
 
         function getActiveSoundGroups() {
@@ -11384,6 +11400,10 @@
                 matchedPairs: [],
                 selectedPairCard: null,
                 isStageLocked: false,
+                stageLoopRounds: 1,
+                firstAttemptEvaluated: {},
+                pendingMistakes: new Set(),
+                reinsertCount: {},
                 timerSeconds: 15,
                 timerInterval: null,
                 sessionKanaStats: {}, // [hiragana]: { attempts: 0, correct: 0 }
@@ -11461,8 +11481,7 @@
             });
 
             // Auxiliary toggles
-            const timerToggle = document.getElementById('stagesTimerToggle');
-            if (timerToggle) timerToggle.checked = !!config.timerEnabled;
+            updateStagesTimerSpeedUI();
 
             const autoAudioToggle = document.getElementById('stagesAutoAudioToggle');
             if (autoAudioToggle) autoAudioToggle.checked = !!config.autoAudio;
@@ -11952,13 +11971,16 @@
             const stage5WordsPool = generateStage5Words(kanaPool);
 
             // Read auxiliary toggles
-            const timerEnabled = document.getElementById('stagesTimerToggle')?.checked || false;
+            const timerSpeed = config.timerSpeed || 'medium';
+            const timerEnabled = (timerSpeed !== 'off');
             const autoAudio = document.getElementById('stagesAutoAudioToggle')?.checked ?? true;
             const lockMode = document.getElementById('stagesLockModeToggle')?.checked || false;
 
+            config.timerSpeed = timerSpeed;
             config.timerEnabled = timerEnabled;
             config.autoAudio = autoAudio;
             config.lockMode = lockMode;
+            state.stagesConfig.timerSpeed = timerSpeed;
             state.stagesConfig.timerEnabled = timerEnabled;
             state.stagesConfig.autoAudio = autoAudio;
             state.stagesConfig.lockMode = lockMode;
@@ -11998,6 +12020,10 @@
                 matchedPairs: [],
                 selectedPairCard: null,
                 isStageLocked: lockMode,
+                stageLoopRounds: 1,
+                firstAttemptEvaluated: {},
+                pendingMistakes: new Set(),
+                reinsertCount: {},
                 timerSeconds: 15,
                 timerInterval: null,
                 stats: {
@@ -12119,37 +12145,321 @@
         const getStage3Chunks = getStage4Chunks;
 
         // ==========================================================
-        // COLA DE REINTENTOS ESPACIADOS (ANTI-MEMORIA A CORTO PLAZO)
+        // TEMPORIZADOR ADAPTATIVO CALIBRADO (3 VELOCIDADES Y APAGADO)
+        // ==========================================================
+        const STAGE_TIMER_PRESETS = {
+            slow: {
+                1: 20, // Opción Múltiple
+                2: 20, // Opción Inversa
+                3: 25, // Escucha Fonética
+                4: 50, // Parejas (Micro-tablero)
+                5: 25, // Teclado Kana
+                6: 50, // Texto Continuo (20 kanas)
+                7: 35, // Vocabulario (Palabras)
+                8: 45, // Trazos con Guía
+                9: 50  // Trazos a Ciegas
+            },
+            medium: {
+                1: 10,
+                2: 10,
+                3: 12,
+                4: 30,
+                5: 12,
+                6: 30,
+                7: 20,
+                8: 25,
+                9: 30
+            },
+            fast: {
+                1: 5,
+                2: 5,
+                3: 6,
+                4: 15,
+                5: 6,
+                6: 18,
+                7: 10,
+                8: 12,
+                9: 15
+            }
+        };
+
+        function getStageTimerSpeed() {
+            const config = getActiveStagesConfig();
+            if (config.timerSpeed) return config.timerSpeed;
+            return config.timerEnabled ? 'medium' : 'off';
+        }
+
+        function setStagesTimerSpeed(speed) {
+            const config = getActiveStagesConfig();
+            config.timerSpeed = speed;
+            config.timerEnabled = (speed !== 'off');
+            if (state.currentSyllabary === 'katakana') {
+                if (!state.stagesConfig_katakana) state.stagesConfig_katakana = {};
+                state.stagesConfig_katakana.timerSpeed = speed;
+                state.stagesConfig_katakana.timerEnabled = (speed !== 'off');
+            } else {
+                if (!state.stagesConfig) state.stagesConfig = {};
+                state.stagesConfig.timerSpeed = speed;
+                state.stagesConfig.timerEnabled = (speed !== 'off');
+            }
+            saveStateToStorage();
+            updateStagesTimerSpeedUI();
+        }
+
+        function updateStagesTimerSpeedUI() {
+            const speed = getStageTimerSpeed();
+            const btns = document.querySelectorAll('#stagesTimerSpeedSelector .stages-speed-btn');
+            btns.forEach(btn => {
+                const s = btn.dataset.speed;
+                if (s === speed) {
+                    btn.className = 'stages-speed-btn px-2.5 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black shadow transition';
+                } else {
+                    btn.className = 'stages-speed-btn px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition';
+                }
+            });
+
+            const hiddenCheckbox = document.getElementById('stagesTimerToggle');
+            if (hiddenCheckbox) hiddenCheckbox.checked = (speed !== 'off');
+        }
+
+        function setupStageExerciseTimer() {
+            if (state.stageSession.timerInterval) {
+                clearInterval(state.stageSession.timerInterval);
+                state.stageSession.timerInterval = null;
+            }
+
+            const stageNum = getCurrentStageNumber();
+            const speed = getStageTimerSpeed();
+            const timerBadge = document.getElementById('stageTimerBadge');
+            const timerSecs = document.getElementById('stageTimerSeconds');
+            const speedIcon = document.getElementById('stageTimerSpeedIcon');
+
+            if (speed === 'off' || !state.stageSession.active) {
+                if (timerBadge) {
+                    timerBadge.classList.add('hidden');
+                    timerBadge.classList.remove('flex');
+                }
+                return;
+            }
+
+            const duration = STAGE_TIMER_PRESETS[speed]?.[stageNum] || 15;
+            state.stageSession.timerSeconds = duration;
+
+            if (timerBadge) {
+                timerBadge.classList.remove('hidden');
+                timerBadge.classList.add('flex');
+                timerBadge.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold font-mono transition-all duration-300';
+            }
+
+            const iconMap = { slow: '🐢', medium: '⚡', fast: '🔥' };
+            if (speedIcon) speedIcon.textContent = iconMap[speed] || '⚡';
+            if (timerSecs) timerSecs.textContent = `${duration}s`;
+
+            state.stageSession.timerInterval = setInterval(() => {
+                state.stageSession.timerSeconds--;
+                if (timerSecs) timerSecs.textContent = `${state.stageSession.timerSeconds}s`;
+
+                // Transición cromática de advertencia
+                const pct = state.stageSession.timerSeconds / duration;
+                if (timerBadge) {
+                    if (pct > 0.45) {
+                        timerBadge.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold font-mono transition-all duration-300';
+                    } else if (pct > 0.20) {
+                        timerBadge.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold font-mono transition-all duration-300';
+                    } else {
+                        timerBadge.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/25 border border-rose-500/50 text-rose-300 text-xs font-bold font-mono animate-pulse transition-all duration-300';
+                    }
+                }
+
+                if (state.stageSession.timerSeconds <= 0) {
+                    clearInterval(state.stageSession.timerInterval);
+                    state.stageSession.timerInterval = null;
+                    playSoundTone(220, 'sawtooth', 0.25);
+                    showToast('⏱️ ¡Tiempo agotado!', 'error');
+
+                    const itemIdx = state.stageSession.currentItemIndex;
+                    const curItem = state.stageSession.stageQueue?.[itemIdx];
+                    const kanaChar = curItem?.hiragana || curItem?.katakana || curItem?.character;
+
+                    handleStageAnswer(false, '¡Tiempo agotado!', kanaChar);
+
+                    const optBtns = document.querySelectorAll('.stage-opt-btn');
+                    if (optBtns.length > 0) {
+                        optBtns.forEach(b => b.disabled = true);
+                        if (stageNum === 1 && curItem) {
+                            optBtns.forEach(b => {
+                                if (b.textContent.trim().toLowerCase() === curItem.romaji.toLowerCase()) {
+                                    b.className = 'stage-opt-btn py-4 rounded-2xl bg-matcha-600 border-2 border-matcha-400 text-white font-mono text-xl font-bold uppercase flex items-center justify-center gap-1.5';
+                                }
+                            });
+                        } else if ((stageNum === 2 || stageNum === 3) && curItem) {
+                            optBtns.forEach(b => {
+                                if (b.textContent.trim() === (curItem.hiragana || curItem.katakana)) {
+                                    b.className = 'stage-opt-btn py-3.5 rounded-2xl bg-matcha-600 border-2 border-matcha-400 text-white font-jp text-4xl font-bold flex items-center justify-center gap-2';
+                                }
+                            });
+                        }
+                    }
+
+                    setTimeout(() => nextStageExercise(), 950);
+                }
+            }, 1000);
+        }
+
+        function toggleStageTimerInSession() {
+            const currentSpeed = getStageTimerSpeed();
+            const order = ['off', 'slow', 'medium', 'fast'];
+            const nextIdx = (order.indexOf(currentSpeed) + 1) % order.length;
+            const nextSpeed = order[nextIdx];
+
+            setStagesTimerSpeed(nextSpeed);
+
+            const speedLabels = {
+                off: '⏹️ Apagado (Sin prisa)',
+                slow: '🐢 Lento (Relajado)',
+                medium: '⚡ Medio (Equilibrado)',
+                fast: '🔥 Rápido (Desafío veloz)'
+            };
+            showToast(`⏱️ Temporizador: ${speedLabels[nextSpeed]}`, 'info');
+
+            setupStageExerciseTimer();
+            updateStageActiveControlButtons();
+        }
+
+        function updateStageActiveControlButtons() {
+            const speed = getStageTimerSpeed();
+            const timerLabel = document.getElementById('stageTimerToggleLabel');
+            if (timerLabel) {
+                const map = {
+                    off: 'Temporizador: Off',
+                    slow: 'Temporizador: 🐢 Lento',
+                    medium: 'Temporizador: ⚡ Medio',
+                    fast: 'Temporizador: 🔥 Rápido'
+                };
+                timerLabel.textContent = map[speed] || 'Temporizador';
+            }
+
+            const timerBtn = document.getElementById('stageTimerToggleBtn');
+            if (timerBtn) {
+                if (speed !== 'off') {
+                    timerBtn.className = 'py-2.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-bold flex items-center justify-center gap-2 transition active:scale-95 shadow-sm';
+                } else {
+                    timerBtn.className = 'py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-slate-300 font-bold flex items-center justify-center gap-2 transition active:scale-95';
+                }
+            }
+        }
+
+        // ==========================================================
+        // CONTROL DE BUCLE DE DOMINIO INFINITO (BLOQUEO DE ETAPA)
+        // ==========================================================
+        function updateStageLockBtnUI() {
+            const isLocked = !!state.stageSession?.isStageLocked;
+            const lockBtn = document.getElementById('stageLockBtn');
+            const lockIcon = document.getElementById('stageLockIcon');
+            const lockLabel = document.getElementById('stageLockLabel');
+
+            if (lockBtn) {
+                if (isLocked) {
+                    lockBtn.className = 'py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 border border-amber-400 text-slate-950 font-black shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition active:scale-95';
+                } else {
+                    lockBtn.className = 'py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/80 text-slate-300 font-bold flex items-center justify-center gap-2 transition active:scale-95';
+                }
+            }
+            if (lockIcon) {
+                lockIcon.className = isLocked ? 'fa-solid fa-lock text-slate-950' : 'fa-solid fa-lock text-slate-400';
+            }
+            if (lockLabel) {
+                lockLabel.textContent = isLocked ? 'Etapa fijada (Bucle)' : 'Bloquear etapa';
+            }
+        }
+
+        function toggleCurrentStageLock() {
+            state.stageSession.isStageLocked = !state.stageSession.isStageLocked;
+            updateStageLockBtnUI();
+            showToast(state.stageSession.isStageLocked 
+                ? "🔒 Etapa bloqueada en Bucle de Dominio (se repetirá con nuevos ejercicios hasta desbloquear)" 
+                : "🔓 Etapa desbloqueada (avanzará a la siguiente etapa al terminar)", "info");
+        }
+
+        function repeatCurrentStageLoop() {
+            const stageNum = getCurrentStageNumber();
+            state.stageSession.stageLoopRounds = (state.stageSession.stageLoopRounds || 1) + 1;
+
+            playSoundTone(587.33, 'sine', 0.15);
+            setTimeout(() => playSoundTone(880, 'sine', 0.22), 120);
+
+            showToast(`🔁 Bucle de Dominio: Etapa ${stageNum} (Ronda ${state.stageSession.stageLoopRounds})`, "info");
+
+            state.stageSession.currentItemIndex = 0;
+            state.stageSession.firstAttemptEvaluated = {};
+            state.stageSession.pendingMistakes = new Set();
+            if (!state.stageSession.stageErrorsCount) state.stageSession.stageErrorsCount = {};
+            state.stageSession.stageErrorsCount[stageNum] = 0;
+
+            const pool = state.stageSession.pool;
+            if (stageNum === 4) {
+                const numGroups = state.stagesConfig.selectedSoundGroups?.length || 1;
+                state.stageSession.stage4Chunks = getStage4Chunks(pool, numGroups);
+                state.stageSession.stage3Chunks = state.stageSession.stage4Chunks;
+            } else if (stageNum === 6) {
+                state.stageSession.stageQueue = [...pool];
+            } else if (stageNum === 7) {
+                state.stageSession.currentStage7Word = null;
+                state.stageSession.currentStage6Word = null;
+                state.stageSession.stage7UsedWords.clear();
+                state.stageSession.stageQueue = shuffleArray([...(state.stageSession.stage7WordsPool || [])]).slice(0, 10);
+            } else if (stageNum === 8 || stageNum === 9) {
+                const drawPool = (state.stageSession.coreKanas && state.stageSession.coreKanas.length > 0) 
+                    ? state.stageSession.coreKanas 
+                    : pool;
+                state.stageSession.stageQueue = initDrawQueue(drawPool);
+            } else {
+                state.stageSession.stageQueue = shuffleArray([...pool]);
+            }
+
+            renderCurrentStageExercise();
+        }
+
+        // ==========================================================
+        // REINSERCIÓN OBLIGATORIA CON ESPACIADO INTELIGENTE
         // ==========================================================
         function reinsertFailedStageItem(item) {
             if (!state.stageSession || !state.stageSession.stageQueue) return;
             const queue = state.stageSession.stageQueue;
             const curIdx = state.stageSession.currentItemIndex;
-            const pool = state.stageSession.pool;
+            const stageNum = getCurrentStageNumber();
+            const pool = (stageNum === 7 && state.stageSession.stage7WordsPool) 
+                ? state.stageSession.stage7WordsPool 
+                : state.stageSession.pool;
 
+            const targetKey = item.hiragana || item.romaji || item.katakana || item.word;
             const remainingAhead = queue.length - (curIdx + 1);
 
+            if (!state.stageSession.reinsertCount) state.stageSession.reinsertCount = {};
+            state.stageSession.reinsertCount[targetKey] = (state.stageSession.reinsertCount[targetKey] || 0) + 1;
+
+            const reinsertedItem = { ...item, _isReinserted: true, _reinsertCount: state.stageSession.reinsertCount[targetKey] };
+
             if (remainingAhead >= 2) {
-                // Hay al menos 2 preguntas por delante. Intercalar 1 o 2 preguntas antes del reintento
+                // Hay al menos 2 preguntas por delante. Intercalar 2 o 3 preguntas antes del reintento
                 const offset = remainingAhead >= 3 ? (Math.random() < 0.5 ? 2 : 3) : 2;
                 const targetIdx = Math.min(queue.length, curIdx + 1 + offset);
-                queue.splice(targetIdx, 0, item);
+                queue.splice(targetIdx, 0, reinsertedItem);
             } else if (remainingAhead === 1) {
-                // Solo queda 1 pregunta por delante. Añadir 1 kana intermedio del pool y luego el fallido
-                const fillerCandidates = pool.filter(k => k.hiragana !== item.hiragana);
+                // Solo queda 1 pregunta por delante. Añadir 1 item intermedio del pool y luego el fallido
+                const fillerCandidates = pool.filter(k => (k.hiragana || k.romaji) !== targetKey);
                 const filler = fillerCandidates.length > 0 
                     ? fillerCandidates[Math.floor(Math.random() * fillerCandidates.length)]
                     : pool[0];
-                queue.push(filler);
-                queue.push(item);
+                if (filler) queue.push({ ...filler, _isFiller: true });
+                queue.push(reinsertedItem);
             } else {
-                // Era la última pregunta. Inyectar 2 preguntas intermedias antes del reintento
-                const fillerCandidates = pool.filter(k => k.hiragana !== item.hiragana);
-                const fillers = shuffleArray([...fillerCandidates]).slice(0, 2);
-                if (fillers.length === 0) fillers.push(item);
-                if (fillers.length === 1 && fillerCandidates.length > 0) fillers.push(fillerCandidates[0]);
-                fillers.forEach(f => queue.push(f));
-                queue.push(item);
+                // Era la última pregunta. Inyectar 2 preguntas intermedias de repaso antes del reintento
+                const fillerCandidates = pool.filter(k => (k.hiragana || k.romaji) !== targetKey);
+                const shuffledFillers = shuffleArray([...fillerCandidates]).slice(0, 2);
+                if (shuffledFillers.length === 0 && pool.length > 0) shuffledFillers.push(pool[0]);
+                shuffledFillers.forEach(f => queue.push({ ...f, _isFiller: true }));
+                queue.push(reinsertedItem);
             }
 
             const subEl = document.getElementById('stageSubIndicator');
@@ -12180,10 +12490,8 @@
                     state.stageSession.stage4Chunks = getStage4Chunks(pool, numGroups);
                     state.stageSession.stage3Chunks = state.stageSession.stage4Chunks;
                 } else if (stageNum === 6) {
-                    // Etapa 6: Flujo continuo de texto (20 kanas en bloque multilínea)
                     state.stageSession.stageQueue = [...pool];
                 } else if (stageNum === 7) {
-                    // Etapa 7: Escribir Palabra (Vocabulario real de la fila activa y repaso)
                     const isAuto = !!state.stageSession.isAuto;
                     const lvlIdx = isAuto ? STAGES_CURRICULUM.findIndex(l => l.id === state.stageSession.autoLevelId) : -1;
                     const vocabPool = (state.stageSession.allUnlockedKanas && state.stageSession.allUnlockedKanas.length > 0)
@@ -12193,13 +12501,11 @@
                     state.stageSession.stage6WordsPool = state.stageSession.stage7WordsPool;
                     state.stageSession.stageQueue = state.stageSession.stage7WordsPool.slice(0, 10);
                 } else if (stageNum === 8 || stageNum === 9) {
-                    // FATIGA CONTROL: Etapas 8 y 9 se enfocan exclusivamente en los kanas de la fila activa (coreKanas)
                     const drawPool = (state.stageSession.coreKanas && state.stageSession.coreKanas.length > 0) 
                         ? state.stageSession.coreKanas 
                         : pool;
                     state.stageSession.stageQueue = initDrawQueue(drawPool);
                 } else {
-                    // Etapas 1, 2, 3 (Audio) y 5 (Teclado)
                     state.stageSession.stageQueue = shuffleArray([...pool]);
                 }
             }
@@ -12226,25 +12532,33 @@
             updateStageQuickSelectorPills();
 
             // Update Header
+            const roundNum = state.stageSession.stageLoopRounds || 1;
+            const isLocked = state.stageSession.isStageLocked;
             const badgeEl = document.getElementById('stageBadgeIndicator');
-            if (badgeEl) badgeEl.textContent = `Etapa ${state.stageSession.currentStageIndex + 1}/${state.stageSession.selectedStages.length}`;
+            if (badgeEl) {
+                badgeEl.textContent = `Etapa ${state.stageSession.currentStageIndex + 1}/${state.stageSession.selectedStages.length}${roundNum > 1 ? ` (Ronda ${roundNum})` : ''}`;
+            }
 
             const titleEl = document.getElementById('stageTitleIndicator');
             if (titleEl) titleEl.textContent = meta ? meta.name : `Etapa ${stageNum}`;
 
             const subEl = document.getElementById('stageSubIndicator');
+            const roundPrefix = (isLocked || roundNum > 1) ? `Ronda ${roundNum} • ` : '';
             if (subEl) {
+                const reinsertBadge = curItem?._isReinserted 
+                    ? ` <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse"><i class="fa-solid fa-rotate-right"></i> Refuerzo</span>` 
+                    : (curItem?._isFiller ? ` <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-700/60 text-slate-300 border border-slate-600/50">Repaso</span>` : '');
                 if (stageNum === 4) {
                     const chunksCount = state.stageSession.stage4Chunks ? state.stageSession.stage4Chunks.length : 1;
-                    subEl.textContent = chunksCount > 1 
-                        ? `Micro-tablero ${itemIdx + 1} de ${totalItemsInStage} (${curItem.length} parejas)`
-                        : `Tablero de Parejas (${curItem.length} parejas)`;
+                    subEl.innerHTML = (chunksCount > 1 
+                        ? `${roundPrefix}Micro-tablero ${itemIdx + 1} de ${totalItemsInStage} (${curItem.length} parejas)`
+                        : `${roundPrefix}Tablero de Parejas (${curItem.length} parejas)`) + reinsertBadge;
                 } else if (stageNum === 6) {
-                    subEl.textContent = `Flujo Continuo (Mecanografía Rápida)`;
+                    subEl.innerHTML = `${roundPrefix}Flujo Continuo (Mecanografía Rápida)` + reinsertBadge;
                 } else if (stageNum === 7) {
-                    subEl.textContent = `Ejercicio ${itemIdx + 1} de ${totalItemsInStage} (Palabras de Vocabulario)`;
+                    subEl.innerHTML = `${roundPrefix}Ejercicio ${itemIdx + 1} de ${totalItemsInStage} (Palabras de Vocabulario)` + reinsertBadge;
                 } else {
-                    subEl.textContent = `Ejercicio ${itemIdx + 1} de ${totalItemsInStage}`;
+                    subEl.innerHTML = `${roundPrefix}Ejercicio ${itemIdx + 1} de ${totalItemsInStage}` + reinsertBadge;
                 }
             }
 
@@ -12252,51 +12566,10 @@
             const pBar = document.getElementById('stageSessionProgressBar');
             if (pBar) pBar.style.width = `${Math.min(100, Math.max(5, overallProgress))}%`;
 
-            // Lock status icon and label
-            const lockIcon = document.getElementById('stageLockIcon');
-            if (lockIcon) {
-                lockIcon.className = state.stageSession.isStageLocked ? 'fa-solid fa-lock text-amber-400' : 'fa-solid fa-lock text-slate-400';
-            }
-            const lockLabel = document.getElementById('stageLockLabel');
-            if (lockLabel) {
-                lockLabel.textContent = state.stageSession.isStageLocked ? 'Desbloquear etapa' : 'Bloquear etapa';
-            }
-
-            // Setup timer if enabled (Temporizador Adaptativo Inteligente)
-            const timerBadge = document.getElementById('stageTimerBadge');
-            const timerSecs = document.getElementById('stageTimerSeconds');
-            if (state.stagesConfig.timerEnabled) {
-                if (timerBadge) timerBadge.classList.remove('hidden');
-                if (timerBadge) timerBadge.classList.add('flex');
-
-                let duration = 15; // Base para preguntas individuales (1, 2, 3, 5)
-                if (stageNum === 4) duration = 35;       // Emparejamiento
-                else if (stageNum === 6) duration = 40;  // Texto continuo (20 kanas)
-                else if (stageNum === 7) duration = 20;  // Palabras (3 a 5 kanas)
-                else if (stageNum === 8 || stageNum === 9) duration = 25; // Trazado y dibujo
-
-                state.stageSession.timerSeconds = duration;
-                if (timerSecs) timerSecs.textContent = `${duration}s`;
-                state.stageSession.timerInterval = setInterval(() => {
-                    state.stageSession.timerSeconds--;
-                    if (timerSecs) timerSecs.textContent = `${state.stageSession.timerSeconds}s`;
-                    if (state.stageSession.timerSeconds <= 0) {
-                        clearInterval(state.stageSession.timerInterval);
-                        state.stageSession.timerInterval = null;
-                        playSoundTone(220, 'sawtooth', 0.25);
-                        showToast('⏱️ ¡Tiempo agotado!', 'error');
-                        handleStageAnswer(false, '¡Tiempo agotado!');
-
-                        const optBtns = document.querySelectorAll('.stage-opt-btn');
-                        optBtns.forEach(b => b.disabled = true);
-
-                        setTimeout(() => nextStageExercise(), 950);
-                    }
-                }, 1000);
-            } else {
-                if (timerBadge) timerBadge.classList.add('hidden');
-                if (timerBadge) timerBadge.classList.remove('flex');
-            }
+            // Setup buttons and calibrated timer
+            updateStageLockBtnUI();
+            updateStageActiveControlButtons();
+            setupStageExerciseTimer();
 
             const workspace = document.getElementById('stageWorkspaceContainer');
             if (!workspace) return;
@@ -12308,7 +12581,7 @@
                 state.stageSession.currentStage6Word = state.stageSession.currentStage7Word;
             }
 
-            // Render stage content con la nueva secuencia cognitiva
+            // Render stage content con la secuencia cognitiva
             switch (stageNum) {
                 case 1:
                     renderStage1_MultipleChoice(workspace, curItem);
@@ -12357,19 +12630,6 @@
             if (item) speakJapanese(item.hiragana);
         }
 
-        function toggleCurrentStageLock() {
-            state.stageSession.isStageLocked = !state.stageSession.isStageLocked;
-            const lockIcon = document.getElementById('stageLockIcon');
-            if (lockIcon) {
-                lockIcon.className = state.stageSession.isStageLocked ? 'fa-solid fa-lock text-amber-400' : 'fa-solid fa-lock text-slate-400';
-            }
-            const lockLabel = document.getElementById('stageLockLabel');
-            if (lockLabel) {
-                lockLabel.textContent = state.stageSession.isStageLocked ? 'Desbloquear etapa' : 'Bloquear etapa';
-            }
-            showToast(state.stageSession.isStageLocked ? "🔒 Etapa bloqueada (modo repaso continuo)" : "🔓 Etapa desbloqueada", "info");
-        }
-
         function prevStageExercise() {
             state.stageSession.currentStage5Word = null;
             state.stageSession.currentStage6Word = null;
@@ -12409,6 +12669,22 @@
                 state.stageSession.currentItemIndex++;
                 renderCurrentStageExercise();
             } else {
+                // Verificar si aún quedan errores pendientes por corregir (Reinserción obligatoria)
+                const hasPendingMistakes = state.stageSession.pendingMistakes && state.stageSession.pendingMistakes.size > 0;
+                if (hasPendingMistakes && !skip && [1, 2, 3, 5, 7, 8, 9].includes(stageNum)) {
+                    // Reencolar los errores pendientes si alguno no fue resuelto
+                    const curQueue = state.stageSession.stageQueue;
+                    state.stageSession.pendingMistakes.forEach(errChar => {
+                        const original = state.stageSession.pool.find(k => (k.hiragana || k.romaji) === errChar) 
+                            || (state.stageSession.stage7WordsPool && state.stageSession.stage7WordsPool.find(w => w.hiragana === errChar));
+                        if (original) curQueue.push({ ...original, _isReinserted: true });
+                    });
+                    totalItemsInStage = curQueue.length;
+                    state.stageSession.currentItemIndex++;
+                    renderCurrentStageExercise();
+                    return;
+                }
+
                 // Etapa finalizada: Registrar estado pedagógico por colores
                 if (!state.stageSession.stageStatuses) state.stageSession.stageStatuses = {};
                 const errors = state.stageSession.stageErrorsCount?.[stageNum] || 0;
@@ -12434,6 +12710,12 @@
                     }
                 }
 
+                // Si la etapa está bloqueada en Bucle de Dominio, repetir indefinidamente
+                if (state.stageSession.isStageLocked && !skip) {
+                    repeatCurrentStageLoop();
+                    return;
+                }
+
                 // Avanzar fluidamente a la siguiente etapa seleccionada o finalizar
                 state.stageSession.currentStageIndex++;
                 state.stageSession.currentItemIndex = 0;
@@ -12457,6 +12739,8 @@
                 state.stageSession.stats.stageResults[curStageNum] = { correct: 0, errors: 0 };
             }
             if (!state.stageSession.stageErrorsCount) state.stageSession.stageErrorsCount = {};
+            if (!state.stageSession.pendingMistakes) state.stageSession.pendingMistakes = new Set();
+            if (!state.stageSession.firstAttemptEvaluated) state.stageSession.firstAttemptEvaluated = {};
 
             if (isPresentation) {
                 // Modo presentación guiado: Excluido de estadísticas y XP.
@@ -12465,6 +12749,14 @@
                     reinsertFailedStageItem(curItem);
                 }
                 return;
+            }
+
+            // Fallback para kanaChar si no vino explícito (ej: tiempo agotado)
+            if (!kanaChar) {
+                const curItem = state.stageSession.stageQueue?.[state.stageSession.currentItemIndex];
+                if (curItem) {
+                    kanaChar = curItem.hiragana || curItem.katakana || curItem.character;
+                }
             }
 
             // Registro individual de rendimiento por kana para cálculo de maestría acumulativa
@@ -12486,24 +12778,53 @@
                 }
             }
 
+            const isFirstAttempt = kanaChar ? !state.stageSession.firstAttemptEvaluated[kanaChar] : true;
+
             if (isCorrect) {
                 state.stageSession.stats.totalCorrect++;
                 state.stageSession.stats.stageResults[curStageNum].correct++;
-                state.stageSession.stats.xpEarned += 10;
-                addXP(10);
                 triggerHaptic('success');
                 playSoundTone(659.25, 'sine', 0.15);
-                if (kanaChar) recordKanaResult(kanaChar, true);
+
+                if (isFirstAttempt) {
+                    // Primer intento en esta ronda: evaluación y promoción SRS genuina
+                    if (kanaChar) {
+                        state.stageSession.firstAttemptEvaluated[kanaChar] = true;
+                        recordKanaResult(kanaChar, true);
+                    }
+                    state.stageSession.stats.xpEarned += 10;
+                    addXP(10);
+                } else {
+                    // Reintento de un error previo (refuerzo superado):
+                    // No inflar SRS en la misma ronda, pero liberar el fallo y otorgar XP de recuperación
+                    if (kanaChar) {
+                        state.stageSession.pendingMistakes.delete(kanaChar);
+                    }
+                    state.stageSession.stats.xpEarned += 5;
+                    addXP(5);
+                    showToast(customMsg || `💪 ¡Refuerzo completado! Has corregido el kana.`, "success");
+                }
             } else {
                 state.stageSession.stats.totalErrors++;
                 state.stageSession.stats.stageResults[curStageNum].errors++;
                 state.stageSession.stageErrorsCount[curStageNum] = (state.stageSession.stageErrorsCount[curStageNum] || 0) + 1;
                 triggerHaptic('error');
                 playSoundTone(220, 'sawtooth', 0.25);
-                if (kanaChar) recordKanaResult(kanaChar, false);
 
-                // Modo Dominio (Repetir fallos): reinsertar kana fallido en la cola con offset espaciado
-                if (state.stagesConfig.lockMode && [1, 2, 3, 5, 7, 8, 9].includes(curStageNum)) {
+                if (kanaChar) {
+                    state.stageSession.pendingMistakes.add(kanaChar);
+                }
+
+                if (isFirstAttempt) {
+                    // Primer intento fallido: democión a Caja 1 en el sistema SRS
+                    if (kanaChar) {
+                        state.stageSession.firstAttemptEvaluated[kanaChar] = true;
+                        recordKanaResult(kanaChar, false);
+                    }
+                }
+
+                // Reinserción obligatoria con espaciado inteligente (Etapas 1, 2, 3, 5, 7, 8, 9)
+                if ([1, 2, 3, 5, 7, 8, 9].includes(curStageNum)) {
                     const curItem = state.stageSession.stageQueue?.[state.stageSession.currentItemIndex];
                     if (curItem) {
                         reinsertFailedStageItem(curItem);
@@ -12553,13 +12874,6 @@
             } else {
                 finishStagesSession();
             }
-        }
-
-        function toggleStageTimerInSession() {
-            state.stagesConfig.timerEnabled = !state.stagesConfig.timerEnabled;
-            saveStateToStorage();
-            showToast(state.stagesConfig.timerEnabled ? "⏱️ Temporizador activado" : "⏱️ Temporizador desactivado", "info");
-            renderCurrentStageExercise();
         }
 
         function toggleStageAudioInSession() {
