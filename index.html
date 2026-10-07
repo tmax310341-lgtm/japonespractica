@@ -3664,69 +3664,51 @@
             </div>
         </div>
     </div>
-                    <!-- Modal Didáctico Explicativo de Chiisai Tsu (っ) / Consonantes Dobles -->
-    <div id="sokuonExplanationModal" class="hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-slate-900 border-2 border-amber-500/70 rounded-3xl max-w-lg w-full p-6 space-y-5 shadow-2xl relative animate-card-pop">
-            <button type="button" onclick="closeSokuonModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-1" aria-label="Cerrar explicación de consonantes dobles">
-                <i class="fa-solid fa-xmark"></i>
+                    <!-- Modal Didáctico Explicativo de Chiisai Tsu (っ / ッ) / Consonantes Dobles -->
+    <div id="sokuonExplanationModal" class="hidden fixed inset-0 z-[70] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-slate-900 border-2 border-amber-500/70 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-5 sm:p-6 space-y-4 shadow-2xl relative animate-card-pop">
+            <button type="button" onclick="closeSokuonModal()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95 absolute top-4 right-4" aria-label="Cerrar explicación de consonantes dobles">
+                <i class="fa-solid fa-xmark text-base"></i>
             </button>
 
             <!-- Header -->
-            <div class="flex items-center gap-3.5 border-b border-slate-800 pb-4">
-                <div class="font-jp text-5xl font-black text-amber-300 bg-slate-950 p-3 rounded-2xl border border-amber-500/40 min-w-[4.5rem] text-center shadow-inner">
+            <div class="flex items-center gap-3.5 border-b border-slate-800 pb-3">
+                <div id="sokuonCharBadge" class="font-jp text-5xl font-black text-amber-300 bg-slate-950 p-3 rounded-2xl border border-amber-500/40 min-w-[4.5rem] text-center shadow-inner">
                     っ
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span id="sokuonBadgeTag" class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                         <i class="fa-solid fa-sparkles"></i> Guía Fonética Especial (促音)
                     </span>
-                    <h3 class="text-xl font-black text-white">Chiisai Tsu (っ) / Consonante Doble</h3>
+                    <h3 id="sokuonTitle" class="text-lg sm:text-xl font-black text-white">Chiisai Tsu (っ) / Consonante Doble</h3>
+                    <p id="sokuonSubtitle" class="text-[11px] text-slate-400">Geminación de consonante</p>
                 </div>
             </div>
 
+            <!-- Syllabary Switcher Tab in Modal -->
+            <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 gap-1">
+                <button type="button" id="sokuonTabHiragana" onclick="setSokuonModalSyllabary('hiragana')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-black transition flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-sm">
+                    <span>🌸 Hiragana (っ)</span>
+                </button>
+                <button type="button" id="sokuonTabKatakana" onclick="setSokuonModalSyllabary('katakana')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white">
+                    <span>⚡ Katakana (ッ)</span>
+                </button>
+            </div>
+
             <!-- Explanation Card -->
-            <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-3 text-xs leading-relaxed">
-                <p class="text-slate-200">
-                    El <strong class="text-amber-300">っ</strong> (tsu pequeño) <strong class="text-rose-400">no se pronuncia</strong> como "tsu". Funciona como un <strong>golpe de voz / pausa breve</strong> que <strong class="text-sky-300">duplica la consonante</strong> del kana siguiente en Romaji.
+            <div class="p-3.5 sm:p-4 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-3 text-xs leading-relaxed">
+                <p id="sokuonExplanationText" class="text-slate-200">
+                    El <strong class="text-amber-300 font-bold font-jp">っ</strong> (tsu pequeño) <strong class="text-rose-400">no se pronuncia</strong> como "tsu". Funciona como un <strong>golpe de voz / pausa breve</strong> que <strong class="text-sky-300">duplica la consonante</strong> del kana siguiente en Romaji.
                 </p>
 
+                <!-- Comparison Box -->
+                <div id="sokuonComparisonBox" class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                    <!-- Dinámico por JS -->
+                </div>
+
                 <!-- Visual Examples Grid -->
-                <div class="grid grid-cols-2 gap-2.5 pt-2">
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 cursor-pointer hover:border-slate-700 transition" onclick="speakJapanese('きって')">
-                        <div class="flex items-center justify-between">
-                            <span class="font-jp text-2xl font-bold text-white">きって</span>
-                            <i class="fa-solid fa-volume-high text-xs text-sky-400"></i>
-                        </div>
-                        <div class="text-xs font-mono font-bold text-amber-400 uppercase">Ki<span class="text-rose-400 font-black underline">tt</span>e</div>
-                        <div class="text-[11px] text-slate-400">Sello postal</div>
-                    </div>
-
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 cursor-pointer hover:border-slate-700 transition" onclick="speakJapanese('がっこう')">
-                        <div class="flex items-center justify-between">
-                            <span class="font-jp text-2xl font-bold text-white">がっこう</span>
-                            <i class="fa-solid fa-volume-high text-xs text-sky-400"></i>
-                        </div>
-                        <div class="text-xs font-mono font-bold text-amber-400 uppercase">Ga<span class="text-rose-400 font-black underline">kk</span>ou</div>
-                        <div class="text-[11px] text-slate-400">Escuela</div>
-                    </div>
-
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 cursor-pointer hover:border-slate-700 transition" onclick="speakJapanese('ざっし')">
-                        <div class="flex items-center justify-between">
-                            <span class="font-jp text-2xl font-bold text-white">ざっし</span>
-                            <i class="fa-solid fa-volume-high text-xs text-sky-400"></i>
-                        </div>
-                        <div class="text-xs font-mono font-bold text-amber-400 uppercase">Za<span class="text-rose-400 font-black underline">ss</span>hi</div>
-                        <div class="text-[11px] text-slate-400">Revista</div>
-                    </div>
-
-                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 cursor-pointer hover:border-slate-700 transition" onclick="speakJapanese('きっぷ')">
-                        <div class="flex items-center justify-between">
-                            <span class="font-jp text-2xl font-bold text-white">きっぷ</span>
-                            <i class="fa-solid fa-volume-high text-xs text-sky-400"></i>
-                        </div>
-                        <div class="text-xs font-mono font-bold text-amber-400 uppercase">Ki<span class="text-rose-400 font-black underline">pp</span>u</div>
-                        <div class="text-[11px] text-slate-400">Boleto / Billete</div>
-                    </div>
+                <div id="sokuonExamplesGrid" class="grid grid-cols-2 gap-2.5 pt-1">
+                    <!-- Dinámico por JS -->
                 </div>
             </div>
 
@@ -3737,7 +3719,7 @@
                     <span>No volver a mostrar esta explicación automáticamente</span>
                 </label>
 
-                <button type="button" onclick="closeSokuonModal()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm rounded-xl transition active:scale-95 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2" aria-label="Cerrar explicación de consonantes dobles">
+                <button type="button" onclick="closeSokuonModal()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm rounded-xl transition active:scale-95 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2" aria-label="Cerrar explicación de consonantes dobles">
                     <i class="fa-solid fa-check"></i> ¡Entendido, Continuar!
                 </button>
             </div>
@@ -6815,6 +6797,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeThemeModal();
+                if (typeof closeSokuonModal === 'function') closeSokuonModal();
                 if (typeof closeMobileMenu === 'function') closeMobileMenu();
                 if (typeof toggleThemeDropdown === 'function') toggleThemeDropdown(false);
             }
@@ -11594,11 +11577,145 @@
             }
         }
 
+        let currentSokuonModalSyllabary = 'hiragana';
+
+        const SOKUON_DATA = {
+            hiragana: {
+                char: 'っ',
+                normalChar: 'つ',
+                syllabaryName: 'Hiragana',
+                badgeText: '🌸 Hiragana (っ)',
+                title: 'Chiisai Tsu (っ) / Consonante Doble',
+                subtitle: 'Geminación en palabras japonesas nativas',
+                explanation: 'El <strong class="text-amber-300 font-bold font-jp">っ</strong> (tsu pequeño de Hiragana) <strong class="text-rose-400">no se pronuncia</strong> como "tsu". Funciona como un <strong>golpe de voz / pausa breve</strong> (1 tiempo de silencio) que <strong class="text-sky-300">duplica la consonante</strong> del kana siguiente en Romaji.',
+                sizeComparison: {
+                    normal: 'つ',
+                    small: 'っ',
+                    normalEx: 'まつ (matsu / esperar)',
+                    smallEx: 'まった (matta / esperó)'
+                },
+                examples: [
+                    { word: 'きって', romajiPrefix: 'Ki', doubleConsonant: 'tt', romajiSuffix: 'e', meaning: 'Sello postal' },
+                    { word: 'がっこう', romajiPrefix: 'Ga', doubleConsonant: 'kk', romajiSuffix: 'ou', meaning: 'Escuela' },
+                    { word: 'ざっし', romajiPrefix: 'Za', doubleConsonant: 'ss', romajiSuffix: 'hi', meaning: 'Revista' },
+                    { word: 'きっぷ', romajiPrefix: 'Ki', doubleConsonant: 'pp', romajiSuffix: 'u', meaning: 'Boleto / Billete' }
+                ]
+            },
+            katakana: {
+                char: 'ッ',
+                normalChar: 'ツ',
+                syllabaryName: 'Katakana',
+                badgeText: '⚡ Katakana (ッ)',
+                title: 'Chiisai Tsu (ッ) / Consonante Doble',
+                subtitle: 'Consonantes dobles en préstamos extranjeros (Gairaigo)',
+                explanation: 'El <strong class="text-amber-300 font-bold font-jp">ッ</strong> (tsu pequeño de Katakana) <strong class="text-rose-400">no se pronuncia</strong> como "tsu". Funciona como un <strong>golpe de voz / pausa breve</strong> que <strong class="text-sky-300">duplica la consonante</strong> siguiente. Es <strong>súper frecuente</strong> en palabras extranjeras para adaptar sonidos secos como "bed", "cup" o "ticket".',
+                sizeComparison: {
+                    normal: 'ツ',
+                    small: 'ッ',
+                    normalEx: 'マツ (matsu / pino)',
+                    smallEx: 'マッチ (macchi / cerilla)'
+                },
+                examples: [
+                    { word: 'ベッド', romajiPrefix: 'Be', doubleConsonant: 'dd', romajiSuffix: 'o', meaning: 'Cama (Bed)' },
+                    { word: 'カップ', romajiPrefix: 'Ka', doubleConsonant: 'pp', romajiSuffix: 'u', meaning: 'Taza (Cup)' },
+                    { word: 'サッカー', romajiPrefix: 'Sa', doubleConsonant: 'kk', romajiSuffix: 'aa', meaning: 'Fútbol (Soccer)' },
+                    { word: 'チケット', romajiPrefix: 'Chi', doubleConsonant: 'ke', doubleConsonant2: 'tt', romajiSuffix: 'o', meaning: 'Boleto (Ticket)' }
+                ]
+            }
+        };
+
+        function setSokuonModalSyllabary(syllabary) {
+            currentSokuonModalSyllabary = syllabary === 'katakana' ? 'katakana' : 'hiragana';
+            renderSokuonModalContent();
+        }
+
+        function renderSokuonModalContent() {
+            const data = SOKUON_DATA[currentSokuonModalSyllabary] || SOKUON_DATA.hiragana;
+            const isKata = currentSokuonModalSyllabary === 'katakana';
+
+            // Switcher tabs UI
+            const tabHira = document.getElementById('sokuonTabHiragana');
+            const tabKata = document.getElementById('sokuonTabKatakana');
+            if (tabHira && tabKata) {
+                if (isKata) {
+                    tabHira.className = 'flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white';
+                    tabKata.className = 'flex-1 py-1.5 px-3 rounded-lg text-xs font-black transition flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-sm';
+                } else {
+                    tabHira.className = 'flex-1 py-1.5 px-3 rounded-lg text-xs font-black transition flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-sm';
+                    tabKata.className = 'flex-1 py-1.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white';
+                }
+            }
+
+            // Big character badge
+            const badge = document.getElementById('sokuonCharBadge');
+            if (badge) badge.textContent = data.char;
+
+            // Title and Subtitle
+            const titleEl = document.getElementById('sokuonTitle');
+            if (titleEl) titleEl.textContent = data.title;
+            const subTitleEl = document.getElementById('sokuonSubtitle');
+            if (subTitleEl) subTitleEl.textContent = data.subtitle;
+
+            // Explanation Text
+            const expEl = document.getElementById('sokuonExplanationText');
+            if (expEl) expEl.innerHTML = data.explanation;
+
+            // Size comparison box
+            const compEl = document.getElementById('sokuonComparisonBox');
+            if (compEl) {
+                compEl.innerHTML = `
+                    <div class="flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800/80 pb-1.5 mb-1.5">
+                        <span class="font-bold text-amber-300">Comparativa de tamaño:</span>
+                        <span>Normal vs Pequeño</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                        <div class="bg-slate-900/90 p-2 rounded-xl border border-slate-800">
+                            <div class="font-jp text-lg font-black text-slate-300">${data.sizeComparison.normal} <span class="text-[10px] font-sans font-normal text-slate-400">(Normal)</span></div>
+                            <div class="text-[10px] text-slate-400 font-mono mt-0.5">${data.sizeComparison.normalEx}</div>
+                        </div>
+                        <div class="bg-slate-900/90 p-2 rounded-xl border border-amber-500/40">
+                            <div class="font-jp text-lg font-black text-amber-300">${data.sizeComparison.small} <span class="text-[10px] font-sans font-bold text-amber-400">(Sokuon)</span></div>
+                            <div class="text-[10px] text-amber-300 font-mono mt-0.5">${data.sizeComparison.smallEx}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Examples Grid
+            const gridEl = document.getElementById('sokuonExamplesGrid');
+            if (gridEl) {
+                gridEl.innerHTML = data.examples.map(ex => `
+                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 cursor-pointer hover:border-amber-500/50 hover:bg-slate-850 transition active:scale-98 shadow-sm group" onclick="speakJapanese('${ex.word}')" title="Toca para escuchar pronunciación">
+                        <div class="flex items-center justify-between">
+                            <span class="font-jp text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">${ex.word}</span>
+                            <i class="fa-solid fa-volume-high text-xs text-sky-400 group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div class="text-xs font-mono font-bold text-amber-400 uppercase">
+                            ${ex.romajiPrefix}<span class="text-rose-400 font-black underline">${ex.doubleConsonant}</span>${ex.doubleConsonant2 ? `<span class="text-rose-400 font-black underline">${ex.doubleConsonant2}</span>` : ''}${ex.romajiSuffix}
+                        </div>
+                        <div class="text-[11px] text-slate-400">${ex.meaning}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
         function showSokuonModal(contextWordObj = null) {
+            // Determine initial syllabary based on contextWordObj or active app syllabary
+            if (contextWordObj && ((contextWordObj.katakana && contextWordObj.katakana.includes('ッ')) || (typeof contextWordObj.word === 'string' && contextWordObj.word.includes('ッ')))) {
+                currentSokuonModalSyllabary = 'katakana';
+            } else if (contextWordObj && ((contextWordObj.hiragana && contextWordObj.hiragana.includes('っ')) || (typeof contextWordObj.word === 'string' && contextWordObj.word.includes('っ')))) {
+                currentSokuonModalSyllabary = 'hiragana';
+            } else {
+                currentSokuonModalSyllabary = (state && state.currentSyllabary === 'katakana') ? 'katakana' : 'hiragana';
+            }
+
+            renderSokuonModalContent();
+
             const modal = document.getElementById('sokuonExplanationModal');
             if (!modal) return;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
 
             const cb = document.getElementById('sokuonDoNotShowAgainCb');
             if (cb) cb.checked = !!state.sokuonTipDisabled;
@@ -11606,16 +11723,17 @@
 
         function closeSokuonModal() {
             const modal = document.getElementById('sokuonExplanationModal');
-            if (!modal) return;
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            document.body.classList.remove('overflow-hidden');
 
             const cb = document.getElementById('sokuonDoNotShowAgainCb');
             if (cb) {
                 state.sokuonTipDisabled = cb.checked;
                 saveStateToStorage();
             }
-
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
         }
 
         function generateStage6Words(activeKanaObjects, coreKanaObjects = null, isAuto = false, levelIndex = -1) {
@@ -13022,9 +13140,12 @@
             }
             const wordObj = state.stageSession.currentStage7Word || state.stageSession.currentStage6Word;
 
-            if (state.stagesConfig.autoAudio) speakJapanese(wordObj.hiragana);
+            const isKataWord = !!(wordObj.katakana && !wordObj.hiragana) || (state && state.currentSyllabary === 'katakana');
+            const wordDisplay = isKataWord ? (wordObj.katakana || wordObj.hiragana) : (wordObj.hiragana || wordObj.katakana);
+            if (state.stagesConfig.autoAudio) speakJapanese(wordDisplay);
 
-            const hasSokuon = wordObj.hiragana.includes('っ');
+            const hasSokuon = (wordObj.hiragana && wordObj.hiragana.includes('っ')) || (wordObj.katakana && wordObj.katakana.includes('ッ')) || (typeof wordObj.word === 'string' && (wordObj.word.includes('っ') || wordObj.word.includes('ッ')));
+            const sokuonChar = (wordDisplay && wordDisplay.includes('ッ')) ? 'ッ' : 'っ';
 
             // Trigger Sokuon modal automatically if not disabled by user
             if (hasSokuon && !state.sokuonTipDisabled) {
@@ -13036,15 +13157,15 @@
                     <div class="flex items-center justify-between w-full text-xs font-bold text-slate-400 uppercase tracking-wider px-1">
                         <span>Escribe la palabra en Romaji:</span>
                         ${hasSokuon ? `
-                            <button type="button" onclick="showSokuonModal()" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full text-[11px] font-extrabold flex items-center gap-1 hover:bg-amber-500/30 transition active:scale-95 shadow-sm" title="Ver explicación del Chiisai Tsu (っ)">
-                                <i class="fa-solid fa-lightbulb text-amber-400"></i> ¿Qué es っ?
+                            <button type="button" onclick="showSokuonModal()" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full text-[11px] font-extrabold flex items-center gap-1 hover:bg-amber-500/30 transition active:scale-95 shadow-sm" title="Ver explicación del Chiisai Tsu">
+                                <i class="fa-solid fa-lightbulb text-amber-400"></i> ¿Qué es ${sokuonChar}?
                             </button>
                         ` : ''}
                     </div>
 
-                    <div class="w-full bg-slate-950/80 p-6 rounded-3xl border-2 border-indigo-500/50 flex flex-col items-center justify-center gap-2 shadow-2xl cursor-pointer hover:border-indigo-400 transition active:scale-98 relative" onclick="speakJapanese('${wordObj.hiragana}')">
-                        ${hasSokuon ? `<span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-amber-500/25 text-amber-300 text-[10px] font-extrabold border border-amber-500/40 shadow-sm">促音 っ (Doble)</span>` : ''}
-                        <div class="font-jp text-5xl sm:text-6xl font-black text-white">${wordObj.hiragana}</div>
+                    <div class="w-full bg-slate-950/80 p-6 rounded-3xl border-2 border-indigo-500/50 flex flex-col items-center justify-center gap-2 shadow-2xl cursor-pointer hover:border-indigo-400 transition active:scale-98 relative" onclick="speakJapanese('${wordDisplay}')">
+                        ${hasSokuon ? `<span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-amber-500/25 text-amber-300 text-[10px] font-extrabold border border-amber-500/40 shadow-sm">促音 ${sokuonChar} (Doble)</span>` : ''}
+                        <div class="font-jp text-5xl sm:text-6xl font-black text-white">${wordDisplay}</div>
                         <div class="text-xs font-bold text-indigo-300 uppercase tracking-wider text-center">${wordObj.spanish}</div>
                     </div>
 
