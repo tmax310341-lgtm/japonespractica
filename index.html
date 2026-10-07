@@ -551,6 +551,7 @@
         #mobileMenuDrawer,
         #kanaStrokeModal,
         #themeSelectorModal,
+        #voiceSettingsModal,
         #themeQuickDropdown {
             background-color: var(--bg-card) !important;
             border-color: var(--border-card) !important;
@@ -559,6 +560,8 @@
         #mobileMenuDrawer .border-t,
         #themeSelectorModal .border-b,
         #themeSelectorModal .border-t,
+        #voiceSettingsModal .border-b,
+        #voiceSettingsModal .border-t,
         #themeQuickDropdown .border-b,
         #themeQuickDropdown .border-t {
             border-color: var(--border-card) !important;
@@ -1387,6 +1390,12 @@
                     </div>
                 </div>
 
+                <!-- Voice Settings Modal Button -->
+                <button type="button" onclick="openVoiceModal()" id="voiceSettingsBtn" title="Ajustes de Voz y Pronunciación"
+                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-400 flex items-center justify-center transition active:scale-95 shadow-sm shrink-0" aria-label="Ajustes de voz y pronunciación">
+                    <i class="fa-solid fa-microphone-lines text-sm"></i>
+                </button>
+
                 <!-- Audio Toggle Button -->
                 <button type="button" onclick="toggleGlobalAudio()" id="audioToggleBtn" title="Activar/Desactivar Sonido"
                     class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-400 flex items-center justify-center transition active:scale-95 shadow-sm shrink-0" aria-label="Activar o desactivar sonido">
@@ -1517,6 +1526,18 @@
 
         <!-- Drawer Footer: Selector directo de Temas y Acceso -->
         <div id="drawerThemeFooter" class="drawer-theme-footer p-3.5 border-t border-slate-800 space-y-2.5 shrink-0">
+            <!-- Configuración de Voz Directa -->
+            <button type="button" onclick="openVoiceModal()" class="w-full py-2 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/70 text-xs font-bold flex items-center justify-between text-slate-200 transition active:scale-98 shadow-sm">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-microphone-lines text-sky-400"></i>
+                    <span>Voz y Pronunciación</span>
+                </span>
+                <span class="text-[10px] text-slate-400 flex items-center gap-1 font-mono">
+                    <span id="drawerVoicePresetBadge">👨 Masculina</span>
+                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                </span>
+            </button>
+
             <div>
                 <div class="flex items-center justify-between text-xs font-bold text-slate-300 mb-2">
                     <span class="flex items-center gap-1.5">
@@ -5899,6 +5920,12 @@
             streak: 1,
             lastActiveDate: new Date().toISOString().slice(0, 10),
             audioEnabled: true,
+            voiceConfig: {
+                voiceUri: '',
+                preset: 'male',
+                pitch: 0.80,
+                rate: 0.88
+            },
             theme: 'theme-dark',
             strokeStrictness: 'normal',
             sokuonTipDisabled: false, // 'easy' | 'normal' | 'strict'
@@ -6038,8 +6065,16 @@
                     const parsed = JSON.parse(raw);
                     if (typeof parsed.xp === 'number') state.xp = parsed.xp;
                     if (parsed.theme) { state.theme = normalizeThemeKey(parsed.theme); applyTheme(state.theme); } else { applyTheme('theme-dark'); }
-                    if (typeof parsed.streak === 'number') state.streak = parsed.streak;
-                    if (parsed.strokeStrictness) state.strokeStrictness = parsed.strokeStrictness;
+                    if (typeof parsed.audioEnabled === 'boolean') state.audioEnabled = parsed.audioEnabled;
+                    if (parsed.voiceConfig && typeof parsed.voiceConfig === 'object') {
+                        state.voiceConfig = {
+                            voiceUri: parsed.voiceConfig.voiceUri || '',
+                            preset: parsed.voiceConfig.preset || 'male',
+                            pitch: typeof parsed.voiceConfig.pitch === 'number' ? parsed.voiceConfig.pitch : 0.80,
+                            rate: typeof parsed.voiceConfig.rate === 'number' ? parsed.voiceConfig.rate : 0.88
+                        };
+                    }
+                    if (typeof parsed.strokeStrictness === 'string') state.strokeStrictness = parsed.strokeStrictness;
                     if (Array.isArray(parsed.practiceSelectedGroups) && parsed.practiceSelectedGroups.length > 0) {
                         state.practiceSelectedGroups = parsed.practiceSelectedGroups;
                     }
@@ -6155,6 +6190,8 @@
                     stagesAutoProgress: state.stagesAutoProgress,
                     stagesConfig: state.stagesConfig,
                     theme: state.theme,
+                    audioEnabled: state.audioEnabled,
+                    voiceConfig: state.voiceConfig,
                     memorySelectedGroups: state.memorySelectedGroups,
                     memoryPairCount: state.memoryPairCount,
                     srs: state.srs,
@@ -6282,22 +6319,266 @@
         }
 
         // ==========================================
-        // AUDIO ENGINE (TTS & SYNTHESIZER)
+        // AUDIO ENGINE (TTS & SYNTHESIZER CON SELECTOR DE VOZ)
         // ==========================================
         let cachedJapaneseVoice = null;
         let voicesInitialized = false;
 
+        const VOICE_PRESET_CONFIG = {
+            female: { label: 'Femenino / Claro', pitch: 1.12, rate: 0.90, icon: '👩' },
+            male: { label: 'Masculino / Grave', pitch: 0.80, rate: 0.86, icon: '👨' },
+            sensei: { label: 'Sensei / Profundo', pitch: 0.65, rate: 0.82, icon: '🥋' },
+            anime: { label: 'Juvenil / Dinámico', pitch: 1.28, rate: 0.96, icon: '🌸' }
+        };
+
+        function getAvailableJapaneseVoices() {
+            if (!('speechSynthesis' in window)) return [];
+            const voices = window.speechSynthesis.getVoices() || [];
+            return voices.filter(v => {
+                const lang = (v.lang || '').toLowerCase();
+                const name = (v.name || '').toLowerCase();
+                return lang.startsWith('ja') || lang.includes('jp') || name.includes('japan') || name.includes('日本語');
+            });
+        }
+
+        function detectVoiceGender(voice) {
+            if (!voice) return 'auto';
+            const name = (voice.name || '').toLowerCase();
+            if (name.includes('keita') || name.includes('ichiro') || name.includes('otoya') || 
+                name.includes('takumi') || name.includes('kenji') || name.includes('naoki') || 
+                name.includes('daichi') || name.includes('hattori') || name.includes('male') || name.includes('guy')) {
+                return 'male';
+            }
+            if (name.includes('nanami') || name.includes('haruka') || name.includes('ayumi') || 
+                name.includes('kyoko') || name.includes('aoi') || name.includes('shiori') || 
+                name.includes('female') || name.includes('girl') || name.includes('woman')) {
+                return 'female';
+            }
+            return 'auto';
+        }
+
         function initJapaneseVoices() {
             if (!('speechSynthesis' in window)) return;
             const voices = window.speechSynthesis.getVoices();
-            if (voices.length === 0) return;
+            if (!voices || voices.length === 0) return;
 
-            // Prioritize high-quality natural voices
-            const naturalJa = voices.find(v => (v.name.includes('Nanami') || v.name.includes('Keita') || v.name.includes('Google 日本語')) && v.lang.startsWith('ja'));
-            const anyJa = voices.find(v => v.lang.toLowerCase().startsWith('ja') || v.lang.toLowerCase().includes('jp'));
+            const jaVoices = getAvailableJapaneseVoices();
+            if (!state.voiceConfig) {
+                state.voiceConfig = { voiceUri: '', preset: 'male', pitch: 0.80, rate: 0.88 };
+            }
+            const config = state.voiceConfig;
 
-            cachedJapaneseVoice = naturalJa || anyJa || null;
+            // 1. Si el usuario guardó una voz específica por URI o nombre, buscarla
+            if (config.voiceUri) {
+                cachedJapaneseVoice = jaVoices.find(v => (v.voiceURI === config.voiceUri || v.name === config.voiceUri)) || null;
+            }
+
+            // 2. Si no hay voz configurada o no se encontró, buscar según el preset (ej: male -> buscar voz masculina real)
+            if (!cachedJapaneseVoice && jaVoices.length > 0) {
+                if (config.preset === 'male' || config.preset === 'sensei') {
+                    cachedJapaneseVoice = jaVoices.find(v => detectVoiceGender(v) === 'male') || null;
+                } else if (config.preset === 'female' || config.preset === 'anime') {
+                    cachedJapaneseVoice = jaVoices.find(v => detectVoiceGender(v) === 'female') || null;
+                }
+            }
+
+            // 3. Fallback inteligente a la mejor voz disponible
+            if (!cachedJapaneseVoice && jaVoices.length > 0) {
+                cachedJapaneseVoice = jaVoices.find(v => v.name.includes('Keita') || v.name.includes('Nanami') || v.name.includes('Google 日本語')) || jaVoices[0];
+            }
+
+            // 4. Si aún no hay voz japonesa, buscar cualquier voz con etiqueta ja
+            if (!cachedJapaneseVoice && voices.length > 0) {
+                cachedJapaneseVoice = voices.find(v => (v.lang || '').toLowerCase().includes('ja')) || null;
+            }
+
             voicesInitialized = true;
+            updateVoiceModalUI();
+        }
+
+        function setVoicePreset(presetKey) {
+            if (!state.voiceConfig) state.voiceConfig = {};
+            state.voiceConfig.preset = presetKey;
+            const pInfo = VOICE_PRESET_CONFIG[presetKey] || VOICE_PRESET_CONFIG.male;
+            state.voiceConfig.pitch = pInfo.pitch;
+            if (!state.voiceConfig.rate) state.voiceConfig.rate = pInfo.rate;
+
+            const jaVoices = getAvailableJapaneseVoices();
+            if (presetKey === 'male' || presetKey === 'sensei') {
+                const maleVoice = jaVoices.find(v => detectVoiceGender(v) === 'male');
+                if (maleVoice) {
+                    cachedJapaneseVoice = maleVoice;
+                    state.voiceConfig.voiceUri = maleVoice.voiceURI || maleVoice.name;
+                }
+            } else if (presetKey === 'female' || presetKey === 'anime') {
+                const femaleVoice = jaVoices.find(v => detectVoiceGender(v) === 'female');
+                if (femaleVoice) {
+                    cachedJapaneseVoice = femaleVoice;
+                    state.voiceConfig.voiceUri = femaleVoice.voiceURI || femaleVoice.name;
+                }
+            }
+
+            saveStateToStorage();
+            updateVoiceModalUI();
+            testCurrentVoiceSample();
+        }
+
+        function setVoiceSpeed(speed) {
+            if (!state.voiceConfig) state.voiceConfig = {};
+            state.voiceConfig.rate = speed;
+            saveStateToStorage();
+            updateVoiceModalUI();
+            testCurrentVoiceSample();
+        }
+
+        function onVoiceDropdownChange(voiceUri) {
+            if (!state.voiceConfig) state.voiceConfig = {};
+            state.voiceConfig.voiceUri = voiceUri;
+            const jaVoices = getAvailableJapaneseVoices();
+            const selected = jaVoices.find(v => (v.voiceURI === voiceUri || v.name === voiceUri));
+            if (selected) {
+                cachedJapaneseVoice = selected;
+                const gender = detectVoiceGender(selected);
+                if (gender === 'male' && state.voiceConfig.preset === 'female') {
+                    state.voiceConfig.preset = 'male';
+                    state.voiceConfig.pitch = VOICE_PRESET_CONFIG.male.pitch;
+                } else if (gender === 'female' && state.voiceConfig.preset === 'male') {
+                    state.voiceConfig.preset = 'female';
+                    state.voiceConfig.pitch = VOICE_PRESET_CONFIG.female.pitch;
+                }
+            }
+            saveStateToStorage();
+            updateVoiceModalUI();
+            testCurrentVoiceSample();
+        }
+
+        function testCurrentVoiceSample() {
+            speakJapanese('こんにちは、はじめまして。');
+        }
+
+        function resetVoiceSettingsToDefault() {
+            state.voiceConfig = {
+                voiceUri: '',
+                preset: 'male',
+                pitch: 0.80,
+                rate: 0.88
+            };
+            const jaVoices = getAvailableJapaneseVoices();
+            cachedJapaneseVoice = jaVoices.find(v => detectVoiceGender(v) === 'male') || jaVoices[0] || null;
+            saveStateToStorage();
+            updateVoiceModalUI();
+            showToast("Voz restablecida al modo predeterminado", "info");
+            testCurrentVoiceSample();
+        }
+
+        function updateVoiceModalUI() {
+            const dropdown = document.getElementById('voiceSelectDropdown');
+            const countBadge = document.getElementById('voiceCountBadge');
+            const hint = document.getElementById('voiceDetectedHint');
+            const config = state.voiceConfig || { preset: 'male', pitch: 0.80, rate: 0.88 };
+
+            const jaVoices = getAvailableJapaneseVoices();
+            if (countBadge) {
+                countBadge.textContent = `${jaVoices.length} ${jaVoices.length === 1 ? 'voz' : 'voces'}`;
+            }
+
+            if (dropdown) {
+                if (jaVoices.length === 0) {
+                    dropdown.innerHTML = '<option value="">(No se detectaron voces japonesas instaladas)</option>';
+                } else {
+                    dropdown.innerHTML = jaVoices.map(v => {
+                        const gender = detectVoiceGender(v);
+                        const genderBadge = gender === 'male' ? '👨 Hombre' : (gender === 'female' ? '👩 Mujer' : '🌐 Sistema');
+                        const isSelected = cachedJapaneseVoice && (cachedJapaneseVoice.voiceURI === v.voiceURI || cachedJapaneseVoice.name === v.name);
+                        return `<option value="${v.voiceURI || v.name}" ${isSelected ? 'selected' : ''}>${v.name} (${genderBadge})</option>`;
+                    }).join('');
+                }
+            }
+
+            if (hint) {
+                if (jaVoices.length === 0) {
+                    hint.textContent = 'Tu navegador no reporta voces japonesas nativas instaladas. El modulador ajustará el tono del sintetizador fallback.';
+                } else if (jaVoices.length === 1) {
+                    hint.textContent = '1 voz japonesa detectada. El modulador de abajo altera el tono acústico para transformarla en hombre, mujer o sensei.';
+                } else {
+                    hint.textContent = `${jaVoices.length} voces japonesas disponibles en tu sistema. Puedes elegir una voz física o modular su tono.`;
+                }
+            }
+
+            // Resaltar preset activo (female, male, sensei, anime)
+            ['female', 'male', 'sensei', 'anime'].forEach(p => {
+                const btn = document.getElementById('voice-preset-' + p);
+                if (btn) {
+                    if (config.preset === p) {
+                        btn.classList.add('ring-2', 'ring-sky-500', 'border-sky-500', 'bg-sky-500/15');
+                        btn.classList.remove('border-slate-700', 'bg-slate-800/80');
+                    } else {
+                        btn.classList.remove('ring-2', 'ring-sky-500', 'border-sky-500', 'bg-sky-500/15');
+                        btn.classList.add('border-slate-700', 'bg-slate-800/80');
+                    }
+                }
+            });
+
+            // Resaltar velocidad activa
+            const curRate = config.rate || 0.88;
+            const speedPills = [
+                { id: 'voice-speed-slow', val: 0.75 },
+                { id: 'voice-speed-normal', val: 0.88 },
+                { id: 'voice-speed-fast', val: 1.08 }
+            ];
+            speedPills.forEach(sp => {
+                const el = document.getElementById(sp.id);
+                if (el) {
+                    if (Math.abs(curRate - sp.val) < 0.08) {
+                        el.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500', 'bg-emerald-500/20', 'text-emerald-300');
+                        el.classList.remove('border-slate-700', 'bg-slate-800', 'text-slate-200');
+                    } else {
+                        el.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500', 'bg-emerald-500/20', 'text-emerald-300');
+                        el.classList.add('border-slate-700', 'bg-slate-800', 'text-slate-200');
+                    }
+                }
+            });
+
+            const speedLabel = document.getElementById('voiceSpeedValLabel');
+            if (speedLabel) {
+                speedLabel.textContent = `${curRate.toFixed(2)}x (${curRate < 0.8 ? 'Pausada' : (curRate > 1.0 ? 'Nativa' : 'Pedagógica')})`;
+            }
+
+            // Actualizar badge en drawer
+            const drawerBadge = document.getElementById('drawerVoicePresetBadge');
+            if (drawerBadge) {
+                const pInfo = VOICE_PRESET_CONFIG[config.preset] || VOICE_PRESET_CONFIG.male;
+                drawerBadge.textContent = `${pInfo.icon} ${config.preset === 'male' ? 'Hombre' : (config.preset === 'female' ? 'Mujer' : (config.preset === 'sensei' ? 'Sensei' : 'Anime'))}`;
+            }
+        }
+
+        function openVoiceModal() {
+            if (typeof closeMobileMenu === 'function') closeMobileMenu();
+            if (typeof closeThemeModal === 'function') closeThemeModal();
+            const modal = document.getElementById('voiceSettingsModal');
+            const backdrop = document.getElementById('voiceSettingsModalBackdrop');
+            if (!modal || !backdrop) return;
+            initJapaneseVoices();
+            updateVoiceModalUI();
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            backdrop.classList.add('opacity-100', 'pointer-events-auto');
+            modal.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            modal.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeVoiceModal() {
+            const modal = document.getElementById('voiceSettingsModal');
+            const backdrop = document.getElementById('voiceSettingsModalBackdrop');
+            if (modal) {
+                modal.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+                modal.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            }
+            if (backdrop) {
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+            }
+            document.body.classList.remove('overflow-hidden');
         }
 
         try {
@@ -6356,8 +6637,10 @@
                     const utter = new SpeechSynthesisUtterance(text);
                     activeSpeechUtterance = utter;
                     utter.lang = 'ja-JP';
-                    utter.rate = 0.86;
-                    utter.pitch = 1.02;
+
+                    const vConf = state.voiceConfig || { preset: 'male', pitch: 0.80, rate: 0.88 };
+                    utter.pitch = typeof vConf.pitch === 'number' ? vConf.pitch : 0.80;
+                    utter.rate = typeof vConf.rate === 'number' ? vConf.rate : 0.88;
 
                     if (cachedJapaneseVoice) {
                         utter.voice = cachedJapaneseVoice;
@@ -6847,6 +7130,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeThemeModal();
+                if (typeof closeVoiceModal === 'function') closeVoiceModal();
                 if (typeof closeSokuonModal === 'function') closeSokuonModal();
                 if (typeof closeMobileMenu === 'function') closeMobileMenu();
                 if (typeof toggleThemeDropdown === 'function') toggleThemeDropdown(false);
@@ -18601,6 +18885,179 @@
                 Listo / Cerrar
             </button>
         </div>
+    </div>
+
+    <!-- ==========================================================
+         MODAL DE AJUSTES DE VOZ Y PRONUNCIACIÓN (TTS ENGINE)
+         ========================================================== -->
+    <div id="voiceSettingsModalBackdrop" onclick="closeVoiceModal()"
+        class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[60] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <div id="voiceSettingsModal"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[94vw] max-w-lg max-h-[88vh] flex flex-col bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 z-[60] shadow-2xl transition-all duration-300 opacity-0 pointer-events-none scale-95">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 shrink-0">
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 text-base sm:text-lg shadow-sm shrink-0">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm sm:text-lg font-black text-white leading-tight">Voz y Pronunciación Japonesa</h3>
+                    <p class="text-[10px] sm:text-[11px] text-slate-400">Motor TTS • Modulación de Timbre • Velocidad Calibrada</p>
+                </div>
+            </div>
+            <button type="button" onclick="closeVoiceModal()" aria-label="Cerrar ajustes de voz"
+                class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-95 shrink-0 shadow-sm">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+        </div>
+
+        <!-- Contenido desplazable con scroll contenido -->
+        <div class="overflow-y-auto flex-1 my-3 pr-1 space-y-4 custom-scrollbar min-h-0 overscroll-contain">
+            
+            <!-- 1. Selección de Voz del Sistema / Navegador -->
+            <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-3.5 space-y-2">
+                <div class="flex items-center justify-between">
+                    <label for="voiceSelectDropdown" class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-globe text-sky-400"></i>
+                        <span>Voz Física del Sistema</span>
+                    </label>
+                    <span id="voiceCountBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300">
+                        Detectando...
+                    </span>
+                </div>
+                <select id="voiceSelectDropdown" onchange="onVoiceDropdownChange(this.value)"
+                    class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 text-xs font-medium focus:ring-2 focus:ring-sky-500 focus:outline-none transition">
+                    <option value="">Cargando voces japonesas...</option>
+                </select>
+                <p id="voiceDetectedHint" class="text-[10px] sm:text-[11px] text-slate-400 leading-relaxed">
+                    Escaneando voces nativas instaladas en tu dispositivo...
+                </p>
+            </div>
+
+            <!-- 2. Modulador Acústico de Timbre (4 Presets) -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-amber-400"></i>
+                        <span>Timbre y Personalidad Fonética</span>
+                    </span>
+                    <span class="text-[10px] text-slate-400">Afinación acústica</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 sm:gap-2.5">
+                    <!-- Masculino (Default) -->
+                    <button type="button" id="voice-preset-male" onclick="setVoicePreset('male')"
+                        class="p-3 rounded-2xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700/80 text-left transition-all flex flex-col gap-1.5 shadow-sm group">
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg">👨</span>
+                            <span class="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-300">Barítono</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white group-hover:text-sky-300 transition">Masculino</div>
+                            <div class="text-[10px] text-slate-400 leading-tight">Grave, natural y claro (0.80)</div>
+                        </div>
+                    </button>
+
+                    <!-- Femenino -->
+                    <button type="button" id="voice-preset-female" onclick="setVoicePreset('female')"
+                        class="p-3 rounded-2xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700/80 text-left transition-all flex flex-col gap-1.5 shadow-sm group">
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg">👩</span>
+                            <span class="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-pink-500/10 text-pink-300">Estándar</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white group-hover:text-pink-300 transition">Femenino</div>
+                            <div class="text-[10px] text-slate-400 leading-tight">Agudo y cristalino (1.12)</div>
+                        </div>
+                    </button>
+
+                    <!-- Sensei -->
+                    <button type="button" id="voice-preset-sensei" onclick="setVoicePreset('sensei')"
+                        class="p-3 rounded-2xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700/80 text-left transition-all flex flex-col gap-1.5 shadow-sm group">
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg">🥋</span>
+                            <span class="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300">Profundo</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white group-hover:text-amber-300 transition">Sensei</div>
+                            <div class="text-[10px] text-slate-400 leading-tight">Solemne, maduro y pausado (0.65)</div>
+                        </div>
+                    </button>
+
+                    <!-- Anime / Juvenil -->
+                    <button type="button" id="voice-preset-anime" onclick="setVoicePreset('anime')"
+                        class="p-3 rounded-2xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700/80 text-left transition-all flex flex-col gap-1.5 shadow-sm group">
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg">🌸</span>
+                            <span class="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-300">Dinámico</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white group-hover:text-purple-300 transition">Juvenil / Anime</div>
+                            <div class="text-[10px] text-slate-400 leading-tight">Expresivo y brillante (1.28)</div>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="p-2.5 rounded-xl bg-slate-800/30 border border-slate-800/60 flex items-start gap-2 text-[10px] sm:text-[11px] text-slate-400">
+                    <i class="fa-solid fa-circle-info text-sky-400 text-xs mt-0.5 shrink-0"></i>
+                    <span>¿Tu dispositivo solo tiene 1 voz femenina? La modulación acústica adapta la frecuencia fundamental (Pitch) para lograr un timbre masculino o de maestro sin requerir descargas adicionales.</span>
+                </div>
+            </div>
+
+            <!-- 3. Velocidad de Dicción -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-gauge-high text-emerald-400"></i>
+                        <span>Velocidad de Lectura</span>
+                    </span>
+                    <span id="voiceSpeedValLabel" class="text-[11px] font-mono text-emerald-300 font-semibold">0.88x (Pedagógica)</span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" id="voice-speed-slow" onclick="setVoiceSpeed(0.75)"
+                        class="py-2.5 px-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 text-xs font-bold transition flex flex-col items-center gap-1 hover:bg-slate-700">
+                        <span>🐢 0.75x</span>
+                        <span class="text-[9px] font-normal text-slate-400">Pausada</span>
+                    </button>
+                    <button type="button" id="voice-speed-normal" onclick="setVoiceSpeed(0.88)"
+                        class="py-2.5 px-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 text-xs font-bold transition flex flex-col items-center gap-1 hover:bg-slate-700">
+                        <span>🎯 0.88x</span>
+                        <span class="text-[9px] font-normal text-slate-400">Pedagógica</span>
+                    </button>
+                    <button type="button" id="voice-speed-fast" onclick="setVoiceSpeed(1.08)"
+                        class="py-2.5 px-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 text-xs font-bold transition flex flex-col items-center gap-1 hover:bg-slate-700">
+                        <span>⚡ 1.08x</span>
+                        <span class="text-[9px] font-normal text-slate-400">Nativa</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Buttons -->
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-2 shrink-0">
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="testCurrentVoiceSample()" title="Escuchar frase de prueba"
+                    class="py-2.5 px-3 sm:px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition active:scale-98 flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-volume-high text-xs"></i>
+                    <span>Probar</span>
+                </button>
+                <button type="button" onclick="resetVoiceSettingsToDefault()" title="Restablecer voz inicial"
+                    class="py-2.5 px-2.5 sm:px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-xs transition active:scale-98 border border-slate-700 flex items-center gap-1.5" aria-label="Restablecer valores predeterminados">
+                    <i class="fa-solid fa-rotate-left text-xs"></i>
+                    <span class="hidden sm:inline">Restablecer</span>
+                </button>
+            </div>
+
+            <button type="button" onclick="closeVoiceModal()"
+                class="py-2.5 px-5 sm:px-6 rounded-xl stage-theme-primary-btn text-white font-bold text-xs transition active:scale-98 shadow-md">
+                Listo / Guardar
+            </button>
+        </div>
+
     </div>
 
 </body>
