@@ -499,10 +499,16 @@
 
         /* 4. Elevación Visual y Mapeo de Clases de Fondo y Bordes */
         .bg-slate-950,
+        .bg-slate-950\/95,
         .bg-slate-950\/90,
+        .bg-slate-950\/85,
         .bg-slate-950\/80,
+        .bg-slate-950\/75,
         .bg-slate-950\/70,
-        .bg-slate-950\/60 {
+        .bg-slate-950\/65,
+        .bg-slate-950\/60,
+        .bg-slate-950\/50,
+        .bg-slate-950\/40 {
             background-color: var(--bg-app) !important;
         }
 
@@ -556,6 +562,25 @@
         #themeQuickDropdown .border-b,
         #themeQuickDropdown .border-t {
             border-color: var(--border-card) !important;
+        }
+
+        /* Sección Inferior de Temas del Menú Hamburguesa */
+        #drawerThemeFooter,
+        .drawer-theme-footer {
+            background-color: var(--bg-app) !important;
+            border-color: var(--border-card) !important;
+        }
+        #drawerThemeFooter .border-t,
+        #drawerThemeFooter .border-b {
+            border-color: var(--border-card) !important;
+        }
+        #drawerThemeFooter .text-slate-300,
+        #drawerThemeFooter .text-slate-400 {
+            color: var(--text-secondary) !important;
+        }
+        #drawerThemeFooter .text-slate-500 {
+            color: var(--text-secondary) !important;
+            opacity: 0.85;
         }
 
         /* Form Controls */
@@ -735,7 +760,7 @@
             }
 
             /* Convertir contenedores oscuros de slate en tarjetas claras con relieve (NUNCA afectar botones ni barras de progreso) */
-            :is(div, section, article):not(button):not(a):not(.theme-logo-box):not(#headerXpProgressBar):not(#stageSessionProgressBar):not(#lookalikesTimerBar):not(.stage-theme-progress-bar):is(
+            :is(div, section, article):not(button):not(a):not(.theme-logo-box):not(#headerXpProgressBar):not(#stageSessionProgressBar):not(#lookalikesTimerBar):not(.stage-theme-progress-bar):not([id*="Backdrop"]):is(
                 [class*="from-slate-9"],
                 [class*="via-slate-8"],
                 [class*="to-slate-9"],
@@ -744,8 +769,10 @@
                 .bg-slate-900,
                 .bg-slate-900\/90,
                 .bg-slate-900\/80,
+                .bg-slate-950\/85,
                 .bg-slate-950\/80,
                 .bg-slate-950\/90,
+                .drawer-theme-footer,
                 .theme-hero-card
             ) {
                 background-image: none !important;
@@ -1489,7 +1516,7 @@
         </div>
 
         <!-- Drawer Footer: Selector directo de Temas y Acceso -->
-        <div class="p-3.5 border-t border-slate-800 bg-slate-950/85 space-y-2.5 shrink-0">
+        <div id="drawerThemeFooter" class="drawer-theme-footer p-3.5 border-t border-slate-800 space-y-2.5 shrink-0">
             <div>
                 <div class="flex items-center justify-between text-xs font-bold text-slate-300 mb-2">
                     <span class="flex items-center gap-1.5">
@@ -1503,22 +1530,22 @@
                 </div>
                 <!-- 6 Botones Rápidos de 1-Tap directo dentro del Drawer -->
                 <div class="grid grid-cols-3 gap-1.5 text-center">
-                    <button type="button" onclick="selectTheme('theme-dark'); closeMobileMenu();" class="p-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-white transition active:scale-95" title="Midnight Tokyo">
+                    <button type="button" onclick="selectTheme('theme-dark'); closeMobileMenu();" id="drawer-theme-theme-dark" class="p-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-white transition active:scale-95" title="Midnight Tokyo">
                         <span>🌌</span><span>Tokyo</span>
                     </button>
-                    <button type="button" onclick="selectTheme('theme-matcha'); closeMobileMenu();" class="p-1.5 rounded-xl border border-emerald-800 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-emerald-300 transition active:scale-95" title="Jardín Zen">
+                    <button type="button" onclick="selectTheme('theme-matcha'); closeMobileMenu();" id="drawer-theme-theme-matcha" class="p-1.5 rounded-xl border border-emerald-800 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-emerald-300 transition active:scale-95" title="Jardín Zen">
                         <span>🍵</span><span>Zen</span>
                     </button>
-                    <button type="button" onclick="selectTheme('theme-sumie'); closeMobileMenu();" class="p-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-rose-300 transition active:scale-95" title="Tinta Sumi-e">
+                    <button type="button" onclick="selectTheme('theme-sumie'); closeMobileMenu();" id="drawer-theme-theme-sumie" class="p-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-[11px] font-bold flex items-center justify-center gap-1 text-rose-300 transition active:scale-95" title="Tinta Sumi-e">
                         <span>🖌️</span><span>Sumi-e</span>
                     </button>
-                    <button type="button" onclick="selectTheme('theme-light'); closeMobileMenu();" class="p-1.5 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 text-[11px] font-bold flex items-center justify-center gap-1 text-rose-900 transition active:scale-95" title="Sakura Kioto">
+                    <button type="button" onclick="selectTheme('theme-light'); closeMobileMenu();" id="drawer-theme-theme-light" class="p-1.5 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 text-[11px] font-bold flex items-center justify-center gap-1 text-rose-900 transition active:scale-95" title="Sakura Kioto">
                         <span>🌸</span><span>Sakura</span>
                     </button>
-                    <button type="button" onclick="selectTheme('theme-tatami'); closeMobileMenu();" class="p-1.5 rounded-xl border border-lime-300 bg-amber-50 hover:bg-amber-100 text-[11px] font-bold flex items-center justify-center gap-1 text-lime-950 transition active:scale-95" title="Tatami &amp; Té">
+                    <button type="button" onclick="selectTheme('theme-tatami'); closeMobileMenu();" id="drawer-theme-theme-tatami" class="p-1.5 rounded-xl border border-lime-300 bg-amber-50 hover:bg-amber-100 text-[11px] font-bold flex items-center justify-center gap-1 text-lime-950 transition active:scale-95" title="Tatami &amp; Té">
                         <span>🌾</span><span>Tatami</span>
                     </button>
-                    <button type="button" onclick="selectTheme('theme-kanagawa'); closeMobileMenu();" class="p-1.5 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 text-[11px] font-bold flex items-center justify-center gap-1 text-sky-950 transition active:scale-95" title="Kanagawa Índigo">
+                    <button type="button" onclick="selectTheme('theme-kanagawa'); closeMobileMenu();" id="drawer-theme-theme-kanagawa" class="p-1.5 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 text-[11px] font-bold flex items-center justify-center gap-1 text-sky-950 transition active:scale-95" title="Kanagawa Índigo">
                         <span>🌊</span><span>Mar</span>
                     </button>
                 </div>
@@ -6755,6 +6782,21 @@
             if (metaTheme) {
                 metaTheme.setAttribute('content', info.meta || (isDark ? '#090d16' : '#faf7f7'));
             }
+
+            // Actualizar estado activo en los botones de tema del Drawer
+            const drawerThemeKeys = ['theme-dark', 'theme-matcha', 'theme-sumie', 'theme-light', 'theme-tatami', 'theme-kanagawa'];
+            drawerThemeKeys.forEach(k => {
+                const btn = document.getElementById('drawer-theme-' + k);
+                if (btn) {
+                    if (k === normKey) {
+                        btn.classList.add('ring-2', 'scale-105');
+                        btn.style.boxShadow = '0 0 10px var(--accent-primary)';
+                    } else {
+                        btn.classList.remove('ring-2', 'scale-105');
+                        btn.style.boxShadow = '';
+                    }
+                }
+            });
 
             // Actualizar dashboard de etapas si está visible
             if (typeof renderStagesAutoDashboard === 'function') {
