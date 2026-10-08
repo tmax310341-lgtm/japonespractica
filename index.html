@@ -2050,6 +2050,7 @@
                     <button type="button" onclick="setPracticePreset('dakuten', 'draw')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-sky-300 rounded-lg border border-slate-700 transition">Dakuten (25)</button>
                     <button type="button" onclick="setPracticePreset('youon', 'draw')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-purple-300 rounded-lg border border-slate-700 transition">Combinados (33)</button>
                     <button type="button" onclick="setPracticePreset('all', 'draw')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition">Todos (104)</button>
+                    <button type="button" onclick="setPracticePreset('kanjiNumbers', 'draw')" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg border border-amber-500/40 transition flex items-center gap-1 font-bold"><i class="fa-solid fa-paintbrush text-amber-400"></i> Números Kanji (21)</button>
                 </div>
 
                 <!-- Toggle Chips -->
@@ -2221,6 +2222,7 @@
                     <button type="button" onclick="setPracticePreset('dakuten', 'blind')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-sky-300 rounded-lg border border-slate-700 transition">Dakuten (25)</button>
                     <button type="button" onclick="setPracticePreset('youon', 'blind')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-purple-300 rounded-lg border border-slate-700 transition">Combinados (33)</button>
                     <button type="button" onclick="setPracticePreset('all', 'blind')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition">Todos (104)</button>
+                    <button type="button" onclick="setPracticePreset('kanjiNumbers', 'blind')" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg border border-amber-500/40 transition flex items-center gap-1 font-bold"><i class="fa-solid fa-paintbrush text-amber-400"></i> Números Kanji (21)</button>
                 </div>
 
                 <!-- Sound Row Toggle Chips Grid -->
@@ -4000,7 +4002,28 @@
   "ャ": ["M25,56.25c1.67,1.28,4.84,1.85,7.96,1.08c14.85-3.64,26.27-6.16,38.45-9.34c17.31-4.52,1.18,11.21-2.16,15.73","M41.1,35.5c1.3,1.1,2,2.1,2.5,4.1c0.5,2,9.4,41.62,9.9,43.72c0.5,2.1,1.7,7.2,2.4,9.8"],
   "ュ": ["M34.8,52.84c1.91,1.21,4.13,1.67,7.44,1.21c10.65-1.51,13.99-1.68,21.71-2.97c5.43-0.9,6.26,0.13,5.23,5.12c-1.91,9.25-3.92,19.45-5.23,27.49","M24.5,86.21c2.21,1.21,3.84,1.73,7.34,1.21c18.54-2.79,28.95-3.12,43.52-3.12c3.02,0,5.93,0.4,8.95,0.9"],
   "ョ": ["M33.5,50.62c1.9,1.21,4.09,1.6,7.39,1.21c11.19-1.32,21.35-2.46,29.07-3.44c4.79-0.61,5.49,0.4,5.2,5.16c-0.79,12.56-1.5,24.79-2.4,34.21","M33.6,69.04c1.9,1.21,4.09,1.6,7.39,1.21c8.39-0.99,18.23-1.85,24.86-2.47c2.21-0.2,4.21,0.04,6.21,0.44","M29,90.06c2.2,1.05,3.79,1.36,7.29,1.05c9.99-0.88,23.47-2.35,33.07-2.35c2.7,0,4.49,0,7.49,0.44"],
-  "ッ": ["M29,51.88c1.89,2.42,3.59,7.57,3.89,11.2","M48.24,45.73c2.69,2.83,5.28,7.67,5.58,12.01","M79.34,49.8c0.6,1.82,0.31,4.24-0.6,6.46c-6.08,14.83-16.95,32.44-36.68,41.62"]
+  "ッ": ["M29,51.88c1.89,2.42,3.59,7.57,3.89,11.2","M48.24,45.73c2.69,2.83,5.28,7.67,5.58,12.01","M79.34,49.8c0.6,1.82,0.31,4.24-0.6,6.46c-6.08,14.83-16.95,32.44-36.68,41.62"],
+  "零": ["M33.21,16.07c2.36,0.32,4.67,0.13,7.03-0.08c7-0.64,17.79-1.78,26.14-2.39c2.44-0.18,4.94-0.51,7.37-0.1","M20.29,26.75c-0.2,4.96-1.94,10.46-3.23,15.47","M21.02,29.53c23.36-2.4,47.23-5.28,65.79-5.71c8.03-0.19,3.38,4.46-0.78,8.61","M52.98,17.84c0.97,0.97,1.07,2.04,1.07,3.32c0,0.24,0.03,9.92,0.04,16.34c0.01,3.11,0.01,5.45,0.01,5.59","M33.88,34.88c2.8,0.75,6.61,3.01,8.13,4.26","M28.6,44.26c3.52,0.89,8.95,4.15,10.86,5.63","M66.68,33.27c3.41,1.4,7.28,4.19,8.65,5.36","M65.88,44.88c3.13,0.99,7.41,3.97,9.11,5.62","M51.87,46.75c0,1.44-0.65,2.54-1.47,3.65c-5.17,7.05-16.3,16.71-35.15,27.28","M53.04,49.32c5.89,3.64,21.19,14.05,29.63,19.18c2.79,1.7,5.66,3.56,8.83,4.43","M47.77,61.4c3.54,1.16,9.16,4.76,10.04,6.57","M34.08,76.52c2.44,1.34,5.47,0.69,8.06,0.34c6.98-0.93,22.29-3.07,27.74-3.8c3.59-0.48,5.55,0.02,2.17,3.12c-4.85,4.45-11.15,10.5-15.9,14.83","M46.32,87.14c3.81,1.42,13.66,6.89,15.46,10.61"],
+  "一": ["M11,54.25c3.19,0.62,6.25,0.75,9.73,0.5c20.64-1.5,50.39-5.12,68.58-5.24c3.6-0.02,5.77,0.24,7.57,0.49"],
+  "二": ["M25.25,32.4c1.77,0.37,4.78,0.56,6.55,0.37c10.82-1.15,28.82-3.4,41.24-3.76c2.95-0.09,4.73,0.18,6.21,0.36","M12,80.75c2.37,0.5,6.73,0.67,9.09,0.5c23.79-1.75,45.04-4.12,67.49-4.74c3.95-0.11,6.32,0.24,8.3,0.49"],
+  "三": ["M27.5,23.65c3.09,0.73,6.29,0.36,9.4,0.06c10.2-1,27-2.94,38.97-3.57c3.06-0.16,6.09-0.2,9.14,0.23","M28.75,55.14c3.13,0.76,6.46,0.43,9.64,0.2c10.03-0.72,23.97-2.63,34.73-3.12c2.7-0.12,5.45-0.16,8.13,0.3","M13,87.83c3.94,1.01,7.72,0.96,11.75,0.72c18.41-1.07,41.27-3.39,61.12-4.07c3.63-0.13,7.2-0.1,10.75,0.78"],
+  "四": ["M14.5,31.48c1.51,1.51,2.25,3.27,2.53,5.2c1.14,7.9,2.61,25.18,4.39,40.83c0.29,2.55,0.34,3.81,0.64,6.24","M17.85,34.04c21.65-1.92,51.52-3.92,67.82-4.3c4.85-0.11,6.31,2.62,6.04,5.38c-0.9,9.02-4.17,28.29-6.41,39.62c-0.49,2.49-0.94,4.6-1.3,6.13","M40.5,36c0.08,0.64,0.12,1.65-0.16,2.57c-2.22,7.3-5.1,14.55-13.35,22.68","M59.75,34.25c0.8,1.05,1.44,2.29,1.49,3.92c0.11,3.62,0.05,7.05,0.05,9.89c0,6.94,0.71,7.54,9.47,7.54c4.99,0,8.86-0.72,10.25-1.72","M22.73,79.32c13.77-0.57,43.64-1.8,61.18-2.08"],
+  "五": ["M31.75,23.15c2.8,0.67,5.54,0.42,8.36,0.12c9.3-0.99,22.18-2.4,34.14-3.21c2.49-0.17,5.04-0.33,7.5,0.2","M55.75,25.25c0.62,1.25,1.02,3.01,0.5,5c-3.12,11.88-14,44.12-19.75,59","M25.5,55.25c2.07,1.24,4.73,1.03,7,0.81c15.49-1.45,29.89-3.03,42.25-4.06c3-0.25,4.25,1.75,3.5,3.75c-2.24,5.96-6,20.75-7.75,31.5","M11.25,90.5c3.04,0.81,6.52,0.63,9.63,0.41c15.71-1.1,43.9-2.8,67.75-3.8c3.41-0.14,6.9-0.4,10.25,0.39"],
+  "六": ["M51.87,17.5c1.78,1.78,2.71,3.48,2.71,6.5c0,6.46,0.12,9.16,0.12,14.35","M13.5,42.13c3.27,0.74,7.11,0.89,9.93,0.64c21.56-1.9,41.78-5.02,61.41-5.47c4.8-0.11,7.49,0.31,11.06,1.07","M38.11,58.6c0.51,1.37,0.42,3.67-0.49,5.29C33.38,71.38,24,82.38,15.41,88.75","M70.16,59.92c9.96,8.61,18.18,18.54,23.16,28.99"],
+  "七": ["M15.5,51.75c1.82,0.5,4.38,0.88,6.96,0.5c16.91-2.45,50.92-8.12,64.44-8.74c3.02-0.14,4.84,0.24,6.35,0.49","M43,20c1.38,1.38,2.15,3.25,2.15,5.26C45.15,29.5,45,71.84,45,76c0,10.5,2.25,12.25,20.25,12.25c18.75,0,20-3.75,20-2.75"],
+  "八": ["M37.22,45c0.28,1.5,0.2,3.21-0.86,5.48c-4.23,9.02-11.48,20.4-24.1,32.02","M48,27.25c9.38,0.25,21.12,30,37.27,45.72c3.79,3.69,6.73,5.66,9.98,7.03"],
+  "九": ["M41.88,14.38c1,1.38,1.5,3.25,1.5,5.12c0,40.13-9.12,57.5-28.5,68.75","M13.5,45.75c2.88,0.85,5.78,0.05,8.58-0.66c8.47-2.14,39.88-9.79,40.92-9.84c2.5-0.12,4.75,0.5,4.25,4.75c-0.5,4.25-5.5,20.75-7,32.5c-2.23,17.46,2,19.37,18.21,19.37c13.79,0,19.01-1.07,19.27-10.12"],
+  "十": ["M11.88,50.98c3.18,0.89,6.62,0.61,9.87,0.35c19.92-1.58,45.23-4.76,63.38-5.82c3.85-0.23,7.23-0.07,11,0.56","M52.22,11.63c1.4,1.4,2.2,3.96,2.2,6.26c0,1.13-0.03,51.22-0.19,73.41c-0.03,3.96-0.06,6.83-0.08,8.08"],
+  "百": ["M16.13,20.23c2.22,0.54,6.29,0.75,8.51,0.54c21.49-2.02,41.86-4.39,59.22-4.98c3.7-0.12,5.92,0.26,7.77,0.53","M52.31,21.75c0.19,1.38,0.19,2.5-0.38,3.93c-1.65,4.19-4.81,9.19-8.66,14.68","M30.75,42.82c0.96,0.96,1.64,2.45,1.72,4.19c0.41,8.74,0.96,32.92,1.18,43.74c0.05,2.48,0.08,4.12,0.1,4.5","M33.55,44.8c10.35-1.37,35.73-4.38,38.78-4.59c3.15-0.22,4.92,1.17,4.92,4.24c0,4.48-0.68,32-0.92,44.06c-0.06,3.02-0.1,5.05-0.11,5.48","M34.14,66.95c10.24-1.08,32.11-3.2,41.44-3.57","M34.97,92.87c8.78-0.87,30.53-2.12,40.06-2.39"],
+  "千": ["M70.38,10.17c-0.13,1.58-0.83,2.64-2.17,3.67c-5.71,4.41-21.46,11.91-41.57,16.82","M12.13,50.83c3.36,0.94,7.21,0.75,10.63,0.49c17.76-1.34,37.63-4.16,66.24-4.94c3.08-0.08,6.08-0.14,9.13,0.38","M54.56,25.25c1.03,1.03,2.01,3,2.01,5.18c0,0.9-0.07,46.38-0.19,63.58c-0.02,2.93-0.04,5.04-0.06,5.99"],
+  "万": ["M14.38,24.73c2.3,0.54,6.52,0.78,8.81,0.54c21.57-2.27,44.44-5.64,64.9-5.98c3.83-0.06,6.12,0.26,8.04,0.53","M51,41.5c1.45,0.7,3.19,1.43,5.19,1.74c7.31,1.14,17.05,1.94,22.64,1.5c4.64-0.37,6.38,1.08,5.17,4.73C77.88,68,72.75,78.75,63.87,90.4c-7.6,9.97-10.12,3.22-12.62,0.2","M51.75,25.5c0.5,2,0.22,3.78-0.21,5.89C48.95,43.8,34.75,73.38,13.56,87.97"],
+  "円": ["M21.75,19.8c0.91,0.91,1.47,3.23,1.5,5.45c0.2,13.9,0.03,47.69,0.03,62.5c0,2-0.03,4.99-0.03,6","M24.06,21.56c15.07-1.68,49.46-5.58,57.92-6.31c2.9-0.25,4.78,1.88,4.78,4.27c0,13.48,0,53.21,0,67.48c0,9.75-4.25,6.5-8.5,1.5","M52.25,20.75c0.88,0.88,1.5,2,1.5,3.71c0,6.76,0,27.54,0,31.04","M24.75,59.75c14.62-1.75,43-4.25,60.5-5.25"],
+  "時": ["M16,29.84c0.75,0.66,1.21,1.62,1.21,3.07c0,1.18-0.16,30.08-0.21,40.85c-0.01,2.42-0.02,3.95-0.02,4.08","M17.78,30.74c4.65-0.63,16.12-2.07,17.6-2.25c1.52-0.18,3,1.5,2.88,2.57c-0.24,2.17-0.36,24.9-0.35,40.79c0,1.63-0.12,3.35-0.12,4.43","M18.75,52c4.5-0.75,13.5-2.12,18.22-2.35","M17.8,74.52c6.2-0.92,11.45-1.89,18.94-2.7","M51.44,29.03c1.37,0.44,3.63,0.34,5,0.19c9.79-1.09,16.34-2.34,25.62-3.08c2.27-0.18,3.9-0.04,5.04,0.18","M67.59,11.37c0.89,0.9,1.59,2.24,1.59,3.75c0,8.39,0.03,27.02,0.03,27.6","M45.38,45.35c1.49,0.44,4.21,0.59,5.71,0.44c11.29-1.16,25.66-3.29,39.2-3.99c2.48-0.13,3.97,0.21,5.21,0.43","M46,60.99c1.43,0.46,4.04,0.58,5.49,0.46c12.01-1.07,26.89-3.07,39.07-3.89c2.38-0.16,4.41,0.22,5.6,0.44","M78.07,46.08c1.11,1.11,1.66,2.56,1.71,5.06c0.23,12.03-0.09,34.43-0.09,38.52c0,9.83-5.42,2.19-7.66-0.04","M56.75,70.38c2.87,1.76,6.55,6.38,7.27,9.12"],
+  "分": ["M41.12,19.38c0.25,1.24-0.44,3.01-1.1,4.08C34.31,32.72,27.13,40.62,13,51.25","M54.69,13.75c7.56-0.12,20.68,19.17,29.41,25.95c3.07,2.39,6.02,4.05,10.4,5.3","M29.35,55.37c2.42,0.83,4.97,0.75,7.42,0.37c11.06-1.7,28.87-5.3,34.1-5.76c3.69-0.33,5.08,1.48,4.88,3.77c-0.54,6.05-5.94,29.03-10.5,36.3c-4.99,7.96-5.74,4.21-9.84-0.49","M49.12,57.25c0.15,1.49,0.06,2.72-0.56,4.08C43.5,72.5,35.75,82,22.5,90.75"],
+  "半": ["M26.02,22.58c3.9,2.41,10.07,9.89,11.04,13.63","M82.75,18.75c0.16,1.19-0.39,2.25-1.01,3.2c-2.57,3.96-7.16,8.76-12.62,12.92","M28.3,48.57c1.78,0.38,5.07,0.21,6.83,0.03c10.62-1.09,29.12-2.99,38.5-3.67c2.97-0.22,4.75-0.17,6.24,0.02","M13.5,67.22c2.25,0.91,6.85,1.03,9.22,0.78c18.28-1.87,40.4-3.58,62.61-4.38c4-0.14,6.41,0.25,8.42,0.52","M52.67,11.5c1.23,1.23,1.85,3.17,1.85,4.4c0,7.6,0.1,54.35,0.1,75.1c0,3.18-0.07,5.46-0.11,6.5"],
+  "月": ["M34.25,16.25c1,1,1.48,2.38,1.5,4c0.38,33.62,2.38,59.38-11,73.25","M36.25,19c4.12-0.62,31.49-4.78,33.25-5c4-0.5,5.5,1.12,5.5,4.75c0,2.76-0.5,49.25-0.5,69.5c0,13-6.25,4-8.75,1.75","M37.25,38c10.25-1.5,27.25-3.75,36.25-4.5","M37,58.25c8.75-1.12,27-3.5,36.25-4"],
+  "日": ["M31.5,24.5c1.12,1.12,1.74,2.75,1.74,4.75c0,1.6-0.16,38.11-0.09,53.5c0.02,3.82,0.05,6.35,0.09,6.75","M33.48,26c0.8-0.05,37.67-3.01,40.77-3.25c3.19-0.25,5,1.75,5,4.25c0,4-0.22,40.84-0.23,56c0,3.48,0,5.72,0,6","M34.22,55.25c7.78-0.5,35.9-2.5,44.06-2.75","M34.23,86.5c10.52-0.75,34.15-2.12,43.81-2.25"],
+  "年": ["M40.01,11.89c0.24,1.61-0.01,2.86-0.84,4.46c-2.53,4.84-6.91,11.4-15.86,19.62","M39.13,23.62c2.25,0.38,4.4,0.18,5.79,0.03c11.7-1.27,21.33-2.9,33.22-4.07c2.3-0.23,4.2,0,5.35,0.26","M30.13,43.59c1.36,0.33,3.87,0.46,5.21,0.33c10.91-1.05,28.53-3.42,40.78-4.26c2.26-0.15,3.63,0.16,4.76,0.32","M33.75,44.5c1,1.25,1,1.97,1.01,3.5C34.8,52.33,35,65.29,35,66.25","M13.88,67.74c1.97,0.47,5.61,0.66,7.57,0.47c20.21-2.03,36.35-4.62,66.65-5.31c3.29-0.08,5.26,0.22,6.91,0.46","M56.56,25.46c1.12,1.12,1.79,3.54,1.79,4.94c0,0.89-0.05,44.26-0.13,61.6c-0.01,3.12-0.03,5.39-0.05,6.38"]
 };
 
         // ==========================================
@@ -5970,7 +5993,29 @@
             'し': { count: 1, steps: ['1. Línea vertical con curva hacia arriba (forma de J)'] },
             'す': { count: 2, steps: ['1. Horizontal', '2. Vertical con bucle central'] },
             'せ': { count: 3, steps: ['1. Horizontal', '2. Vertical derecho', '3. Vertical izquierdo curvado'] },
-            'そ': { count: 1, steps: ['1. Trazo en zigzag continuo con base redondeada'] }
+            'そ': { count: 1, steps: ['1. Trazo en zigzag continuo con base redondeada'] },
+            // Números y Tiempo en Kanji (KanjiVG)
+            '零': { count: 13, steps: ['1. Horizontal superior', '2. Vertical izquierdo lluvia', '3. Techo lluvia con gancho', '4. Vertical central', '5-8. Cuatro gotas lluvia', '9. Diagonal orden', '10. Horizontal con quiebre', '11. Punto interior', '12. Trazo en ángulo', '13. Punto final'] },
+            '一': { count: 1, steps: ['1. Línea horizontal de izquierda a derecha con leve inclinación'] },
+            '二': { count: 2, steps: ['1. Horizontal superior corto', '2. Horizontal inferior largo'] },
+            '三': { count: 3, steps: ['1. Horizontal superior medio', '2. Horizontal centro corto', '3. Horizontal base largo'] },
+            '四': { count: 5, steps: ['1. Vertical izquierdo', '2. Techo y bajada derecha', '3. Curva interior izquierda', '4. Ángulo interior derecho', '5. Cierre horizontal inferior'] },
+            '五': { count: 4, steps: ['1. Horizontal superior', '2. Diagonal al centro', '3. Ángulo horizontal-vertical', '4. Base horizontal larga'] },
+            '六': { count: 4, steps: ['1. Punto superior', '2. Sombrero horizontal largo', '3. Diagonal izquierda descendente', '4. Punto diagonal derecho'] },
+            '七': { count: 2, steps: ['1. Horizontal ascendente', '2. Vertical con curva y gancho hacia arriba'] },
+            '八': { count: 2, steps: ['1. Diagonal izquierda', '2. Diagonal derecha en cascada'] },
+            '九': { count: 2, steps: ['1. Diagonal curva izquierda', '2. Ángulo superior con gancho envolvente'] },
+            '十': { count: 2, steps: ['1. Horizontal centrado', '2. Vertical recto que cruza el centro'] },
+            '百': { count: 6, steps: ['1. Horizontal superior', '2. Diagonal izquierda', '3. Vertical caja', '4. Esquina superior-derecha', '5. Horizontal interior', '6. Cierre horizontal inferior'] },
+            '千': { count: 3, steps: ['1. Diagonal superior inclinada', '2. Horizontal central', '3. Vertical recto que corta todo'] },
+            '万': { count: 3, steps: ['1. Horizontal superior', '2. Ángulo con gancho', '3. Trazo curvo hacia la izquierda'] },
+            '円': { count: 4, steps: ['1. Vertical izquierdo', '2. Techo y lateral con gancho', '3. Vertical interior', '4. Horizontal interior cruzado'] },
+            '時': { count: 10, steps: ['1-4. Sol (日) a la izquierda', '5-10. Templo (寺) a la derecha'] },
+            '分': { count: 4, steps: ['1-2. Ocho (八) superior', '3-4. Espada (刀) inferior con gancho'] },
+            '半': { count: 5, steps: ['1-2. Dos puntos superiores', '3. Horizontal corto', '4. Horizontal largo', '5. Corte vertical central'] },
+            '月': { count: 4, steps: ['1. Vertical curvo izquierdo', '2. Techo y pared derecha con gancho', '3. Barra interior superior', '4. Barra interior inferior'] },
+            '日': { count: 4, steps: ['1. Vertical izquierdo', '2. Techo y pared derecha', '3. Horizontal interno central', '4. Cierre horizontal inferior'] },
+            '年': { count: 6, steps: ['1. Diagonal izquierda superior', '2. Horizontal superior', '3. Vertical corto', '4. Horizontal medio', '5. Horizontal largo', '6. Vertical central largo'] }
         };
 
         // ==========================================
@@ -7966,6 +8011,55 @@
         let modalDragStartX = 0, modalDragStartY = 0;
         let modalInitialLeft = 0, modalInitialTop = 0;
 
+
+        // ==========================================================
+        // DICCIONARIO Y MOTOR CALIGRÁFICO DE NÚMEROS Y TIEMPO EN KANJI (KanjiVG)
+        // ==========================================================
+        const NUMBER_KANJI_DATA = [
+            { kanji: '零', val: 0, romaji: 'rei / zero', kana: 'れい / ゼロ', strokes: 13, note: 'Cero. Compuesto por lluvia (雨) arriba y orden (令) abajo.' },
+            { kanji: '一', val: 1, romaji: 'ichi', kana: 'いち', strokes: 1, note: 'Uno. Un solo trazo horizontal de izquierda a derecha con suave terminación.' },
+            { kanji: '二', val: 2, romaji: 'ni', kana: 'に', strokes: 2, note: 'Dos. Dos horizontales: superior corto, inferior largo.' },
+            { kanji: '三', val: 3, romaji: 'san', kana: 'さん', strokes: 3, note: 'Tres. Tres horizontales: superior medio, centro corto, base larga.' },
+            { kanji: '四', val: 4, romaji: 'yon / shi', kana: 'よん / し', strokes: 5, note: 'Cuatro. Caja exterior, trazos curvos interiores y cierre de base al final.' },
+            { kanji: '五', val: 5, romaji: 'go', kana: 'ご', strokes: 4, note: 'Cinco. Horizontal, diagonal interior, quiebre y base horizontal.' },
+            { kanji: '六', val: 6, romaji: 'roku', kana: 'ろく', strokes: 4, note: 'Seis. Punto superior, sombrero horizontal y dos patas abiertas.' },
+            { kanji: '七', val: 7, romaji: 'nana / shichi', kana: 'なな / しち', strokes: 2, note: 'Siete. Horizontal ascendente y vertical con curva y gancho.' },
+            { kanji: '八', val: 8, romaji: 'hachi', kana: 'はち', strokes: 2, note: 'Ocho. Dos trazos abiertos en cascada que no se tocan arriba.' },
+            { kanji: '九', val: 9, romaji: 'kyuu / ku', kana: 'きゅう / く', strokes: 2, note: 'Nueve. Primero diagonal izquierda, luego ángulo superior con gancho.' },
+            { kanji: '十', val: 10, romaji: 'juu', kana: 'じゅう', strokes: 2, note: 'Diez. Cruz simple: horizontal primero, luego vertical que corta.' },
+            { kanji: '百', val: 100, romaji: 'hyaku', kana: 'ひゃく', strokes: 6, note: 'Cien. Horizontal, diagonal, vertical, caja y cierre.' },
+            { kanji: '千', val: 1000, romaji: 'sen', kana: 'せん', strokes: 3, note: 'Mil. Diagonal superior inclinada, horizontal y corte vertical recto.' },
+            { kanji: '万', val: 10000, romaji: 'man', kana: 'まん', strokes: 3, note: 'Diez mil. Horizontal superior, trazo con gancho y curva izquierda.' },
+            { kanji: '円', val: 'Yen', romaji: 'en', kana: 'えん', strokes: 4, note: 'Yen / Moneda. Vertical izquierdo, caja con gancho, vertical y horizontal.' },
+            { kanji: '時', val: 'Hora', romaji: 'ji', kana: 'じ', strokes: 10, note: 'Hora / Tiempo. Sol (日) a la izquierda + templo (寺) a la derecha.' },
+            { kanji: '分', val: 'Minuto', romaji: 'fun / pun', kana: 'ふん / ぷん', strokes: 4, note: 'Minuto / Parte. Ocho (八) arriba + espada (刀) abajo.' },
+            { kanji: '半', val: 'Media', romaji: 'han', kana: 'はん', strokes: 5, note: 'Mitad / Y media. Dos puntos arriba, dos horizontales y corte vertical.' },
+            { kanji: '月', val: 'Mes', romaji: 'gatsu / getsu', kana: 'がつ / げつ', strokes: 4, note: 'Mes / Luna. Vertical izquierdo, techo con gancho y dos barras internas.' },
+            { kanji: '日', val: 'Día', romaji: 'nichi / bi', kana: 'にち / び', strokes: 4, note: 'Día / Sol. Caja vertical, horizontal interno y cierre de base.' },
+            { kanji: '年', val: 'Año', romaji: 'nen', kana: 'ねん', strokes: 6, note: 'Año. Trazos horizontales, cruces y vertical largo central.' }
+        ];
+
+        function practiceKanjiInCanvas(char) {
+            const kObj = NUMBER_KANJI_DATA.find(k => k.kanji === char) || NUMBER_KANJI_DATA[1];
+            state.customPracticePool = NUMBER_KANJI_DATA.map(k => ({
+                hiragana: k.kanji,
+                katakana: k.kanji,
+                char: k.kanji,
+                romaji: `${k.romaji} (${k.val})`,
+                meaning: k.note
+            }));
+            state.customPracticeTitle = '🔢 Práctica de Trazos: Números y Tiempo en Kanji';
+            state.selectedDrawingKana = state.customPracticePool.find(k => k.char === char) || state.customPracticePool[0];
+            
+            if (typeof closeKanaStrokeModal === 'function') closeKanaStrokeModal();
+            if (typeof switchTab === 'function') switchTab('draw');
+            if (typeof updateCustomPracticePoolBanner === 'function') updateCustomPracticePoolBanner();
+            if (typeof loadCharacterForDrawing === 'function') loadCharacterForDrawing(char, 'draw');
+            if (typeof renderDrawKanaList === 'function') renderDrawKanaList();
+            if (typeof speakJapanese === 'function') speakJapanese(kObj.kana || char);
+            if (typeof showToast === 'function') showToast(`Cargado kanji ${char} en el lienzo interactivo`, 'success');
+        }
+
         function showKanaStrokeModal(hiraganaChar) {
             currentModalKana = hiraganaChar;
             const modal = document.getElementById('kanaStrokeModal');
@@ -7973,10 +8067,12 @@
             if (!modal) return;
 
             const activeDataset = getActiveKanaDataset();
-            const kanaObj = activeDataset.find(k => (k.char || k.katakana || k.hiragana) === hiraganaChar) ||
+            const numKanjiObj = (typeof NUMBER_KANJI_DATA !== 'undefined') ? NUMBER_KANJI_DATA.find(k => k.kanji === hiraganaChar) : null;
+            const kanaObj = numKanjiObj ? { romaji: `${numKanjiObj.romaji} (${numKanjiObj.val})`, hiragana: numKanjiObj.kana, char: numKanjiObj.kanji } :
+                            (activeDataset.find(k => (k.char || k.katakana || k.hiragana) === hiraganaChar) ||
                             HIRAGANA_DATA.find(k => k.hiragana === hiraganaChar) ||
                             KATAKANA_DATA.find(k => k.katakana === hiraganaChar) ||
-                            { romaji: '', hiragana: hiraganaChar, char: hiraganaChar };
+                            { romaji: '', hiragana: hiraganaChar, char: hiraganaChar });
             const romajiEl = document.getElementById('modalKanaRomaji');
             const charEl = document.getElementById('modalKanaChar');
             if (romajiEl) romajiEl.textContent = (kanaObj.romaji || '').toUpperCase();
@@ -8017,6 +8113,16 @@
         }
 
         function navKanaStrokeModal(delta) {
+            if (typeof NUMBER_KANJI_DATA !== 'undefined' && NUMBER_KANJI_DATA.some(k => k.kanji === currentModalKana)) {
+                const pool = NUMBER_KANJI_DATA;
+                const curIdx = pool.findIndex(k => k.kanji === currentModalKana);
+                const nextIdx = (curIdx + delta + pool.length) % pool.length;
+                const nextChar = pool[nextIdx].kanji;
+                currentModalKana = nextChar;
+                if (typeof speakJapanese === 'function') speakJapanese(pool[nextIdx].kana || nextChar);
+                showKanaStrokeModal(nextChar);
+                return;
+            }
             const activeDataset = getActiveKanaDataset();
             const currentCatList = activeDataset.filter(k => k.category === state.currentCategory);
             const pool = currentCatList.length > 0 ? currentCatList : activeDataset;
@@ -9438,6 +9544,22 @@
                 newGroups = ['kya', 'sha', 'cha', 'nya', 'hya', 'mya', 'rya', 'gya', 'ja', 'dya', 'bya', 'pya'];
             } else if (presetKey === 'all') {
                 newGroups = groups.map(g => g.id);
+            } else if (presetKey === 'kanjiNumbers') {
+                state.customPracticePool = NUMBER_KANJI_DATA.map(k => ({
+                    hiragana: k.kanji,
+                    katakana: k.kanji,
+                    char: k.kanji,
+                    romaji: `${k.romaji} (${k.val})`,
+                    meaning: k.note
+                }));
+                state.customPracticeTitle = '🔢 Práctica de Trazos: Números y Tiempo en Kanji';
+                updateCustomPracticePoolBanner();
+                refreshAllDrawingGroupUIs();
+                if (mode === 'draw') nextDrawChallenge();
+                else if (mode === 'blind') nextBlindChallenge();
+                else if (mode === 'dictation') nextDictationChallenge();
+                showToast("Activada práctica de Números y Tiempo en Kanji", "success");
+                return;
             }
 
             if (state.currentSyllabary === 'katakana') {
@@ -15365,17 +15487,26 @@ const DIGIT_HIRAGANA = {
                             </p>
                         </div>
 
-                        <!-- Grid 1 al 10 con audio -->
+                        <!-- Grid 1 al 10 con audio y trazos Kanji -->
                         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                             ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(digit => {
                                 const d = DIGIT_HIRAGANA[digit];
+                                const k = DIGIT_KANJI[digit] || '';
                                 return `
                                     <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-400/50 flex flex-col justify-between gap-2 shadow-sm transition group">
                                         <div class="flex items-center justify-between">
-                                            <span class="font-mono text-2xl font-black text-amber-300">${digit}</span>
-                                            <button type="button" onclick="speakJapanese('${d.hira}')" class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
-                                                <i class="fa-solid fa-volume-high text-xs"></i>
-                                            </button>
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-mono text-2xl font-black text-amber-300">${digit}</span>
+                                                <span class="font-jp text-xl font-black text-white">${k}</span>
+                                            </div>
+                                            <div class="flex items-center gap-1">
+                                                <button type="button" onclick="showKanaStrokeModal('${k}')" class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 flex items-center justify-center transition active:scale-90" title="Ver animación de trazo de ${k}">
+                                                    <i class="fa-solid fa-paintbrush text-[11px]"></i>
+                                                </button>
+                                                <button type="button" onclick="speakJapanese('${d.hira}')" class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                    <i class="fa-solid fa-volume-high text-xs"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div>
                                             <div class="font-jp text-lg font-bold text-white">${d.hira}</div>
@@ -15499,7 +15630,12 @@ const DIGIT_HIRAGANA = {
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
                                 <i class="fa-solid fa-circle-notch text-amber-400"></i> Lección 3 de 5: La Llegada al 100
                             </span>
-                            <h3 class="text-xl sm:text-2xl font-black text-white">El 100 y las Centenas Regulares</h3>
+                            <div class="flex items-center justify-between gap-3 flex-wrap">
+                                <h3 class="text-xl sm:text-2xl font-black text-white">El 100 y las Centenas Regulares</h3>
+                                <button type="button" onclick="showKanaStrokeModal('百')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-paintbrush text-rose-400"></i> Ver Trazos de 百
+                                </button>
+                            </div>
                             <p class="text-xs sm:text-sm text-slate-300">
                                 Para llegar a las centenas aparece la palabra <strong class="text-amber-300 font-jp">ひゃく (hyaku = 100)</strong>. Sigue la misma lógica que las decenas, pero con una <em>regla de oro inquebrantable</em>:
                             </p>
@@ -15658,7 +15794,17 @@ const DIGIT_HIRAGANA = {
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
                                 <i class="fa-solid fa-gem text-amber-400"></i> Lección 5 de 7: Los Miles y sus Mutaciones (千 / せん)
                             </span>
-                            <h3 class="text-xl sm:text-2xl font-black text-white">Los Miles: 千 (せん - sen) y sus 2 Mutaciones</h3>
+                            <div class="flex items-center justify-between gap-3 flex-wrap">
+                                <h3 class="text-xl sm:text-2xl font-black text-white">Los Miles: 千 (せん - sen) y sus 2 Mutaciones</h3>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="showKanaStrokeModal('千')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                        <i class="fa-solid fa-paintbrush text-rose-400"></i> Trazos de 千
+                                    </button>
+                                    <button type="button" onclick="showKanaStrokeModal('円')" class="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                        <i class="fa-solid fa-paintbrush text-amber-400"></i> Trazos de 円
+                                    </button>
+                                </div>
+                            </div>
                             <p class="text-xs sm:text-sm text-slate-300">
                                 Para expresar millares en japonés se usa el sufijo <strong class="text-amber-300 font-jp">千 (せん - sen = 1.000)</strong>. Al igual que el 100 (ひゃく), el 1.000 tiene una regla de oro primordial:
                             </p>
@@ -15938,7 +16084,12 @@ const DIGIT_HIRAGANA = {
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30">
                                 <i class="fa-solid fa-layer-group text-indigo-400"></i> Lección 7 de 7: Números Mayores y el Sistema del 万 (man)
                             </span>
-                            <h3 class="text-xl sm:text-2xl font-black text-white">La Regla Básica del 万 (man): 10.000 a Millones</h3>
+                            <div class="flex items-center justify-between gap-3 flex-wrap">
+                                <h3 class="text-xl sm:text-2xl font-black text-white">La Regla Básica del 万 (man): 10.000 a Millones</h3>
+                                <button type="button" onclick="showKanaStrokeModal('万')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-paintbrush text-rose-400"></i> Ver Trazos de 万
+                                </button>
+                            </div>
                             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
                                 A diferencia de 100 (<strong>百 / hyaku</strong>) o 1.000 (<strong>千 / sen</strong>), donde no necesitas decir "uno" por delante, para 10.000 <strong class="text-amber-300">siempre es obligatorio</strong> incluir el 1 (<strong>一 / ichi</strong>):
                             </p>
@@ -16869,6 +17020,49 @@ const DIGIT_HIRAGANA = {
             container.innerHTML = `
                 <div class="space-y-6">
                     
+                    
+                    <!-- Ficha Caligráfica: Guía de Trazos de Números y Tiempo en Kanji -->
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950/30 border-2 border-rose-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold mb-1">
+                                    <i class="fa-solid fa-paintbrush text-rose-400"></i> Caligrafía Oficial KanjiVG
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-black text-white">
+                                    Guía de Trazos: Números y Tiempo en Kanji (漢字)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
+                                    Aprende el orden y dirección correcta de trazos para cada número. Haz clic en <strong>Ver</strong> para ver la animación interactiva trazo por trazo o en <strong>Lienzo</strong> para dibujarlo con retroalimentación caligráfica.
+                                </p>
+                            </div>
+                            <button type="button" onclick="practiceKanjiInCanvas('一')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-amber-500 text-white font-bold text-xs shadow-lg hover:from-rose-500 hover:to-amber-400 transition flex items-center gap-2">
+                                <i class="fa-solid fa-pen-nib"></i> Entrenar en Lienzo de Dibujo
+                            </button>
+                        </div>
+
+                        <!-- Grid de Tarjetas de Números en Kanji -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 pt-2">
+                            ${NUMBER_KANJI_DATA.map(k => `
+                                <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-rose-500/50 flex flex-col items-center text-center transition group shadow-sm">
+                                    <div class="font-jp text-3xl font-black text-white group-hover:text-rose-400 transition mt-1">${k.kanji}</div>
+                                    <div class="text-xs font-bold text-amber-400 mt-1">${k.romaji}</div>
+                                    <div class="text-[10px] text-slate-400 font-jp">${k.kana}</div>
+                                    <div class="inline-block mt-1 px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">
+                                        ${k.strokes} ${k.strokes === 1 ? 'trazo' : 'trazos'}
+                                    </div>
+                                    <div class="flex items-center gap-1.5 mt-2.5 w-full">
+                                        <button type="button" onclick="showKanaStrokeModal('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Ver animación de trazo">
+                                            <i class="fa-solid fa-eye text-[10px]"></i> Ver
+                                        </button>
+                                        <button type="button" onclick="practiceKanjiInCanvas('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Dibujar en el lienzo">
+                                            <i class="fa-solid fa-pen text-[10px]"></i> Lienzo
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
                     <!-- Ficha 1: Mutaciones Clave del Parcial (Centenas 100 - 999) -->
                     <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 border-2 border-amber-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
                         <div class="flex items-center justify-between gap-3 flex-wrap">
@@ -17832,7 +18026,26 @@ const DIGIT_HIRAGANA = {
                     <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
                         <div class="text-center space-y-1">
                             <span class="text-xs uppercase font-bold text-slate-400 tracking-widest block">Reloj Analógico y Digital Interactivo:</span>
-                            <h3 class="text-xl sm:text-2xl font-black text-white">Ajusta la Hora y Escucha su Lectura Nativa</h3>
+                            <div class="flex items-center justify-between gap-3 flex-wrap">
+                                <h3 class="text-xl sm:text-2xl font-black text-white">Ajusta la Hora y Escucha su Lectura Nativa</h3>
+                                <div class="flex items-center gap-1.5">
+                                    <button type="button" onclick="showKanaStrokeModal('時')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 時">
+                                        <i class="fa-solid fa-paintbrush text-rose-400"></i> 時
+                                    </button>
+                                    <button type="button" onclick="showKanaStrokeModal('分')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 分">
+                                        <i class="fa-solid fa-paintbrush text-rose-400"></i> 分
+                                    </button>
+                                    <button type="button" onclick="showKanaStrokeModal('半')" class="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 半">
+                                        <i class="fa-solid fa-paintbrush text-amber-400"></i> 半
+                                    </button>
+                                    <button type="button" onclick="showKanaStrokeModal('月')" class="px-2.5 py-1 rounded-xl bg-purple-500/20 text-purple-300 hover:bg-purple-500/30 border border-purple-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 月">
+                                        <i class="fa-solid fa-paintbrush text-purple-400"></i> 月
+                                    </button>
+                                    <button type="button" onclick="showKanaStrokeModal('日')" class="px-2.5 py-1 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 border border-sky-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 日">
+                                        <i class="fa-solid fa-paintbrush text-sky-400"></i> 日
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="flex flex-col md:flex-row items-center justify-center gap-8">
