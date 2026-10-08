@@ -9,10 +9,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Hiragana Master">
-    <meta name="application-name" content="Hiragana Master">
+    <meta name="apple-mobile-web-app-title" content="KotoDojo">
+    <meta name="application-name" content="KotoDojo">
     <meta name="format-detection" content="telephone=no">
-    <title>Hiragana Master - Aprende y Practica Japonés</title>
+    <title>KotoDojo - Kanas, Números, Horas y Caligrafía Japonesa</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -1250,16 +1250,16 @@
 
                 <div class="flex items-center gap-1.5 sm:gap-2 cursor-pointer shrink-0" onclick="switchTab('study')">
                     <div class="theme-logo-box w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-jp text-white font-black text-sm sm:text-base shadow-md shrink-0">
-                        あ
+                        言
                     </div>
                     <div>
                         <div class="flex items-center gap-1.5">
-                            <h1 class="text-xs sm:text-base font-extrabold text-white leading-none hidden sm:block">Hiragana Master</h1>
+                            <h1 class="text-xs sm:text-base font-extrabold text-white leading-none hidden sm:block">KotoDojo</h1>
                             <span id="headerCurrentTabBadge" class="hidden md:inline px-2 py-0.5 rounded-full stage-theme-pill text-[10px] font-bold">
                                 Aprender
                             </span>
                         </div>
-                        <p class="text-[10px] text-slate-400 hidden md:block">ひらがなマスター • SRS Pro</p>
+                        <p class="text-[10px] text-slate-400 hidden md:block">こと道場 • Kanas, Números &amp; Tiempo</p>
                     </div>
                 </div>
             </div>
@@ -1423,11 +1423,11 @@
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-3">
                     <div class="theme-logo-box w-9 h-9 rounded-xl flex items-center justify-center font-jp text-white font-black text-lg shadow-md">
-                        あ
+                        言
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-white text-sm">Hiragana Master</h3>
-                        <p class="stage-theme-accent-text text-[10px] font-semibold">Navegación de Secciones</p>
+                        <h3 class="font-extrabold text-white text-sm">KotoDojo</h3>
+                        <p class="stage-theme-accent-text text-[10px] font-semibold">こと道場 • Navegación</p>
                     </div>
                 </div>
                 <button type="button" onclick="toggleMobileMenu(false)" aria-label="Cerrar menú"
@@ -1580,7 +1580,7 @@
                 </div>
             </div>
             <div class="text-[10px] text-slate-500 text-center font-mono">
-                Hiragana Master • 100% Offline
+                KotoDojo • 100% Offline
             </div>
         </div>
     </div>
@@ -6021,7 +6021,7 @@
         // ==========================================
         // STATE MANAGEMENT & LOCAL STORAGE PERSISTENCE
         // ==========================================
-        const STORAGE_KEY = 'hiragana_master_storage_v2';
+        const STORAGE_KEY = 'kotodojo_storage_v1';
 
         const state = {
             // Silabario Activo Global ('hiragana' | 'katakana')
@@ -6210,7 +6210,7 @@
 
         function loadStateFromStorage() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
+                const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('hiragana_master_storage_v2');
                 if (raw) {
                     const parsed = JSON.parse(raw);
                     if (typeof parsed.xp === 'number') state.xp = parsed.xp;
@@ -20884,7 +20884,7 @@ const DIGIT_HIRAGANA = {
     </div>
 
     <!-- ==========================================================
-         MODAL DE ATMÓSFERAS Y TEMAS VISUALES (HIRAGANA MASTER)
+         MODAL DE ATMÓSFERAS Y TEMAS VISUALES (KOTODOJO)
          ========================================================== -->
     <!-- MODAL SELECTOR DE ATMÓSFERAS Y TEMAS (6 PALETAS ARMONIZADAS) -->
     <div id="themeSelectorModalBackdrop" onclick="closeThemeModal()"
