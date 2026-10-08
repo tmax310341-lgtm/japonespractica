@@ -15089,21 +15089,27 @@ const DIGIT_HIRAGANA = {
                 return {
                     hiragana: 'ぜろ',
                     romaji: 'zero',
+                    kanji: '零',
+                    kanjiBlocks: ['零'],
                     blocks: ['ぜろ'],
                     hasMutation: false,
                     mutationInfo: null,
-                    breakdown: [{ val: 0, text: '0 = ぜろ (zero / れい rei)' }],
+                    breakdown: [{ val: 0, text: '0 = ぜろ (zero / れい rei) [Kanji: 零]' }],
                     blocksOf4: '0'
                 };
             }
 
             if (n <= 10 && !isInsideMan) {
                 const item = DIGIT_HIRAGANA[n];
+                const kanjiChar = DIGIT_KANJI[n] || '';
                 let note = n + ' = ' + item.hira + ' (' + item.romaji + ')';
                 if (item.alt) note += ' [Lectura alternativa: ' + item.alt + ']';
+                note += ' [Kanji: ' + kanjiChar + ']';
                 return {
                     hiragana: item.hira,
                     romaji: item.romaji,
+                    kanji: kanjiChar,
+                    kanjiBlocks: [kanjiChar],
                     blocks: [item.hira],
                     hasMutation: false,
                     mutationInfo: null,
@@ -15555,19 +15561,19 @@ const DIGIT_HIRAGANA = {
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <span><strong>11:</strong> じゅういち</span>
+                                    <div><strong>11:</strong> <span class="font-jp text-amber-300 font-bold">十一</span> <span class="text-slate-300">(じゅういち)</span></div>
                                     <button type="button" onclick="speakJapanese('じゅういち')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <span><strong>14:</strong> じゅうよん</span>
+                                    <div><strong>14:</strong> <span class="font-jp text-amber-300 font-bold">十四</span> <span class="text-slate-300">(じゅうよん)</span></div>
                                     <button type="button" onclick="speakJapanese('じゅうよん')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <span><strong>17:</strong> じゅうなな</span>
+                                    <div><strong>17:</strong> <span class="font-jp text-amber-300 font-bold">十七</span> <span class="text-slate-300">(じゅうなな)</span></div>
                                     <button type="button" onclick="speakJapanese('じゅうなな')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <span><strong>19:</strong> じゅうきゅう</span>
+                                    <div><strong>19:</strong> <span class="font-jp text-amber-300 font-bold">十九</span> <span class="text-slate-300">(じゅうきゅう)</span></div>
                                     <button type="button" onclick="speakJapanese('じゅうきゅう')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
@@ -15664,27 +15670,57 @@ const DIGIT_HIRAGANA = {
                             </span>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>100:</strong> <span class="font-jp text-white font-bold">ひゃく</span> <span class="text-slate-500">(hyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">100</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">百</span>
+                                        <span class="font-jp text-white font-bold">ひゃく</span>
+                                        <span class="text-slate-400">(hyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('ひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>200:</strong> <span class="font-jp text-white font-bold">にひゃく</span> <span class="text-slate-500">(nihyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">200</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">二百</span>
+                                        <span class="font-jp text-white font-bold">にひゃく</span>
+                                        <span class="text-slate-400">(nihyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('にひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>400:</strong> <span class="font-jp text-white font-bold">よんひゃく</span> <span class="text-slate-500">(yonhyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">400</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">四百</span>
+                                        <span class="font-jp text-white font-bold">よんひゃく</span>
+                                        <span class="text-slate-400">(yonhyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('よんひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>500:</strong> <span class="font-jp text-white font-bold">ごひゃく</span> <span class="text-slate-500">(gohyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">500</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">五百</span>
+                                        <span class="font-jp text-white font-bold">ごひゃく</span>
+                                        <span class="text-slate-400">(gohyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('ごひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>700:</strong> <span class="font-jp text-white font-bold">ななひゃく</span> <span class="text-slate-500">(nanahyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">700</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">七百</span>
+                                        <span class="font-jp text-white font-bold">ななひゃく</span>
+                                        <span class="text-slate-400">(nanahyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('ななひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                                    <div><strong>900:</strong> <span class="font-jp text-white font-bold">きゅうひゃく</span> <span class="text-slate-500">(kyuuhyaku)</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-mono text-base font-black text-amber-400">900</span>
+                                        <span class="font-jp text-lg font-black text-amber-300">九百</span>
+                                        <span class="font-jp text-white font-bold">きゅうひゃく</span>
+                                        <span class="text-slate-400">(kyuuhyaku)</span>
+                                    </div>
                                     <button type="button" onclick="speakJapanese('きゅうひゃく')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
@@ -15721,8 +15757,11 @@ const DIGIT_HIRAGANA = {
                                     </button>
                                 </div>
                                 <div>
-                                    <div class="text-2xl font-jp font-black text-white">
-                                        さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-2xl font-jp font-black text-amber-400">三百</span>
+                                        <div class="text-xl font-jp font-bold text-white">
+                                            さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
+                                        </div>
                                     </div>
                                     <div class="text-xs font-mono text-slate-400">sanbyaku</div>
                                 </div>
@@ -15742,8 +15781,11 @@ const DIGIT_HIRAGANA = {
                                     </button>
                                 </div>
                                 <div>
-                                    <div class="text-2xl font-jp font-black text-white">
-                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-2xl font-jp font-black text-amber-400">六百</span>
+                                        <div class="text-xl font-jp font-bold text-white">
+                                            <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                        </div>
                                     </div>
                                     <div class="text-xs font-mono text-slate-400">roppyaku</div>
                                 </div>
@@ -15763,8 +15805,11 @@ const DIGIT_HIRAGANA = {
                                     </button>
                                 </div>
                                 <div>
-                                    <div class="text-2xl font-jp font-black text-white">
-                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-2xl font-jp font-black text-amber-400">八百</span>
+                                        <div class="text-xl font-jp font-bold text-white">
+                                            <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                        </div>
                                     </div>
                                     <div class="text-xs font-mono text-slate-400">happyaku</div>
                                 </div>
@@ -16618,7 +16663,8 @@ const DIGIT_HIRAGANA = {
 
             const isKanji = (state.numbersConfig && state.numbersConfig.scriptMode === 'kanji');
             const assembled = state.numbersPlacedChips.map(c => c.text).join('');
-            const targetAnswer = isKanji ? ch.kanji : ch.hiragana;
+            const targetKanji = ch.kanji || (typeof numberToKanji === 'function' ? numberToKanji(ch.number).kanji : '');
+            const targetAnswer = isKanji ? targetKanji : ch.hiragana;
             const isCorrect = (assembled === targetAnswer);
 
             if (isCorrect) {
@@ -17088,8 +17134,11 @@ const DIGIT_HIRAGANA = {
                                         <i class="fa-solid fa-volume-high text-xs"></i>
                                     </button>
                                 </div>
-                                <div class="text-lg font-jp font-black text-white">
-                                    さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-lg font-jp font-black text-amber-400">三百</span>
+                                    <div class="text-base font-jp font-bold text-white">
+                                        さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
+                                    </div>
                                 </div>
                                 <div class="text-xs font-mono text-slate-400">sanbyaku</div>
                                 <p class="text-[11px] text-amber-200/90 leading-tight">
@@ -17105,8 +17154,11 @@ const DIGIT_HIRAGANA = {
                                         <i class="fa-solid fa-volume-high text-xs"></i>
                                     </button>
                                 </div>
-                                <div class="text-lg font-jp font-black text-white">
-                                    <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-lg font-jp font-black text-amber-400">六百</span>
+                                    <div class="text-base font-jp font-bold text-white">
+                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                    </div>
                                 </div>
                                 <div class="text-xs font-mono text-slate-400">roppyaku</div>
                                 <p class="text-[11px] text-amber-200/90 leading-tight">
@@ -17122,8 +17174,11 @@ const DIGIT_HIRAGANA = {
                                         <i class="fa-solid fa-volume-high text-xs"></i>
                                     </button>
                                 </div>
-                                <div class="text-lg font-jp font-black text-white">
-                                    <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-lg font-jp font-black text-amber-400">八百</span>
+                                    <div class="text-base font-jp font-bold text-white">
+                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                    </div>
                                 </div>
                                 <div class="text-xs font-mono text-slate-400">happyaku</div>
                                 <p class="text-[11px] text-amber-200/90 leading-tight">
