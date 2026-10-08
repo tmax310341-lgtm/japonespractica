@@ -1182,6 +1182,143 @@
             border-color: #5eead4 !important;
         }
 
+        /* ==========================================================
+           BANNERS Y AVISOS DE NÚMEROS (ALTO CONTRASTE & ADAPTACIÓN A TEMAS)
+           ========================================================== */
+        .numbers-achievement-banner {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.45) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(6, 78, 59, 0.45) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            border-top: 4px solid #10b981;
+            box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.5), 0 0 20px -3px rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+        .numbers-achievement-banner .banner-title {
+            color: #ffffff;
+            font-weight: 900;
+        }
+        .numbers-achievement-banner .banner-desc {
+            color: #a7f3d0;
+        }
+        .numbers-achievement-banner .banner-desc strong {
+            color: #6ee7b7;
+        }
+        .numbers-achievement-banner .banner-secondary-btn {
+            background-color: rgba(15, 23, 42, 0.85);
+            color: #fcd34d;
+            border-color: #334155;
+        }
+        .numbers-achievement-banner .banner-secondary-btn:hover {
+            background-color: #1e293b;
+            color: #fef08a;
+        }
+
+        /* Variación por atmósfera oscura */
+        body.theme-matcha .numbers-achievement-banner {
+            background: linear-gradient(135deg, rgba(20, 83, 45, 0.6) 0%, rgba(20, 33, 26, 0.9) 100%);
+            border-color: rgba(132, 204, 22, 0.5);
+            border-top: 4px solid #84cc16;
+            box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.5), 0 0 20px -3px rgba(132, 204, 22, 0.2);
+        }
+        body.theme-matcha .numbers-achievement-banner .banner-desc {
+            color: #d9f99d;
+        }
+
+        body.theme-sumie .numbers-achievement-banner {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, #1c1c22 100%);
+            border-color: rgba(225, 29, 72, 0.5);
+            border-top: 4px solid #e11d48;
+        }
+
+        /* Variación para temas claros (Sakura Kioto, Tatami & Té, Kanagawa Índigo) - 100% Legible */
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #fafffd 100%) !important;
+            border: 2px solid #059669 !important;
+            box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.18), 0 4px 12px rgba(5, 150, 105, 0.08) !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-title {
+            color: #064e3b !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-desc {
+            color: #065f46 !important;
+            font-weight: 500 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-desc strong {
+            color: #022c22 !important;
+            font-weight: 800 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-secondary-btn {
+            background-color: #ffffff !important;
+            color: #065f46 !important;
+            border-color: #a7f3d0 !important;
+            box-shadow: 0 2px 6px rgba(5, 150, 105, 0.1) !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-secondary-btn:hover {
+            background-color: #f0fdf4 !important;
+            color: #022c22 !important;
+            border-color: #059669 !important;
+        }
+
+        /* Toques temáticos distintivos en modo claro */
+        body.theme-light .numbers-achievement-banner {
+            border-top: 5px solid #f43f5e !important;
+            background: linear-gradient(135deg, #f0fdf4 0%, #fff1f2 100%) !important;
+        }
+        body.theme-tatami .numbers-achievement-banner {
+            border-top: 5px solid #4d7c0f !important;
+            background: linear-gradient(135deg, #f0fdf4 0%, #f7fee7 100%) !important;
+        }
+        body.theme-kanagawa .numbers-achievement-banner {
+            border-top: 5px solid #0284c7 !important;
+            background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%) !important;
+        }
+
+        /* Tarjeta de transición paso 6 a paso 7 */
+        .numbers-step-transition-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+            border-color: #f59e0b !important;
+            box-shadow: 0 6px 18px -2px rgba(245, 158, 11, 0.15) !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card h4 {
+            color: #78350f !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card p {
+            color: #92400e !important;
+        }
+
+        /* Regla de seguridad de alto contraste para textos verde/esmeralda en temas claros */
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) :is(
+            .text-emerald-200,
+            .text-emerald-100,
+            .text-teal-200,
+            .text-teal-100
+        ) {
+            color: #065f46 !important;
+            font-weight: 500 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) :is(
+            .text-emerald-300,
+            .text-teal-300
+        ) {
+            color: #047857 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #fafffd 100%) !important;
+            border-color: #059669 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] h4 {
+            color: #064e3b !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] p {
+            color: #065f46 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] strong {
+            color: #022c22 !important;
+        }
+
         /* Scrollbar thumb */
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: var(--theme-border, #cbd5e1);
@@ -15422,7 +15559,7 @@ const DIGIT_HIRAGANA = {
         }
 
         // ==========================================================
-        // MODO APRENDIZAJE: LECCIÓN INTERACTIVA PASO A PASO (1 AL 6)
+        // MODO APRENDIZAJE: LECCIÓN INTERACTIVA PASO A PASO (1 AL 7)
         // ==========================================================
         function setNumbersLessonStep(step) {
             state.numbersLessonStep = Math.max(1, Math.min(7, step));
@@ -15485,7 +15622,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
-                                <i class="fa-solid fa-graduation-cap text-amber-400"></i> Lección 1 de 5: La Base de Todo
+                                <i class="fa-solid fa-graduation-cap text-amber-400"></i> Lección 1 de 7: La Base de Todo (1 al 10 y Kanji)
                             </span>
                             <h3 class="text-xl sm:text-2xl font-black text-white">Los Números del 1 al 10 y su Filosofía</h3>
                             <p class="text-xs sm:text-sm text-slate-300">
@@ -15543,7 +15680,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
-                                <i class="fa-solid fa-calculator text-amber-400"></i> Lección 2 de 5: La Lógica de las Decenas
+                                <i class="fa-solid fa-calculator text-amber-400"></i> Lección 2 de 7: La Lógica de las Decenas (11 al 99)
                             </span>
                             <h3 class="text-xl sm:text-2xl font-black text-white">¿Cómo se Arman los Números del 11 al 99?</h3>
                             <p class="text-xs sm:text-sm text-slate-300">
@@ -15634,7 +15771,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
-                                <i class="fa-solid fa-circle-notch text-amber-400"></i> Lección 3 de 5: La Llegada al 100
+                                <i class="fa-solid fa-circle-dot text-amber-400"></i> Lección 3 de 7: El 100 y las Centenas Regulares (百 / ひゃく)
                             </span>
                             <div class="flex items-center justify-between gap-3 flex-wrap">
                                 <h3 class="text-xl sm:text-2xl font-black text-white">El 100 y las Centenas Regulares</h3>
@@ -15739,7 +15876,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold">
-                                <i class="fa-solid fa-star text-rose-400"></i> Lección 4 de 6: Reglas y Mutaciones Clave
+                                <i class="fa-solid fa-star text-rose-400"></i> Lección 4 de 7: Las 3 Mutaciones Fonéticas Obligatorias (300, 600, 800)
                             </span>
                             <h3 class="text-xl sm:text-2xl font-black text-white">Las 3 Mutaciones Fonéticas Obligatorias (300, 600, 800)</h3>
                             <p class="text-xs sm:text-sm text-slate-300">
@@ -15837,7 +15974,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">
-                                <i class="fa-solid fa-gem text-amber-400"></i> Lección 5 de 7: Los Miles y sus Mutaciones (千 / せん)
+                                <i class="fa-solid fa-gem text-amber-400"></i> Lección 5 de 7: Los Miles (千 - sen) y sus 2 Mutaciones (3.000 y 8.000)
                             </span>
                             <div class="flex items-center justify-between gap-3 flex-wrap">
                                 <h3 class="text-xl sm:text-2xl font-black text-white">Los Miles: 千 (せん - sen) y sus 2 Mutaciones</h3>
@@ -15993,24 +16130,24 @@ const DIGIT_HIRAGANA = {
                         <div class="pt-2 text-center">
                             <button type="button" onclick="setNumbersLessonStep(6)"
                                 class="py-2.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm shadow-md transition active:scale-95 inline-flex items-center gap-2">
-                                <span>Paso 6: Ensamblado Maestro de 3 y 4 Dígitos</span>
+                                <span>Paso 6: Ensamblado Jerárquico de 3 y 4 Dígitos</span>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
                 `;
             } else if (curStep === 6) {
-                // PASO 6: EL ENSAMBLADO MAESTRO
+                // PASO 6: EL ENSAMBLADO MAESTRO (100 A 9.999)
                 stepBodyHtml = `
                     <div class="space-y-5 animate-fade-in">
                         <div class="space-y-1">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">
-                                <i class="fa-solid fa-cubes text-emerald-400"></i> Lección 5 de 5: Dominio Total
+                                <i class="fa-solid fa-cubes text-emerald-400"></i> Lección 6 de 7: Ensamblado Jerárquico de 3 y 4 Dígitos (100 a 9.999)
                             </span>
-                            <h3 class="text-xl sm:text-2xl font-black text-white">El Ensamblado Maestro: Cómo Armar de 100 a 999</h3>
+                            <h3 class="text-xl sm:text-2xl font-black text-white">El Ensamblado Maestro: De 100 a 9.999</h3>
                             <p class="text-xs sm:text-sm text-slate-300">
-                                Para armar cualquier número de hasta 3 dígitos, el orden jerárquico es estricto de izquierda a derecha:
-                                <strong class="text-amber-300 font-mono">[Centenas] + [Decenas] + [Unidades]</strong>.
+                                Para armar cualquier número de hasta 4 dígitos antes del 万, el orden jerárquico es estricto de izquierda a derecha:
+                                <strong class="text-amber-300 font-mono">[Miles] + [Centenas] + [Decenas] + [Unidades]</strong>.
                             </p>
                         </div>
 
@@ -16099,23 +16236,66 @@ const DIGIT_HIRAGANA = {
                             </div>
                         </div>
 
-                        <!-- Banner de Felicitación y Transición a Paso 6 -->
-                        <div class="p-5 rounded-2xl bg-gradient-to-r from-emerald-600/20 via-teal-600/20 to-emerald-600/20 border-2 border-emerald-500/50 text-center space-y-3">
-                            <div class="text-3xl">🎉</div>
-                            <h4 class="text-lg font-black text-white">¡Felicidades! Ya dominas la teoría hasta el 999</h4>
-                            <p class="text-xs text-emerald-200 max-w-md mx-auto">
-                                Ahora que conoces las reglas, el orden de armado y las 3 mutaciones fonéticas, continúa al Paso 6 para descubrir la regla del <strong>万 (man)</strong> y los millones, o practica armando números.
+                        <!-- Caso D: 4 Dígitos con Miles y Mutaciones Combinadas (ej: 3.650 y 8.308) -->
+                        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+                            <span class="text-xs font-bold text-amber-300 uppercase tracking-wide block">
+                                Caso D: 4 Dígitos con Miles y Mutaciones Dobles (ej: 3.650 y 8.308)
+                            </span>
+                            <p class="text-xs text-slate-300">
+                                Para números de 4 dígitos, sumas los miles (千) respetando las mutaciones de 3.000 (さんぜん) y 8.000 (はっせん):
                             </p>
-                            <div class="flex flex-wrap items-center justify-center gap-2.5">
+                            <div class="space-y-2 text-xs">
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-mono text-base font-bold text-white">3.650 (三千六百五十)</span>
+                                        <button type="button" onclick="speakJapanese('さんぜんろっぴゃくごじゅう')" class="text-amber-400 hover:text-amber-300 flex items-center gap-1 font-bold">
+                                            <i class="fa-solid fa-volume-high"></i> Escuchar
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1.5 font-jp font-bold">
+                                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">3.000: さんぜん (mutación!)</span>
+                                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">600: ろっぴゃく (mutación!)</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-200">50: ごじゅう</span>
+                                    </div>
+                                    <div class="text-slate-300 pt-0.5 font-jp">→ <strong>さんぜん ろっぴゃく ごじゅう</strong> <em>(sanzen roppyaku gojuu)</em></div>
+                                </div>
+
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-mono text-base font-bold text-white">8.308 (八千三百八)</span>
+                                        <button type="button" onclick="speakJapanese('はっせんさんびゃくはち')" class="text-amber-400 hover:text-amber-300 flex items-center gap-1 font-bold">
+                                            <i class="fa-solid fa-volume-high"></i> Escuchar
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1.5 font-jp font-bold">
+                                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">8.000: はっせん (mutación!)</span>
+                                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">300: さんびゃく (mutación!)</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-200">8: はち</span>
+                                    </div>
+                                    <div class="text-slate-300 pt-0.5 font-jp">→ <strong>はっせん さんびゃく はち</strong> <em>(hassen sanbyaku hachi)</em></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta de Transición fluida al Paso 7: El Salto al 万 (man) -->
+                        <div class="numbers-step-transition-card p-5 sm:p-6 rounded-2xl border-2 space-y-3 text-center">
+                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 text-2xl mb-1 shadow-md">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <h4 class="text-lg sm:text-xl font-black text-white">¿Y qué pasa después del 9.999? ¡El Salto al 万 (man)!</h4>
+                            <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+                                En español agrupamos los números grandes de 3 en 3 ceros (miles, millones). Pero en Japón, la unidad elemental de grandes cifras cambia a <strong class="text-amber-300">bloques de 4 ceros</strong>: el <strong>万 (10.000)</strong>.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
                                 <button type="button" onclick="setNumbersLessonStep(7)"
-                                    class="py-2.5 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm shadow-md transition active:scale-95 inline-flex items-center gap-2">
-                                    <span>Paso 7: ≥ 10.000 (万 y Millones)</span>
+                                    class="py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg transition active:scale-95 inline-flex items-center gap-2">
+                                    <span>Avanzar al Paso 7: El Sistema del 万 (man) y Millones</span>
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
                                 <button type="button" onclick="setNumbersMode('builder')"
-                                    class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition active:scale-95 inline-flex items-center gap-2">
+                                    class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition active:scale-95 inline-flex items-center gap-2">
                                     <i class="fa-solid fa-puzzle-piece"></i>
-                                    <span>Ir al Constructor Lego</span>
+                                    <span>Probar en Constructor Lego</span>
                                 </button>
                             </div>
                         </div>
@@ -16127,7 +16307,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-6 animate-fade-in">
                         <div class="space-y-2">
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30">
-                                <i class="fa-solid fa-layer-group text-indigo-400"></i> Lección 7 de 7: Números Mayores y el Sistema del 万 (man)
+                                <i class="fa-solid fa-layer-group text-indigo-400"></i> Lección 7 de 7: Grandes Cifras y el Sistema del 万 (man: 10.000 a Millones)
                             </span>
                             <div class="flex items-center justify-between gap-3 flex-wrap">
                                 <h3 class="text-xl sm:text-2xl font-black text-white">La Regla Básica del 万 (man): 10.000 a Millones</h3>
@@ -16323,12 +16503,12 @@ const DIGIT_HIRAGANA = {
                             </div>
                         </div>
 
-                        <!-- Banner Final de Celebración y Práctica -->
-                        <div class="p-6 rounded-3xl bg-gradient-to-r from-emerald-600/20 via-teal-600/20 to-emerald-600/20 border-2 border-emerald-500/50 text-center space-y-3">
-                            <div class="text-4xl">🎓🌟</div>
-                            <h4 class="text-xl font-black text-white">¡Has completado el Sistema Numérico Japonés Completo!</h4>
-                            <p class="text-xs sm:text-sm text-emerald-200 max-w-xl mx-auto">
-                                Desde los dígitos 0 al 10, las decenas, las centenas y sus 3 mutaciones, los miles, hasta los millones con la regla del <strong>万 (man)</strong>. ¡Ahora pon a prueba tu oído y agilidad mental!
+                        <!-- Banner Final de Celebración y Práctica (Theme-Aware & Alto Contraste) -->
+                        <div class="numbers-achievement-banner p-6 sm:p-7 rounded-3xl text-center space-y-3.5">
+                            <div class="text-4xl">🎓 🌟</div>
+                            <h4 class="banner-title text-xl sm:text-2xl font-black">¡Has completado el Sistema Numérico Japonés Completo!</h4>
+                            <p class="banner-desc text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+                                Desde los dígitos 0 al 10, decenas, centenas (con sus 3 mutaciones fonéticas), miles (con sus 2 mutaciones) y la regla de los grandes números con el <strong>万 (man)</strong>. ¡Ahora pon a prueba tu oído y agilidad mental!
                             </p>
                             <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
                                 <button type="button" onclick="setNumbersRange('10000-plus'); setNumbersMode('builder');"
@@ -16337,7 +16517,7 @@ const DIGIT_HIRAGANA = {
                                     <span>Practicar Lego con ≥ 10.000</span>
                                 </button>
                                 <button type="button" onclick="setNumbersRange('10000-plus'); setNumbersMode('dictation');"
-                                    class="py-3 px-5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-black text-xs sm:text-sm border border-slate-700 transition active:scale-95 inline-flex items-center gap-2">
+                                    class="banner-secondary-btn py-3 px-5 rounded-2xl font-black text-xs sm:text-sm border transition active:scale-95 inline-flex items-center gap-2">
                                     <i class="fa-solid fa-headphones"></i>
                                     <span>Dictado Auditivo de Grandes Números</span>
                                 </button>
@@ -16347,7 +16527,7 @@ const DIGIT_HIRAGANA = {
                 `;
             }
 
-            // Footer navigation buttons
+            // Footer navigation buttons (7 pasos interactivos)
             const navFooterHtml = `
                 <div class="flex items-center justify-between gap-3 pt-4 border-t border-slate-800">
                     <button type="button" onclick="setNumbersLessonStep(${curStep - 1})" ${curStep === 1 ? 'disabled' : ''}
@@ -16356,18 +16536,18 @@ const DIGIT_HIRAGANA = {
                         <span>Anterior</span>
                     </button>
                     <span class="text-xs text-slate-400 font-medium">
-                        Paso <strong class="text-white">${curStep}</strong> de 6
+                        Paso <strong class="text-white">${curStep}</strong> de 7
                     </span>
-                    ${curStep < 6 ? `
+                    ${curStep < 7 ? `
                         <button type="button" onclick="setNumbersLessonStep(${curStep + 1})"
                             class="py-2.5 px-4 sm:px-5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-md transition flex items-center gap-2 active:scale-95">
-                            <span>Siguiente</span>
+                            <span>Siguiente (Paso ${curStep + 1})</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     ` : `
                         <button type="button" onclick="setNumbersMode('builder')"
                             class="py-2.5 px-4 sm:px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs sm:text-sm shadow-md transition flex items-center gap-2 active:scale-95">
-                            <span>Practicar</span>
+                            <span>Practicar en Lego</span>
                             <i class="fa-solid fa-puzzle-piece"></i>
                         </button>
                     `}
