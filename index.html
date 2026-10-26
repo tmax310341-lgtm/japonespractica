@@ -1170,6 +1170,21 @@
         :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-emerald-400, .text-emerald-300) { color: #047857 !important; }
         :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-sky-400, .text-sky-500) { color: #0369a1 !important; }
         :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-rose-400, .text-rose-300) { color: #be123c !important; }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-indigo-400, .text-indigo-300) { color: #4338ca !important; }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-purple-400, .text-purple-300) { color: #7e22ce !important; }
+
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-purple-500/10"] {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+            border: 1.5px solid #c084fc !important;
+            border-left: 4px solid #9333ea !important;
+            color: #581c87 !important;
+        }
+        :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-rose-500/10"] {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) !important;
+            border: 1.5px solid #fb7185 !important;
+            border-left: 4px solid #e11d48 !important;
+            color: #881337 !important;
+        }
 
         :is(body.theme-light, body.theme-tatami, body.theme-kanagawa) .bg-emerald-950\/80 {
             background-color: #dcfce7 !important;
@@ -3656,94 +3671,35 @@
                             <span id="numbersScoreDisplay" class="text-lg font-black stage-theme-accent-text">0</span>
                         </div>
                         <div class="bg-slate-950/80 border border-slate-800 rounded-2xl px-4 py-2.5 text-center min-w-[100px] shadow-inner">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Filtro</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Nivel</span>
                             <span id="numbersRangeBadge" class="text-xs font-bold stage-theme-accent-text">≥ 10.000</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Range Selector Bar (Filtros Claros de Estudio) -->
-                <div class="mt-6 pt-5 border-t border-slate-800/80">
-                    <div class="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-filter stage-theme-accent-text text-xs"></i> Seleccionar Rango de Estudio:
-                        </span>
-                        <span class="text-[11px] stage-theme-accent-text font-medium">✨ Incluye la regla del 万 (10.000 a millones)</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2" id="numbersRangeButtonsGroup">
-                        <!-- Botón 1: 0 - 10 -->
-                        <button type="button" onclick="setNumbersRange('0-10')" id="btn-range-0-10"
-                            class="numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700">
-                            <span class="font-bold text-sm">0 - 10</span>
-                            <span class="text-[10px] text-slate-400">Dígitos base</span>
-                        </button>
-
-                        <!-- Botón 2: 11 - 99 -->
-                        <button type="button" onclick="setNumbersRange('11-99')" id="btn-range-11-99"
-                            class="numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700">
-                            <span class="font-bold text-sm">11 - 99</span>
-                            <span class="text-[10px] text-slate-400">Decenas (じゅう)</span>
-                        </button>
-
-                        <!-- Botón 3: 100 - 999 -->
-                        <button type="button" onclick="setNumbersRange('100-999')" id="btn-range-100-999"
-                            class="numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700">
-                            <span class="font-bold text-sm">100 - 999</span>
-                            <span class="text-[10px] text-slate-400">Centenas y Mutaciones</span>
-                        </button>
-
-                        <!-- Botón 4: 1.000 - 9.999 -->
-                        <button type="button" onclick="setNumbersRange('1000-9999')" id="btn-range-1000-9999"
-                            class="numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700">
-                            <span class="font-bold text-sm">1.000 - 9.999</span>
-                            <span class="text-[10px] text-slate-400">Miles (せん / sen)</span>
-                        </button>
-
-                        <!-- Botón 5: ≥ 10.000 (万 - man) -->
-                        <button type="button" onclick="setNumbersRange('10000-plus')" id="btn-range-10000-plus"
-                            class="numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 border stage-theme-pill shadow-md col-span-2 sm:col-span-1">
-                            <span class="font-black text-sm flex items-center gap-1">
-                                <i class="fa-solid fa-layer-group text-[11px] stage-theme-accent-text"></i> ≥ 10.000
-                            </span>
-                            <span class="text-[10px] stage-theme-accent-text opacity-90">万 (man a Millones)</span>
-                        </button>
-                    </div>
-                </div>
             </div>
 
-            <!-- Dynamic Learning Mode Tabs -->
-            <div class="flex items-center gap-2 p-1.5 bg-slate-900/90 border border-slate-800 rounded-2xl overflow-x-auto" id="numbersModesTabBar">
-                <button type="button" onclick="setNumbersMode('lesson')" id="btn-num-mode-lesson"
-                    class="numbers-mode-tab flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    <span>Modo Aprendizaje</span>
+            <!-- Dynamic 3-Pillar Navigation Tabs -->
+            <div class="flex items-center gap-2 p-1.5 bg-slate-900/90 border border-slate-800 rounded-2xl overflow-x-auto" id="numbersPillarsTabBar">
+                <button type="button" onclick="setNumbersPillar('guide')" id="btn-num-pillar-guide"
+                    class="numbers-pillar-tab flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span>Guía y Teoría</span>
                 </button>
-                <button type="button" onclick="setNumbersMode('builder')" id="btn-num-mode-builder"
-                    class="numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-puzzle-piece text-amber-400"></i>
-                    <span>Armar Número</span>
+                <button type="button" onclick="setNumbersPillar('practice')" id="btn-num-pillar-practice"
+                    class="numbers-pillar-tab flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-gamepad text-amber-400"></i>
+                    <span>Gimnasio de Práctica</span>
                 </button>
-                <button type="button" onclick="setNumbersMode('dictation')" id="btn-num-mode-dictation"
-                    class="numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-headphones text-sky-400"></i>
-                    <span>Dictado Auditivo</span>
-                </button>
-                <button type="button" onclick="setNumbersMode('quiz')" id="btn-num-mode-quiz"
-                    class="numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-bolt text-rose-400"></i>
-                    <span>Quiz Rápido</span>
-                </button>
-                <button type="button" onclick="setNumbersMode('guide')" id="btn-num-mode-guide"
-                    class="numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
-                    <i class="fa-solid fa-book-bookmark text-emerald-400"></i>
-                    <span>Guía y Mutaciones</span>
+                <button type="button" onclick="setNumbersPillar('translator')" id="btn-num-pillar-translator"
+                    class="numbers-pillar-tab flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i>
+                    <span>Traductor en Vivo</span>
                 </button>
             </div>
 
             <!-- Active Exercise Workspace Container -->
-            <div id="numbersWorkspaceContainer" class="min-h-[380px]">
-                <!-- Injected dynamically based on active mode -->
+            <div id="numbersWorkspaceContainer" class="min-h-[420px]">
+                <!-- Injected dynamically based on active pillar -->
             </div>
 
         </section>
@@ -6157,7 +6113,13 @@
             '分': { count: 4, steps: ['1-2. Ocho (八) superior', '3-4. Espada (刀) inferior con gancho'] },
             '半': { count: 5, steps: ['1-2. Dos puntos superiores', '3. Horizontal corto', '4. Horizontal largo', '5. Corte vertical central'] },
             '月': { count: 4, steps: ['1. Vertical curvo izquierdo', '2. Techo y pared derecha con gancho', '3. Barra interior superior', '4. Barra interior inferior'] },
+            '火': { count: 4, steps: ['1. Chispa corta izquierda', '2. Chispa diagonal derecha', '3. Tronco central curvo a la izquierda', '4. Barrido diagonal firme a la derecha'] },
+            '水': { count: 4, steps: ['1. Eje vertical central con gancho', '2. Ángulo lateral izquierdo', '3. Diagonal corta superior derecha', '4. Barrido inferior derecho'] },
+            '木': { count: 4, steps: ['1. Rama horizontal superior', '2. Tronco vertical recto central', '3. Raíz diagonal izquierda', '4. Raíz diagonal derecha'] },
+            '金': { count: 8, steps: ['1-2. Tejado superior (人)', '3. Horizontal corto interior', '4. Horizontal medio', '5. Vertical central', '6-7. Dos pepitas laterales', '8. Base horizontal firme'] },
+            '土': { count: 3, steps: ['1. Horizontal corto superior', '2. Vertical central', '3. Base horizontal larga del suelo'] },
             '日': { count: 4, steps: ['1. Vertical izquierdo', '2. Techo y pared derecha', '3. Horizontal interno central', '4. Cierre horizontal inferior'] },
+            '曜': { count: 18, steps: ['1-4. Sol (日) a la izquierda', '5-10. Dos alas/plumas (羽) arriba a la derecha', '11-18. Pájaro (隹) abajo a la derecha'] },
             '年': { count: 6, steps: ['1. Diagonal izquierda superior', '2. Horizontal superior', '3. Vertical corto', '4. Horizontal medio', '5. Horizontal largo', '6. Vertical central largo'] }
         };
 
@@ -6317,12 +6279,15 @@
                 }
             },
 
-            // Numbers Mode (0 - 999 & Advanced) State
+            // Numbers Mode (0 - 99.999.999 & 3-Pillar Architecture) State
             numbersConfig: {
-                range: 'partial', // 'partial' (0-999), '0-10', '11-99', '100-999', '1000-9999', '10000-plus'
-                mode: 'lesson', // 'lesson', 'builder', 'dictation', 'quiz', 'guide'
+                pillar: 'guide', // 'guide' | 'practice' | 'translator'
+                guideSubTab: 'lesson', // 'lesson' | 'basics' | 'mutations' | 'man' | 'kanji'
+                range: '10000-plus', // 'partial', '0-10', '11-99', '100-999', '1000-9999', '10000-plus'
+                mode: 'builder', // 'builder' | 'dictation' | 'quiz'
                 lessonStep: 1, // 1 to 7
                 scriptMode: 'kana', // 'kana' | 'kanji'
+                yenMode: false, // true to append 円 (えん) in Live Translator
                 streak: 0,
                 score: 0
             },
@@ -6447,10 +6412,20 @@
                         };
                     }
                     if (parsed.numbersConfig && typeof parsed.numbersConfig === 'object') {
+                        const rawMode = parsed.numbersConfig.mode;
+                        const validPracticeModes = ['builder', 'dictation', 'quiz'];
+                        const migratedPillar = parsed.numbersConfig.pillar ||
+                            ((rawMode === 'guide' || rawMode === 'lesson') ? 'guide' : (validPracticeModes.includes(rawMode) ? 'practice' : 'guide'));
+                        const migratedSubTab = parsed.numbersConfig.guideSubTab ||
+                            (rawMode === 'guide' ? 'mutations' : 'lesson');
                         state.numbersConfig = {
-                            range: parsed.numbersConfig.range || 'partial',
-                            mode: parsed.numbersConfig.mode || 'lesson',
+                            pillar: ['guide', 'practice', 'translator'].includes(migratedPillar) ? migratedPillar : 'guide',
+                            guideSubTab: ['lesson', 'basics', 'mutations', 'man', 'kanji'].includes(migratedSubTab) ? migratedSubTab : 'lesson',
+                            range: parsed.numbersConfig.range || '10000-plus',
+                            mode: validPracticeModes.includes(rawMode) ? rawMode : 'builder',
                             lessonStep: parsed.numbersConfig.lessonStep || 1,
+                            scriptMode: parsed.numbersConfig.scriptMode === 'kanji' ? 'kanji' : 'kana',
+                            yenMode: Boolean(parsed.numbersConfig.yenMode),
                             streak: parsed.numbersConfig.streak || 0,
                             score: parsed.numbersConfig.score || 0
                         };
@@ -8205,7 +8180,7 @@
             if (typeof updateCustomPracticePoolBanner === 'function') updateCustomPracticePoolBanner();
             if (typeof loadCharacterForDrawing === 'function') loadCharacterForDrawing(char, 'draw');
             if (typeof renderDrawKanaList === 'function') renderDrawKanaList();
-            if (typeof speakJapanese === 'function') speakJapanese(kObj.kana || char);
+            if (typeof speakJapanese === 'function') speakJapanese(((kObj.kana || char).split('/')[0] || char).trim());
             if (typeof showToast === 'function') showToast(`Cargado kanji ${char} en el lienzo interactivo`, 'success');
         }
 
@@ -8268,7 +8243,7 @@
                 const nextIdx = (curIdx + delta + pool.length) % pool.length;
                 const nextChar = pool[nextIdx].kanji;
                 currentModalKana = nextChar;
-                if (typeof speakJapanese === 'function') speakJapanese(pool[nextIdx].kana || nextChar);
+                if (typeof speakJapanese === 'function') speakJapanese(((pool[nextIdx].kana || nextChar).split('/')[0] || nextChar).trim());
                 showKanaStrokeModal(nextChar);
                 return;
             }
@@ -8288,7 +8263,9 @@
 
         function playModalKanaAudio() {
             if (currentModalKana) {
-                speakJapanese(currentModalKana);
+                const numKanjiObj = (typeof NUMBER_KANJI_DATA !== 'undefined') ? NUMBER_KANJI_DATA.find(k => k.kanji === currentModalKana) : null;
+                const spoken = numKanjiObj ? ((numKanjiObj.kana || currentModalKana).split('/')[0] || currentModalKana).trim() : currentModalKana;
+                speakJapanese(spoken);
             }
         }
 
@@ -15107,7 +15084,7 @@
             6: '六', 7: '七', 8: '八', 9: '九', 10: '十'
         };
 
-        function numberToKanji(n) {
+        function numberToKanji(n, isInsideMan = false) {
             if (typeof n !== 'number' || isNaN(n) || n < 0) return { kanji: '', blocks: [] };
             const originalN = Math.floor(n);
             if (originalN === 0) return { kanji: '零', blocks: ['零'] };
@@ -15119,16 +15096,16 @@
             // 万 (10.000)
             if (rem >= 10000) {
                 const manCount = Math.floor(rem / 10000);
-                const sub = numberToKanji(manCount);
+                const sub = numberToKanji(manCount, true);
                 kanjiParts.push(sub.kanji + '万');
                 blocks.push(...sub.blocks, '万');
                 rem %= 10000;
             }
 
-            // 千 (1.000)
+            // 千 (1.000) — delante de 万 (ej: 10.000.000 = 一千万, 14.703.280 = 一千四百七十万...) se escribe 一千
             if (rem >= 1000) {
                 const senCount = Math.floor(rem / 1000);
-                if (senCount === 1) {
+                if (senCount === 1 && !isInsideMan) {
                     kanjiParts.push('千');
                     blocks.push('千');
                 } else {
@@ -15278,12 +15255,9 @@ const DIGIT_HIRAGANA = {
                 const manCount = Math.floor(n / 10000);
                 const rem = n % 10000;
                 
-                let manSub;
-                // Caso especial 10.000.000 (1000万): いっせんまん (issenman)
-                if (manCount === 1000) {
-                    manSub = { hiragana: 'いっせん', romaji: 'issen', blocks: ['いっ', 'せん'] };
-                } else {
-                    manSub = numberToJapanese(manCount, true);
+                const manSub = numberToJapanese(manCount, true);
+                if (manSub.hasMutation && manSub.mutationInfo) {
+                    mutations.push(manSub.mutationInfo);
                 }
                 
                 hiraParts.push(manSub.hiragana + 'まん');
@@ -15298,18 +15272,27 @@ const DIGIT_HIRAGANA = {
                 n = rem;
             }
 
-            // 1,000s (Sen)
+            // 1,000s (Sen) — delante de 万 (ej: 10.000.000 = いっせんまん, 14.703.280 = いっせんよんひゃくななじゅうまん...) 1000 se lee いっせん
             if (n >= 1000) {
                 const senCount = Math.floor(n / 1000);
                 const rem = n % 1000;
-                const sData = THOUSANDS_DATA[senCount];
-                hiraParts.push(sData.hira);
-                romajiParts.push(sData.romaji);
-                blocks.push(...sData.blocks);
-                if (sData.mutation) {
-                    mutations.push((senCount * 1000) + ': ' + sData.hira + ' → ' + sData.mutation);
+                if (senCount === 1 && isInsideMan) {
+                    hiraParts.push('いっせん');
+                    romajiParts.push('issen');
+                    blocks.push('いっ', 'せん');
+                    mutations.push('1000万: いっせんまん → いっ + せん (Sokuon obligatorio delante de 万)');
+                    breakdown.push({ val: 1000, text: '1000 (en bloque 万) = いっせん (issen)' });
+                } else {
+                    const sData = THOUSANDS_DATA[senCount];
+                    hiraParts.push(sData.hira);
+                    romajiParts.push(sData.romaji);
+                    blocks.push(...sData.blocks);
+                    if (sData.mutation) {
+                        const scaleLabel = isInsideMan ? (senCount * 1000) + '万' : String(senCount * 1000);
+                        mutations.push(scaleLabel + ': ' + sData.hira + (isInsideMan ? 'まん' : '') + ' → ' + sData.mutation);
+                    }
+                    breakdown.push({ val: senCount * 1000, text: (senCount * 1000) + ' = ' + sData.hira + ' (' + sData.romaji + ')' });
                 }
-                breakdown.push({ val: senCount * 1000, text: (senCount * 1000) + ' = ' + sData.hira + ' (' + sData.romaji + ')' });
                 n = rem;
             }
 
@@ -15322,7 +15305,8 @@ const DIGIT_HIRAGANA = {
                 romajiParts.push(hData.romaji);
                 blocks.push(...hData.blocks);
                 if (hData.mutation) {
-                    mutations.push((hyakuCount * 100) + ': ' + hData.hira + ' → ' + hData.mutation);
+                    const scaleLabel = isInsideMan ? (hyakuCount * 100) + '万' : String(hyakuCount * 100);
+                    mutations.push(scaleLabel + ': ' + hData.hira + (isInsideMan ? 'まん' : '') + ' → ' + hData.mutation);
                 }
                 breakdown.push({ val: hyakuCount * 100, text: (hyakuCount * 100) + ' = ' + hData.hira + ' (' + hData.romaji + ')' });
                 n = rem;
@@ -15417,29 +15401,22 @@ const DIGIT_HIRAGANA = {
                         const remPart = Math.floor(Math.random() * 9000) + 100;
                         return manPart * 10000 + remPart;
                     }
-                } else if (roll < 0.92) {
-                    // 22%: 7 DÍGITOS COMPLETOS Y VARIADOS (1.000.000 a 9.999.999) -> Ej: 1.765.890, 4.320.150, 9.834.630
+                } else if (roll < 0.88) {
+                    // 18%: 7 DÍGITOS COMPLETOS Y VARIADOS (1.000.000 a 9.999.999) -> Ej: 1.765.890, 4.320.150, 9.834.630
                     return Math.floor(Math.random() * 9000000) + 1000000;
+                } else if (roll < 0.94) {
+                    // 6%: 8 DÍGITOS DEL TALLER (10.000.000 a 99.999.999) -> Ej: 14.703.280, 25.400.000
+                    return (Math.floor(Math.random() * 9000) + 1000) * 10000 + Math.floor(Math.random() * 10000);
                 } else {
-                    // 8%: Hitos redondos ocasionales (ej. 50.000, 100.000, 1.000.000, 10.000.000)
+                    // 6%: Hitos redondos ocasionales (ej. 50.000, 100.000, 1.000.000, 10.000.000)
                     const milestones = [10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000];
                     return milestones[Math.floor(Math.random() * milestones.length)];
                 }
             }
-            // Default 'partial' (0 to 999):
-            const roll = Math.random();
-            if (roll < 0.20) {
-                return Math.floor(Math.random() * 11);
-            } else if (roll < 0.50) {
-                return Math.floor(Math.random() * 89) + 11;
-            } else {
-                if (Math.random() < 0.45) {
-                    const mutationHundreds = [300, 600, 800];
-                    const base = mutationHundreds[Math.floor(Math.random() * mutationHundreds.length)];
-                    return base + Math.floor(Math.random() * 100);
-                }
-                return Math.floor(Math.random() * 900) + 100;
-            }
+            // Default 'partial' ("🔥 Mix Todos": 0 hasta millones):
+            const mixBuckets = ['0-10', '11-99', '100-999', '1000-9999', '10000-plus'];
+            const pickedBucket = mixBuckets[Math.floor(Math.random() * mixBuckets.length)];
+            return getRandomNumberForRange(pickedBucket);
         }
 
         function generateLegoBank(correctBlocks, targetNum, isKanji = false) {
@@ -15475,20 +15452,45 @@ const DIGIT_HIRAGANA = {
             return pool;
         }
 
-        // Initialize Numbers Game Tab
+        // ==========================================================
+        // CONTROLADOR PRINCIPAL DEL TALLER DE NÚMEROS (3 PILARES)
+        // 1. Guía y Teoría (Modular: 1-7, 0-99, Mutaciones, 万, Kanji)
+        // 2. Gimnasio de Práctica (Armar Fichas, Dictado, Quiz + Rangos)
+        // 3. Traductor en Vivo (Traducción en tiempo real 0 a Millones)
+        // ==========================================================
+
         function initNumbersGame() {
             if (!state.numbersConfig) {
                 state.numbersConfig = {
-                    range: 'partial',
-                    mode: 'lesson',
+                    pillar: 'guide',
+                    guideSubTab: 'lesson',
+                    mode: 'builder',
+                    range: '10000-plus',
                     lessonStep: 1,
+                    scriptMode: 'kana',
+                    yenMode: false,
                     streak: 0,
                     score: 0
                 };
             }
+            if (!state.numbersConfig.pillar) {
+                if (state.numbersConfig.mode === 'guide' || state.numbersConfig.mode === 'lesson') {
+                    state.numbersConfig.pillar = 'guide';
+                    state.numbersConfig.guideSubTab = (state.numbersConfig.mode === 'guide') ? 'mutations' : 'lesson';
+                } else {
+                    state.numbersConfig.pillar = 'practice';
+                }
+            }
+            if (!['lesson', 'basics', 'mutations', 'man', 'kanji'].includes(state.numbersConfig.guideSubTab)) {
+                state.numbersConfig.guideSubTab = 'lesson';
+            }
+            if (!['builder', 'dictation', 'quiz'].includes(state.numbersConfig.mode)) {
+                state.numbersConfig.mode = 'builder';
+            }
+            if (!state.numbersConfig.range) state.numbersConfig.range = '10000-plus';
+
             updateNumbersHeaderStats();
-            updateNumbersRangeButtonsUI();
-            setNumbersMode(state.numbersConfig.mode || 'lesson', true);
+            setNumbersPillar(state.numbersConfig.pillar || 'guide', true);
         }
 
         function updateNumbersHeaderStats() {
@@ -15496,12 +15498,12 @@ const DIGIT_HIRAGANA = {
             const scoreEl = document.getElementById('numbersScoreDisplay');
             const rangeBadgeEl = document.getElementById('numbersRangeBadge');
 
-            if (streakEl) streakEl.innerHTML = '<i class="fa-solid fa-fire text-amber-400 text-sm"></i> ' + (state.numbersConfig.streak || 0);
-            if (scoreEl) scoreEl.textContent = state.numbersConfig.score || 0;
+            if (streakEl) streakEl.innerHTML = '<i class="fa-solid fa-fire text-amber-400 text-sm"></i> ' + (state.numbersConfig?.streak || 0);
+            if (scoreEl) scoreEl.textContent = state.numbersConfig?.score || 0;
 
             const rangeNames = {
-                'partial': '0 - 999 (General)',
-                '0-10': '0 - 10 (Básicos)',
+                'partial': 'Mix (Todos)',
+                '0-10': '0 - 10 (Dígitos)',
                 '11-99': '11 - 99 (Decenas)',
                 '100-999': '100 - 999 (Centenas)',
                 '1000-9999': '1.000 - 9.999 (Miles)',
@@ -15509,65 +15511,404 @@ const DIGIT_HIRAGANA = {
                 '10000-plus': '≥ 10.000 (万 y Millones)'
             };
             if (rangeBadgeEl) {
-                rangeBadgeEl.textContent = rangeNames[state.numbersConfig.range] || '0 - 999';
+                rangeBadgeEl.textContent = rangeNames[state.numbersConfig?.range] || '≥ 10.000';
             }
         }
 
-        function updateNumbersRangeButtonsUI() {
-            const rangeBtns = document.querySelectorAll('.numbers-range-btn');
-            const curRange = state.numbersConfig.range || 'partial';
+        function setNumbersPillar(pillar, skipSave) {
+            if (!state.numbersConfig) state.numbersConfig = {};
+            state.numbersConfig.pillar = pillar;
+            if (!skipSave) saveStateToStorage();
 
-            rangeBtns.forEach(btn => {
-                const rangeId = btn.id.replace('btn-range-', '');
-                if (rangeId === curRange) {
-                    btn.className = 'numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 border stage-theme-pill shadow-md scale-[1.02]';
+            const pillarTabs = document.querySelectorAll('.numbers-pillar-tab');
+            pillarTabs.forEach(tab => {
+                const tabPillar = tab.id.replace('btn-num-pillar-', '');
+                if (tabPillar === pillar) {
+                    tab.className = 'numbers-pillar-tab flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md';
                 } else {
-                    btn.className = 'numbers-range-btn py-2.5 px-3 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700';
+                    tab.className = 'numbers-pillar-tab flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800';
                 }
             });
+
+            if (pillar === 'guide') {
+                renderNumbersGuidePillar();
+            } else if (pillar === 'practice') {
+                renderNumbersPracticePillar();
+            } else if (pillar === 'translator') {
+                renderNumbersTranslatorPillar();
+            }
+        }
+
+        // Compatibilidad con botones y accesos previos
+        function setNumbersMode(mode, skipSave) {
+            if (!state.numbersConfig) state.numbersConfig = {};
+            if (mode === 'guide' || mode === 'lesson') {
+                state.numbersConfig.pillar = 'guide';
+                state.numbersConfig.guideSubTab = (mode === 'guide') ? 'mutations' : 'lesson';
+                setNumbersPillar('guide', skipSave);
+            } else {
+                state.numbersConfig.pillar = 'practice';
+                state.numbersConfig.mode = mode;
+                setNumbersPillar('practice', skipSave);
+            }
         }
 
         function setNumbersRange(range) {
+            if (!state.numbersConfig) state.numbersConfig = {};
             state.numbersConfig.range = range;
             saveStateToStorage();
             updateNumbersHeaderStats();
-            updateNumbersRangeButtonsUI();
+            updateNumbersPracticeRangeButtonsUI();
 
-            // Refresh current mode with new range
-            const mode = state.numbersConfig.mode || 'lesson';
-            if (mode === 'lesson') renderNumbersLesson();
-            else if (mode === 'builder') nextNumbersLegoChallenge();
-            else if (mode === 'dictation') nextNumbersDictationChallenge();
-            else if (mode === 'quiz') nextNumbersQuizChallenge();
-            else if (mode === 'guide') renderNumbersGuide();
+            // Si estamos en el gimnasio de práctica, refrescar el reto con el nuevo rango
+            if (state.numbersConfig.pillar === 'practice') {
+                const curDyn = state.numbersConfig.mode || 'builder';
+                if (curDyn === 'builder') nextNumbersLegoChallenge();
+                else if (curDyn === 'dictation') nextNumbersDictationChallenge();
+                else if (curDyn === 'quiz') nextNumbersQuizChallenge();
+            }
         }
 
-        function setNumbersMode(mode, skipSave) {
-            state.numbersConfig.mode = mode;
-            if (!skipSave) saveStateToStorage();
+        // ==========================================================
+        // PILAR 1: GUÍA Y TEORÍA MODULAR
+        // ==========================================================
+        function renderNumbersGuidePillar() {
+            const container = document.getElementById('numbersWorkspaceContainer');
+            if (!container) return;
 
-            // Update mode tab buttons
-            const modeTabs = document.querySelectorAll('.numbers-mode-tab');
-            modeTabs.forEach(tab => {
-                const tabMode = tab.id.replace('btn-num-mode-', '');
-                if (tabMode === mode) {
-                    tab.className = 'numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md';
+            const curSubTab = (state.numbersConfig && state.numbersConfig.guideSubTab) || 'lesson';
+
+            const subTabsMeta = [
+                { id: 'lesson', label: 'Lección 1-7', icon: 'fa-graduation-cap' },
+                { id: 'basics', label: 'Dígitos y Decenas (0-99)', icon: 'fa-list-ol' },
+                { id: 'mutations', label: 'Mutaciones Clave', icon: 'fa-star' },
+                { id: 'man', label: 'Sistema del 万 (10k+)', icon: 'fa-layer-group' },
+                { id: 'kanji', label: 'Caligrafía Kanji', icon: 'fa-paintbrush' }
+            ];
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Sub-tabs Navigation Bar -->
+                    <div class="flex items-center gap-2 p-1.5 bg-slate-900/90 border border-slate-800 rounded-2xl overflow-x-auto" id="numbersGuideSubTabsBar">
+                        ${subTabsMeta.map(st => {
+                            const isActive = st.id === curSubTab;
+                            return `
+                                <button type="button" onclick="setNumbersGuideSubTab('${st.id}')" id="btn-guide-subtab-${st.id}"
+                                    class="guide-sub-tab flex-1 min-w-[125px] py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 ${isActive ? 'stage-theme-primary-btn shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800'}">
+                                    <i class="fa-solid ${st.icon} ${isActive ? '' : 'text-amber-400'}"></i>
+                                    <span>${st.label}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <!-- Guide Sub-Content Area -->
+                    <div id="numbersGuideSubContent" class="animate-fade-in"></div>
+                </div>
+            `;
+
+            renderNumbersGuideSubContent(curSubTab);
+        }
+
+        function setNumbersGuideSubTab(subTab) {
+            if (!state.numbersConfig) state.numbersConfig = {};
+            state.numbersConfig.guideSubTab = subTab;
+            saveStateToStorage();
+
+            const subTabs = document.querySelectorAll('.guide-sub-tab');
+            subTabs.forEach(tab => {
+                const tid = tab.id.replace('btn-guide-subtab-', '');
+                if (tid === subTab) {
+                    tab.className = 'guide-sub-tab flex-1 min-w-[125px] py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md';
                 } else {
-                    tab.className = 'numbers-mode-tab flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800';
+                    tab.className = 'guide-sub-tab flex-1 min-w-[125px] py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800';
                 }
             });
 
-            if (mode === 'lesson') {
-                renderNumbersLesson();
-            } else if (mode === 'builder') {
-                nextNumbersLegoChallenge();
-            } else if (mode === 'dictation') {
-                nextNumbersDictationChallenge();
-            } else if (mode === 'quiz') {
-                nextNumbersQuizChallenge();
-            } else if (mode === 'guide') {
-                renderNumbersGuide();
+            renderNumbersGuideSubContent(subTab);
+        }
+
+        // ==========================================================
+        // PILAR 2: GIMNASIO DE PRÁCTICA (ENTRENAMIENTO ACTIVO)
+        // ==========================================================
+        function renderNumbersPracticePillar() {
+            const container = document.getElementById('numbersWorkspaceContainer');
+            if (!container) return;
+
+            if (!state.numbersConfig) state.numbersConfig = {};
+            if (!['builder', 'dictation', 'quiz'].includes(state.numbersConfig.mode)) {
+                state.numbersConfig.mode = 'builder';
             }
+            const curDyn = state.numbersConfig.mode;
+            const curRange = state.numbersConfig.range || '10000-plus';
+
+            const dynMeta = [
+                { id: 'builder', label: 'Armar con Fichas', icon: 'fa-puzzle-piece', color: 'text-amber-400' },
+                { id: 'dictation', label: 'Dictado Auditivo', icon: 'fa-headphones', color: 'text-sky-400' },
+                { id: 'quiz', label: 'Quiz Rápido', icon: 'fa-bolt', color: 'text-rose-400' }
+            ];
+
+            const rangeMeta = [
+                { id: '0-10', title: '0 - 10', desc: 'Dígitos' },
+                { id: '11-99', title: '11 - 99', desc: 'Decenas' },
+                { id: '100-999', title: '100 - 999', desc: 'Centenas' },
+                { id: '1000-9999', title: '1k - 9.9k', desc: 'Miles' },
+                { id: '10000-plus', title: '≥ 10.000', desc: '万 y Millones' },
+                { id: 'partial', title: '🔥 Mix', desc: 'Todos' }
+            ];
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Gym Controls: Dinámica + Rango Contextual -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl space-y-4">
+                        <!-- Dinámica Selector -->
+                        <div class="flex items-center justify-between gap-3 flex-wrap border-b border-slate-800/80 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-gamepad stage-theme-accent-text"></i> Dinámica de Juego:
+                            </span>
+                            <div class="flex items-center gap-2 flex-wrap" id="practiceDynButtonsGroup">
+                                ${dynMeta.map(d => {
+                                    const isActive = d.id === curDyn;
+                                    return `
+                                        <button type="button" onclick="setNumbersPracticeDynamic('${d.id}')" id="btn-practice-dyn-${d.id}"
+                                            class="practice-dyn-tab py-2 px-3.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isActive ? 'stage-theme-primary-btn shadow-md' : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-850'}">
+                                            <i class="fa-solid ${d.icon} ${isActive ? '' : d.color}"></i>
+                                            <span>${d.label}</span>
+                                        </button>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Rango Selector Contextual -->
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-filter stage-theme-accent-text"></i> Rango de Estudio:
+                                </span>
+                                <span class="text-[11px] stage-theme-accent-text font-medium">✨ Entrena a tu ritmo por magnitud</span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2" id="numbersPracticeRangeButtonsGroup">
+                                ${rangeMeta.map(r => {
+                                    const isActive = r.id === curRange;
+                                    return `
+                                        <button type="button" onclick="setNumbersRange('${r.id}')" id="btn-practice-range-${r.id}"
+                                            class="practice-range-btn py-2 px-2.5 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border ${isActive ? 'stage-theme-pill shadow-md scale-[1.02] font-bold' : 'bg-slate-950/80 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700'}">
+                                            <span class="font-bold text-xs sm:text-sm">${r.title}</span>
+                                            <span class="text-[10px] opacity-80">${r.desc}</span>
+                                        </button>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Practice Exercise Container -->
+                    <div id="numbersPracticeExerciseArea" class="animate-fade-in"></div>
+                </div>
+            `;
+
+            // Launch active dynamic challenge
+            if (curDyn === 'builder') {
+                nextNumbersLegoChallenge();
+            } else if (curDyn === 'dictation') {
+                nextNumbersDictationChallenge();
+            } else if (curDyn === 'quiz') {
+                nextNumbersQuizChallenge();
+            }
+        }
+
+        function setNumbersPracticeDynamic(dyn) {
+            if (!state.numbersConfig) state.numbersConfig = {};
+            state.numbersConfig.mode = dyn;
+            saveStateToStorage();
+
+            const dynTabs = document.querySelectorAll('.practice-dyn-tab');
+            dynTabs.forEach(tab => {
+                const tid = tab.id.replace('btn-practice-dyn-', '');
+                if (tid === dyn) {
+                    tab.className = 'practice-dyn-tab py-2 px-3.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 stage-theme-primary-btn shadow-md';
+                } else {
+                    tab.className = 'practice-dyn-tab py-2 px-3.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 bg-slate-950 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-850';
+                }
+            });
+
+            if (dyn === 'builder') {
+                nextNumbersLegoChallenge();
+            } else if (dyn === 'dictation') {
+                nextNumbersDictationChallenge();
+            } else if (dyn === 'quiz') {
+                nextNumbersQuizChallenge();
+            }
+        }
+
+        function updateNumbersPracticeRangeButtonsUI() {
+            const rangeBtns = document.querySelectorAll('.practice-range-btn');
+            const curRange = state.numbersConfig?.range || '10000-plus';
+
+            rangeBtns.forEach(btn => {
+                const rangeId = btn.id.replace('btn-practice-range-', '');
+                if (rangeId === curRange) {
+                    btn.className = 'practice-range-btn py-2 px-2.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 border stage-theme-pill shadow-md scale-[1.02]';
+                } else {
+                    btn.className = 'practice-range-btn py-2 px-2.5 rounded-xl text-xs font-semibold transition flex flex-col items-center justify-center gap-0.5 border bg-slate-950/80 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700';
+                }
+            });
+        }
+
+        // ==========================================================
+        // PILAR 3: TRADUCTOR Y DESCOMPOSITOR EN VIVO (0 A MILLONES + PRECIOS 円)
+        // ==========================================================
+        function toggleTranslatorYenMode() {
+            if (!state.numbersConfig) state.numbersConfig = {};
+            state.numbersConfig.yenMode = !state.numbersConfig.yenMode;
+            saveStateToStorage();
+            const yenBtn = document.getElementById('btnTranslatorYenMode');
+            if (yenBtn) {
+                const isYen = Boolean(state.numbersConfig.yenMode);
+                yenBtn.className = `py-3.5 px-4 rounded-2xl border-2 font-bold text-xs sm:text-sm transition flex items-center gap-2 active:scale-95 ${isYen ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'}`;
+                yenBtn.innerHTML = `<i class="fa-solid fa-yen-sign ${isYen ? 'text-amber-400' : ''}"></i><span>${isYen ? 'Precio 円 Activo' : 'Modo Precio (円)'}</span>`;
+            }
+            const input = document.getElementById('customNumberInput');
+            translateCustomNumberInput(input ? input.value : 1765890);
+        }
+
+        function renderNumbersTranslatorPillar() {
+            const container = document.getElementById('numbersWorkspaceContainer');
+            if (!container) return;
+
+            const initialVal = 1765890;
+            const isYen = Boolean(state.numbersConfig && state.numbersConfig.yenMode);
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/30 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold mb-1.5 border border-indigo-500/30">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i> Descomposición y Audio en Tiempo Real
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-black text-white">
+                                    Traductor Numérico Japonés (0 a 99.999.999)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    Escribe cualquier cifra o precio para descomponerla en bloques de <strong class="stage-theme-accent-text">万 (man)</strong>, escuchar su pronunciación nativa y detectar mutaciones fonéticas.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-xs text-slate-400">Ejemplos del Taller:</span>
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <button type="button" onclick="setCustomNumberInput(348)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-mono font-bold transition">348</button>
+                                    <button type="button" onclick="setCustomNumberInput(2500)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-mono font-bold transition">2.500</button>
+                                    <button type="button" onclick="setCustomNumberInput(25800)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-mono font-bold transition">25.800</button>
+                                    <button type="button" onclick="setCustomNumberInput(1820000)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 text-xs font-mono font-bold transition" title="Ejemplo Taller: くるま 1.820.000円">1.820.000</button>
+                                    <button type="button" onclick="setCustomNumberInput(14703280)" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-mono font-bold transition" title="Ejercicio 1 #18 del Taller">14.703.280</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Box Prominente + Toggle Precios 円 -->
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <div class="relative flex-1 min-w-[200px]">
+                                <input type="number" id="customNumberInput" min="0" max="99999999" value="${initialVal}"
+                                    oninput="translateCustomNumberInput(this.value)"
+                                    class="w-full py-3.5 px-5 rounded-2xl bg-slate-950 border-2 border-indigo-500/50 text-white font-mono text-2xl font-black focus:outline-none focus:border-indigo-400 transition" />
+                            </div>
+                            <button type="button" id="btnTranslatorYenMode" onclick="toggleTranslatorYenMode()"
+                                class="py-3.5 px-4 rounded-2xl border-2 font-bold text-xs sm:text-sm transition flex items-center gap-2 active:scale-95 ${isYen ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'}">
+                                <i class="fa-solid fa-yen-sign ${isYen ? 'text-amber-400' : ''}"></i>
+                                <span>${isYen ? 'Precio 円 Activo' : 'Modo Precio (円)'}</span>
+                            </button>
+                            <button type="button" onclick="translateCustomNumberInput(document.getElementById('customNumberInput').value)"
+                                class="py-3.5 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 active:scale-95">
+                                <i class="fa-solid fa-language mr-1.5"></i> Traducir
+                            </button>
+                        </div>
+
+                        <!-- Live Output Card -->
+                        <div id="customNumberOutputCard" class="p-5 sm:p-6 rounded-2xl bg-slate-950 border border-indigo-500/30 space-y-4">
+                            <!-- Populated on load -->
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            translateCustomNumberInput(initialVal);
+        }
+
+        function setCustomNumberInput(num) {
+            const input = document.getElementById('customNumberInput');
+            if (input) {
+                input.value = num;
+                translateCustomNumberInput(num);
+            }
+        }
+
+        function translateCustomNumberInput(val) {
+            const outputCard = document.getElementById('customNumberOutputCard');
+            if (!outputCard) return;
+
+            const n = parseInt(val, 10);
+            if (isNaN(n) || n < 0 || n > 99999999) {
+                outputCard.innerHTML = `<span class="text-xs text-slate-500">Ingresa un número válido entre 0 y 99.999.999</span>`;
+                return;
+            }
+
+            const data = numberToJapanese(n);
+            const b4Formatted = formatJapaneseBlocksOf4(n);
+            const isYen = Boolean(state.numbersConfig && state.numbersConfig.yenMode);
+            const displayKanji = (data.kanji || '') + (isYen ? '円' : '');
+            const displayHira = data.hiragana + (isYen ? 'えん' : '');
+            const displayRomaji = data.romaji + (isYen ? ' en' : '');
+            const spokenPhrase = isYen ? `${data.hiragana}えんです` : data.hiragana;
+
+            outputCard.innerHTML = `
+                <div class="flex items-center justify-between gap-3 flex-wrap border-b border-slate-900 pb-4">
+                    <div>
+                        <div class="text-xs font-bold text-amber-400 font-jp mb-0.5">
+                            Kanji: <span class="text-lg font-black text-white">${displayKanji}</span>
+                            ${isYen ? `<span class="ml-2 px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[11px] font-mono">¥${n.toLocaleString()}</span>` : ''}
+                        </div>
+                        <div class="text-2xl sm:text-3xl font-jp font-black text-white tracking-wide">
+                            ${displayHira}${isYen ? '<span class="text-base sm:text-xl text-amber-300 font-bold ml-1">です。</span>' : ''}
+                        </div>
+                        <div class="text-xs sm:text-sm font-mono text-indigo-300 mt-0.5">
+                            ${displayRomaji}${isYen ? ' desu.' : ''}
+                        </div>
+                    </div>
+                    <button type="button" onclick="speakJapanese('${spokenPhrase}')" class="px-4 py-2.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/40 text-indigo-300 font-bold text-xs flex items-center gap-2 transition active:scale-95 shadow">
+                        <i class="fa-solid fa-volume-high text-sm"></i>
+                        <span>${isYen ? 'Escuchar Precio' : 'Pronunciar'}</span>
+                    </button>
+                </div>
+                ${data.mutationInfo ? `
+                    <div class="text-xs text-amber-300 font-semibold bg-amber-500/10 p-3 rounded-xl border border-amber-500/30 flex items-start gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5 shrink-0"></i>
+                        <span>${data.mutationInfo}</span>
+                    </div>
+                ` : ''}
+                <div class="space-y-3 pt-1">
+                    <div class="flex flex-wrap items-center gap-2 text-xs">
+                        <span class="px-3 py-1 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-mono">
+                            Occidental: <strong class="text-white">${n.toLocaleString()}${isYen ? ' 円' : ''}</strong>
+                        </span>
+                        <span class="px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono">
+                            Bloques de 4 (万): <strong class="text-white">${b4Formatted}</strong>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">Descomposición Posicional:</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${data.breakdown.map(b => `
+                                <span class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-200 text-xs font-jp border border-slate-800 shadow-sm">
+                                    ${b.text}
+                                </span>
+                            `).join('')}
+                            ${isYen ? `<span class="px-3 py-1.5 rounded-xl bg-amber-500/15 text-amber-300 text-xs font-jp border border-amber-500/30 font-bold">円 = えん (en / yenes)</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         // ==========================================================
@@ -15579,14 +15920,14 @@ const DIGIT_HIRAGANA = {
             state.numbersConfig.lessonStep = state.numbersLessonStep;
             saveStateToStorage();
             renderNumbersLesson();
-            const container = document.getElementById('numbersWorkspaceContainer');
+            const container = document.getElementById('numbersGuideSubContent') || document.getElementById('numbersWorkspaceContainer');
             if (container) {
                 container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
         function renderNumbersLesson() {
-            const container = document.getElementById('numbersWorkspaceContainer');
+            const container = document.getElementById('numbersGuideSubContent') || document.getElementById('numbersWorkspaceContainer');
             if (!container) return;
 
             const curStep = (state.numbersConfig && state.numbersConfig.lessonStep) || state.numbersLessonStep || 1;
@@ -16645,7 +16986,7 @@ const DIGIT_HIRAGANA = {
         }
 
         function renderNumbersLego(feedback) {
-            const container = document.getElementById('numbersWorkspaceContainer');
+            const container = document.getElementById('numbersPracticeExerciseArea') || document.getElementById('numbersWorkspaceContainer');
             if (!container) return;
 
             const ch = state.numbersCurrentChallenge;
@@ -16878,9 +17219,12 @@ const DIGIT_HIRAGANA = {
         // ==========================================================
         // DINÁMICA 2: DICTADO AUDITIVO (CON TECLADO EN PANTALLA & PC)
         // ==========================================================
+        let numbersDictationLocked = false;
+
         function nextNumbersDictationChallenge() {
             const ch = generateNumbersChallenge();
             state.numbersDictationInput = '';
+            numbersDictationLocked = false;
             renderNumbersDictation();
             setTimeout(() => {
                 playNumbersDictationAudio();
@@ -16895,7 +17239,7 @@ const DIGIT_HIRAGANA = {
         }
 
         function renderNumbersDictation(feedback) {
-            const container = document.getElementById('numbersWorkspaceContainer');
+            const container = document.getElementById('numbersPracticeExerciseArea') || document.getElementById('numbersWorkspaceContainer');
             if (!container) return;
 
             const ch = state.numbersCurrentChallenge;
@@ -16972,7 +17316,7 @@ const DIGIT_HIRAGANA = {
                     <div class="space-y-1">
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block text-center">Tu Respuesta Numérica:</span>
                         <div id="numbersDictationDisplay"
-                            class="h-16 rounded-2xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-mono text-4xl font-black text-amber-300 tracking-wider shadow-inner">
+                            class="h-16 px-3 rounded-2xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-mono ${state.numbersDictationInput.length >= 7 ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-4xl'} font-black text-amber-300 tracking-wider shadow-inner">
                             ${displayValue}
                         </div>
                     </div>
@@ -17010,12 +17354,13 @@ const DIGIT_HIRAGANA = {
         }
 
         function pressNumbersKeypad(key) {
+            if (numbersDictationLocked) return;
             if (key === 'backspace') {
                 state.numbersDictationInput = state.numbersDictationInput.slice(0, -1);
             } else if (key === 'clear') {
                 state.numbersDictationInput = '';
             } else if (key >= '0' && key <= '9') {
-                if (state.numbersDictationInput.length < 9) {
+                if (state.numbersDictationInput.length < 8) {
                     state.numbersDictationInput += key;
                 }
             }
@@ -17024,8 +17369,9 @@ const DIGIT_HIRAGANA = {
 
         function checkNumbersDictation() {
             const ch = state.numbersCurrentChallenge;
-            if (!ch || state.numbersDictationInput.length === 0) return;
+            if (!ch || state.numbersDictationInput.length === 0 || numbersDictationLocked) return;
 
+            numbersDictationLocked = true;
             const enteredNum = parseInt(state.numbersDictationInput, 10);
             const isCorrect = enteredNum === ch.number;
 
@@ -17113,7 +17459,7 @@ const DIGIT_HIRAGANA = {
         }
 
         function renderNumbersQuiz(feedback) {
-            const container = document.getElementById('numbersWorkspaceContainer');
+            const container = document.getElementById('numbersPracticeExerciseArea') || document.getElementById('numbersWorkspaceContainer');
             if (!container) return;
 
             const q = currentNumbersQuiz;
@@ -17249,206 +17595,276 @@ const DIGIT_HIRAGANA = {
         }
 
         // ==========================================================
-        // DINÁMICA 4: GUÍA Y MUTACIONES (FICHA DE ESTUDIO + TRADUCTOR)
+        // SUB-MÓDULOS DE GUÍA Y TEORÍA (MODULAR Y SIN SCROLL INFINITO)
         // ==========================================================
-        function renderNumbersGuide() {
-            const container = document.getElementById('numbersWorkspaceContainer');
+
+        function renderNumbersGuideSubContent(subTab) {
+            const container = document.getElementById('numbersGuideSubContent');
             if (!container) return;
 
+            if (subTab === 'lesson') {
+                renderNumbersLesson();
+            } else if (subTab === 'basics') {
+                renderNumbersGuideBasics(container);
+            } else if (subTab === 'mutations') {
+                renderNumbersGuideMutations(container);
+            } else if (subTab === 'man') {
+                renderNumbersGuideMan(container);
+            } else if (subTab === 'kanji') {
+                renderNumbersGuideKanji(container);
+            }
+        }
+
+        // Sub-ficha 1: Dígitos Base (0-10) y Decenas (11-99)
+        function renderNumbersGuideBasics(container) {
             container.innerHTML = `
-                <div class="space-y-6">
-                    
-                    
-                    <!-- Ficha Caligráfica: Guía de Trazos de Números y Tiempo en Kanji -->
-                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950/30 border-2 border-rose-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
-                        <div class="flex items-center justify-between gap-3 flex-wrap">
-                            <div>
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold mb-1">
-                                    <i class="fa-solid fa-paintbrush text-rose-400"></i> Caligrafía Oficial KanjiVG
-                                </span>
-                                <h3 class="text-xl sm:text-2xl font-black text-white">
-                                    Guía de Trazos: Números y Tiempo en Kanji (漢字)
-                                </h3>
-                                <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
-                                    Aprende el orden y dirección correcta de trazos para cada número. Haz clic en <strong>Ver</strong> para ver la animación interactiva trazo por trazo o en <strong>Lienzo</strong> para dibujarlo con retroalimentación caligráfica.
-                                </p>
-                            </div>
-                            <button type="button" onclick="practiceKanjiInCanvas('一')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-amber-500 text-white font-bold text-xs shadow-lg hover:from-rose-500 hover:to-amber-400 transition flex items-center gap-2">
-                                <i class="fa-solid fa-pen-nib"></i> Entrenar en Lienzo de Dibujo
-                            </button>
-                        </div>
-
-                        <!-- Grid de Tarjetas de Números en Kanji -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 pt-2">
-                            ${NUMBER_KANJI_DATA.map(k => `
-                                <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-rose-500/50 flex flex-col items-center text-center transition group shadow-sm">
-                                    <div class="font-jp text-3xl font-black text-white group-hover:text-rose-400 transition mt-1">${k.kanji}</div>
-                                    <div class="text-xs font-bold text-amber-400 mt-1">${k.romaji}</div>
-                                    <div class="text-[10px] text-slate-400 font-jp">${k.kana}</div>
-                                    <div class="inline-block mt-1 px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">
-                                        ${k.strokes} ${k.strokes === 1 ? 'trazo' : 'trazos'}
-                                    </div>
-                                    <div class="flex items-center gap-1.5 mt-2.5 w-full">
-                                        <button type="button" onclick="showKanaStrokeModal('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Ver animación de trazo">
-                                            <i class="fa-solid fa-eye text-[10px]"></i> Ver
-                                        </button>
-                                        <button type="button" onclick="practiceKanjiInCanvas('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Dibujar en el lienzo">
-                                            <i class="fa-solid fa-pen text-[10px]"></i> Lienzo
-                                        </button>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Ficha 1: Mutaciones Clave del Parcial (Centenas 100 - 999) -->
-                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 border-2 border-amber-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+                <div class="space-y-6 animate-fade-in">
+                    <!-- Ficha: Dígitos Base 0 a 10 y Lecturas Clave -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
                         <div class="flex items-center justify-between gap-3 flex-wrap">
                             <div>
                                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-1">
-                                    <i class="fa-solid fa-star text-amber-400"></i> Reglas Fonéticas Fundamentales
+                                    <i class="fa-solid fa-list-ol text-amber-400"></i> Fundamentos
                                 </span>
                                 <h3 class="text-xl sm:text-2xl font-black text-white">
-                                    Las 3 Mutaciones Fonéticas de Centenas
+                                    Dígitos Base (0 - 10) y Lecturas Clave
                                 </h3>
                                 <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
-                                    La regla base es <span class="font-mono text-amber-300 font-bold">[Dígito] + ひゃく</span>. Sin embargo, en <span class="font-bold text-white">300, 600 y 800</span> el sonido se transforma por facilidad articulatoria:
+                                    Aprende la pronunciación estándar y las lecturas alternativas críticas que cambian según el contexto (horas, meses, conteo).
                                 </p>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                            <!-- Mutación 300 -->
-                            <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-2xl font-black font-mono text-amber-300">300</span>
-                                    <button type="button" onclick="speakJapanese('さんびゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
-                                        <i class="fa-solid fa-volume-high text-xs"></i>
-                                    </button>
-                                </div>
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-lg font-jp font-black text-amber-400">三百</span>
-                                    <div class="text-base font-jp font-bold text-white">
-                                        さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-mono text-slate-400">sanbyaku</div>
-                                <p class="text-[11px] text-amber-200/90 leading-tight">
-                                    <strong>Mutación Sonora (Dakuon):</strong> 'h' cambia a 'b'. <em>¡Nunca digas sanhyaku!</em>
-                                </p>
-                            </div>
-
-                            <!-- Mutación 600 -->
-                            <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-2xl font-black font-mono text-amber-300">600</span>
-                                    <button type="button" onclick="speakJapanese('ろっぴゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
-                                        <i class="fa-solid fa-volume-high text-xs"></i>
-                                    </button>
-                                </div>
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-lg font-jp font-black text-amber-400">六百</span>
-                                    <div class="text-base font-jp font-bold text-white">
-                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-mono text-slate-400">roppyaku</div>
-                                <p class="text-[11px] text-amber-200/90 leading-tight">
-                                    <strong>Doble Mutación:</strong> roku se convierte en <strong class="text-white">ろっ</strong> y hyaku muta a <strong class="text-white">ぴゃく</strong> (sonido p / Handakuon).
-                                </p>
-                            </div>
-
-                            <!-- Mutación 800 -->
-                            <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-2xl font-black font-mono text-amber-300">800</span>
-                                    <button type="button" onclick="speakJapanese('はっぴゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
-                                        <i class="fa-solid fa-volume-high text-xs"></i>
-                                    </button>
-                                </div>
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-lg font-jp font-black text-amber-400">八百</span>
-                                    <div class="text-base font-jp font-bold text-white">
-                                        <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
-                                    </div>
-                                </div>
-                                <div class="text-xs font-mono text-slate-400">happyaku</div>
-                                <p class="text-[11px] text-amber-200/90 leading-tight">
-                                    <strong>Doble Mutación:</strong> hachi se convierte en <strong class="text-white">はっ</strong> y hyaku muta a <strong class="text-white">ぴゃく</strong> (Handakuon).
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Recordatorio de 100 -->
-                        <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 flex items-center gap-2.5">
-                            <i class="fa-solid fa-circle-info text-amber-400 text-base shrink-0"></i>
-                            <span><strong>Regla de oro:</strong> 100 es simplemente <strong class="text-white font-jp">ひゃく</strong> (hyaku). ¡Nunca se dice <em>ichihyaku</em>! Igual que 10 es simplemente <strong class="text-white font-jp">じゅう</strong>.</span>
-                        </div>
-                    </div>
-
-                    <!-- Ficha 2: Dígitos Base 0 a 10 y Lecturas Dobles -->
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
-                        <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-list-ol text-amber-400"></i> Dígitos Base (0 - 10) y Lecturas Clave
-                        </h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 pt-2">
                             ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(digit => {
                                 const d = DIGIT_HIRAGANA[digit];
                                 return `
-                                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between hover:border-slate-700 transition">
+                                    <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between hover:border-slate-700 transition shadow-sm">
                                         <div>
                                             <div class="flex items-center gap-2">
-                                                <span class="font-mono text-lg font-black text-amber-300">${digit}</span>
-                                                <span class="font-jp text-base font-bold text-white">${d.hira}</span>
+                                                <span class="font-mono text-xl font-black text-amber-300">${digit}</span>
+                                                <span class="font-jp text-lg font-bold text-white">${d.hira}</span>
                                             </div>
-                                            <div class="text-[11px] font-mono text-slate-400">${d.romaji}${d.alt ? ` <span class="text-amber-400/90">/ ${d.alt}</span>` : ''}</div>
+                                            <div class="text-[11px] font-mono text-slate-400">${d.romaji}${d.alt ? ` <span class="text-amber-400/90 font-bold">/ ${d.alt}</span>` : ''}</div>
                                         </div>
-                                        <button type="button" onclick="speakJapanese('${d.hira}')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
-                                            <i class="fa-solid fa-volume-high text-[11px]"></i>
+                                        <button type="button" onclick="speakJapanese('${d.hira}')" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95 shadow">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
                                 `;
                             }).join('')}
                         </div>
-                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-1">
-                            <span class="font-bold text-amber-300 block">Lecturas dobles para tener en cuenta:</span>
-                            <p>• <strong>4:</strong> Habitualmente <strong class="text-white">よん (yon)</strong> al componer números (ej. 40 = よんじゅう). <strong class="text-slate-400">し (shi)</strong> se reserva para meses (abril) o posiciones fijas.</p>
+
+                        <div class="p-4 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs text-slate-300 space-y-1.5">
+                            <span class="font-bold text-amber-300 flex items-center gap-1.5 text-sm">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Lecturas alternativas fundamentales para recordar:
+                            </span>
+                            <p>• <strong>4:</strong> Habitualmente <strong class="text-white">よん (yon)</strong> al componer números (ej. 40 = よんじゅう). <strong class="text-slate-400">し (shi)</strong> se reserva para meses (abril / しがつ) o posiciones fijas.</p>
                             <p>• <strong>7:</strong> Habitualmente <strong class="text-white">なな (nana)</strong> para componer números (ej. 70 = ななじゅう). <strong class="text-slate-400">しち (shichi)</strong> se usa para julio (しちがつ) o la hora 7:00 (しちじ).</p>
-                            <p>• <strong>9:</strong> Habitualmente <strong class="text-white">きゅう (kyuu)</strong> para componer (ej. 90 = きゅうじゅう). <strong class="text-slate-400">く (ku)</strong> se usa para septiembre (くがつ) o 9:00 (くじ).</p>
+                            <p>• <strong>9:</strong> Habitualmente <strong class="text-white">きゅう (kyuu)</strong> para componer números (ej. 90 = きゅうじゅう). <strong class="text-slate-400">く (ku)</strong> se usa para septiembre (くがつ) o 9:00 (くじ).</p>
                         </div>
                     </div>
 
-                    <!-- Ficha 3: Regla Combinatoria de Decenas (11 - 99) -->
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-3">
-                        <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-calculator text-amber-400"></i> Fórmula de Decenas (11 - 99)
-                        </h3>
-                        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                            <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-bold text-white font-mono flex-wrap text-center">
-                                <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-amber-300">[Dígito 1-9]</span>
-                                <span class="text-slate-400">+</span>
-                                <span class="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 font-jp">じゅう (juu)</span>
-                                <span class="text-slate-400">+</span>
-                                <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-amber-300">[Dígito 1-9]</span>
+                    <!-- Ficha: Regla Combinatoria de Decenas (11 - 99) -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-1">
+                                    <i class="fa-solid fa-calculator text-amber-400"></i> Estructura Aditiva
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-black text-white">
+                                    Fórmula de Decenas (11 - 99)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
+                                    El japonés es 100% regular y matemático: combina el multiplicador + じゅう (10) + unidad.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+                            <div class="flex items-center justify-center gap-2 text-sm sm:text-base font-bold text-white font-mono flex-wrap text-center py-1">
+                                <span class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-amber-300 border border-slate-700">[Dígito 1-9]</span>
+                                <span class="text-slate-400 text-lg">+</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 font-jp font-bold">じゅう (juu)</span>
+                                <span class="text-slate-400 text-lg">+</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-slate-800 text-amber-300 border border-slate-700">[Dígito 1-9]</span>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
-                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                                    <span class="font-mono text-amber-400 font-bold">14:</span> じゅうよん
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
+                                    <div><span class="font-mono text-amber-400 font-bold text-sm">14:</span> <span class="font-jp text-white font-bold ml-1">じゅうよん</span></div>
+                                    <button type="button" onclick="speakJapanese('じゅうよん')" class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
-                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                                    <span class="font-mono text-amber-400 font-bold">20:</span> にじゅう
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
+                                    <div><span class="font-mono text-amber-400 font-bold text-sm">20:</span> <span class="font-jp text-white font-bold ml-1">にじゅう</span></div>
+                                    <button type="button" onclick="speakJapanese('にじゅう')" class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
-                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                                    <span class="font-mono text-amber-400 font-bold">47:</span> よんじゅうなな
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
+                                    <div><span class="font-mono text-amber-400 font-bold text-sm">47:</span> <span class="font-jp text-white font-bold ml-1">よんじゅうなな</span></div>
+                                    <button type="button" onclick="speakJapanese('よんじゅうなな')" class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
-                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                                    <span class="font-mono text-amber-400 font-bold">99:</span> きゅうじゅうきゅう
+                                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
+                                    <div><span class="font-mono text-amber-400 font-bold text-sm">99:</span> <span class="font-jp text-white font-bold ml-1">きゅうじゅうきゅう</span></div>
+                                    <button type="button" onclick="speakJapanese('きゅうじゅうきゅう')" class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            `;
+        }
 
-                    <!-- Ficha 4: El Sistema del 万 (man - 10.000 a Millones) -->
+        // Sub-ficha 2: Las 5 Mutaciones Fonéticas Clave (Centenas y Miles)
+        function renderNumbersGuideMutations(container) {
+            container.innerHTML = `
+                <div class="space-y-6 animate-fade-in">
+                    <!-- Ficha: Mutaciones Fonéticas Clave (300, 600, 800, 3000, 8000) -->
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 border-2 border-amber-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-5">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-1">
+                                <i class="fa-solid fa-star text-amber-400"></i> Reglas Fonéticas Sagradas
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-black text-white">
+                                Las 5 Mutaciones Fonéticas Oficiales (Centenas y Miles)
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                La regla estándar es <span class="font-mono text-amber-300 font-bold">[Dígito] + ひゃく (100)</span> y <span class="font-mono text-amber-300 font-bold">[Dígito] + せん (1.000)</span>. Sin embargo, en exactamente <strong>5 casos</strong> el sonido se transforma por asimilación articulatoria:
+                            </p>
+                        </div>
+
+                        <!-- 3 Mutaciones de Centenas -->
+                        <div>
+                            <h4 class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-dot text-amber-400 text-[10px]"></i> Las 3 Mutaciones de Centenas (百 - hyaku)
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <!-- 300 -->
+                                <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-2xl font-black font-mono text-amber-300">300</span>
+                                        <button type="button" onclick="speakJapanese('さんびゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-lg font-jp font-black text-amber-400">三百</span>
+                                        <div class="text-base font-jp font-bold text-white">
+                                            さん<span class="text-amber-400 underline decoration-amber-500 decoration-2">びゃく</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-400">sanbyaku</div>
+                                    <p class="text-[11px] text-amber-200/90 leading-tight">
+                                        <strong>Mutación Sonora (Dakuon):</strong> 'h' cambia a 'b'. <em>¡Nunca digas sanhyaku!</em>
+                                    </p>
+                                </div>
+
+                                <!-- 600 -->
+                                <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-2xl font-black font-mono text-amber-300">600</span>
+                                        <button type="button" onclick="speakJapanese('ろっぴゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-lg font-jp font-black text-amber-400">六百</span>
+                                        <div class="text-base font-jp font-bold text-white">
+                                            <span class="text-amber-400 underline decoration-amber-500 decoration-2">ろっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-400">roppyaku</div>
+                                    <p class="text-[11px] text-amber-200/90 leading-tight">
+                                        <strong>Doble Mutación:</strong> roku se convierte en <strong class="text-white">ろっ</strong> y hyaku muta a <strong class="text-white">ぴゃく</strong> (Handakuon).
+                                    </p>
+                                </div>
+
+                                <!-- 800 -->
+                                <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-2xl font-black font-mono text-amber-300">800</span>
+                                        <button type="button" onclick="speakJapanese('はっぴゃく')" class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-lg font-jp font-black text-amber-400">八百</span>
+                                        <div class="text-base font-jp font-bold text-white">
+                                            <span class="text-amber-400 underline decoration-amber-500 decoration-2">はっ</span><span class="text-amber-400 underline decoration-amber-500 decoration-2">ぴゃく</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-400">happyaku</div>
+                                    <p class="text-[11px] text-amber-200/90 leading-tight">
+                                        <strong>Doble Mutación:</strong> hachi se convierte en <strong class="text-white">はっ</strong> y hyaku muta a <strong class="text-white">ぴゃく</strong> (Handakuon).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2 Mutaciones de Miles -->
+                        <div>
+                            <h4 class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-gem text-sky-400 text-[10px]"></i> Las 2 Mutaciones de Miles (千 - sen)
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <!-- 3.000 -->
+                                <div class="p-4 rounded-2xl bg-slate-950 border border-sky-500/30 space-y-2 hover:border-sky-400 transition shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-2xl font-black font-mono text-sky-300">3.000</span>
+                                        <button type="button" onclick="speakJapanese('さんぜん')" class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-lg font-jp font-black text-sky-400">三千</span>
+                                        <div class="text-base font-jp font-bold text-white">
+                                            さん<span class="text-sky-400 underline decoration-sky-500 decoration-2">ぜん</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-400">sanzen</div>
+                                    <p class="text-[11px] text-sky-200/90 leading-tight">
+                                        <strong>Mutación Sonora (Dakuon):</strong> 's' cambia a 'z'. <em>¡Nunca digas sansen!</em>
+                                    </p>
+                                </div>
+
+                                <!-- 8.000 -->
+                                <div class="p-4 rounded-2xl bg-slate-950 border border-sky-500/30 space-y-2 hover:border-sky-400 transition shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-2xl font-black font-mono text-sky-300">8.000</span>
+                                        <button type="button" onclick="speakJapanese('はっせん')" class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-lg font-jp font-black text-sky-400">八千</span>
+                                        <div class="text-base font-jp font-bold text-white">
+                                            <span class="text-sky-400 underline decoration-sky-500 decoration-2">はっ</span>せん
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-mono text-slate-400">hassen</div>
+                                    <p class="text-[11px] text-sky-200/90 leading-tight">
+                                        <strong>Asimilación y Parada (Sokuon):</strong> hachi se asimila a <strong class="text-white">はっ</strong> + sen. <em>¡Nunca digas hachisen!</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reglas de Oro -->
+                        <div class="p-3.5 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs text-slate-300 space-y-1.5">
+                            <div class="flex items-center gap-2 text-amber-300 font-bold">
+                                <i class="fa-solid fa-circle-check text-sm"></i>
+                                <span>Regla de Oro para 100 y 1.000:</span>
+                            </div>
+                            <p>• <strong>100:</strong> Es simplemente <strong class="text-white font-jp">ひゃく</strong> (hyaku). ¡Nunca se dice <em>ichihyaku</em>! Igual que 10 es solo <strong class="text-white font-jp">じゅう</strong> (juu).</p>
+                            <p>• <strong>1.000:</strong> Es simplemente <strong class="text-white font-jp">せん</strong> (sen). ¡Nunca se dice <em>ichisen</em>!</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Sub-ficha 3: El Sistema del 万 (10.000 a Millones)
+        function renderNumbersGuideMan(container) {
+            container.innerHTML = `
+                <div class="space-y-6 animate-fade-in">
                     <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border-2 border-indigo-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
                         <div class="flex items-center justify-between gap-3 flex-wrap">
                             <div>
@@ -17579,87 +17995,80 @@ const DIGIT_HIRAGANA = {
                             </table>
                         </div>
                     </div>
+                </div>
+            `;
+        }
 
-                    <!-- Ficha 5: Traductor Interactivo en Vivo (Cualquier número) -->
-                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/30 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
-                        <div class="flex items-center justify-between gap-2 flex-wrap">
-                            <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i> Traductor y Descompositor en Vivo (0 a Millones)
-                            </h3>
-                            <span class="text-xs text-slate-400">Escribe cualquier número (0 a 99.999.999) para ver cómo se dice:</span>
-                        </div>
+        // Sub-ficha 4: Caligrafía Oficial en Kanji (KanjiVG)
+        function renderNumbersGuideKanji(container) {
+            const numKanjis = NUMBER_KANJI_DATA.slice(0, 15);
+            const timeKanjis = NUMBER_KANJI_DATA.slice(15);
+            const renderCard = (k) => `
+                <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 hover:border-rose-500/50 flex flex-col items-center text-center transition group shadow-sm">
+                    <div class="font-jp text-3xl font-black text-white group-hover:text-rose-400 transition mt-1">${k.kanji}</div>
+                    <div class="text-xs font-bold text-amber-400 mt-1">${k.romaji}</div>
+                    <div class="text-[10px] text-slate-400 font-jp">${k.kana}</div>
+                    <div class="inline-block mt-1 px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">
+                        ${k.strokes} ${k.strokes === 1 ? 'trazo' : 'trazos'}
+                    </div>
+                    <div class="flex items-center gap-1.5 mt-2.5 w-full">
+                        <button type="button" onclick="showKanaStrokeModal('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Ver animación de trazo">
+                            <i class="fa-solid fa-eye text-[10px]"></i> Ver
+                        </button>
+                        <button type="button" onclick="practiceKanjiInCanvas('${k.kanji}')" class="flex-1 py-1 px-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-[11px] font-bold transition flex items-center justify-center gap-1" title="Dibujar en el lienzo">
+                            <i class="fa-solid fa-pen text-[10px]"></i> Lienzo
+                        </button>
+                    </div>
+                </div>
+            `;
 
-                        <div class="flex items-center gap-3">
-                            <input type="number" id="customNumberInput" min="0" max="99999999" value="348"
-                                oninput="translateCustomNumberInput(this.value)"
-                                class="w-48 py-2.5 px-4 rounded-xl bg-slate-950 border-2 border-indigo-500/50 text-white font-mono text-xl font-bold focus:outline-none focus:border-indigo-400 transition" />
-                            <button type="button" onclick="translateCustomNumberInput(document.getElementById('customNumberInput').value)" class="py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition">
-                                Traducir
+            container.innerHTML = `
+                <div class="space-y-6 animate-fade-in">
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950/30 border-2 border-rose-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold mb-1">
+                                    <i class="fa-solid fa-paintbrush text-rose-400"></i> Caligrafía Oficial KanjiVG
+                                </span>
+                                <h3 class="text-xl sm:text-2xl font-black text-white">
+                                    Guía de Trazos: Números, Moneda y Tiempo (漢字)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
+                                    Haz clic en <strong>Ver</strong> para observar la animación trazo por trazo o en <strong>Lienzo</strong> para dibujarlo con retroalimentación caligráfica.
+                                </p>
+                            </div>
+                            <button type="button" onclick="practiceKanjiInCanvas('一')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-amber-500 text-white font-bold text-xs shadow-lg hover:from-rose-500 hover:to-amber-400 transition flex items-center gap-2">
+                                <i class="fa-solid fa-pen-nib"></i> Entrenar en Lienzo de Dibujo
                             </button>
                         </div>
 
-                        <!-- Live Output Box -->
-                        <div id="customNumberOutputCard" class="p-4 rounded-2xl bg-slate-950 border border-indigo-500/30 space-y-2">
-                            <!-- Populated on load -->
+                        <!-- Sección 1: Números y Moneda (0 a 万 + 円) -->
+                        <div class="space-y-2.5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-hashtag text-amber-400"></i> Números y Moneda (零 a 万 + 円)
+                            </span>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-3">
+                                ${numKanjis.map(renderCard).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Sección 2: Tiempo y Calendario (時, 分, 半, 曜日...) -->
+                        <div class="space-y-2.5 pt-3 border-t border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-sky-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-clock text-sky-400"></i> Tiempo, Horas y Días de la Semana (時・分・曜日)
+                            </span>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                ${timeKanjis.map(renderCard).join('')}
+                            </div>
                         </div>
                     </div>
-
                 </div>
             `;
-
-            // Initialize live translator with 348
-            translateCustomNumberInput(348);
         }
 
-        function translateCustomNumberInput(val) {
-            const outputCard = document.getElementById('customNumberOutputCard');
-            if (!outputCard) return;
-
-            const n = parseInt(val, 10);
-            if (isNaN(n) || n < 0 || n > 99999999) {
-                outputCard.innerHTML = `<span class="text-xs text-slate-500">Ingresa un número válido entre 0 y 99.999.999</span>`;
-                return;
-            }
-
-            const data = numberToJapanese(n);
-            const b4Formatted = formatJapaneseBlocksOf4(n);
-
-            outputCard.innerHTML = `
-                <div class="flex items-center justify-between gap-3 flex-wrap">
-                    <div>
-                        <div class="text-2xl sm:text-3xl font-jp font-black text-white">
-                            ${data.hiragana}
-                        </div>
-                        <div class="text-xs font-mono text-indigo-300">
-                            ${data.romaji}
-                        </div>
-                    </div>
-                    <button type="button" onclick="speakJapanese('${data.hiragana}')" class="px-3.5 py-2 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/40 text-indigo-300 font-bold text-xs flex items-center gap-1.5 transition">
-                        <i class="fa-solid fa-volume-high"></i> Pronunciar
-                    </button>
-                </div>
-                ${data.mutationInfo ? `
-                    <div class="text-xs text-amber-300 font-semibold bg-amber-500/10 p-2 rounded-lg border border-amber-500/30">
-                        <i class="fa-solid fa-triangle-exclamation text-amber-400 mr-1"></i> ${data.mutationInfo}
-                    </div>
-                ` : ''}
-                <div class="pt-2 border-t border-slate-900 space-y-2">
-                    <div class="flex flex-wrap items-center gap-2 text-xs">
-                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 font-mono">Occidental: <strong class="text-white">${n.toLocaleString()}</strong></span>
-                        <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono">Bloques de 4 (万): <strong>${b4Formatted}</strong></span>
-                    </div>
-                    <div>
-                        <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-1">Descomposición Posicional:</span>
-                        <div class="flex flex-wrap gap-1.5">
-                            ${data.breakdown.map(b => `
-                                <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 text-xs font-jp border border-slate-800">
-                                    ${b.text}
-                                </span>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
+        // Compatibilidad: llamada directa a renderNumbersGuide
+        function renderNumbersGuide() {
+            setNumbersPillar('guide');
         }
 
 
@@ -17707,18 +18116,18 @@ const DIGIT_HIRAGANA = {
         ];
 
         const TIME_MONTHS_DATA = [
-            { num: 1, kanji: '一月', hira: 'いちがつ', romaji: 'ichigatsu', isException: false },
-            { num: 2, kanji: '二月', hira: 'にがつ', romaji: 'nigatsu', isException: false },
-            { num: 3, kanji: '三月', hira: 'さんがつ', romaji: 'sangatsu', isException: false },
-            { num: 4, kanji: '四月', hira: 'しがつ', romaji: 'shigatsu', isException: true, note: '¡NUNCA yongatsu! Siempre しがつ (shigatsu).' },
-            { num: 5, kanji: '五月', hira: 'ごがつ', romaji: 'gogatsu', isException: false },
-            { num: 6, kanji: '六月', hira: 'ろくがつ', romaji: 'rokugatsu', isException: false },
-            { num: 7, kanji: '七月', hira: 'しちがつ', romaji: 'shichigatsu', isException: true, note: '¡NUNCA nanagatsu! Siempre しちがつ (shichigatsu).' },
-            { num: 8, kanji: '八月', hira: 'はちがつ', romaji: 'hachigatsu', isException: false },
-            { num: 9, kanji: '九月', hira: 'くがつ', romaji: 'kugatsu', isException: true, note: '¡NUNCA kyuugatsu! Siempre くがつ (kugatsu).' },
-            { num: 10, kanji: '十月', hira: 'じゅうがつ', romaji: 'juugatsu', isException: false },
-            { num: 11, kanji: '十一月', hira: 'じゅういちがつ', romaji: 'juuichigatsu', isException: false },
-            { num: 12, kanji: '十二月', hira: 'じゅうにがつ', romaji: 'juunigatsu', isException: false }
+            { num: 1, nameEs: 'enero', kanji: '一月', hira: 'いちがつ', romaji: 'ichigatsu', isException: false },
+            { num: 2, nameEs: 'febrero', kanji: '二月', hira: 'にがつ', romaji: 'nigatsu', isException: false },
+            { num: 3, nameEs: 'marzo', kanji: '三月', hira: 'さんがつ', romaji: 'sangatsu', isException: false },
+            { num: 4, nameEs: 'abril', kanji: '四月', hira: 'しがつ', romaji: 'shigatsu', isException: true, note: '¡NUNCA yongatsu! Siempre しがつ (shigatsu).' },
+            { num: 5, nameEs: 'mayo', kanji: '五月', hira: 'ごがつ', romaji: 'gogatsu', isException: false },
+            { num: 6, nameEs: 'junio', kanji: '六月', hira: 'ろくがつ', romaji: 'rokugatsu', isException: false },
+            { num: 7, nameEs: 'julio', kanji: '七月', hira: 'しちがつ', romaji: 'shichigatsu', isException: true, note: '¡NUNCA nanagatsu! Siempre しちがつ (shichigatsu).' },
+            { num: 8, nameEs: 'agosto', kanji: '八月', hira: 'はちがつ', romaji: 'hachigatsu', isException: false },
+            { num: 9, nameEs: 'septiembre', kanji: '九月', hira: 'くがつ', romaji: 'kugatsu', isException: true, note: '¡NUNCA kyuugatsu! Siempre くがつ (kugatsu).' },
+            { num: 10, nameEs: 'octubre', kanji: '十月', hira: 'じゅうがつ', romaji: 'juugatsu', isException: false },
+            { num: 11, nameEs: 'noviembre', kanji: '十一月', hira: 'じゅういちがつ', romaji: 'juuichigatsu', isException: false },
+            { num: 12, nameEs: 'diciembre', kanji: '十二月', hira: 'じゅうにがつ', romaji: 'juunigatsu', isException: false }
         ];
 
         const TIME_DAYS_DATA = [
@@ -17849,6 +18258,15 @@ const DIGIT_HIRAGANA = {
             }
         ];
 
+        const TIME_ROUTINE_VERBS_DATA = [
+            { hira: 'おきます', romaji: 'okimasu', es: 'Levantarse / despertarse', icon: 'fa-sun', ex: 'しちじに おきます (7:00)' },
+            { hira: 'ねます', romaji: 'nemasu', es: 'Acostarse / dormir', icon: 'fa-moon', ex: 'じゅういちじに ねます (11:00)' },
+            { hira: 'はたらきます', romaji: 'hatarakimasu', es: 'Trabajar', icon: 'fa-briefcase', ex: 'はちじから ごじまで はたらきます (8–5)' },
+            { hira: 'やすみます', romaji: 'yasumimasu', es: 'Descansar', icon: 'fa-mug-hot', ex: 'いちじから にじまで やすみます (1–2)' },
+            { hira: 'べんきょうします', romaji: 'benkyou shimasu', es: 'Estudiar', icon: 'fa-book-open', ex: 'くじから じゅうにじまで べんきょうします (9–12)' },
+            { hira: 'おわります', romaji: 'owarimasu', es: 'Terminar', icon: 'fa-flag-checkered', ex: 'ろくじに おわります (6:00)' }
+        ];
+
         const TIME_SENTENCES_DATA = [
             {
                 pattern: 'Preguntar la hora',
@@ -17886,6 +18304,13 @@ const DIGIT_HIRAGANA = {
                 es: 'Son las 8:00 a.m.'
             },
             {
+                pattern: 'Preguntar hora de acción (に)',
+                jp: 'なんじに おきますか。',
+                hira: 'なんじに おきますか。',
+                romaji: 'nanji ni okimasu ka.',
+                es: '¿A qué hora te levantas?'
+            },
+            {
                 pattern: 'Rutina (Partícula に)',
                 jp: 'わたしは しちじに おきます。',
                 hira: 'わたしは しちじに おきます。',
@@ -17901,10 +18326,17 @@ const DIGIT_HIRAGANA = {
             },
             {
                 pattern: 'Rango (から ... まで)',
-                jp: 'わたしは いちじから 2じまで やすみます。',
+                jp: 'わたしは いちじから にじまで やすみます。',
                 hira: 'わたしは いちじから にじまで やすみます。',
                 romaji: 'watashi wa ichiji kara niji made yasumimasu.',
                 es: 'Descanso de 1:00 a 2:00.'
+            },
+            {
+                pattern: 'Estudio (から ... まで)',
+                jp: 'わたしは くじから ごじまで べんきょうします。',
+                hira: 'わたしは くじから ごじまで べんきょうします。',
+                romaji: 'watashi wa kuji kara goji made benkyou shimasu.',
+                es: 'Estudio de 9:00 a 5:00.'
             },
             {
                 pattern: 'Pregunta de rango',
@@ -17946,31 +18378,38 @@ const DIGIT_HIRAGANA = {
                     let tK = '', tH = '', tR = '';
                     let uK = '', uH = '', uR = '';
 
-                    if (tens > 0) {
+                    if (units === 0 && tens > 0) {
                         if (tens === 1) {
-                            tK = '十'; tH = 'じゅう'; tR = 'juu';
+                            minKanji = '十分'; minHira = 'じゅっぷん'; minRomaji = 'juppun';
                         } else {
                             const d = DIGIT_HIRAGANA[tens];
-                            tK = DIGIT_KANJI[tens] + '十';
-                            tH = d.hira + 'じゅう';
-                            tR = d.romaji + 'juu';
-                        }
-                    }
-                    if (units > 0) {
-                        const uMinData = TIME_MINUTES_DATA.find(m => m.num === units);
-                        if (uMinData) {
-                            uK = uMinData.kanji;
-                            uH = uMinData.hira;
-                            uR = uMinData.romaji;
+                            minKanji = DIGIT_KANJI[tens] + '十分';
+                            minHira = d.hira + 'じゅっぷん';
+                            minRomaji = d.romaji + 'juppun';
                         }
                     } else {
-                        uK = '分';
-                        uH = 'ぷん';
-                        uR = 'pun';
+                        if (tens > 0) {
+                            if (tens === 1) {
+                                tK = '十'; tH = 'じゅう'; tR = 'juu';
+                            } else {
+                                const d = DIGIT_HIRAGANA[tens];
+                                tK = DIGIT_KANJI[tens] + '十';
+                                tH = d.hira + 'じゅう';
+                                tR = d.romaji + 'juu';
+                            }
+                        }
+                        if (units > 0) {
+                            const uMinData = TIME_MINUTES_DATA.find(m => m.num === units);
+                            if (uMinData) {
+                                uK = uMinData.kanji;
+                                uH = uMinData.hira;
+                                uR = uMinData.romaji;
+                            }
+                        }
+                        minKanji = tK + uK;
+                        minHira = tH + uH;
+                        minRomaji = (tR ? tR + ' ' : '') + uR;
                     }
-                    minKanji = tK + uK;
-                    minHira = tH + uH;
-                    minRomaji = (tR ? tR + ' ' : '') + uR;
                 }
             }
 
@@ -18081,6 +18520,63 @@ const DIGIT_HIRAGANA = {
             minuteHand.setAttribute('transform', `rotate(${minuteAngle} 100 100)`);
         }
 
+        function buildClockPhraseHtml(phrase, isKanji) {
+            const primaryText = isKanji ? phrase.kanji : phrase.hiragana;
+            const secondaryText = isKanji ? phrase.hiragana : phrase.kanji;
+            const halfHourNote = phrase.minute === 30
+                ? `<div class="pt-1">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[11px] font-jp text-amber-300 font-semibold">
+                            <i class="fa-solid fa-lightbulb text-[10px]"></i> Media hora: 半 (はん) — también válido 三十分 (さんじゅっぷん)
+                        </span>
+                   </div>`
+                : '';
+
+            return `
+                <div class="space-y-1">
+                    <div class="text-2xl sm:text-3xl font-black text-white font-jp tracking-wide flex items-center justify-center gap-2">
+                        <span>${primaryText}</span>
+                        <button type="button" onclick="speakJapanese('${phrase.hiragana}')" class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                            <i class="fa-solid fa-volume-high text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="text-xs sm:text-sm font-jp text-amber-300 font-bold">
+                        ${secondaryText}
+                    </div>
+                    <div class="text-[11px] font-mono text-slate-400">
+                        ${phrase.romaji}
+                    </div>
+                    ${halfHourNote}
+                </div>
+            `;
+        }
+
+        function syncClockControlsUI() {
+            const h = state.timeClockState.hour;
+            const m = state.timeClockState.minute;
+            const p = state.timeClockState.period;
+
+            updateClockHands(h, m);
+
+            const hourDigits = document.getElementById('clockHourDigits');
+            if (hourDigits) hourDigits.textContent = String(h);
+
+            const minDigits = document.getElementById('clockMinuteDigits');
+            if (minDigits) minDigits.textContent = String(m).padStart(2, '0');
+
+            const amBtn = document.getElementById('btnClockPeriodAM');
+            const pmBtn = document.getElementById('btnClockPeriodPM');
+            if (amBtn) {
+                amBtn.className = 'flex-1 py-2 rounded-xl text-xs font-bold transition ' +
+                    (p === 'am' ? 'bg-sky-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white');
+            }
+            if (pmBtn) {
+                pmBtn.className = 'flex-1 py-2 rounded-xl text-xs font-bold transition ' +
+                    (p === 'pm' ? 'bg-amber-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white');
+            }
+
+            updateClockReadout();
+        }
+
         function adjustClockTime(deltaHour, deltaMinute) {
             let h = state.timeClockState.hour + deltaHour;
             let m = state.timeClockState.minute + deltaMinute;
@@ -18088,19 +18584,29 @@ const DIGIT_HIRAGANA = {
             while (m < 0) { m += 60; h -= 1; }
             while (m >= 60) { m -= 60; h += 1; }
 
-            if (h < 1) h = 12;
-            if (h > 12) h = 1;
+            while (h < 1) h += 12;
+            while (h > 12) h -= 12;
 
             state.timeClockState.hour = h;
             state.timeClockState.minute = m;
 
-            updateClockHands(h, m);
-            updateClockReadout();
+            syncClockControlsUI();
         }
 
         function setClockPeriod(p) {
             state.timeClockState.period = p;
-            updateClockReadout();
+            syncClockControlsUI();
+        }
+
+        function setClockPreset(h, m, p, autoSpeak = true) {
+            state.timeClockState.hour = h;
+            state.timeClockState.minute = m;
+            state.timeClockState.period = p;
+            syncClockControlsUI();
+            if (autoSpeak) {
+                const phrase = formatTimePhrase(h, m, p);
+                speakJapanese(phrase.hiragana);
+            }
         }
 
         function updateClockReadout() {
@@ -18111,23 +18617,8 @@ const DIGIT_HIRAGANA = {
 
             const displayEl = document.getElementById('clockLivePhraseContainer');
             if (displayEl) {
-                const isKanji = state.timeConfig.scriptMode === 'kanji';
-                displayEl.innerHTML = `
-                    <div class="space-y-1">
-                        <div class="text-2xl sm:text-3xl font-black text-white font-jp tracking-wide flex items-center justify-center gap-2">
-                            <span>${phrase.kanji}</span>
-                            <button type="button" onclick="speakJapanese('${phrase.hiragana}')" class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
-                                <i class="fa-solid fa-volume-high text-sm"></i>
-                            </button>
-                        </div>
-                        <div class="text-xs sm:text-sm font-jp text-amber-300 font-bold">
-                            ${phrase.hiragana}
-                        </div>
-                        <div class="text-[11px] font-mono text-slate-400">
-                            ${phrase.romaji}
-                        </div>
-                    </div>
-                `;
+                const isKanji = (state.timeConfig?.scriptMode || 'kanji') === 'kanji';
+                displayEl.innerHTML = buildClockPhraseHtml(phrase, isKanji);
             }
         }
 
@@ -18140,6 +18631,7 @@ const DIGIT_HIRAGANA = {
             const m = state.timeClockState.minute;
             const p = state.timeClockState.period;
             const phrase = formatTimePhrase(h, m, p);
+            const isKanji = (state.timeConfig?.scriptMode || 'kanji') === 'kanji';
 
             const hourAngle = ((h % 12) + m / 60) * 30;
             const minAngle = m * 6;
@@ -18208,7 +18700,7 @@ const DIGIT_HIRAGANA = {
                                 Los minutos se dividen en dos grupos fonéticos. Los que terminan en <strong class="text-amber-300">1, 3, 4, 6, 8, 10</strong> mutan a <strong class="text-white font-jp">〜ぷん (-pun)</strong> con sokuon (consonante doble).
                             </p>
                             <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
-                                <span><strong>Regla de media hora:</strong> 30 minutos se dice <strong class="text-amber-300 font-jp">半 (はん - han)</strong>. Ej: 3:30 = <span class="font-jp text-white">三時半 (さんじはん)</span></span>
+                                <span><strong>Regla de media hora:</strong> 30 minutos se dice <strong class="text-amber-300 font-jp">半 (はん - han)</strong> o <strong class="text-sky-300 font-jp">三十分 (さんじゅっぷん)</strong>. Ej: 3:30 = <span class="font-jp text-white">三時半 (さんじはん)</span></span>
                                 <button type="button" onclick="speakJapanese('さんじはん')" class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                             </div>
                         </div>
@@ -18277,7 +18769,10 @@ const DIGIT_HIRAGANA = {
                             ${TIME_MONTHS_DATA.map(item => `
                                 <div class="p-3.5 rounded-2xl bg-slate-950 border ${item.isException ? 'border-amber-500/50 bg-amber-500/5' : 'border-slate-800'} hover:border-sky-400/50 flex flex-col justify-between gap-1.5 transition">
                                     <div class="flex items-center justify-between">
-                                        <span class="font-mono text-lg font-black ${item.isException ? 'text-amber-300' : 'text-slate-200'}">Mes ${item.num}</span>
+                                        <div>
+                                            <span class="font-mono text-lg font-black ${item.isException ? 'text-amber-300' : 'text-slate-200'}">Mes ${item.num}</span>
+                                            <span class="block text-[11px] font-semibold capitalize text-slate-400">${item.nameEs}</span>
+                                        </div>
                                         <button type="button" onclick="speakJapanese('${item.hira}')" class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
@@ -18419,17 +18914,45 @@ const DIGIT_HIRAGANA = {
                 `;
             } else if (sub === 'sentences') {
                 subContentHtml = `
-                    <div class="space-y-4 animate-fade-in">
+                    <div class="space-y-5 animate-fade-in">
                         <div class="p-4 rounded-2xl bg-sky-500/10 border border-sky-500/30 space-y-1.5">
                             <span class="text-xs font-bold text-sky-300 flex items-center gap-2 uppercase tracking-wide">
-                                <i class="fa-solid fa-comments text-sky-400"></i> Expresiones y Gramática de Tiempo del Taller Oficial
+                                <i class="fa-solid fa-comments text-sky-400"></i> Expresiones, Verbos de Rutina y Gramática del Taller Oficial
                             </span>
                             <p class="text-xs text-slate-300 leading-relaxed">
-                                Estructuras para preguntar la hora, usar la partícula de tiempo <strong class="text-white font-jp">に (ni)</strong> y expresar rangos con <strong class="text-white font-jp">から (kara) ... まで (made)</strong>:
+                                Usa <strong class="text-amber-300 font-jp">[Hora] + に + [Verbo]</strong> para indicar a qué hora haces una acción, y <strong class="text-sky-300 font-jp">[Inicio] + から + [Fin] + まで</strong> para expresar rangos ("desde... hasta...").
                             </p>
                         </div>
 
+                        <!-- Los 6 Verbos de Rutina del Taller (pág. 11) -->
                         <div class="space-y-2.5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5 px-1">
+                                <i class="fa-solid fa-person-walking text-amber-400"></i> Los 6 Verbos Clave de Rutina Diaria (〜ます):
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                                ${TIME_ROUTINE_VERBS_DATA.map(v => `
+                                    <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-amber-500/40 flex items-center justify-between gap-3 transition">
+                                        <div class="space-y-0.5 min-w-0">
+                                            <div class="flex items-center gap-1.5">
+                                                <i class="fa-solid ${v.icon} text-amber-400 text-xs"></i>
+                                                <span class="font-jp text-base font-black text-white">${v.hira}</span>
+                                            </div>
+                                            <div class="font-mono text-[11px] text-amber-300">${v.romaji}</div>
+                                            <div class="text-xs text-slate-300 font-semibold">${v.es}</div>
+                                            <div class="text-[11px] font-jp text-slate-400 truncate">Ej: ${v.ex}</div>
+                                        </div>
+                                        <button type="button" onclick="speakJapanese('${v.hira}')" class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar verbo">
+                                            <i class="fa-solid fa-volume-high text-xs"></i>
+                                        </button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-sky-300 flex items-center gap-1.5 px-1">
+                                <i class="fa-solid fa-quote-left text-sky-400"></i> Oraciones Modelo con Audio:
+                            </span>
                             ${TIME_SENTENCES_DATA.map(item => `
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-400/50 flex items-center justify-between gap-4 transition">
                                     <div class="space-y-1">
@@ -18457,7 +18980,7 @@ const DIGIT_HIRAGANA = {
                             <span class="text-xs uppercase font-bold text-slate-400 tracking-widest block">Reloj Analógico y Digital Interactivo:</span>
                             <div class="flex items-center justify-between gap-3 flex-wrap">
                                 <h3 class="text-xl sm:text-2xl font-black text-white">Ajusta la Hora y Escucha su Lectura Nativa</h3>
-                                <div class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-1.5 flex-wrap">
                                     <button type="button" onclick="showKanaStrokeModal('時')" class="px-2.5 py-1 rounded-xl bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="Ver trazos de 時">
                                         <i class="fa-solid fa-paintbrush text-rose-400"></i> 時
                                     </button>
@@ -18514,13 +19037,13 @@ const DIGIT_HIRAGANA = {
                             </div>
 
                             <!-- Controles de ajuste rápido -->
-                            <div class="space-y-4 max-w-sm w-full">
+                            <div class="space-y-3.5 max-w-sm w-full">
                                 <!-- Period Toggle (AM / PM) -->
                                 <div class="flex items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-950 border border-slate-800">
-                                    <button type="button" onclick="setClockPeriod('am')" class="flex-1 py-2 rounded-xl text-xs font-bold transition ${p === 'am' ? 'bg-sky-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white'}">
+                                    <button id="btnClockPeriodAM" type="button" onclick="setClockPeriod('am')" class="flex-1 py-2 rounded-xl text-xs font-bold transition ${p === 'am' ? 'bg-sky-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white'}">
                                         午前 (AM)
                                     </button>
-                                    <button type="button" onclick="setClockPeriod('pm')" class="flex-1 py-2 rounded-xl text-xs font-bold transition ${p === 'pm' ? 'bg-amber-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white'}">
+                                    <button id="btnClockPeriodPM" type="button" onclick="setClockPeriod('pm')" class="flex-1 py-2 rounded-xl text-xs font-bold transition ${p === 'pm' ? 'bg-amber-500 text-slate-950 font-black shadow-md' : 'text-slate-400 hover:text-white'}">
                                         午後 (PM)
                                     </button>
                                 </div>
@@ -18530,7 +19053,7 @@ const DIGIT_HIRAGANA = {
                                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Hora:</span>
                                     <div class="flex items-center gap-2">
                                         <button type="button" onclick="adjustClockTime(-1, 0)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center transition active:scale-90">-1h</button>
-                                        <span class="w-12 text-center font-mono font-black text-lg text-amber-300">${h}</span>
+                                        <span id="clockHourDigits" class="w-12 text-center font-mono font-black text-lg text-amber-300">${h}</span>
                                         <button type="button" onclick="adjustClockTime(1, 0)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center transition active:scale-90">+1h</button>
                                     </div>
                                 </div>
@@ -18539,11 +19062,22 @@ const DIGIT_HIRAGANA = {
                                 <div class="flex items-center justify-between p-2.5 rounded-2xl bg-slate-950 border border-slate-800">
                                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Minutos:</span>
                                     <div class="flex items-center gap-1.5">
-                                        <button type="button" onclick="adjustClockTime(0, -5)" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold">-5m</button>
-                                        <button type="button" onclick="adjustClockTime(0, -1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">-1</button>
-                                        <span class="w-10 text-center font-mono font-black text-lg text-sky-300">${String(m).padStart(2, '0')}</span>
-                                        <button type="button" onclick="adjustClockTime(0, 1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">+1</button>
-                                        <button type="button" onclick="adjustClockTime(0, 5)" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold">+5m</button>
+                                        <button type="button" onclick="adjustClockTime(0, -5)" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition active:scale-90">-5m</button>
+                                        <button type="button" onclick="adjustClockTime(0, -1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition active:scale-90">-1</button>
+                                        <span id="clockMinuteDigits" class="w-10 text-center font-mono font-black text-lg text-sky-300">${String(m).padStart(2, '0')}</span>
+                                        <button type="button" onclick="adjustClockTime(0, 1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition active:scale-90">+1</button>
+                                        <button type="button" onclick="adjustClockTime(0, 5)" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition active:scale-90">+5m</button>
+                                    </div>
+                                </div>
+
+                                <!-- Presets Rápidos de Excepciones del Taller -->
+                                <div class="pt-0.5 space-y-1.5">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">Probar excepciones del taller:</span>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <button type="button" onclick="setClockPreset(4, 0, 'am')" class="px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 border border-amber-500/30 text-[11px] font-mono font-bold text-amber-300 transition">4:00 AM (よじ)</button>
+                                        <button type="button" onclick="setClockPreset(7, 20, 'am')" class="px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 border border-sky-500/30 text-[11px] font-mono font-bold text-sky-300 transition">7:20 AM</button>
+                                        <button type="button" onclick="setClockPreset(9, 8, 'am')" class="px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 border border-amber-500/30 text-[11px] font-mono font-bold text-amber-300 transition">9:08 AM (くじ)</button>
+                                        <button type="button" onclick="setClockPreset(3, 30, 'pm')" class="px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 border border-emerald-500/30 text-[11px] font-mono font-bold text-emerald-300 transition">3:30 PM (半)</button>
                                     </div>
                                 </div>
                             </div>
@@ -18551,20 +19085,7 @@ const DIGIT_HIRAGANA = {
 
                         <!-- Readout Dinámico con audio -->
                         <div id="clockLivePhraseContainer" class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                            <div class="space-y-1">
-                                <div class="text-2xl sm:text-3xl font-black text-white font-jp tracking-wide flex items-center justify-center gap-2">
-                                    <span>${phrase.kanji}</span>
-                                    <button type="button" onclick="speakJapanese('${phrase.hiragana}')" class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
-                                        <i class="fa-solid fa-volume-high text-sm"></i>
-                                    </button>
-                                </div>
-                                <div class="text-xs sm:text-sm font-jp text-amber-300 font-bold">
-                                    ${phrase.hiragana}
-                                </div>
-                                <div class="text-[11px] font-mono text-slate-400">
-                                    ${phrase.romaji}
-                                </div>
-                            </div>
+                            ${buildClockPhraseHtml(phrase, isKanji)}
                         </div>
                     </div>
 
@@ -18661,9 +19182,9 @@ const DIGIT_HIRAGANA = {
             const isKanji = state.timeConfig.scriptMode === 'kanji';
 
             if (roll < 0.45) {
-                // Tipo 1: Hora con minutos
+                // Tipo 1: Hora con minutos (incluyendo mutaciones -pun del taller)
                 const hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-                const minutes = [0, 5, 10, 15, 20, 30, 40, 45, 50];
+                const minutes = [0, 1, 3, 4, 5, 6, 8, 10, 15, 20, 30, 40, 45, 50];
                 const h = hours[Math.floor(Math.random() * hours.length)];
                 const m = minutes[Math.floor(Math.random() * minutes.length)];
                 const p = Math.random() < 0.5 ? 'am' : 'pm';
@@ -18671,8 +19192,8 @@ const DIGIT_HIRAGANA = {
 
                 const correctBlocks = isKanji ? phrase.blocksKanji : phrase.blocksKana;
                 const distractors = isKanji
-                    ? ['午前', '午後', '四時', '七時', '九時', '半', '十分', '五分', '十五分', '二十分']
-                    : ['ごぜん', 'ごご', 'よじ', 'しちじ', 'くじ', 'はん', 'じゅっぷん', 'ごふん', 'しじ', 'きゅうじ'];
+                    ? ['午前', '午後', '四時', '七時', '九時', '半', '一分', '三分', '六分', '八分', '十分', '五分', '十五分', '二十分']
+                    : ['ごぜん', 'ごご', 'よじ', 'しちじ', 'くじ', 'はん', 'いっぷん', 'さんぷん', 'ろっぷん', 'はっぷん', 'じゅっぷん', 'ごふん', 'しじ', 'きゅうじ'];
 
                 return {
                     type: 'time',
@@ -18695,7 +19216,7 @@ const DIGIT_HIRAGANA = {
 
                 return {
                     type: 'date',
-                    promptTitle: `${day.num} de ${month.num}º mes (Día ${day.num})`,
+                    promptTitle: `${day.num} de ${month.nameEs} (Mes ${month.num}, Día ${day.num})`,
                     targetPhrase: {
                         kanji: month.kanji + day.kanji,
                         hiragana: month.hira + ' ' + day.hira,
@@ -18713,8 +19234,8 @@ const DIGIT_HIRAGANA = {
                 const targetAnswer = isKanji ? (day.kanji + weekday.kanji) : (day.hira + weekday.hira);
                 const correctBlocks = isKanji ? [day.kanji, weekday.kanji] : [day.hira, weekday.hira];
                 const distractors = isKanji
-                    ? ['月曜日', '火曜日', '水曜日', '金曜日', 'ついたち', '十四日', '二十日']
-                    : ['げつようび', 'かようび', 'すいようび', 'きんようび', 'ついたち', 'じゅうよっか', 'はつか'];
+                    ? ['月曜日', '火曜日', '水曜日', '金曜日', '一日', '四日', '十四日', '二十日']
+                    : ['げつようび', 'かようび', 'すいようび', 'きんようび', 'ついたち', 'よっか', 'じゅうよっか', 'はつか'];
 
                 return {
                     type: 'weekday_date',
@@ -18852,7 +19373,7 @@ const DIGIT_HIRAGANA = {
                                 <span class="font-bold text-base text-white">Aún no coincide</span>
                             </div>
                             <p class="text-xs text-rose-300">
-                                Revisa el orden jerárquico (AM/PM $ightarrow$ Hora $ightarrow$ Minuto) o (Mes $ightarrow$ Día $ightarrow$ Día de semana).
+                                Revisa el orden jerárquico: ${ch.type === 'time' ? '(AM/PM → Hora → Minuto)' : (ch.type === 'date' ? '(Mes → Día)' : '(Día del mes → Día de la semana)')}.
                             </p>
                             <div class="flex gap-2 pt-1">
                                 <button type="button" onclick="clearTimeBuilder()" class="py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition">
@@ -18949,7 +19470,7 @@ const DIGIT_HIRAGANA = {
         // ==========================================================
         function nextTimeListeningChallenge() {
             const hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-            const minutes = [0, 5, 15, 20, 30, 40, 45];
+            const minutes = [0, 1, 3, 4, 5, 6, 8, 10, 13, 15, 17, 20, 30, 40, 45, 50];
             const h = hours[Math.floor(Math.random() * hours.length)];
             const m = minutes[Math.floor(Math.random() * minutes.length)];
             const p = Math.random() < 0.5 ? 'am' : 'pm';
@@ -19098,10 +19619,10 @@ const DIGIT_HIRAGANA = {
                                 <span>Toca para Escuchar de Nuevo</span>
                             </button>
                         </div>
-                        <p class="text-xs text-slate-400">Escucha con atención y selecciona qué hora representa la expresión japonesa:</p>
+                        <p class="text-xs text-slate-400">Escucha con atención y selecciona qué hora representa la expresión japonesa (teclas <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-mono text-[10px]">1</kbd>–<kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-mono text-[10px]">4</kbd>):</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div id="timeListeningOptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         ${optionsHtml}
                     </div>
 
@@ -19191,6 +19712,24 @@ const DIGIT_HIRAGANA = {
                 options: ['はつか (hatsuka)', 'にじゅうにち (nijuunichi)', 'にじゅうよっか (nijuuyokka)', 'ふつか (futsuka)'],
                 correct: 0,
                 explanation: 'El día 20 tiene una lectura tradicional única: はつか (hatsuka).'
+            },
+            {
+                q: '¿Qué partícula indica la hora exacta en que ocurre una acción (ej: 7時に おきます)?',
+                options: ['に (ni)', 'を (o)', 'で (de)', 'は (wa)'],
+                correct: 0,
+                explanation: 'Con horas específicas y verbos de acción (おきます, ねます, おわります...) se usa siempre la partícula に (ni).'
+            },
+            {
+                q: '¿Qué par de partículas expresa un rango horario "desde ... hasta ..." (ej: 9時から 5時まで)?',
+                options: ['から ... まで (kara ... made)', 'に ... へ (ni ... e)', 'と ... や (to ... ya)', 'で ... に (de ... ni)'],
+                correct: 0,
+                explanation: 'から (kara) marca el inicio ("desde") y まで (made) marca el final ("hasta").'
+            },
+            {
+                q: '¿Qué significa la oración del taller "わたしは しちじに おきます"?',
+                options: ['Me levanto a las 7:00', 'Me acuesto a las 7:00', 'Trabajo hasta las 7:00', 'Estudio a las 4:00'],
+                correct: 0,
+                explanation: 'しちじ (shichiji) = 7:00, に = a las, おきます (okimasu) = levantarse.'
             }
         ];
 
@@ -19309,7 +19848,7 @@ const DIGIT_HIRAGANA = {
                         </h3>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div id="timeQuizOptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         ${optionsHtml}
                     </div>
 
@@ -21046,19 +21585,23 @@ const DIGIT_HIRAGANA = {
                 }
             }
 
-            // Priority 0: Numbers Tab Active (Lesson, Dictation, Lego Builder, Quiz)
+            // Priority 0A: Numbers Tab Active (3-pillar layout: Guide/Lesson, Practice/Builder-Dictation-Quiz, Translator)
             const numbersTab = document.getElementById('tab-numbers');
-            if (numbersTab && !numbersTab.classList.contains('hidden')) {
-                if (state.numbersConfig && state.numbersConfig.mode === 'lesson') {
+            if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig) {
+                const activePillar = state.numbersConfig.pillar || 'guide';
+                const activeGuideSub = state.numbersConfig.guideSubTab || 'lesson';
+                const activePracticeMode = state.numbersConfig.mode || 'builder';
+
+                if (activePillar === 'guide' && activeGuideSub === 'lesson') {
                     if (e.key === 'ArrowRight' || e.key === 'PageDown') {
                         e.preventDefault();
                         e.stopPropagation();
-                        setNumbersLessonStep(Math.min(7, ((state.numbersConfig && state.numbersConfig.lessonStep) || state.numbersLessonStep || 1) + 1));
+                        setNumbersLessonStep(Math.min(7, (state.numbersConfig.lessonStep || state.numbersLessonStep || 1) + 1));
                         return;
                     } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
                         e.preventDefault();
                         e.stopPropagation();
-                        setNumbersLessonStep(Math.max(1, ((state.numbersConfig && state.numbersConfig.lessonStep) || state.numbersLessonStep || 1) - 1));
+                        setNumbersLessonStep(Math.max(1, (state.numbersConfig.lessonStep || state.numbersLessonStep || 1) - 1));
                         return;
                     } else if (e.key >= '1' && e.key <= '7') {
                         e.preventDefault();
@@ -21066,7 +21609,7 @@ const DIGIT_HIRAGANA = {
                         setNumbersLessonStep(parseInt(e.key, 10));
                         return;
                     }
-                } else if (state.numbersConfig && state.numbersConfig.mode === 'dictation') {
+                } else if (activePillar === 'practice' && activePracticeMode === 'dictation') {
                     if (e.key >= '0' && e.key <= '9') {
                         e.preventDefault();
                         e.stopPropagation();
@@ -21088,7 +21631,7 @@ const DIGIT_HIRAGANA = {
                         }
                         return;
                     }
-                } else if (state.numbersConfig && state.numbersConfig.mode === 'builder') {
+                } else if (activePillar === 'practice' && activePracticeMode === 'builder') {
                     if (e.key === 'Enter') {
                         e.preventDefault();
                         e.stopPropagation();
@@ -21099,6 +21642,41 @@ const DIGIT_HIRAGANA = {
                             checkNumberLego();
                         }
                         return;
+                    } else if (e.key === 'Backspace') {
+                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersLegoChallenge()"]');
+                        if (!nextBtn && state.numbersPlacedChips && state.numbersPlacedChips.length > 0) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            removeNumberLegoChip(state.numbersPlacedChips.length - 1);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Priority 0B: Time & Hours Tab Active (Builder, Listening, Quiz)
+            const timeTab = document.getElementById('tab-time');
+            if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
+                const timeMode = state.timeConfig.mode || 'guide';
+                if (timeMode === 'builder') {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const nextBtn = timeTab.querySelector('button[onclick="nextTimeBuilderChallenge()"]');
+                        if (nextBtn) {
+                            nextBtn.click();
+                        } else if (state.timePlacedChips && state.timePlacedChips.length > 0) {
+                            checkTimeBuilder();
+                        }
+                        return;
+                    } else if (e.key === 'Backspace') {
+                        const nextBtn = timeTab.querySelector('button[onclick="nextTimeBuilderChallenge()"]');
+                        if (!nextBtn && state.timePlacedChips && state.timePlacedChips.length > 0) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            removeTimeBuilderChip(state.timePlacedChips.length - 1);
+                            return;
+                        }
                     }
                 }
             }
@@ -21111,21 +21689,32 @@ const DIGIT_HIRAGANA = {
             else if (e.key === '4' || e.code === 'Digit4' || e.code === 'Numpad4') optIndex = 3;
 
             if (optIndex === -1) {
-                // Enter shortcut to advance Quiz next button
-                if (e.key === 'Enter' && numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.mode === 'quiz') {
-                    const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersQuizChallenge()"]');
-                    if (nextBtn) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        nextBtn.click();
-                        return;
+                // Enter shortcut to advance Quiz / Listening next buttons
+                if (e.key === 'Enter') {
+                    if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
+                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersQuizChallenge()"]');
+                        if (nextBtn) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            nextBtn.click();
+                            return;
+                        }
+                    }
+                    if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
+                        const nextTimeBtn = timeTab.querySelector('button[onclick="nextTimeListeningChallenge()"], button[onclick="nextTimeQuizChallenge()"]');
+                        if (nextTimeBtn) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            nextTimeBtn.click();
+                            return;
+                        }
                     }
                 }
                 return;
             }
 
             // Numbers Tab Quiz Mode Option Selection (1..4)
-            if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.mode === 'quiz') {
+            if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
                 const numQuizGrid = document.getElementById('numbersQuizGrid');
                 if (numQuizGrid) {
                     const quizBtns = numQuizGrid.querySelectorAll('button:not([disabled])');
@@ -21134,6 +21723,25 @@ const DIGIT_HIRAGANA = {
                         e.stopPropagation();
                         quizBtns[optIndex].click();
                         return;
+                    }
+                }
+            }
+
+            // Time Tab Listening / Quiz Mode Option Selection (1..4)
+            if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
+                const timeGridId = state.timeConfig.mode === 'listening'
+                    ? 'timeListeningOptionsGrid'
+                    : (state.timeConfig.mode === 'quiz' ? 'timeQuizOptionsGrid' : null);
+                if (timeGridId) {
+                    const timeGrid = document.getElementById(timeGridId);
+                    if (timeGrid) {
+                        const timeBtns = timeGrid.querySelectorAll('button:not([disabled])');
+                        if (timeBtns && timeBtns[optIndex]) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            timeBtns[optIndex].click();
+                            return;
+                        }
                     }
                 }
             }
