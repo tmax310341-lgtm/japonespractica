@@ -1,0 +1,36 @@
+# ==========================================================
+# KotoDojo - .gitignore
+# Lo que se publica es index.html (copia de "juego japones.html").
+# ==========================================================
+
+# Copia de trabajo local (idéntica a index.html, que es la que se versiona)
+juego japones.html
+
+# Material de estudio (PDFs, imágenes, libros, artículos) - pesado y con derechos de autor
+material/
+*.pdf
+*.docx
+*.jpeg
+*.jpg
+*.png
+
+# Backups, duplicados y archivos comprimidos
+_archivo/
+*.bak
+*.bak_*
+*.zip
+
+# Herramientas y proyectos de referencia externos
+herramientas/
+*.vsix
+referencias/
+hiragana-master/
+
+# Scripts de parches de un solo uso y sus salidas
+scratch/
+
+# Configuración local del editor y del sistema
+.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store
