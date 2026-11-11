@@ -8,6 +8,13 @@
             return code >= 0x30A0 && code <= 0x30FF;
         }
 
+        // Busca el objeto de un kana (hiragana o katakana) por su carácter.
+        // Las entradas de KATAKANA_DATA guardan el carácter katakana también en .hiragana.
+        function findKanaByChar(char) {
+            const dataset = isKatakanaChar(char) ? KATAKANA_DATA : HIRAGANA_DATA;
+            return dataset.find(k => (k.char || k.katakana || k.hiragana) === char) || null;
+        }
+
         function getActiveKanaDataset() {
             return state.currentSyllabary === 'katakana' ? KATAKANA_DATA : HIRAGANA_DATA;
         }

@@ -49,8 +49,14 @@
                 .slice(0, limit);
         }
 
+        // Convierte la lista de kanas débiles en objetos del silabario correspondiente
+        // (antes solo se buscaba en HIRAGANA_DATA y con katakana la lista quedaba vacía).
+        function getWeakKanaObjects(limit = 5) {
+            return getWeakestKanas(limit).map(w => findKanaByChar(w.char)).filter(Boolean);
+        }
+
         function practiceSingleWeakKana(hiragana, mode = 'draw') {
-            const kanaObj = HIRAGANA_DATA.find(k => k.hiragana === hiragana);
+            const kanaObj = findKanaByChar(hiragana);
             if (!kanaObj) return;
 
             if (mode === 'quiz') {
@@ -72,12 +78,11 @@
         }
 
         function startWeakKanasPractice() {
-            const weakList = getWeakestKanas(5);
-            if (weakList.length === 0) {
+            const targetKanas = getWeakKanaObjects(5);
+            if (targetKanas.length === 0) {
                 showToast("¡Excelente! No tienes kanas con dificultades registradas aún.", "success");
                 return;
             }
-            const targetKanas = weakList.map(w => HIRAGANA_DATA.find(k => k.hiragana === w.hiragana)).filter(Boolean);
             state.customPracticePool = targetKanas;
             state.customPracticeTitle = `🎯 ${targetKanas.length} Kanas Difíciles`;
             switchTab('draw');
@@ -89,12 +94,11 @@
         }
 
         function startWeakKanasQuiz() {
-            const weakList = getWeakestKanas(5);
-            if (weakList.length === 0) {
+            const targetKanas = getWeakKanaObjects(5);
+            if (targetKanas.length === 0) {
                 showToast("¡Excelente! No tienes kanas difíciles registrados aún.", "success");
                 return;
             }
-            const targetKanas = weakList.map(w => HIRAGANA_DATA.find(k => k.hiragana === w.hiragana)).filter(Boolean);
             state.quizCustomPool = targetKanas;
             state.quizCustomTitle = `🎯 Quiz de Kanas Difíciles (${targetKanas.length} kanas)`;
             switchTab('quiz');

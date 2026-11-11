@@ -77,8 +77,9 @@
             const countBadge = document.getElementById('drawPoolCountBadge');
             if (countBadge) countBadge.textContent = `${activePool.length} activos`;
 
+            const selected = state.selectedDrawingKana;
             activePool.forEach(item => {
-                const isCurrent = state.selectedDrawingKana.hiragana === item.hiragana;
+                const isCurrent = !!selected && selected.hiragana === item.hiragana;
                 const btn = document.createElement('button');
                 btn.className = `p-2 rounded-xl border text-center font-jp font-bold transition ${
                     item.hiragana.length > 1 ? 'text-sm' : 'text-lg'
