@@ -1,10 +1,16 @@
 # ==========================================================
 # KotoDojo - .gitignore
-# Lo que se publica es index.html (copia de "juego japones.html").
+# Lo que se publica es index.html junto con css/, js/ y data/.
 # ==========================================================
 
-# Copia de trabajo local (idéntica a index.html, que es la que se versiona)
+# Copia de trabajo antigua de un solo archivo (ya no se usa: la app está en index.html + css/ + js/ + data/)
 juego japones.html
+
+# Dependencias de desarrollo (Tailwind CLI). css/tailwind.css SÍ se versiona.
+node_modules/
+
+# Configuración local de Claude Code (worktrees, servidores de vista previa)
+.claude/
 
 # Material de estudio (PDFs, imágenes, libros, artículos) - pesado y con derechos de autor
 material/

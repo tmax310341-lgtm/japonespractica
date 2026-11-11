@@ -1,0 +1,16 @@
+/* ==========================================================
+   KotoDojo · Punto de entrada de estilos
+   ----------------------------------------------------------
+   Orden de la cascada (de menor a mayor prioridad):
+     1. capa "app": Font Awesome, base.css y tailwind.css, en ese
+        orden (dentro de la capa, en empates gana el último, igual
+        que cuando se usaba el CDN de Tailwind).
+     2. theme-overrides.css, sin capa: los estilos sin capa
+        siempre ganan a los de una capa, así que los temas
+        sobrescriben las utilidades de Tailwind sin !important.
+   Tras cambiar clases en el HTML o en js/, ejecuta: npm run build:css
+   ========================================================== */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css") layer(app);
+@import url("base.css") layer(app);
+@import url("tailwind.css") layer(app);
+@import url("theme-overrides.css");

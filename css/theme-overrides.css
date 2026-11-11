@@ -1,0 +1,954 @@
+/* KotoDojo · Ajustes de tema sobre las utilidades de Tailwind.
+   Este archivo se carga FUERA de cualquier capa (ver css/app.css), así que sus reglas
+   ganan a Tailwind y a css/base.css sin necesidad de !important. */
+
+/* Mobile Screen & Tap Hardening */
+/* Mobile Safe Area & Notch Support */
+
+/* Custom scrollbars */
+
+/* Hide scrollbars completely on designated containers */
+
+/* Sopa de Letras Custom Styles */
+
+.ws-found-0 { background-color: rgba(16, 185, 129, 0.3); border-color: #34d399; color: #a7f3d0; }
+.ws-found-1 { background-color: rgba(244, 63, 94, 0.3); border-color: #fb7185; color: #fecdd3; }
+.ws-found-2 { background-color: rgba(14, 165, 233, 0.3); border-color: #38bdf8; color: #bae6fd; }
+.ws-found-3 { background-color: rgba(245, 158, 11, 0.3); border-color: #fbbf24; color: #fef08a; }
+.ws-found-4 { background-color: rgba(168, 85, 247, 0.3); border-color: #c084fc; color: #e9d5ff; }
+.ws-found-5 { background-color: rgba(236, 72, 153, 0.3); border-color: #f472b6; color: #fbcfe8; }
+.ws-found-6 { background-color: rgba(6, 182, 212, 0.3); border-color: #22d3ee; color: #cffafe; }
+.ws-found-7 { background-color: rgba(99, 102, 241, 0.3); border-color: #818cf8; color: #e0e7ff; }
+
+.ws-selecting {
+    background-color: rgba(244, 63, 94, 0.4);
+    border-color: #f43f5e;
+    color: #ffffff;
+}
+
+.ws-click-start {
+    border-color: #fbbf24;
+    background-color: rgba(245, 158, 11, 0.25);
+}
+
+/* SVG Stroke Interactive Surface Classes */
+
+.stroke-surface.surface-ok {
+    border-color: #10b981;
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+}
+
+.stroke-surface.surface-bad {
+    border-color: #f43f5e;
+    box-shadow: 0 0 25px rgba(244, 63, 94, 0.4);
+}
+
+/* Look-alikes card bounce */
+
+/* ==========================================================
+   ARQUITECTURA DE TOKENS DE DISEÑO Y TEMAS VISUALES (4 MODOS)
+   ========================================================== */
+
+/* 1. TOKENS BASE Y COMPATIBILIDAD DINÁMICA (:root) */
+
+/* PALETA 1: theme-dark (Midnight Tokyo - Neón Elegante) */
+
+/* PALETA 2: theme-matcha (Jardín Zen & Bambú) */
+
+/* PALETA 3: theme-light (Sakura Kioto - Papel Washi y Cerezo) */
+
+/* PALETA 4: theme-sumie (Tinta Tradicional & Sello Hanko) */
+
+/* 5. Tatami & Morning Matcha (Claro Zen - Madera Clara y Té Verde) */
+
+/* 6. Kanagawa & Aizome (Claro Marino - Porcelana y Azul Índigo) */
+
+/* ==========================================================
+   MODO PRESENTACIÓN: BRILLO Y ANIMACIÓN PULSANTE ESMERALDA
+   ========================================================== */
+
+.presentation-target-glow,
+.stage-opt-btn.presentation-target-glow {
+    animation: presentationPulseGlow 1.25s infinite ease-in-out;
+    border-width: 2.5px;
+    position: relative;
+    z-index: 10;
+    font-weight: 900;
+}
+
+/* Brillo en temas oscuros */
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .presentation-target-glow,
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .stage-opt-btn.presentation-target-glow {
+    background-color: rgba(16, 185, 129, 0.25);
+    border-color: #34d399;
+    color: #a7f3d0;
+}
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .presentation-target-glow .presentation-target-text,
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .stage-opt-btn.presentation-target-glow .presentation-target-text,
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .presentation-target-glow i,
+body:not(.theme-light):not(.theme-tatami):not(.theme-kanagawa) .stage-opt-btn.presentation-target-glow i {
+    color: #34d399;
+}
+
+/* Brillo en temas claros (fondo #ecfdf5, borde #059669 y sombra verde esmeralda) */
+body.theme-light .presentation-target-glow,
+body.theme-tatami .presentation-target-glow,
+body.theme-kanagawa .presentation-target-glow,
+body.theme-light .stage-opt-btn.presentation-target-glow,
+body.theme-tatami .stage-opt-btn.presentation-target-glow,
+body.theme-kanagawa .stage-opt-btn.presentation-target-glow {
+    background-color: #ecfdf5;
+    border-color: #059669;
+    color: #065f46;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.55);
+}
+body.theme-light .presentation-target-glow .presentation-target-text,
+body.theme-light .stage-opt-btn.presentation-target-glow .presentation-target-text,
+body.theme-light .presentation-target-glow i,
+body.theme-light .stage-opt-btn.presentation-target-glow i,
+body.theme-tatami .presentation-target-glow .presentation-target-text,
+body.theme-tatami .stage-opt-btn.presentation-target-glow .presentation-target-text,
+body.theme-tatami .presentation-target-glow i,
+body.theme-tatami .stage-opt-btn.presentation-target-glow i,
+body.theme-kanagawa .presentation-target-glow .presentation-target-text,
+body.theme-kanagawa .stage-opt-btn.presentation-target-glow .presentation-target-text,
+body.theme-kanagawa .presentation-target-glow i,
+body.theme-kanagawa .stage-opt-btn.presentation-target-glow i {
+    color: #059669;
+}
+
+.stage-opt-btn.bg-matcha-600 {
+    background-color: #16a34a;
+    border-color: #4ade80;
+    color: #ffffff;
+}
+.stage-opt-btn.bg-rose-600 {
+    background-color: #e11d48;
+    border-color: #fb7185;
+    color: #ffffff;
+}
+
+/* ==========================================================
+   MAPEO DE VARIABLES A COMPONENTES CLAVE
+   ========================================================== */
+
+/* 1. Body Base */
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+}
+
+/* 2. Header & Barras Flotantes */
+header {
+    background-color: var(--bg-header);
+    border-color: var(--border-card);
+}
+
+/* 3. Tarjetas de Kanas (Grid de Estudio, Práctica, Lookalikes, Modo 9 Etapas) */
+.study-card,
+.pair-card,
+.stage-level-card,
+.stage-opt-btn,
+#lookalikesOptionsGrid button,
+[id^="study-row-header-"] {
+    background-color: var(--bg-card);
+    border-color: var(--border-card);
+    box-shadow: var(--card-shadow);
+    color: var(--text-primary);
+}
+
+/* Efectos hover en tarjetas */
+.study-card:hover,
+.pair-card:hover,
+.stage-level-card:hover,
+.stage-opt-btn:hover,
+#lookalikesOptionsGrid button:hover,
+[id^="study-row-header-"]:hover {
+    border-color: var(--border-card-hover);
+    box-shadow: var(--card-shadow), 0 0 16px -2px var(--border-card-hover);
+}
+
+/* 4. Elevación Visual y Mapeo de Clases de Fondo y Bordes */
+.bg-slate-950,
+.bg-slate-950\/95,
+.bg-slate-950\/90,
+.bg-slate-950\/85,
+.bg-slate-950\/80,
+.bg-slate-950\/75,
+.bg-slate-950\/70,
+.bg-slate-950\/65,
+.bg-slate-950\/60,
+.bg-slate-950\/50,
+.bg-slate-950\/40 {
+    background-color: var(--bg-app);
+}
+
+.bg-slate-900,
+.bg-slate-900\/95,
+.bg-slate-900\/90,
+.bg-slate-900\/80,
+.bg-slate-900\/70,
+.bg-slate-900\/60,
+.bg-slate-800,
+.bg-slate-800\/95,
+.bg-slate-800\/90,
+.bg-slate-800\/80,
+.bg-slate-800\/70,
+.bg-slate-800\/60 {
+    background-color: var(--bg-card);
+}
+
+.border-slate-800,
+.border-slate-800\/80,
+.border-slate-800\/60,
+.border-slate-700,
+.border-slate-700\/80,
+.border-slate-700\/60 {
+    border-color: var(--border-card);
+}
+
+/* Textos y Jerarquía Visual */
+.text-white,
+.text-slate-100,
+.text-slate-200 {
+    color: var(--text-primary);
+}
+.text-slate-300,
+.text-slate-400 {
+    color: var(--text-secondary);
+}
+
+/* Modales, Drawers y Contenedores Flotantes */
+#mobileMenuDrawer,
+#kanaStrokeModal,
+#themeSelectorModal,
+#voiceSettingsModal,
+#themeQuickDropdown {
+    background-color: var(--bg-card);
+    border-color: var(--border-card);
+}
+#mobileMenuDrawer .border-b,
+#mobileMenuDrawer .border-t,
+#themeSelectorModal .border-b,
+#themeSelectorModal .border-t,
+#voiceSettingsModal .border-b,
+#voiceSettingsModal .border-t,
+#themeQuickDropdown .border-b,
+#themeQuickDropdown .border-t {
+    border-color: var(--border-card);
+}
+
+/* Sección Inferior de Temas del Menú Hamburguesa */
+#drawerThemeFooter,
+.drawer-theme-footer {
+    background-color: var(--bg-app);
+    border-color: var(--border-card);
+}
+#drawerThemeFooter .border-t,
+#drawerThemeFooter .border-b {
+    border-color: var(--border-card);
+}
+#drawerThemeFooter .text-slate-300,
+#drawerThemeFooter .text-slate-400 {
+    color: var(--text-secondary);
+}
+#drawerThemeFooter .text-slate-500 {
+    color: var(--text-secondary);
+}
+
+/* Form Controls */
+input[type="text"],
+input[type="number"],
+select {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-card);
+}
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Hero Cards & Paneles Destacados */
+.theme-hero-card,
+#stages-setup-view > div:first-child,
+#tab-numbers > div:first-child,
+#tab-time > div:first-child,
+#tab-parcial > div:first-child,
+#tab-study > div:first-child {
+    background-image: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card) 65%, var(--theme-accent-light) 100%);
+    background-color: var(--bg-card);
+    border-color: var(--border-card);
+    box-shadow: var(--card-shadow);
+}
+
+/* Modo 9 Etapas: Tarjeta Activa y Badges */
+.stage-active-level-card {
+    border: 2.5px solid var(--accent-primary);
+    background: var(--theme-active-level-bg);
+    box-shadow: 0 0 0 3px var(--theme-active-level-ring), var(--theme-active-level-shadow);
+    outline: none;
+}
+.stage-active-level-badge {
+    background-color: var(--theme-accent-light);
+    color: var(--accent-primary);
+    border: 1px solid var(--theme-accent-border);
+}
+.stage-active-pulse {
+    background-color: var(--accent-primary);
+}
+.stage-active-level-card .stage-icon-box {
+    background-color: var(--theme-accent-light);
+    color: var(--accent-primary);
+    border-color: var(--theme-accent-border);
+}
+.stage-icon-box {
+    white-space: nowrap;
+    line-height: 1;
+}
+.stage-icon-box.is-digraph {
+    min-width: 2.85rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    font-size: 0.95rem;
+    letter-spacing: -0.04em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botón Primario y Acentos */
+.stage-theme-primary-btn {
+    background: var(--theme-accent-gradient);
+    color: #ffffff;
+    box-shadow: 0 4px 14px var(--theme-accent-light);
+}
+.stage-theme-pill {
+    background-color: var(--theme-accent-light);
+    color: var(--accent-primary);
+    border: 1px solid var(--theme-accent-border);
+}
+.stage-theme-accent-text {
+    color: var(--accent-primary);
+}
+.stage-theme-progress-bar {
+    background: var(--theme-accent-gradient);
+    box-shadow: 0 0 10px var(--theme-accent-light);
+}
+
+/* Botones en Drawer y Tabs */
+.tab-btn.is-active,
+.tab-btn.stage-theme-primary-btn {
+    background: var(--theme-accent-gradient);
+    color: #ffffff;
+    box-shadow: 0 4px 14px var(--theme-accent-light);
+}
+.tab-btn.is-active i,
+.tab-btn.stage-theme-primary-btn i {
+    color: #ffffff;
+}
+.tab-btn:not(.is-active):not(.stage-theme-primary-btn) {
+    color: var(--text-secondary);
+    background-color: transparent;
+}
+.tab-btn:not(.is-active):not(.stage-theme-primary-btn) i {
+    color: var(--accent-primary);
+}
+.tab-btn:not(.is-active):not(.stage-theme-primary-btn):hover {
+    background-color: var(--theme-accent-light);
+    color: var(--text-primary);
+}
+
+/* Tarjetas de Parejas (Etapa 4) */
+#stagePairsRomaRow .pair-card {
+    color: var(--accent-secondary);
+}
+#stagePairsHiraRow .pair-card {
+    color: var(--text-primary);
+}
+.pair-card.is-selected {
+    border-color: var(--accent-primary);
+    background-color: var(--theme-card-selected-bg);
+    color: var(--theme-card-selected-text);
+    box-shadow: var(--theme-card-selected-glow);
+    transform: scale(1.06) translateY(-2px);
+}
+.pair-card.pair-matched,
+.pair-card.is-matched {
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.22);
+    color: #a7f3d0;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+    opacity: 0.85;
+    transform: scale(0.98);
+}
+body.theme-light .pair-card.pair-matched,
+body.theme-light .pair-card.is-matched,
+body.theme-tatami .pair-card.pair-matched,
+body.theme-tatami .pair-card.is-matched,
+body.theme-kanagawa .pair-card.pair-matched,
+body.theme-kanagawa .pair-card.is-matched {
+    border-color: #059669;
+    background-color: #d1fae5;
+    color: #064e3b;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35), 0 4px 10px rgba(5, 150, 105, 0.15);
+}
+.pair-card.is-error {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.22);
+    color: #fecdd3;
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+}
+body.theme-light .pair-card.is-error,
+body.theme-tatami .pair-card.is-error,
+body.theme-kanagawa .pair-card.is-error {
+    border-color: #dc2626;
+    background-color: #fee2e2;
+    color: #7f1d1d;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.35), 0 6px 14px rgba(220, 38, 38, 0.2);
+}
+
+/* ==========================================================
+   CORRECCIÓN UNIVERSAL PARA TODOS LOS TEMAS CLAROS (PROBLEMA 1)
+   ========================================================== */
+body.theme-light,
+body.theme-tatami,
+body.theme-kanagawa {
+    /* El encabezado principal adopta siempre el fondo del tema claro */
+    header {
+        background-color: var(--bg-header);
+        background-image: none;
+        border-color: var(--border-card);
+    }
+
+    /* Convertir contenedores oscuros de slate en tarjetas claras con relieve (NUNCA afectar botones ni barras de progreso) */
+    :is(div, section, article):not(button):not(a):not(.theme-logo-box):not(#headerXpProgressBar):not(#stageSessionProgressBar):not(#lookalikesTimerBar):not(.stage-theme-progress-bar):not([id*="Backdrop"]):is(
+        [class*="from-slate-9"],
+        [class*="via-slate-8"],
+        [class*="to-slate-9"],
+        [class*="from-slate-8"],
+        .bg-slate-950,
+        .bg-slate-900,
+        .bg-slate-900\/90,
+        .bg-slate-900\/80,
+        .bg-slate-950\/85,
+        .bg-slate-950\/80,
+        .bg-slate-950\/90,
+        .drawer-theme-footer,
+        .theme-hero-card
+    ) {
+        background-image: none;
+        background-color: var(--bg-card);
+        border-color: var(--border-card);
+        box-shadow: var(--card-shadow);
+    }
+
+    /* Asegurar que todos los títulos, textos y párrafos dentro de esos contenedores sean oscuros y legibles */
+    h1, h2, h3, h4, h5, h6,
+    .text-white,
+    .text-slate-100,
+    .text-slate-200 {
+        color: var(--text-primary);
+    }
+
+    .text-slate-300,
+    .text-slate-400,
+    .text-slate-500 {
+        color: var(--text-secondary);
+    }
+
+    /* Tablas y cajas de traducción en Taller de Números */
+    table th {
+        background-color: var(--bg-app);
+        color: var(--text-primary);
+        border-color: var(--border-card);
+    }
+    table td {
+        border-color: var(--border-card);
+        color: var(--text-primary);
+    }
+}
+
+/* Reglas complementarias con selectores planos para máxima compatibilidad cross-engine */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) header {
+    background-color: var(--bg-header);
+    background-image: none;
+    border-color: var(--border-card);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(div, section, article):not(button):not(a):not(.theme-logo-box):not(#headerXpProgressBar):not(#stageSessionProgressBar):not(#lookalikesTimerBar):not(.stage-theme-progress-bar):is(
+    [class*="from-slate-9"],
+    [class*="via-slate-8"],
+    [class*="to-slate-9"],
+    [class*="from-slate-8"],
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-slate-900\/90,
+    .bg-slate-900\/80,
+    .bg-slate-950\/80,
+    .bg-slate-950\/90,
+    .theme-hero-card
+) {
+    background-image: none;
+    background-color: var(--bg-card);
+    border-color: var(--border-card);
+    box-shadow: var(--card-shadow);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    h1, h2, h3, h4, h5, h6,
+    .text-white,
+    .text-slate-100,
+    .text-slate-200
+) {
+    color: var(--text-primary);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .text-slate-300,
+    .text-slate-400,
+    .text-slate-500
+) {
+    color: var(--text-secondary);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) table th {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    border-color: var(--border-card);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) table td {
+    border-color: var(--border-card);
+    color: var(--text-primary);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Preservar barras de progreso dinámicas en temas claros */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    #headerXpProgressBar,
+    #stageSessionProgressBar,
+    #lookalikesTimerBar,
+    .stage-theme-progress-bar
+) {
+    background-image: var(--theme-accent-gradient);
+    background-color: transparent;
+}
+
+/* Preservar degradados y tipografía blanca en botones primarios y tabs activas */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .stage-theme-primary-btn,
+    .tab-btn.is-active,
+    .tab-btn.stage-theme-primary-btn,
+    .theme-logo-box
+) {
+    background-image: var(--theme-accent-gradient);
+    color: #ffffff;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .stage-theme-primary-btn *,
+    .tab-btn.is-active *,
+    .tab-btn.stage-theme-primary-btn *,
+    .theme-logo-box *
+) {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   BOTONES DE ACCIÓN PRINCIPALES Y "COMPROBAR RESPUESTA" (MODOS CLAROS)
+   ========================================================================== */
+
+/* Botón de Comprobar Respuesta y botones dorados de acción (activo) */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:is(
+    [class*="from-amber-500"][class*="to-amber-600"],
+    [class*="from-amber-"][class*="to-amber-"],
+    .bg-amber-500
+):not(:disabled) {
+    background-image: linear-gradient(to right, #f59e0b, #d97706);
+    background-color: #f59e0b;
+    color: #0f172a;
+    border: 1.5px solid #b45309;
+    box-shadow: 0 4px 14px -2px rgba(217, 119, 6, 0.35), 0 2px 6px -1px rgba(245, 158, 11, 0.2);
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:is(
+    [class*="from-amber-500"][class*="to-amber-600"],
+    [class*="from-amber-"][class*="to-amber-"],
+    .bg-amber-500
+):not(:disabled) :is(*, span, i) {
+    color: #0f172a;
+    font-weight: 900;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:is(
+    [class*="from-amber-500"][class*="to-amber-600"],
+    [class*="from-amber-"][class*="to-amber-"],
+    .bg-amber-500
+):hover:not(:disabled) {
+    background-image: linear-gradient(to right, #fbbf24, #f59e0b);
+    box-shadow: 0 6px 18px -2px rgba(217, 119, 6, 0.45);
+}
+
+/* Botón de Comprobar Respuesta cuando está DESHABILITADO (esperando fichas) */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:disabled:is(
+    [class*="from-amber-500"][class*="to-amber-600"],
+    [class*="from-amber-"][class*="to-amber-"],
+    .bg-amber-500
+) {
+    background-image: linear-gradient(to right, #fef3c7, #fde68a);
+    background-color: #fef3c7;
+    border: 1.5px dashed #f59e0b;
+    color: #92400e;
+    opacity: 0.75;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:disabled:is(
+    [class*="from-amber-500"][class*="to-amber-600"],
+    [class*="from-amber-"][class*="to-amber-"],
+    .bg-amber-500
+) :is(*, span, i) {
+    color: #92400e;
+    font-weight: 800;
+}
+
+/* Botones con degradados de transición (ej: from-amber a sakura/rose) */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:is(
+    [class*="from-amber-"][class*="to-sakura-"],
+    [class*="from-amber-"][class*="to-rose-"]
+):not(:disabled) {
+    background-image: linear-gradient(to right, #f59e0b, #e11d48);
+    color: #ffffff;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button:is(
+    [class*="from-amber-"][class*="to-sakura-"],
+    [class*="from-amber-"][class*="to-rose-"]
+):not(:disabled) :is(*, span, i) {
+    color: #ffffff;
+}
+
+/* Preservar texto blanco en botones de acción rose, emerald, indigo */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    button[class*="bg-rose-6"],
+    button[class*="bg-rose-5"],
+    button[class*="bg-emerald-6"],
+    button[class*="bg-emerald-5"],
+    button[class*="bg-indigo-6"],
+    button[class*="bg-indigo-5"],
+    button[class*="from-emerald-"]:not(#headerParcialShortcutBtn),
+    button[class*="from-sky-"],
+    button[class*="from-rose-"]
+) {
+    color: #ffffff;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    button[class*="bg-rose-6"] *,
+    button[class*="bg-rose-5"] *,
+    button[class*="bg-emerald-6"] *,
+    button[class*="bg-emerald-5"] *,
+    button[class*="bg-indigo-6"] *,
+    button[class*="bg-indigo-5"] *,
+    button[class*="from-emerald-"]:not(#headerParcialShortcutBtn) *,
+    button[class*="from-sky-"] *,
+    button[class*="from-rose-"] *
+) {
+    color: #ffffff;
+}
+
+/* Botón de acceso rápido a Palabras de Clase en encabezado (Modo Claro) */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) #headerParcialShortcutBtn {
+    background-color: #ecfdf5;
+    background-image: none;
+    border-color: #86efac;
+    color: #047857;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) #headerParcialShortcutBtn i {
+    color: #059669;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) #headerParcialShortcutBtn span {
+    color: #047857;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) #headerParcialShortcutBtn:hover {
+    background-color: #d1fae5;
+    border-color: #34d399;
+}
+
+/* Preservar badges de acento suave */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .stage-active-level-badge,
+    .stage-theme-pill
+) {
+    background-color: var(--theme-accent-light);
+    color: var(--accent-primary);
+    border-color: var(--theme-accent-border);
+}
+
+/* ==========================================================================
+   FICHAS Y LLAMADOS DORADOS / AMBARINOS (Modo Claro de Alto Contraste)
+   Diseño "Pergamino Imperial & Miel Dorada":
+   Resalta la jerarquía e importancia pedagógica con contraste AAA y calidez.
+   ========================================================================== */
+
+/* Contenedores de tips, advertencias y reglas de oro doradas */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    div[class*="bg-amber-500/10"],
+    div[class*="bg-amber-500/15"],
+    div[class*="bg-amber-500/20"]:not(.w-10):not(.w-12):not(.w-9):not(.w-8):not(.w-7),
+    div[class*="bg-amber-950/80"],
+    .bg-amber-500\/10,
+    .bg-amber-500\/15,
+    .bg-amber-950\/80
+) {
+    background: linear-gradient(135deg, #fffdf5 0%, #fef3c7 100%);
+    border: 1.5px solid #f59e0b;
+    border-left: 4px solid #d97706;
+    color: #78350f;
+    box-shadow: 0 4px 14px -2px rgba(217, 119, 6, 0.12), 0 2px 6px -1px rgba(245, 158, 11, 0.08);
+}
+
+/* Texto base dentro de los cuadros dorados */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    div[class*="bg-amber-500/10"],
+    div[class*="bg-amber-500/15"],
+    div[class*="bg-amber-500/20"],
+    div[class*="bg-amber-950/80"]
+) :is(p, span, li, td, div:not([class*="bg-"])) {
+    color: #78350f;
+}
+
+/* Títulos, negritas y caracteres japoneses en cuadros dorados */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    div[class*="bg-amber-500/10"],
+    div[class*="bg-amber-500/15"],
+    div[class*="bg-amber-500/20"],
+    div[class*="bg-amber-950/80"]
+) :is(strong, b, .font-bold, .font-black, .font-jp, .text-white) {
+    color: #451a03;
+    font-weight: 800;
+}
+
+/* Enfatizados o errores dentro del tip (ej: "¡NUNCA digas!", "(¡error!)") */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    div[class*="bg-amber-500/10"],
+    div[class*="bg-amber-500/15"],
+    div[class*="bg-amber-500/20"]
+) em {
+    color: #9a3412;
+    font-weight: 700;
+}
+
+/* Iconos de aviso dentro de cuadros dorados */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    div[class*="bg-amber-500/10"],
+    div[class*="bg-amber-500/15"],
+    div[class*="bg-amber-500/20"]
+) i {
+    color: #d97706;
+}
+
+/* Tipografía ámbar/amarilla general en temas claros */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .text-amber-100,
+    .text-amber-200,
+    .text-amber-200\/90,
+    .text-yellow-100,
+    .text-yellow-200
+) {
+    color: #78350f;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .text-amber-300,
+    .text-amber-400,
+    .text-amber-400\/90,
+    .text-amber-400\/70,
+    .text-yellow-300,
+    .text-yellow-400
+) {
+    color: #92400e;
+}
+
+/* Badges, tags y pills ambarinas en modo claro */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    span[class*="bg-amber-500/20"],
+    span[class*="bg-amber-500/10"],
+    span[class*="bg-amber-500/15"],
+    .bg-amber-500\/20,
+    .bg-amber-500\/10
+) {
+    background-color: #fef3c7;
+    border-color: #f59e0b;
+    color: #78350f;
+    font-weight: 700;
+}
+
+/* Botones pequeños de pronunciación/audio en ámbar */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button[class*="bg-amber-500/20"] {
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    color: #92400e;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button[class*="bg-amber-500/20"]:hover {
+    background-color: #fde68a;
+    border-color: #f59e0b;
+    color: #78350f;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) button[class*="bg-amber-500/20"] i {
+    color: #b45309;
+}
+
+/* Cuadros de Tips Azul Cielo (ej: regla de miles 〜せん) */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-sky-500/10"] {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1.5px solid #38bdf8;
+    border-left: 4px solid #0284c7;
+    color: #075985;
+    box-shadow: 0 4px 14px -2px rgba(14, 165, 233, 0.12);
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-sky-500/10"] strong {
+    color: #0c4a6e;
+    font-weight: 800;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(
+    .text-sky-200,
+    .text-sky-300
+) {
+    color: #0284c7;
+}
+
+/* Ajustes específicos de alto contraste para badges/textos de otros colores en modo claro */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-sakura-400, .text-sakura-300) { color: #be123c; }
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-emerald-400, .text-emerald-300) { color: #047857; }
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-sky-400, .text-sky-500) { color: #0369a1; }
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-rose-400, .text-rose-300) { color: #be123c; }
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-indigo-400, .text-indigo-300) { color: #4338ca; }
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) :is(.text-purple-400, .text-purple-300) { color: #7e22ce; }
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-purple-500/10"] {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    border: 1.5px solid #c084fc;
+    border-left: 4px solid #9333ea;
+    color: #581c87;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) div[class*="bg-rose-500/10"] {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    border: 1.5px solid #fb7185;
+    border-left: 4px solid #e11d48;
+    color: #881337;
+}
+
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) .bg-emerald-950\/80 {
+    background-color: #dcfce7;
+    color: #14532d;
+    border-color: #86efac;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa) .bg-teal-950\/80 {
+    background-color: #ccfbf1;
+    color: #115e59;
+    border-color: #5eead4;
+}
+
+/* ==========================================================
+   BANNERS Y AVISOS DE NÚMEROS (ALTO CONTRASTE & ADAPTACIÓN A TEMAS)
+   ========================================================== */
+
+/* Variación por atmósfera oscura */
+
+/* Variación para temas claros (Sakura Kioto, Tatami & Té, Kanagawa Índigo) - 100% Legible */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #fafffd 100%);
+    border: 2px solid #059669;
+    box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.18), 0 4px 12px rgba(5, 150, 105, 0.08);
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-title {
+    color: #064e3b;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-desc {
+    color: #065f46;
+    font-weight: 500;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-desc strong {
+    color: #022c22;
+    font-weight: 800;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-secondary-btn {
+    background-color: #ffffff;
+    color: #065f46;
+    border-color: #a7f3d0;
+    box-shadow: 0 2px 6px rgba(5, 150, 105, 0.1);
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-achievement-banner .banner-secondary-btn:hover {
+    background-color: #f0fdf4;
+    color: #022c22;
+    border-color: #059669;
+}
+
+/* Toques temáticos distintivos en modo claro */
+body.theme-light .numbers-achievement-banner {
+    border-top: 5px solid #f43f5e;
+    background: linear-gradient(135deg, #f0fdf4 0%, #fff1f2 100%);
+}
+body.theme-tatami .numbers-achievement-banner {
+    border-top: 5px solid #4d7c0f;
+    background: linear-gradient(135deg, #f0fdf4 0%, #f7fee7 100%);
+}
+body.theme-kanagawa .numbers-achievement-banner {
+    border-top: 5px solid #0284c7;
+    background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%);
+}
+
+/* Tarjeta de transición paso 6 a paso 7 */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #f59e0b;
+    box-shadow: 0 6px 18px -2px rgba(245, 158, 11, 0.15);
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card h4 {
+    color: #78350f;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) .numbers-step-transition-card p {
+    color: #92400e;
+}
+
+/* Regla de seguridad de alto contraste para textos verde/esmeralda en temas claros */
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) :is(
+    .text-emerald-200,
+    .text-emerald-100,
+    .text-teal-200,
+    .text-teal-100
+) {
+    color: #065f46;
+    font-weight: 500;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) :is(
+    .text-emerald-300,
+    .text-teal-300
+) {
+    color: #047857;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #fafffd 100%);
+    border-color: #059669;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] h4 {
+    color: #064e3b;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] p {
+    color: #065f46;
+}
+:is(body.theme-light, body.theme-tatami, body.theme-kanagawa, body.is-light) div[class*="from-emerald-600/20"] strong {
+    color: #022c22;
+}
+
+/* Scrollbar thumb */
+
+/* Linter Fixes: Rules moved from inline styles */
+
+/* Swatches y tarjetas para temas (Linter: sin inline styles) */
