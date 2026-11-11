@@ -1,0 +1,887 @@
+// KotoDojo · Gemelos, vocabulario, Armar Palabras, Shiritori y Sopa de Letras
+        // ==========================================
+        // DATASET: DUELO DE GEMELOS (LOOK-ALIKES)
+        // ==========================================
+        const LOOKALIKES_DATA = [
+            {
+                id: 'sa_ki',
+                target: 'さ',
+                romaji: 'sa',
+                options: ['さ', 'き'],
+                explanation: 'さ (sa) tiene 1 línea horizontal cruzada; き (ki) tiene 2 líneas horizontales.'
+            },
+            {
+                id: 'ki_sa',
+                target: 'き',
+                romaji: 'ki',
+                options: ['き', 'さ'],
+                explanation: 'き (ki) tiene 2 trazos horizontales antes de la curva inferior.'
+            },
+            {
+                id: 'nu_me',
+                target: 'ぬ',
+                romaji: 'nu',
+                options: ['ぬ', 'め'],
+                explanation: 'ぬ (nu) tiene un bucle final al final de la cola; め (me) termina liso sin bucle.'
+            },
+            {
+                id: 'me_nu',
+                target: 'め',
+                romaji: 'me',
+                options: ['め', 'ぬ'],
+                explanation: 'め (me) no tiene el bucle cerrado al final como ぬ (nu).'
+            },
+            {
+                id: 'wa_re_ne',
+                target: 'ね',
+                romaji: 'ne',
+                options: ['ね', 'れ', 'わ'],
+                explanation: 'ね (ne) tiene un bucle final al final de la cola.'
+            },
+            {
+                id: 're_wa_ne',
+                target: 'れ',
+                romaji: 're',
+                options: ['れ', 'わ', 'ね'],
+                explanation: 'れ (re) tiene una curva hacia afuera al final como una cola curvada.'
+            },
+            {
+                id: 'wa_re',
+                target: 'わ',
+                romaji: 'wa',
+                options: ['わ', 'れ'],
+                explanation: 'わ (wa) tiene una curva interior suave y redondeada.'
+            },
+            {
+                id: 'ha_ho',
+                target: 'は',
+                romaji: 'ha',
+                options: ['は', 'ほ'],
+                explanation: 'は (ha) no cruza la línea vertical superior; ほ (ho) tiene una línea superior horizontal y no sobresale.'
+            },
+            {
+                id: 'ho_ha',
+                target: 'ほ',
+                romaji: 'ho',
+                options: ['ほ', 'は'],
+                explanation: 'ほ (ho) tiene la línea superior con sombrero y 2 horizontales.'
+            },
+            {
+                id: 'a_o',
+                target: 'あ',
+                romaji: 'a',
+                options: ['あ', 'お'],
+                explanation: 'あ (a) tiene cruz central y bucle grande; お (o) tiene un punto superior derecho separado.'
+            },
+            {
+                id: 'o_a',
+                target: 'お',
+                romaji: 'o',
+                options: ['お', 'あ'],
+                explanation: 'お (o) tiene el trazo diacrítico separado a la derecha.'
+            },
+            {
+                id: 'ro_ru',
+                target: 'る',
+                romaji: 'ru',
+                options: ['る', 'ろ'],
+                explanation: 'る (ru) tiene un bucle cerrado al final; ろ (ro) queda abierto.'
+            },
+            {
+                id: 'ro_ru_2',
+                target: 'ろ',
+                romaji: 'ro',
+                options: ['ろ', 'る'],
+                explanation: 'ろ (ro) no tiene bucle en la base inferior.'
+            },
+            {
+                id: 'chi_ra',
+                target: 'ち',
+                romaji: 'chi',
+                options: ['ち', 'ら'],
+                explanation: 'ち (chi) tiene línea horizontal arriba y bucle derecho; ら (ra) tiene punto superior separado.'
+            },
+            {
+                id: 'i_ri',
+                target: 'い',
+                romaji: 'i',
+                options: ['い', 'り'],
+                explanation: 'い (i) es más ancho y el trazo izquierdo es largo con gancho; り (ri) el trazo derecho es más largo.'
+            }
+        ];
+
+        // ==========================================
+        // DATASET: SHIRITORI (PALABRAS ENCADENADAS) - Generado desde Gran Biblioteca
+        // ==========================================
+        // (Se inicializa dinámicamente justo después de EXPANDED_VOCABULARY)
+
+        // ==========================================
+        // DATASET: ARMAR PALABRAS (WORD BUILDER)
+        // ==========================================
+                // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // ==========================================
+        // DATASET: BIBLIOTECA EXTENDIDA DE VOCABULARIO (JAPONÉS - ESPAÑOL)
+        // ==========================================
+
+        // ==========================================
+        // DATASET: VOCABULARIO REAL KATAKANA (GAIRAIGO & PRÉSTAMOS REALES)
+        // ==========================================
+        const KATAKANA_VOCABULARY = [
+            // Vocales (A, I, U, E, O)
+            { katakana: 'アイス', hiragana: 'アイス', romaji: 'aisu', spanish: 'Helado' },
+            { katakana: 'エア', hiragana: 'エア', romaji: 'ea', spanish: 'Aire' },
+            { katakana: 'オアシス', hiragana: 'オアシス', romaji: 'oashisu', spanish: 'Oasis' },
+            { katakana: 'アイ', hiragana: 'アイ', romaji: 'ai', spanish: 'Ojo / Amor' },
+            { katakana: 'イエ', hiragana: 'イエ', romaji: 'ie', spanish: 'Sí / Casa' },
+
+            // Fila Ka (K) + Vocales
+            { katakana: 'ケーキ', hiragana: 'ケーキ', romaji: 'keeki', spanish: 'Pastel / Tarta' },
+            { katakana: 'ココア', hiragana: 'ココア', romaji: 'kokoa', spanish: 'Cacao caliente' },
+            { katakana: 'キウイ', hiragana: 'キウイ', romaji: 'kiui', spanish: 'Kiwi' },
+            { katakana: 'ケア', hiragana: 'ケア', romaji: 'kea', spanish: 'Cuidado' },
+            { katakana: 'エコ', hiragana: 'エコ', romaji: 'eko', spanish: 'Eco / Ecológico' },
+            { katakana: 'クッキー', hiragana: 'クッキー', romaji: 'kukkii', spanish: 'Galleta' },
+
+            // Fila Sa (S) + Previos
+            { katakana: 'スキー', hiragana: 'スキー', romaji: 'sukii', spanish: 'Esquí' },
+            { katakana: 'スイカ', hiragana: 'スイカ', romaji: 'suika', spanish: 'Sandía' },
+            { katakana: 'ソース', hiragana: 'ソース', romaji: 'soosu', spanish: 'Salsa' },
+            { katakana: 'キス', hiragana: 'キス', romaji: 'kisu', spanish: 'Beso' },
+            { katakana: 'ケース', hiragana: 'ケース', romaji: 'keesu', spanish: 'Estuche / Caso' },
+            { katakana: 'コース', hiragana: 'コース', romaji: 'koosu', spanish: 'Curso / Ruta' },
+            { katakana: 'ガス', hiragana: 'ガス', romaji: 'gasu', spanish: 'Gas' },
+
+            // Fila Ta (T) + Previos
+            { katakana: 'テスト', hiragana: 'テスト', romaji: 'tesuto', spanish: 'Examen / Test' },
+            { katakana: 'トマト', hiragana: 'トマト', romaji: 'tomato', spanish: 'Tomate' },
+            { katakana: 'タクシー', hiragana: 'タクシー', romaji: 'takushii', spanish: 'Taxi' },
+            { katakana: 'テキスト', hiragana: 'テキスト', romaji: 'tekisuto', spanish: 'Libro de texto' },
+            { katakana: 'ポスト', hiragana: 'ポスト', romaji: 'posuto', spanish: 'Buzón de correo' },
+            { katakana: 'チケット', hiragana: 'チケット', romaji: 'chiketto', spanish: 'Boleto / Entrada' },
+            { katakana: 'スカート', hiragana: 'スカート', romaji: 'sukaato', spanish: 'Falda' },
+            { katakana: 'スケート', hiragana: 'スケート', romaji: 'sukeeto', spanish: 'Patinaje' },
+            { katakana: 'シート', hiragana: 'シート', romaji: 'shiito', spanish: 'Asiento / Hoja' },
+
+            // Fila Na (N) + Previos
+            { katakana: 'ノート', hiragana: 'ノート', romaji: 'nooto', spanish: 'Cuaderno' },
+            { katakana: 'アニメ', hiragana: 'アニメ', romaji: 'anime', spanish: 'Animación / Anime' },
+            { katakana: 'テニス', hiragana: 'テニス', romaji: 'tenisu', spanish: 'Tenis' },
+            { katakana: 'カヌー', hiragana: 'カヌー', romaji: 'kanuu', spanish: 'Canoa' },
+            { katakana: 'コイン', hiragana: 'コイン', romaji: 'koin', spanish: 'Moneda' },
+            { katakana: 'サイン', hiragana: 'サイン', romaji: 'sain', spanish: 'Firma / Señal' },
+            { katakana: 'ネクタイ', hiragana: 'ネクタイ', romaji: 'nekutai', spanish: 'Corbata' },
+
+            // Fila Ha (H) + Previos
+            { katakana: 'ホテル', hiragana: 'ホテル', romaji: 'hoteru', spanish: 'Hotel' },
+            { katakana: 'コーヒー', hiragana: 'コーヒー', romaji: 'koohii', spanish: 'Café' },
+            { katakana: 'ハート', hiragana: 'ハート', romaji: 'haato', spanish: 'Corazón' },
+            { katakana: 'ヒント', hiragana: 'ヒント', romaji: 'hinto', spanish: 'Pista / Consejo' },
+            { katakana: 'ハウス', hiragana: 'ハウス', romaji: 'hausu', spanish: 'Casa / Invernadero' },
+            { katakana: 'ヘルメット', hiragana: 'ヘルメット', romaji: 'herumetto', spanish: 'Casco' },
+
+            // Fila Ma (M) + Previos
+            { katakana: 'カメラ', hiragana: 'カメラ', romaji: 'kamera', spanish: 'Cámara fotográfica' },
+            { katakana: 'マイク', hiragana: 'マイク', romaji: 'maiku', spanish: 'Micrófono' },
+            { katakana: 'ミルク', hiragana: 'ミルク', romaji: 'miruku', spanish: 'Leche' },
+            { katakana: 'マスク', hiragana: 'マスク', romaji: 'masuku', spanish: 'Mascarilla' },
+            { katakana: 'メモ', hiragana: 'メモ', romaji: 'memo', spanish: 'Nota / Memo' },
+            { katakana: 'メニュー', hiragana: 'メニュー', romaji: 'menyuu', spanish: 'Menú' },
+            { katakana: 'ゲーム', hiragana: 'ゲーム', romaji: 'geemu', spanish: 'Juego / Videojuego' },
+
+            // Fila Ya (Y) + Previos
+            { katakana: 'タイヤ', hiragana: 'タイヤ', romaji: 'taiya', spanish: 'Neumático / Llanta' },
+            { katakana: 'ヨット', hiragana: 'ヨット', romaji: 'yotto', spanish: 'Yate' },
+            { katakana: 'ダイヤ', hiragana: 'ダイヤ', romaji: 'daiya', spanish: 'Diamante / Horario' },
+            { katakana: 'ユニフォーム', hiragana: 'ユニフォーム', romaji: 'yunifoomu', spanish: 'Uniforme' },
+
+            // Fila Ra (R) + Previos
+            { katakana: 'ラジオ', hiragana: 'ラジオ', romaji: 'rajio', spanish: 'Radio' },
+            { katakana: 'クラス', hiragana: 'クラス', romaji: 'kurasu', spanish: 'Clase / Aula' },
+            { katakana: 'カレー', hiragana: 'カレー', romaji: 'karee', spanish: 'Curry' },
+            { katakana: 'サラダ', hiragana: 'サラダ', romaji: 'sarada', spanish: 'Ensalada' },
+            { katakana: 'レストラン', hiragana: 'レストラン', romaji: 'resutoran', spanish: 'Restaurante' },
+            { katakana: 'ルール', hiragana: 'ルール', romaji: 'ruuru', spanish: 'Regla / Norma' },
+            { katakana: 'リボン', hiragana: 'リボン', romaji: 'ribon', spanish: 'Cinta / Listón' },
+            { katakana: 'レモン', hiragana: 'レモン', romaji: 'remon', spanish: 'Limón' },
+            { katakana: 'ロッカー', hiragana: 'ロッカー', romaji: 'rokkaa', spanish: 'Casillero / Taquilla' },
+
+            // Fila Wa & N + Previos
+            { katakana: 'ワイン', hiragana: 'ワイン', romaji: 'wain', spanish: 'Vino' },
+            { katakana: 'パン', hiragana: 'パン', romaji: 'pan', spanish: 'Pan' },
+            { katakana: 'ボタン', hiragana: 'ボタン', romaji: 'botan', spanish: 'Botón' },
+            { katakana: 'ペン', hiragana: 'ペン', romaji: 'pen', spanish: 'Bolígrafo / Pluma' },
+            { katakana: 'ピン', hiragana: 'ピン', romaji: 'pin', spanish: 'Alfiler / Pin' },
+            { katakana: 'スプーン', hiragana: 'スプーン', romaji: 'supuun', spanish: 'Cuchara' },
+            { katakana: 'エアコン', hiragana: 'エアコン', romaji: 'eakon', spanish: 'Aire acondicionado' },
+            { katakana: 'プリン', hiragana: 'プリン', romaji: 'purin', spanish: 'Flan / Pudín' },
+            { katakana: 'パンツ', hiragana: 'パンツ', romaji: 'pantsu', spanish: 'Pantalones' },
+
+            // Dakuten & Handakuten (Ga, Za, Da, Ba, Pa)
+            { katakana: 'ギター', hiragana: 'ギター', romaji: 'gitaa', spanish: 'Guitarra' },
+            { katakana: 'グラス', hiragana: 'グラス', romaji: 'gurasu', spanish: 'Vaso de cristal' },
+            { katakana: 'ゴルフ', hiragana: 'ゴルフ', romaji: 'gorufu', spanish: 'Golf' },
+            { katakana: 'ピザ', hiragana: 'ピザ', romaji: 'piza', spanish: 'Pizza' },
+            { katakana: 'デザート', hiragana: 'デザート', romaji: 'dezaato', spanish: 'Postre' },
+            { katakana: 'サイズ', hiragana: 'サイズ', romaji: 'saizu', spanish: 'Talla / Tamaño' },
+            { katakana: 'チーズ', hiragana: 'チーズ', romaji: 'chiizu', spanish: 'Queso' },
+            { katakana: 'ズボン', hiragana: 'ズボン', romaji: 'zubon', spanish: 'Pantalones' },
+            { katakana: 'ドア', hiragana: 'ドア', romaji: 'doa', spanish: 'Puerta' },
+            { katakana: 'ビデオ', hiragana: 'ビデオ', romaji: 'bideo', spanish: 'Video' },
+            { katakana: 'カード', hiragana: 'カード', romaji: 'kaado', spanish: 'Tarjeta' },
+            { katakana: 'ベッド', hiragana: 'ベッド', romaji: 'beddo', spanish: 'Cama' },
+            { katakana: 'デザイン', hiragana: 'デザイン', romaji: 'dezain', spanish: 'Diseño' },
+            { katakana: 'バス', hiragana: 'バス', romaji: 'basu', spanish: 'Autobús' },
+            { katakana: 'バター', hiragana: 'バター', romaji: 'bataa', spanish: 'Mantequilla' },
+            { katakana: 'ビール', hiragana: 'ビール', romaji: 'biiru', spanish: 'Cerveza' },
+            { katakana: 'バナナ', hiragana: 'バナナ', romaji: 'banana', spanish: 'Plátano / Banana' },
+            { katakana: 'ボール', hiragana: 'ボール', romaji: 'booru', spanish: 'Pelota / Balón' },
+            { katakana: 'ビル', hiragana: 'ビル', romaji: 'biru', spanish: 'Edificio' },
+            { katakana: 'ピアノ', hiragana: 'ピアノ', romaji: 'piano', spanish: 'Piano' },
+            { katakana: 'プール', hiragana: 'プール', romaji: 'puuru', spanish: 'Piscina / Alberca' },
+            { katakana: 'パスタ', hiragana: 'パスタ', romaji: 'pasuta', spanish: 'Pasta' },
+            { katakana: 'ペット', hiragana: 'ペット', romaji: 'petto', spanish: 'Mascota' },
+            { katakana: 'ページ', hiragana: 'ページ', romaji: 'peeji', spanish: 'Página' },
+            { katakana: 'プレゼント', hiragana: 'プレゼント', romaji: 'purezento', spanish: 'Regalo' },
+
+            // Yōon / Dígrafos + Vocabulario Escolar del PDF
+            { katakana: 'シャツ', hiragana: 'シャツ', romaji: 'shatsu', spanish: 'Camisa' },
+            { katakana: 'ジュース', hiragana: 'ジュース', romaji: 'juusu', spanish: 'Jugo / Zumo' },
+            { katakana: 'チョコ', hiragana: 'チョコ', romaji: 'choko', spanish: 'Chocolate' },
+            { katakana: 'チョコレート', hiragana: 'チョコレート', romaji: 'chokoreeto', spanish: 'Chocolate' },
+            { katakana: 'キャンプ', hiragana: 'キャンプ', romaji: 'kyanpu', spanish: 'Campamento' },
+            { katakana: 'ニュース', hiragana: 'ニュース', romaji: 'nyuusu', spanish: 'Noticias' },
+            { katakana: 'シャワー', hiragana: 'シャワー', romaji: 'shawaa', spanish: 'Ducha' },
+            { katakana: 'シャンプー', hiragana: 'シャンプー', romaji: 'shanpuu', spanish: 'Champú' },
+            { katakana: 'ブラシ', hiragana: 'ブラシ', romaji: 'burashi', spanish: 'Cepillo' },
+            { katakana: 'コピー', hiragana: 'コピー', romaji: 'kopii', spanish: 'Fotocopia' },
+            { katakana: 'サンドイッチ', hiragana: 'サンドイッチ', romaji: 'sandoitchi', spanish: 'Sándwich' },
+            { katakana: 'カップラーメン', hiragana: 'カップラーメン', romaji: 'kappuraamen', spanish: 'Fideos instantáneos' },
+            { katakana: 'ポテトチップス', hiragana: 'ポテトチップス', romaji: 'potetochippusu', spanish: 'Papas fritas' },
+            { katakana: 'スパゲティー', hiragana: 'スパゲティー', romaji: 'supagetii', spanish: 'Espagueti' },
+            { katakana: 'アイスクリーム', hiragana: 'アイスクリーム', romaji: 'aisukuriimu', spanish: 'Helado' },
+            { katakana: 'ビデオテープ', hiragana: 'ビデオテープ', romaji: 'bideoteepu', spanish: 'Cinta de video' },
+            { katakana: 'マニキュア', hiragana: 'マニキュア', romaji: 'manikyua', spanish: 'Esmalte de uñas' },
+            { katakana: 'トイレットペーパー', hiragana: 'トイレットペーパー', romaji: 'toirettopeepaa', spanish: 'Papel higiénico' }
+        ];
+
+        const EXPANDED_VOCABULARY = [
+            // --- GRUPO A (Vocales: あ, い, う, え, お) ---
+            { hiragana: 'あい', romaji: 'ai', spanish: 'Amor' },
+            { hiragana: 'いえ', romaji: 'ie', spanish: 'Casa' },
+            { hiragana: 'うえ', romaji: 'ue', spanish: 'Arriba / Encima' },
+            { hiragana: 'あお', romaji: 'ao', spanish: 'Azul' },
+            { hiragana: 'いい', romaji: 'ii', spanish: 'Bueno / Bien' },
+            { hiragana: 'いいえ', romaji: 'iie', spanish: 'No (negación)' },
+            { hiragana: 'おい', romaji: 'oi', spanish: 'Sobrino' },
+            { hiragana: 'あう', romaji: 'au', spanish: 'Encontrarse' },
+            { hiragana: 'え', romaji: 'e', spanish: 'Dibujo / Pintura' },
+            { hiragana: 'い', romaji: 'i', spanish: 'Estómago' },
+            { hiragana: 'あおい', romaji: 'aoi', spanish: 'Azul (adjetivo)' },
+            { hiragana: 'いう', romaji: 'iu', spanish: 'Decir' },
+            { hiragana: 'おう', romaji: 'ou', spanish: 'Perseguir / Rey' },
+            { hiragana: 'ええ', romaji: 'ee', spanish: 'Sí (informal)' },
+
+            // --- GRUPO KA (か, き, く, け, こ) + Vocales ---
+            { hiragana: 'あき', romaji: 'aki', spanish: 'Otoño' },
+            { hiragana: 'あか', romaji: 'aka', spanish: 'Rojo' },
+            { hiragana: 'いけ', romaji: 'ike', spanish: 'Estanque' },
+            { hiragana: 'かい', romaji: 'kai', spanish: 'Concha / Marisco' },
+            { hiragana: 'かお', romaji: 'kao', spanish: 'Cara / Rostro' },
+            { hiragana: 'こえ', romaji: 'koe', spanish: 'Voz' },
+            { hiragana: 'きく', romaji: 'kiku', spanish: 'Escuchar / Crisantemo' },
+            { hiragana: 'えき', romaji: 'eki', spanish: 'Estación de tren' },
+            { hiragana: 'かう', romaji: 'kau', spanish: 'Comprar' },
+            { hiragana: 'かく', romaji: 'kaku', spanish: 'Escribir / Dibujar' },
+            { hiragana: 'いく', romaji: 'iku', spanish: 'Ir' },
+            { hiragana: 'おく', romaji: 'oku', spanish: 'Poner / Colocar' },
+            { hiragana: 'ここ', romaji: 'koko', spanish: 'Aquí' },
+            { hiragana: 'き', romaji: 'ki', spanish: 'Árbol / Madera' },
+            { hiragana: 'こ', romaji: 'ko', spanish: 'Niño / Hijo' },
+            { hiragana: 'けいこ', romaji: 'keiko', spanish: 'Práctica / Entrenamiento' },
+            { hiragana: 'あかい', romaji: 'akai', spanish: 'Rojo (adjetivo)' },
+            { hiragana: 'おおきい', romaji: 'ookii', spanish: 'Grande' },
+            { hiragana: 'きかい', romaji: 'kikai', spanish: 'Oportunidad / Máquina' },
+            { hiragana: 'きおく', romaji: 'kioku', spanish: 'Memoria / Recuerdo' },
+            { hiragana: 'こうこう', romaji: 'koukou', spanish: 'Escuela secundaria' },
+            { hiragana: 'けいかく', romaji: 'keikaku', spanish: 'Plan / Proyecto' },
+            { hiragana: 'けいざい', romaji: 'keizai', spanish: 'Economía' },
+            { hiragana: 'かこ', romaji: 'kako', spanish: 'Pasado' },
+            { hiragana: 'きくばり', romaji: 'kikubari', spanish: 'Atención / Consideración' },
+
+            // --- GRUPO SA (さ, し, す, せ, そ) + anteriores ---
+            { hiragana: 'あさ', romaji: 'asa', spanish: 'Mañana (tiempo)' },
+            { hiragana: 'かさ', romaji: 'kasa', spanish: 'Paraguas' },
+            { hiragana: 'すし', romaji: 'sushi', spanish: 'Sushi' },
+            { hiragana: 'せかい', romaji: 'sekai', spanish: 'Mundo' },
+            { hiragana: 'さけ', romaji: 'sake', spanish: 'Salmón / Bebida de arroz' },
+            { hiragana: 'あし', romaji: 'ashi', spanish: 'Pie / Pierna' },
+            { hiragana: 'いす', romaji: 'isu', spanish: 'Silla' },
+            { hiragana: 'うそ', romaji: 'uso', spanish: 'Mentira' },
+            { hiragana: 'くさ', romaji: 'kusa', spanish: 'Hierba / Pasto' },
+            { hiragana: 'そこ', romaji: 'soko', spanish: 'Allí' },
+            { hiragana: 'あせ', romaji: 'ase', spanish: 'Sudor' },
+            { hiragana: 'おさけ', romaji: 'osake', spanish: 'Licor japonés' },
+            { hiragana: 'すこし', romaji: 'sukoshi', spanish: 'Un poco' },
+            { hiragana: 'すき', romaji: 'suki', spanish: 'Gustar / Favorito' },
+            { hiragana: 'さいご', romaji: 'saigo', spanish: 'Final / Último' },
+            { hiragana: 'おそい', romaji: 'osoi', spanish: 'Lento / Tarde' },
+            { hiragana: 'さく', romaji: 'saku', spanish: 'Florecer' },
+            { hiragana: 'しかく', romaji: 'shikaku', spanish: 'Cuadrado' },
+            { hiragana: 'すいか', romaji: 'suika', spanish: 'Sandía' },
+            { hiragana: 'しお', romaji: 'shio', spanish: 'Sal' },
+            { hiragana: 'しし', romaji: 'shishi', spanish: 'León' },
+            { hiragana: 'すく', romaji: 'suku', spanish: 'Estar vacío' },
+            { hiragana: 'さき', romaji: 'saki', spanish: 'Punta / Futuro' },
+            { hiragana: 'さそう', romaji: 'sasou', spanish: 'Invitar' },
+            { hiragana: 'せいかく', romaji: 'seikaku', spanish: 'Carácter / Precisión' },
+
+            // --- GRUPO TA (た, ち, つ, て, と) + anteriores ---
+            { hiragana: 'たこ', romaji: 'tako', spanish: 'Pulpo / Cometa' },
+            { hiragana: 'つき', romaji: 'tsuki', spanish: 'Luna / Mes' },
+            { hiragana: 'て', romaji: 'te', spanish: 'Mano' },
+            { hiragana: 'ちち', romaji: 'chichi', spanish: 'Padre' },
+            { hiragana: 'うた', romaji: 'uta', spanish: 'Canción' },
+            { hiragana: 'あした', romaji: 'ashita', spanish: 'Mañana (día siguiente)' },
+            { hiragana: 'くつ', romaji: 'kutsu', spanish: 'Zapatos' },
+            { hiragana: 'とけい', romaji: 'tokei', spanish: 'Reloj' },
+            { hiragana: 'ちかい', romaji: 'chikai', spanish: 'Cerca' },
+            { hiragana: 'ちか', romaji: 'chika', spanish: 'Subterráneo / Sótano' },
+            { hiragana: 'くち', romaji: 'kuchi', spanish: 'Boca' },
+            { hiragana: 'たけ', romaji: 'take', spanish: 'Bambú' },
+            { hiragana: 'いト', romaji: 'ito', spanish: 'Hilo' },
+            { hiragana: 'おとうと', romaji: 'otouto', spanish: 'Hermano menor' },
+            { hiragana: 'うしろ', romaji: 'ushiro', spanish: 'Detrás' },
+            { hiragana: 'たかい', romaji: 'takai', spanish: 'Alto / Caro' },
+            { hiragana: 'たす', romaji: 'tasu', spanish: 'Sumar / Añadir' },
+            { hiragana: 'たつ', romaji: 'tatsu', spanish: 'Ponerse de pie' },
+            { hiragana: 'ちず', romaji: 'chizu', spanish: 'Mapa' },
+            { hiragana: 'ついたち', romaji: 'tsuitachi', spanish: 'Primer día del mes' },
+            { hiragana: 'つきひ', romaji: 'tsukihi', spanish: 'Tiempo / Días' },
+            { hiragana: 'てがみ', romaji: 'tegami', spanish: 'Carta' },
+            { hiragana: 'とうきょう', romaji: 'toukyou', spanish: 'Tokio' },
+            { hiragana: 'とき', romaji: 'toki', spanish: 'Tiempo / Momento' },
+            { hiragana: 'たいしかん', romaji: 'taishikan', spanish: 'Embajada' },
+
+            // --- GRUPO NA (な, に, ぬ, ね, の) + anteriores ---
+            { hiragana: 'なつ', romaji: 'natsu', spanish: 'Verano' },
+            { hiragana: 'いぬ', romaji: 'inu', spanish: 'Perro' },
+            { hiragana: 'ねこ', romaji: 'neko', spanish: 'Gato' },
+            { hiragana: 'さかな', romaji: 'sakana', spanish: 'Pez / Pescado' },
+            { hiragana: 'にく', romaji: 'niku', spanish: 'Carne' },
+            { hiragana: 'なな', romaji: 'nana', spanish: 'Siete' },
+            { hiragana: 'なまえ', romaji: 'namae', spanish: 'Nombre' },
+            { hiragana: 'なに', romaji: 'nani', spanish: 'Qué (pregunta)' },
+            { hiragana: 'かね', romaji: 'kane', spanish: 'Dinero' },
+            { hiragana: 'たね', romaji: 'tane', spanish: 'Semilla' },
+            { hiragana: 'あね', romaji: 'ane', spanish: 'Hermana mayor' },
+            { hiragana: 'きのう', romaji: 'kinou', spanish: 'Ayer' },
+            { hiragana: 'たいない', romaji: 'tainai', spanish: 'Dentro del cuerpo' },
+            { hiragana: 'たいせつ', romaji: 'taisetsu', spanish: 'Importante' },
+            { hiragana: 'ぬま', romaji: 'numa', spanish: 'Pantano' },
+            { hiragana: 'ぬの', romaji: 'nuno', spanish: 'Tela / Paño' },
+            { hiragana: 'ぬけ', romaji: 'nuke', spanish: 'Omitir / Salir' },
+            { hiragana: 'ねつ', romaji: 'netsu', spanish: 'Fiebre / Calor' },
+            { hiragana: 'のこす', romaji: 'nokosu', spanish: 'Dejar / Guardar' },
+            { hiragana: 'のむ', romaji: 'nomu', spanish: 'Beber' },
+            { hiragana: 'なか', romaji: 'naka', spanish: 'Dentro / Centro' },
+            { hiragana: 'にし', romaji: 'nishi', spanish: 'Oeste' },
+            { hiragana: 'にっき', romaji: 'nikki', spanish: 'Diario personal' },
+            { hiragana: 'ねがい', romaji: 'negai', spanish: 'Deseo / Petición' },
+
+            // --- GRUPO HA (は, ひ, ふ, へ, ほ) + anteriores ---
+            { hiragana: 'はな', romaji: 'hana', spanish: 'Flor / Nariz' },
+            { hiragana: 'は', romaji: 'ha', spanish: 'Diente / Hoja' },
+            { hiragana: 'はし', romaji: 'hashi', spanish: 'Puente / Palillos' },
+            { hiragana: 'ほし', romaji: 'hoshi', spanish: 'Estrella' },
+            { hiragana: 'ふゆ', romaji: 'fuyu', spanish: 'Invierno' },
+            { hiragana: 'ふね', romaji: 'fune', spanish: 'Barco' },
+            { hiragana: 'ほん', romaji: 'hon', spanish: 'Libro' },
+            { hiragana: 'ふく', romaji: 'fuku', spanish: 'Ropa / Suerte' },
+            { hiragana: 'へや', romaji: 'heya', spanish: 'Habitación' },
+            { hiragana: 'はは', romaji: 'haha', spanish: 'Madre' },
+            { hiragana: 'ひと', romaji: 'hito', spanish: 'Persona' },
+            { hiragana: 'ひ', romaji: 'hi', spanish: 'Fuego / Sol' },
+            { hiragana: 'へび', romaji: 'hebi', spanish: 'Serpiente' },
+            { hiragana: 'ほね', romaji: 'hone', spanish: 'Hueso' },
+            { hiragana: 'はちみつ', romaji: 'hachimitsu', spanish: 'Miel' },
+            { hiragana: 'たいへん', romaji: 'taihen', spanish: 'Terrible / Difícil' },
+            { hiragana: 'はる', romaji: 'haru', spanish: 'Primavera' },
+            { hiragana: 'ひかり', romaji: 'hikari', spanish: 'Luz' },
+            { hiragana: 'ひる', romaji: 'hiru', spanish: 'Mediodía / Día' },
+            { hiragana: 'ひふ', romaji: 'hifu', spanish: 'Piel' },
+            { hiragana: 'ふねびと', romaji: 'funebito', spanish: 'Marinero' },
+            { hiragana: 'へいき', romaji: 'heiki', spanish: 'Tranquilo / Calma' },
+            { hiragana: 'ほのか', romaji: 'honoka', spanish: 'Tenue / Sutil' },
+
+            // --- GRUPO MA (ま, み, む, め, も) + anteriores ---
+            { hiragana: 'やま', romaji: 'yama', spanish: 'Montaña' },
+            { hiragana: 'うみ', romaji: 'umi', spanish: 'Mar' },
+            { hiragana: 'あめ', romaji: 'ame', spanish: 'Lluvia / Dulce' },
+            { hiragana: 'め', romaji: 'me', spanish: 'Ojo' },
+            { hiragana: 'みみ', romaji: 'mimi', spanish: 'Oreja' },
+            { hiragana: 'みち', romaji: 'michi', spanish: 'Camino / Calle' },
+            { hiragana: 'むし', romaji: 'mushi', spanish: 'Insecto / Bicho' },
+            { hiragana: 'みず', romaji: 'mizu', spanish: 'Agua' },
+            { hiragana: 'みせ', romaji: 'mise', spanish: 'Tienda' },
+            { hiragana: 'まち', romaji: 'machi', spanish: 'Ciudad / Pueblo' },
+            { hiragana: 'まど', romaji: 'mado', spanish: 'Ventana' },
+            { hiragana: 'あたま', romaji: 'atama', spanish: 'Cabeza' },
+            { hiragana: 'まくら', romaji: 'makura', spanish: 'Almohada' },
+            { hiragana: 'むら', romaji: 'mura', spanish: 'Aldea / Pueblo' },
+            { hiragana: 'まえ', romaji: 'mae', spanish: 'Delante / Antes' },
+            { hiragana: 'みかん', romaji: 'mikan', spanish: 'Mandarina' },
+            { hiragana: 'むね', romaji: 'mune', spanish: 'Pecho / Corazón' },
+            { hiragana: 'もも', romaji: 'momo', spanish: 'Melocotón' },
+            { hiragana: 'もの', romaji: 'mono', spanish: 'Cosa / Objeto' },
+            { hiragana: 'もり', romaji: 'mori', spanish: 'Bosque' },
+            { hiragana: 'まつ', romaji: 'matsu', spanish: 'Esperar / Pino' },
+            { hiragana: 'まいにち', romaji: 'mainichi', spanish: 'Todos los días' },
+            { hiragana: 'みらい', romaji: 'mirai', spanish: 'Futuro' },
+            { hiragana: 'むすこ', romaji: 'musuko', spanish: 'Hijo' },
+            { hiragana: 'むすめ', romaji: 'musume', spanish: 'Hija' },
+
+            // --- GRUPO YA (や, ゆ, よ) + anteriores ---
+            { hiragana: 'ゆき', romaji: 'yuki', spanish: 'Nieve' },
+            { hiragana: 'ゆめ', romaji: 'yume', spanish: 'Sueño' },
+            { hiragana: 'よる', romaji: 'yoru', spanish: 'Noche' },
+            { hiragana: 'やすみ', romaji: 'yasumi', spanish: 'Descanso / Vacaciones' },
+            { hiragana: 'やさい', romaji: 'yasai', spanish: 'Verdura' },
+            { hiragana: 'ゆか', romaji: 'yuka', spanish: 'Suelo / Piso' },
+            { hiragana: 'ゆび', romaji: 'yubi', spanish: 'Dedo' },
+            { hiragana: 'よむ', romaji: 'yomu', spanish: 'Leer' },
+            { hiragana: 'やく', romaji: 'yaku', spanish: 'Hornear / Asar' },
+            { hiragana: 'やり', romaji: 'yari', spanish: 'Lanza' },
+            { hiragana: 'ゆうひ', romaji: 'yuuhi', spanish: 'Puesta de sol' },
+            { hiragana: 'よこ', romaji: 'yoko', spanish: 'Lado / Costado' },
+            { hiragana: 'よい', romaji: 'yoi', spanish: 'Bueno' },
+            { hiragana: 'よてい', romaji: 'yotei', spanish: 'Plan / Horario' },
+
+            // --- GRUPO RA (ら, り, る, れ, ろ) + anteriores ---
+            { hiragana: 'さくら', romaji: 'sakura', spanish: 'Flor de Cerezo' },
+            { hiragana: 'そら', romaji: 'sora', spanish: 'Cielo' },
+            { hiragana: 'とり', romaji: 'tori', spanish: 'Pájaro' },
+            { hiragana: 'くるま', romaji: 'kuruma', spanish: 'Auto / Coche' },
+            { hiragana: 'りんご', romaji: 'ringo', spanish: 'Manzana' },
+            { hiragana: 'こころ', romaji: 'kokoro', spanish: 'Corazón' },
+            { hiragana: 'しろ', romaji: 'shiro', spanish: 'Blanco / Castillo' },
+            { hiragana: 'くろ', romaji: 'kuro', spanish: 'Negro' },
+            { hiragana: 'りす', romaji: 'risu', spanish: 'Ardilla' },
+            { hiragana: 'まつり', romaji: 'matsuri', spanish: 'Festival' },
+            { hiragana: 'さら', romaji: 'sara', spanish: 'Plato' },
+            { hiragana: 'はしる', romaji: 'hashiru', spanish: 'Correr' },
+            { hiragana: 'ろく', romaji: 'roku', spanish: 'Seis' },
+            { hiragana: 'ろうそく', romaji: 'rousoku', spanish: 'Vela' },
+            { hiragana: 'れきし', romaji: 'rekishi', spanish: 'Historia' },
+            { hiragana: 'らいねん', romaji: 'rainen', spanish: 'El próximo año' },
+            { hiragana: 'りゆう', romaji: 'riyuu', spanish: 'Razón / Motivo' },
+            { hiragana: 'りょうり', romaji: 'ryouri', spanish: 'Cocina / Comida' },
+            { hiragana: 'るす', romaji: 'rusu', spanish: 'Ausente de casa' },
+
+            // --- GRUPO WA, N (わ, を, ん) + Dakuten / Yōon ---
+            { hiragana: 'かわ', romaji: 'kawa', spanish: 'Río' },
+            { hiragana: 'わに', romaji: 'wani', spanish: 'Cocodrilo' },
+            { hiragana: 'にわ', romaji: 'niwa', spanish: 'Jardín' },
+            { hiragana: 'わたし', romaji: 'watashi', spanish: 'Yo' },
+            { hiragana: 'わ', romaji: 'wa', spanish: 'Paz / Círculo' },
+            { hiragana: 'にほん', romaji: 'nihon', spanish: 'Japón' },
+            { hiragana: 'ごはん', romaji: 'gohan', spanish: 'Arroz / Comida' },
+            { hiragana: 'せんせい', romaji: 'sensei', spanish: 'Profesor / Maestro' },
+            { hiragana: 'がくせい', romaji: 'gakusei', spanish: 'Estudiante' },
+            { hiragana: 'ともだち', romaji: 'tomodachi', spanish: 'Amigo' },
+            { hiragana: 'おんがく', romaji: 'ongaku', spanish: 'Música' },
+            { hiragana: 'でんしゃ', romaji: 'densha', spanish: 'Tren' },
+            { hiragana: 'しんぶん', romaji: 'shinbun', spanish: 'Periódico' },
+            { hiragana: 'きょう', romaji: 'kyou', spanish: 'Hoy' },
+            { hiragana: 'きょうしつ', romaji: 'kyoushitsu', spanish: 'Aula de clase' },
+            { hiragana: 'かぞく', romaji: 'kazoku', spanish: 'Familia' },
+            { hiragana: 'びょういん', romaji: 'byouin', spanish: 'Hospital' },
+            { hiragana: 'しゃしん', romaji: 'shashin', spanish: 'Fotografía' },
+            { hiragana: 'おちゃ', romaji: 'ocha', spanish: 'Té verde' },
+
+            // --- CONSONANTES GEMINADAS / DOBLES (促音 - Sokuon: っ) ---
+            { hiragana: 'きって', romaji: 'kitte', spanish: 'Sello postal', hasSokuon: true },
+            { hiragana: 'がっこう', romaji: 'gakkou', spanish: 'Escuela', hasSokuon: true },
+            { hiragana: 'ざっし', romaji: 'zasshi', spanish: 'Revista', hasSokuon: true },
+            { hiragana: 'きっぷ', romaji: 'kippu', spanish: 'Boleto / Billete', hasSokuon: true },
+            { hiragana: 'もっと', romaji: 'motto', spanish: 'Más (cantidad)', hasSokuon: true },
+            { hiragana: 'ちょっと', romaji: 'chotto', spanish: 'Un poco / Momento', hasSokuon: true },
+            { hiragana: 'けっこん', romaji: 'kekkon', spanish: 'Matrimonio / Boda', hasSokuon: true },
+            { hiragana: 'きっさてん', romaji: 'kissaten', spanish: 'Cafetería', hasSokuon: true },
+            { hiragana: 'いっぱい', romaji: 'ippai', spanish: 'Lleno / Mucho', hasSokuon: true },
+            { hiragana: 'しっぽ', romaji: 'shippo', spanish: 'Cola / Rabo', hasSokuon: true },
+            { hiragana: 'はっぱ', romaji: 'happa', spanish: 'Hoja de planta', hasSokuon: true },
+            { hiragana: 'ゆっくり', romaji: 'yukkuri', spanish: 'Despacio / Con calma', hasSokuon: true },
+            { hiragana: 'びっくり', romaji: 'bikkuri', spanish: 'Sorpresa / Asombro', hasSokuon: true },
+            { hiragana: 'すっきり', romaji: 'sukkiri', spanish: 'Despejado / Aliviado', hasSokuon: true },
+            { hiragana: 'はっきり', romaji: 'hakkiri', spanish: 'Claramente', hasSokuon: true },
+            { hiragana: 'しっかり', romaji: 'shikkari', spanish: 'Firmemente / Con ganas', hasSokuon: true },
+            { hiragana: 'けっして', romaji: 'kesshite', spanish: 'Nunca / De ningún modo', hasSokuon: true },
+            { hiragana: 'まっちゃ', romaji: 'matcha', spanish: 'Té verde en polvo', hasSokuon: true },
+            { hiragana: 'いっしょ', romaji: 'issho', spanish: 'Juntos', hasSokuon: true },
+            { hiragana: 'にっき', romaji: 'nikki', spanish: 'Diario personal', hasSokuon: true },
+            { hiragana: 'おっと', romaji: 'otto', spanish: 'Esposo / Marido', hasSokuon: true },
+            { hiragana: 'せっけん', romaji: 'sekken', spanish: 'Jabón', hasSokuon: true },
+            { hiragana: 'さっき', romaji: 'sakki', spanish: 'Hace un momento', hasSokuon: true },
+            { hiragana: 'やっと', romaji: 'yatto', spanish: 'Por fin / Al fin', hasSokuon: true },
+            // Vocabulario Cotidiano JLPT N5 / N4 (3, 4 y 5 kanas)
+            { hiragana: 'ありがとう', romaji: 'arigatou', spanish: 'Muchas gracias' },
+            { hiragana: 'おはよう', romaji: 'ohayou', spanish: 'Buenos días' },
+            { hiragana: 'さようなら', romaji: 'sayounara', spanish: 'Adiós / Hasta luego' },
+            { hiragana: 'すみません', romaji: 'sumimasen', spanish: 'Disculpe / Perdón' },
+            { hiragana: 'ごめんなさい', romaji: 'gomennasai', spanish: 'Lo siento mucho' },
+            { hiragana: 'どうぞ', romaji: 'douzo', spanish: 'Adelante / Por favor' },
+            { hiragana: 'よろしく', romaji: 'yoroshiku', spanish: 'Mucho gusto / Encantado' },
+            { hiragana: 'いただきます', romaji: 'itadakimasu', spanish: 'Buen provecho' },
+            { hiragana: 'こんにちは', romaji: 'konnichiwa', spanish: 'Buenas tardes / Hola' },
+            { hiragana: 'こんばんは', romaji: 'konbanwa', spanish: 'Buenas noches' },
+            { hiragana: 'おやすみ', romaji: 'oyasumi', spanish: 'Buenas noches (al dormir)' },
+            { hiragana: 'だいじょうぶ', romaji: 'daijoubu', spanish: 'Está bien / Todo bien' },
+            { hiragana: 'おねがい', romaji: 'onegai', spanish: 'Por favor / Petición' },
+            { hiragana: 'はじめまして', romaji: 'hajimemashite', spanish: 'Mucho gusto (primera vez)' },
+            { hiragana: 'ともだち', romaji: 'tomodachi', spanish: 'Amigo / Amiga' },
+            { hiragana: 'がくせい', romaji: 'gakusei', spanish: 'Estudiante' },
+            { hiragana: 'せんせい', romaji: 'sensei', spanish: 'Profesor / Maestro' },
+            { hiragana: 'かぞく', romaji: 'kazoku', spanish: 'Familia' },
+            { hiragana: 'おとうさん', romaji: 'otousan', spanish: 'Padre / Papá' },
+            { hiragana: 'おかあさん', romaji: 'okaasan', spanish: 'Madre / Mamá' },
+            { hiragana: 'おにいさん', romaji: 'oniisan', spanish: 'Hermano mayor' },
+            { hiragana: 'おねえさん', romaji: 'oneesan', spanish: 'Hermana mayor' },
+            { hiragana: 'おとうと', romaji: 'otouto', spanish: 'Hermano menor' },
+            { hiragana: 'いもうと', romaji: 'imouto', spanish: 'Hermana menor' },
+            { hiragana: 'あかちゃん', romaji: 'akachan', spanish: 'Bebé' },
+            { hiragana: 'きょうだい', romaji: 'kyoudai', spanish: 'Hermanos' },
+            { hiragana: 'おんなのこ', romaji: 'onnanoko', spanish: 'Niña' },
+            { hiragana: 'おとこのこ', romaji: 'otokonoko', spanish: 'Niño' },
+            { hiragana: 'にほんご', romaji: 'nihongo', spanish: 'Idioma japonés' },
+            { hiragana: 'にほんじん', romaji: 'nihonjin', spanish: 'Persona japonesa' },
+            { hiragana: 'がいこく', romaji: 'gaikoku', spanish: 'País extranjero' },
+            { hiragana: 'ひこうき', romaji: 'hikouki', spanish: 'Avión' },
+            { hiragana: 'でんしゃ', romaji: 'densha', spanish: 'Tren eléctrico' },
+            { hiragana: 'じてんしゃ', romaji: 'jitensha', spanish: 'Bicicleta' },
+            { hiragana: 'ちかてつ', romaji: 'chikatetsu', spanish: 'Metro subterráneo' },
+            { hiragana: 'しんかんせん', romaji: 'shinkansen', spanish: 'Tren bala Shinkansen' },
+            { hiragana: 'くるま', romaji: 'kuruma', spanish: 'Coche / Automóvil' },
+            { hiragana: 'びょういん', romaji: 'byouin', spanish: 'Hospital' },
+            { hiragana: 'ぎんこう', romaji: 'ginkou', spanish: 'Banco' },
+            { hiragana: 'としょかん', romaji: 'toshokan', spanish: 'Biblioteca' },
+            { hiragana: 'ゆうびんきょく', romaji: 'yuubinkyoku', spanish: 'Oficina de correos' },
+            { hiragana: 'がっこう', romaji: 'gakkou', spanish: 'Escuela / Colegio', hasSokuon: true },
+            { hiragana: 'だいがく', romaji: 'daigaku', spanish: 'Universidad' },
+            { hiragana: 'こうえん', romaji: 'kouen', spanish: 'Parque público' },
+            { hiragana: 'きっさてん', romaji: 'kissaten', spanish: 'Cafetería tradicional', hasSokuon: true },
+            { hiragana: 'だいどころ', romaji: 'daidokoro', spanish: 'Cocina' },
+            { hiragana: 'おてあらい', romaji: 'otearai', spanish: 'Baño / Servicio' },
+            { hiragana: 'たべもの', romaji: 'tabemono', spanish: 'Comida' },
+            { hiragana: 'のみもの', romaji: 'nomimono', spanish: 'Bebida' },
+            { hiragana: 'くだもの', romaji: 'kudamono', spanish: 'Fruta' },
+            { hiragana: 'おちゃ', romaji: 'ocha', spanish: 'Té verde' },
+            { hiragana: 'こうちゃ', romaji: 'koucha', spanish: 'Té negro' },
+            { hiragana: 'ごはん', romaji: 'gohan', spanish: 'Arroz cocido / Comida' },
+            { hiragana: 'たまご', romaji: 'tamago', spanish: 'Huevo' },
+            { hiragana: 'さかな', romaji: 'sakana', spanish: 'Pescado' },
+            { hiragana: 'やさい', romaji: 'yasai', spanish: 'Verduras' },
+            { hiragana: 'りんご', romaji: 'ringo', spanish: 'Manzana' },
+            { hiragana: 'みかん', romaji: 'mikan', spanish: 'Mandarina' },
+            { hiragana: 'すいか', romaji: 'suika', spanish: 'Sandía' },
+            { hiragana: 'いちご', romaji: 'ichigo', spanish: 'Fresa' },
+            { hiragana: 'とうふ', romaji: 'toufu', spanish: 'Tofu' },
+            { hiragana: 'みそしる', romaji: 'misoshiru', spanish: 'Sopa de miso' },
+            { hiragana: 'あさごはん', romaji: 'asagohan', spanish: 'Desayuno' },
+            { hiragana: 'ひるごはん', romaji: 'hirugohan', spanish: 'Almuerzo' },
+            { hiragana: 'ばんごはん', romaji: 'bangohan', spanish: 'Cena' },
+            { hiragana: 'うさぎ', romaji: 'usagi', spanish: 'Conejo' },
+            { hiragana: 'さくら', romaji: 'sakura', spanish: 'Flor de cerezo' },
+            { hiragana: 'たいよう', romaji: 'taiyou', spanish: 'Sol' },
+            { hiragana: 'あした', romaji: 'ashita', spanish: 'Mañana (día siguiente)' },
+            { hiragana: 'あさって', romaji: 'asatte', spanish: 'Pasado mañana', hasSokuon: true },
+            { hiragana: 'きのう', romaji: 'kinou', spanish: 'Ayer' },
+            { hiragana: 'きょう', romaji: 'kyou', spanish: 'Hoy' },
+            { hiragana: 'まいにち', romaji: 'mainichi', spanish: 'Todos los días' },
+            { hiragana: 'まいあさ', romaji: 'maiasa', spanish: 'Todas las mañanas' },
+            { hiragana: 'まいばん', romaji: 'maiban', spanish: 'Todas las noches' },
+            { hiragana: 'こんしゅう', romaji: 'konshuu', spanish: 'Esta semana' },
+            { hiragana: 'らいしゅう', romaji: 'raishuu', spanish: 'La próxima semana' },
+            { hiragana: 'せんしゅう', romaji: 'senshuu', spanish: 'La semana pasada' },
+            { hiragana: 'てんき', romaji: 'tenki', spanish: 'Clima / Tiempo' },
+            { hiragana: 'じかん', romaji: 'jikan', spanish: 'Tiempo / Hora' },
+            { hiragana: 'おもしろい', romaji: 'omoshiroi', spanish: 'Interesante / Divertido' },
+            { hiragana: 'たのしい', romaji: 'tanoshii', spanish: 'Divertido / Agradable' },
+            { hiragana: 'おいしい', romaji: 'oishii', spanish: 'Delicioso / Rico' },
+            { hiragana: 'かわいい', romaji: 'kawaii', spanish: 'Lindo / Tierno' },
+            { hiragana: 'うれしい', romaji: 'ureshii', spanish: 'Feliz / Alegre' },
+            { hiragana: 'かなしい', romaji: 'kanashii', spanish: 'Triste' },
+            { hiragana: 'むずかしい', romaji: 'muzukashii', spanish: 'Difícil' },
+            { hiragana: 'やさしい', romaji: 'yasashii', spanish: 'Fácil / Amable' },
+            { hiragana: 'あたらしい', romaji: 'atarashii', spanish: 'Nuevo' },
+            { hiragana: 'ふるい', romaji: 'furui', spanish: 'Viejo / Antiguo' },
+            { hiragana: 'おおきい', romaji: 'ookii', spanish: 'Grande' },
+            { hiragana: 'ちいさい', romaji: 'chiisai', spanish: 'Pequeño' },
+            { hiragana: 'あたたかい', romaji: 'atatakai', spanish: 'Cálido' },
+            { hiragana: 'つめたい', romaji: 'tsumetai', spanish: 'Frío (al tacto)' },
+            { hiragana: 'さむい', romaji: 'samui', spanish: 'Frío (clima)' },
+            { hiragana: 'あつい', romaji: 'atsui', spanish: 'Caluroso / Caliente' },
+            { hiragana: 'たかい', romaji: 'takai', spanish: 'Alto / Caro' },
+            { hiragana: 'やすい', romaji: 'yasui', spanish: 'Barato' },
+            { hiragana: 'はやい', romaji: 'hayai', spanish: 'Rápido / Temprano' },
+            { hiragana: 'おそい', romaji: 'osoi', spanish: 'Lento / Tarde' },
+            { hiragana: 'げんき', romaji: 'genki', spanish: 'Con energía / Sano' },
+            { hiragana: 'しずか', romaji: 'shizuka', spanish: 'Tranquilo / Silencioso' },
+            { hiragana: 'きれい', romaji: 'kirei', spanish: 'Hermoso / Limpio' },
+            { hiragana: 'えんぴつ', romaji: 'enpitsu', spanish: 'Lápiz' },
+            { hiragana: 'かばん', romaji: 'kaban', spanish: 'Bolso / Mochila' },
+            { hiragana: 'とけい', romaji: 'tokei', spanish: 'Reloj' },
+            { hiragana: 'めがね', romaji: 'megane', spanish: 'Gafas / Lentes' },
+            { hiragana: 'でんわ', romaji: 'denwa', spanish: 'Teléfono' },
+            { hiragana: 'てがみ', romaji: 'tegami', spanish: 'Carta' },
+            { hiragana: 'しゃしん', romaji: 'shashin', spanish: 'Fotografía' },
+            { hiragana: 'おんがく', romaji: 'ongaku', spanish: 'Música' },
+            { hiragana: 'えいが', romaji: 'eiga', spanish: 'Película' },
+            { hiragana: 'たべます', romaji: 'tabemasu', spanish: 'Comer' },
+            { hiragana: 'のみます', romaji: 'nomimasu', spanish: 'Beber' },
+            { hiragana: 'いきます', romaji: 'ikimasu', spanish: 'Ir' },
+            { hiragana: 'きます', romaji: 'kimasu', spanish: 'Venir' },
+            { hiragana: 'かえります', romaji: 'kaerimasu', spanish: 'Regresar / Volver' },
+            { hiragana: 'みます', romaji: 'mimasu', spanish: 'Ver / Mirar' },
+            { hiragana: 'ききます', romaji: 'kikimasu', spanish: 'Escuchar / Oír' },
+            { hiragana: 'よみます', romaji: 'yomimasu', spanish: 'Leer' },
+            { hiragana: 'かきます', romaji: 'kakimasu', spanish: 'Escribir' },
+            { hiragana: 'はなします', romaji: 'hanashimasu', spanish: 'Hablar' },
+            { hiragana: 'べんきょう', romaji: 'benkyou', spanish: 'Estudio' },
+            { hiragana: 'せんたく', romaji: 'sentaku', spanish: 'Lavado / Lavar ropa' },
+            { hiragana: 'そうじ', romaji: 'souji', spanish: 'Limpieza' },
+            { hiragana: 'りょこう', romaji: 'ryokou', spanish: 'Viaje / Turismo' },
+            { hiragana: 'かいもの', romaji: 'kaimono', spanish: 'Compras' },
+            { hiragana: 'しごと', romaji: 'shigoto', spanish: 'Trabajo / Ocupación' },
+            { hiragana: 'やすみ', romaji: 'yasumi', spanish: 'Descanso / Vacaciones' },
+            { hiragana: 'たんじょうび', romaji: 'tanjoubi', spanish: 'Cumpleaños' },
+            { hiragana: 'おみやげ', romaji: 'omiyage', spanish: 'Souvenir / Regalo de viaje' },
+            { hiragana: 'やくそく', romaji: 'yakusoku', spanish: 'Promesa / Cita' },
+            { hiragana: 'しゅくだい', romaji: 'shukudai', spanish: 'Tarea escolar' },
+            { hiragana: 'しけん', romaji: 'shiken', spanish: 'Examen' },
+            { hiragana: 'きょうしつ', romaji: 'kyoushitsu', spanish: 'Aula / Salón de clases' },
+            { hiragana: 'しょくどう', romaji: 'shokudou', spanish: 'Comedor / Cafetería' },
+            { hiragana: 'ちゅうしゃじょう', romaji: 'chuushajou', spanish: 'Estacionamiento' },
+            { hiragana: 'こうじょう', romaji: 'koujou', spanish: 'Fábrica' },
+            { hiragana: 'たいしかん', romaji: 'taishikan', spanish: 'Embajada' },
+            { hiragana: 'けいさつ', romaji: 'keisatsu', spanish: 'Policía' },
+            { hiragana: 'しょうぼうしょ', romaji: 'shoubousho', spanish: 'Estación de bomberos' },
+            { hiragana: 'ちず', romaji: 'chizu', spanish: 'Mapa' },
+            { hiragana: 'きっぷ', romaji: 'kippu', spanish: 'Boleto / Billete', hasSokuon: true },
+            { hiragana: 'さいふ', romaji: 'saifu', spanish: 'Billetera / Cartera' },
+            { hiragana: 'ぼうし', romaji: 'boushi', spanish: 'Sombrero / Gorra' },
+            { hiragana: 'くつした', romaji: 'kutsushita', spanish: 'Calcetines' },
+            { hiragana: 'うわぎ', romaji: 'uwagi', spanish: 'Chaqueta / Abrigo' },
+            { hiragana: 'ようふく', romaji: 'youfuku', spanish: 'Ropa' },
+            { hiragana: 'きもの', romaji: 'kimono', spanish: 'Kimono tradicional' },
+            { hiragana: 'はし', romaji: 'hashi', spanish: 'Palillos / Puente' },
+            { hiragana: 'ちゃわん', romaji: 'chawan', spanish: 'Tazón de arroz' },
+            { hiragana: 'おさら', romaji: 'osara', spanish: 'Plato' },
+            { hiragana: 'ゆのみ', romaji: 'yunomi', spanish: 'Taza de té' },
+            { hiragana: 'なべ', romaji: 'nabe', spanish: 'Olla' },
+            { hiragana: 'しお', romaji: 'shio', spanish: 'Sal' },
+            { hiragana: 'さとう', romaji: 'satou', spanish: 'Azúcar' },
+            { hiragana: 'しょうゆ', romaji: 'shouyu', spanish: 'Salsa de soja' },
+            { hiragana: 'あぶら', romaji: 'abura', spanish: 'Aceite' },
+            { hiragana: 'こしょう', romaji: 'koshou', spanish: 'Pimienta' },
+
+            // --- VOCABULARIO DE CLASE Y VIDA COTIDIANA (OBJETOS, PERSONAS, LUGARES) ---
+            { hiragana: 'けいたい', romaji: 'keitai', spanish: 'Celular / Móvil' },
+            { hiragana: 'おべんとう', romaji: 'obentou', spanish: 'Bentō (Almuerzo empacado)' },
+            { hiragana: 'おにぎり', romaji: 'onigiri', spanish: 'Onigiri (Bola de arroz)' },
+            { hiragana: 'まんが', romaji: 'manga', spanish: 'Manga / Cómic japonés' },
+            { hiragana: 'ふでばこ', romaji: 'fudebako', spanish: 'Estuche / Cartuchera' },
+            { hiragana: 'じしょ', romaji: 'jisho', spanish: 'Diccionario' },
+            { hiragana: 'のーと', romaji: 'nooto', spanish: 'Cuaderno' },
+            { hiragana: 'けしごむ', romaji: 'keshigomu', spanish: 'Borrador / Goma' },
+            { hiragana: 'ぺん', romaji: 'pen', spanish: 'Bolígrafo / Lapicero' },
+            { hiragana: 'かぎ', romaji: 'kagi', spanish: 'Llave' },
+            { hiragana: 'いしゃ', romaji: 'isha', spanish: 'Médico / Doctor(a)' },
+            { hiragana: 'かいしゃいん', romaji: 'kaishain', spanish: 'Empleado de empresa' },
+            { hiragana: 'しゅふ', romaji: 'shufu', spanish: 'Amo(a) de casa' },
+            { hiragana: 'えんじにあ', romaji: 'enjinia', spanish: 'Ingeniero(a)' },
+            { hiragana: 'ちゅうごく', romaji: 'chuugoku', spanish: 'China (país)' },
+            { hiragana: 'かんこく', romaji: 'kankoku', spanish: 'Corea del Sur (país)' },
+            { hiragana: 'ろしあ', romaji: 'roshia', spanish: 'Rusia (país)' },
+            { hiragana: 'たい', romaji: 'tai', spanish: 'Tailandia (país)' },
+            { hiragana: 'あめりか', romaji: 'amerika', spanish: 'Estados Unidos (país)' },
+            { hiragana: 'うち', romaji: 'uchi', spanish: 'Casa / Hogar propio' },
+            { hiragana: 'かいしゃ', romaji: 'kaisha', spanish: 'Empresa / Compañía' },
+            { hiragana: 'ぎんこう', romaji: 'ginkou', spanish: 'Banco' },
+            { hiragana: 'びょういん', romaji: 'byouin', spanish: 'Hospital' },
+            { hiragana: 'がっこう', romaji: 'gakkou', spanish: 'Escuela / Colegio' }
+        ];
+
+        // ==========================================
+        // DATASET: ARMAR PALABRAS (WORD BUILDER) - DERIVADO DE GRAN BIBLIOTECA
+        // ==========================================
+        const WORDS_DATA = EXPANDED_VOCABULARY.map(w => {
+            const hiraTiles = Array.from(w.hiragana);
+            return {
+                spanish: w.spanish,
+                hiragana: w.hiragana,
+                romaji: w.romaji,
+                hiraTiles: hiraTiles,
+                romaTiles: hiraTiles.map(ch => {
+                    const kanaObj = HIRAGANA_DATA.find(k => k.hiragana === ch);
+                    return kanaObj ? kanaObj.romaji : ch;
+                }),
+                hasSokuon: w.hiragana.includes('っ')
+            };
+        });
+
+        // ==========================================
+        // DATASET: SHIRITORI (PALABRAS ENCADENADAS) - DERIVADO DE GRAN BIBLIOTECA
+        // ==========================================
+        const SHIRITORI_WORDS = EXPANDED_VOCABULARY.map(w => {
+            const chars = Array.from(w.hiragana);
+            const first = chars[0];
+            const last = chars[chars.length - 1];
+            return {
+                word: w.hiragana,
+                romaji: w.romaji,
+                spanish: w.spanish,
+                first: first,
+                last: last,
+                endsInN: (last === 'ん')
+            };
+        });
+
+        // ==========================================
+        // DATASET: SOPA DE LETRAS (WORD SEARCH THEMES) - ENRIQUECIDO
+        // ==========================================
+        const WORD_SEARCH_THEMES = {
+            nature: {
+                name: 'Naturaleza (自然)',
+                words: [
+                    { word: 'さくら', romaji: 'sakura', spanish: 'Cerezo' },
+                    { word: 'やま', romaji: 'yama', spanish: 'Montaña' },
+                    { word: 'かわ', romaji: 'kawa', spanish: 'Río' },
+                    { word: 'うみ', romaji: 'umi', spanish: 'Mar' },
+                    { word: 'そら', romaji: 'sora', spanish: 'Cielo' },
+                    { word: 'あめ', romaji: 'ame', spanish: 'Lluvia' },
+                    { word: 'ゆき', romaji: 'yuki', spanish: 'Nieve' },
+                    { word: 'はな', romaji: 'hana', spanish: 'Flor' },
+                    { word: 'つき', romaji: 'tsuki', spanish: 'Luna' },
+                    { word: 'ほし', romaji: 'hoshi', spanish: 'Estrella' },
+                    { word: 'もり', romaji: 'mori', spanish: 'Bosque' },
+                    { word: 'はる', romaji: 'haru', spanish: 'Primavera' },
+                    { word: 'なつ', romaji: 'natsu', spanish: 'Verano' },
+                    { word: 'あき', romaji: 'aki', spanish: 'Otoño' },
+                    { word: 'ふゆ', romaji: 'fuyu', spanish: 'Invierno' },
+                    { word: 'ひかり', romaji: 'hikari', spanish: 'Luz' }
+                ]
+            },
+            food: {
+                name: 'Comida (食べ物)',
+                words: [
+                    { word: 'すし', romaji: 'sushi', spanish: 'Sushi' },
+                    { word: 'らーめん', romaji: 'raamen', spanish: 'Ramen' },
+                    { word: 'みず', romaji: 'mizu', spanish: 'Agua' },
+                    { word: 'おちゃ', romaji: 'ocha', spanish: 'Té verde' },
+                    { word: 'にく', romaji: 'niku', spanish: 'Carne' },
+                    { word: 'さかな', romaji: 'sakana', spanish: 'Pescado' },
+                    { word: 'たまご', romaji: 'tamago', spanish: 'Huevo' },
+                    { word: 'りんご', romaji: 'ringo', spanish: 'Manzana' },
+                    { word: 'すいか', romaji: 'suika', spanish: 'Sandía' },
+                    { word: 'みかん', romaji: 'mikan', spanish: 'Mandarina' },
+                    { word: 'ごはん', romaji: 'gohan', spanish: 'Arroz' },
+                    { word: 'もも', romaji: 'momo', spanish: 'Melocotón' },
+                    { word: 'やさい', romaji: 'yasai', spanish: 'Verduras' },
+                    { word: 'さけ', romaji: 'sake', spanish: 'Salmón/Sake' },
+                    { word: 'しお', romaji: 'shio', spanish: 'Sal' },
+                    { word: 'まっちゃ', romaji: 'matcha', spanish: 'Té Matcha' }
+                ]
+            },
+            city: {
+                name: 'Ciudad (都市)',
+                words: [
+                    { word: 'くるま', romaji: 'kuruma', spanish: 'Coche' },
+                    { word: 'えき', romaji: 'eki', spanish: 'Estación' },
+                    { word: 'みち', romaji: 'michi', spanish: 'Calle' },
+                    { word: 'いえ', romaji: 'ie', spanish: 'Casa' },
+                    { word: 'ほん', romaji: 'hon', spanish: 'Libro' },
+                    { word: 'がっこう', romaji: 'gakkou', spanish: 'Escuela' },
+                    { word: 'みせ', romaji: 'mise', spanish: 'Tienda' },
+                    { word: 'まち', romaji: 'machi', spanish: 'Ciudad' },
+                    { word: 'びょういん', romaji: 'byouin', spanish: 'Hospital' },
+                    { word: 'でんしゃ', romaji: 'densha', spanish: 'Tren' },
+                    { word: 'ぎんこう', romaji: 'ginkou', spanish: 'Banco' },
+                    { word: 'へや', romaji: 'heya', spanish: 'Habitación' },
+                    { word: 'きっさてん', romaji: 'kissaten', spanish: 'Cafetería' }
+                ]
+            },
+            classroom: {
+                name: 'Objetos de Clase (教室の物)',
+                words: [
+                    { word: 'ほん', romaji: 'hon', spanish: 'Libro' },
+                    { word: 'えんぴつ', romaji: 'enpitsu', spanish: 'Lápiz' },
+                    { word: 'かさ', romaji: 'kasa', spanish: 'Paraguas' },
+                    { word: 'けいたい', romaji: 'keitai', spanish: 'Celular' },
+                    { word: 'かばん', romaji: 'kaban', spanish: 'Mochila / Bolso' },
+                    { word: 'ふでばこ', romaji: 'fudebako', spanish: 'Estuche' },
+                    { word: 'じしょ', romaji: 'jisho', spanish: 'Diccionario' },
+                    { word: 'めがね', romaji: 'megane', spanish: 'Gafas / Lentes' },
+                    { word: 'とけい', romaji: 'tokei', spanish: 'Reloj' },
+                    { word: 'けしごむ', romaji: 'keshigomu', spanish: 'Borrador' },
+                    { word: 'さいふ', romaji: 'saifu', spanish: 'Billetera' },
+                    { word: 'かぎ', romaji: 'kagi', spanish: 'Llave' },
+                    { word: 'しんぶん', romaji: 'shinbun', spanish: 'Periódico' },
+                    { word: 'まんが', romaji: 'manga', spanish: 'Manga' },
+                    { word: 'おべんとう', romaji: 'obentou', spanish: 'Bentō' }
+                ]
+            },
+            people_places: {
+                name: 'Personas y Lugares (人と場所)',
+                words: [
+                    { word: 'せんせい', romaji: 'sensei', spanish: 'Profesor(a)' },
+                    { word: 'がくせい', romaji: 'gakusei', spanish: 'Estudiante' },
+                    { word: 'いしゃ', romaji: 'isha', spanish: 'Médico' },
+                    { word: 'かいしゃいん', romaji: 'kaishain', spanish: 'Empleado' },
+                    { word: 'しゅふ', romaji: 'shufu', spanish: 'Amo(a) de casa' },
+                    { word: 'ともだち', romaji: 'tomodachi', spanish: 'Amigo(a)' },
+                    { word: 'おとうさん', romaji: 'otousan', spanish: 'Padre' },
+                    { word: 'おかあさん', romaji: 'okaasan', spanish: 'Madre' },
+                    { word: 'だいがく', romaji: 'daigaku', spanish: 'Universidad' },
+                    { word: 'ぎんこう', romaji: 'ginkou', spanish: 'Banco' },
+                    { word: 'びょういん', romaji: 'byouin', spanish: 'Hospital' },
+                    { word: 'がっこう', romaji: 'gakkou', spanish: 'Escuela' },
+                    { word: 'にほん', romaji: 'nihon', spanish: 'Japón' },
+                    { word: 'ちゅうごく', romaji: 'chuugoku', spanish: 'China' },
+                    { word: 'かんこく', romaji: 'kankoku', spanish: 'Corea del Sur' },
+                    { word: 'うち', romaji: 'uchi', spanish: 'Casa / Hogar' }
+                ]
+            },
+            anime: {
+                name: 'Anime / Rol (アニメ)',
+                words: [
+                    { word: 'まほう', romaji: 'mahou', spanish: 'Magia' },
+                    { word: 'ゆうしゃ', romaji: 'yuusha', spanish: 'Héroe' },
+                    { word: 'けん', romaji: 'ken', spanish: 'Espada' },
+                    { word: 'ちから', romaji: 'chikara', spanish: 'Poder' },
+                    { word: 'ひかり', romaji: 'hikari', spanish: 'Luz' },
+                    { word: 'かみ', romaji: 'kami', spanish: 'Dios' },
+                    { word: 'ともだち', romaji: 'tomodachi', spanish: 'Amigo' },
+                    { word: 'ゆめ', romaji: 'yume', spanish: 'Sueño' },
+                    { word: 'こころ', romaji: 'kokoro', spanish: 'Corazón' },
+                    { word: 'せかい', romaji: 'sekai', spanish: 'Mundo' },
+                    { word: 'みらい', romaji: 'mirai', spanish: 'Futuro' },
+                    { word: 'きずな', romaji: 'kizuna', spanish: 'Lazo' }
+                ]
+            },
+            all: {
+                name: '🌟 Gran Biblioteca (260+ Palabras)',
+                words: EXPANDED_VOCABULARY.map(w => ({
+                    word: w.hiragana,
+                    romaji: w.romaji,
+                    spanish: w.spanish
+                }))
+            }
+        };
