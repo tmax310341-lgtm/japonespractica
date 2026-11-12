@@ -461,7 +461,7 @@
                 <div class="space-y-1">
                     <div class="text-2xl sm:text-3xl font-black text-white font-jp tracking-wide flex items-center justify-center gap-2">
                         <span>${primaryText}</span>
-                        <button type="button" data-action="speakJapanese" data-args='["${phrase.hiragana}"]' class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                        <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${phrase.hiragana}"]' class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                             <i class="fa-solid fa-volume-high text-sm"></i>
                         </button>
                     </div>
@@ -602,7 +602,7 @@
                                 <div class="p-3 rounded-2xl bg-slate-950 border ${item.isException ? 'border-amber-500/50 bg-amber-500/5' : 'border-slate-800'} hover:border-sky-400/50 flex flex-col justify-between gap-2 transition group">
                                     <div class="flex items-center justify-between">
                                         <span class="font-mono text-xl font-black ${item.isException ? 'text-amber-300' : 'text-white'}">${item.num}:00</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                        <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -627,7 +627,7 @@
                             </p>
                             <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
                                 <span><strong>Regla de media hora:</strong> 30 minutos se dice <strong class="text-amber-300 font-jp">半 (はん - han)</strong> o <strong class="text-sky-300 font-jp">三十分 (さんじゅっぷん)</strong>. Ej: 3:30 = <span class="font-jp text-white">三時半 (さんじはん)</span></span>
-                                <button type="button" data-action="speakJapanese" data-args='["さんじはん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんじはん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                             </div>
                         </div>
 
@@ -636,7 +636,7 @@
                                 <div class="p-3 rounded-2xl bg-slate-950 border ${item.group === 'pun' ? 'border-amber-500/40' : 'border-slate-800'} hover:border-sky-400/50 flex flex-col justify-between gap-1.5 transition">
                                     <div class="flex items-center justify-between">
                                         <span class="font-mono text-lg font-black ${item.group === 'pun' ? 'text-amber-300' : 'text-slate-200'}">${item.num} min</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                        <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -666,7 +666,7 @@
                                 <div class="p-3 rounded-2xl bg-slate-950 border ${item.isSpecial ? 'border-rose-500/50 bg-rose-500/5' : 'border-slate-800'} hover:border-sky-400/50 flex flex-col justify-between gap-1.5 transition">
                                     <div class="flex items-center justify-between">
                                         <span class="font-mono text-lg font-black ${item.isSpecial ? 'text-rose-300' : 'text-slate-200'}">Día ${item.num}</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                        <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -699,7 +699,7 @@
                                             <span class="font-mono text-lg font-black ${item.isException ? 'text-amber-300' : 'text-slate-200'}">Mes ${item.num}</span>
                                             <span class="block text-[11px] font-semibold capitalize text-slate-400">${item.nameEs}</span>
                                         </div>
-                                        <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                        <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -757,7 +757,7 @@
                                                 <div class="font-jp text-xs text-slate-400">${item.hira} <span class="font-mono text-[11px] text-slate-500">(${item.romaji})</span></div>
                                             </div>
                                         </div>
-                                        <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar pronunciación">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar pronunciación">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -807,7 +807,7 @@
                                             <div class="text-[11px] text-slate-400">Lectura On: <strong>ヨウ (you)</strong></div>
                                         </div>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["ようび"]' class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar">
+                                    <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["ようび"]' class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar">
                                         <i class="fa-solid fa-volume-high text-xs"></i>
                                     </button>
                                 </div>
@@ -867,7 +867,7 @@
                                             <div class="text-xs text-slate-300 font-semibold">${v.es}</div>
                                             <div class="text-[11px] font-jp text-slate-400 truncate">Ej: ${v.ex}</div>
                                         </div>
-                                        <button type="button" data-action="speakJapanese" data-args='["${v.hira}"]' class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar verbo">
+                                        <button aria-label="Escuchar verbo" type="button" data-action="speakJapanese" data-args='["${v.hira}"]' class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar verbo">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -887,7 +887,7 @@
                                         <div class="font-jp text-xs text-amber-300">${item.hira} <span class="text-slate-400 font-mono">(${item.romaji})</span></div>
                                         <div class="text-xs text-slate-300 font-medium">→ ${item.es}</div>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar">
+                                    <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${item.hira}"]' class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition active:scale-90 shrink-0" title="Escuchar">
                                         <i class="fa-solid fa-volume-high text-sm"></i>
                                     </button>
                                 </div>
@@ -1245,14 +1245,14 @@
                         data-drop="onTimeLegoDrop"
                         data-dragend="onTimeLegoDragEnd" data-args='["$event", ${idx}]'
                         class="px-2.5 sm:px-3.5 py-2 rounded-2xl bg-sky-500 text-slate-950 font-jp font-black shadow-lg shadow-sky-500/20 flex items-center gap-1.5 cursor-grab active:cursor-grabbing hover:bg-sky-400 transition animate-card-pop select-none border border-sky-300/40">
-                        <button type="button" data-action="moveTimeLegoChip" data-args='[${idx}, -1]' ${idx === 0 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover izquierda">
+                        <button aria-label="Mover izquierda" type="button" data-action="moveTimeLegoChip" data-args='[${idx}, -1]' ${idx === 0 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover izquierda">
                             <i class="fa-solid fa-arrow-left text-xs"></i>
                         </button>
                         <span class="text-base sm:text-lg font-bold px-1">${chip.text}</span>
-                        <button type="button" data-action="moveTimeLegoChip" data-args='[${idx}, 1]' ${idx === state.timePlacedChips.length - 1 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover derecha">
+                        <button aria-label="Mover derecha" type="button" data-action="moveTimeLegoChip" data-args='[${idx}, 1]' ${idx === state.timePlacedChips.length - 1 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover derecha">
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
-                        <button type="button" data-action="removeTimeBuilderChip" data-args='[${idx}]' title="Regresar al banco sin borrar el resto"
+                        <button aria-label="Regresar al banco sin borrar el resto" type="button" data-action="removeTimeBuilderChip" data-args='[${idx}]' title="Regresar al banco sin borrar el resto"
                             class="w-6 h-6 rounded-lg bg-slate-950/20 hover:bg-rose-600 hover:text-white text-slate-950 flex items-center justify-center transition ml-1 text-xs">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
@@ -1341,7 +1341,7 @@
                             <h3 class="text-4xl sm:text-5xl font-black text-white font-mono tracking-tight bg-slate-950 px-6 py-2 rounded-2xl border border-slate-800 shadow-inner">
                                 ${ch.promptTitle}
                             </h3>
-                            <button type="button" data-action="speakJapanese" data-args='["${ch.targetPhrase.hiragana}"]' title="Escuchar pista"
+                            <button aria-label="Escuchar pista" type="button" data-action="speakJapanese" data-args='["${ch.targetPhrase.hiragana}"]' title="Escuchar pista"
                                 class="w-12 h-12 rounded-2xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-500/40 text-sky-400 flex items-center justify-center transition active:scale-90 shadow-md">
                                 <i class="fa-solid fa-volume-high text-lg"></i>
                             </button>

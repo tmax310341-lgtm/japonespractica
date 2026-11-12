@@ -952,3 +952,28 @@ body.theme-kanagawa .numbers-achievement-banner {
 /* Linter Fixes: Rules moved from inline styles */
 
 /* Swatches y tarjetas para temas (Linter: sin inline styles) */
+
+/* ==========================================================
+   ACCESIBILIDAD
+   ========================================================== */
+
+/* La página permite hacer zoom. En iOS, enfocar un campo con letra menor de 16px
+   amplía la página automáticamente; se evita subiendo esos campos a 16px solo en iOS. */
+@supports (-webkit-touch-callout: none) {
+    input.text-xs, input.text-sm, select.text-xs, select.text-sm, textarea.text-xs, textarea.text-sm,
+    input:not([class*="text-"]), select:not([class*="text-"]), textarea:not([class*="text-"]) {
+        font-size: 16px;
+    }
+}
+
+/* Respeta «Reducir movimiento» del sistema: quita animaciones y transiciones decorativas.
+   La animación del orden de trazos usa requestAnimationFrame y no se ve afectada.
+   Es el único !important propio: tiene que ganar a cualquier animación definida en una clase. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -36,6 +36,14 @@
             try { renderStudyGrid(); } catch (err) { console.warn("[Init] renderStudyGrid error:", err); }
             try { updateSyllabarySwitcherUI(); } catch (err) { console.warn("[Init] switcher error:", err); }
             try { updateHeaderBadges(); } catch (err) { console.warn("[Init] badges error:", err); }
+            try { restoreTabFromUrl(); } catch (err) { console.warn("[Init] tab from URL error:", err); }
+        }
+
+        // App instalable y disponible sin conexión (sw.js). No funciona abriendo el archivo con doble clic.
+        if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.warn('[PWA] No se pudo registrar el service worker:', err));
+            });
         }
 
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -84,7 +92,7 @@
 
             // Priority 0.5: Parcial Tab Active (Q1, Q2, Q3, Flashcards)
             const parcialTab = document.getElementById('tab-parcial');
-            if (parcialTab && !parcialTab.classList.contains('hidden')) {
+            if (parcialTab && !parcialTab.classList.contains('hidden') && tabModulesReady('parcial')) {
                 if (state.parcial && state.parcial.mode === 'sim') {
                     if (e.key >= '1' && e.key <= '4') {
                         const optIndex = parseInt(e.key, 10) - 1;
@@ -168,7 +176,7 @@
 
             // Priority 0A: Numbers Tab Active (3-pillar layout: Guide/Lesson, Practice/Builder-Dictation-Quiz, Translator)
             const numbersTab = document.getElementById('tab-numbers');
-            if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig) {
+            if (numbersTab && !numbersTab.classList.contains('hidden') && tabModulesReady('numbers') && state.numbersConfig) {
                 const activePillar = state.numbersConfig.pillar || 'guide';
                 const activeGuideSub = state.numbersConfig.guideSubTab || 'lesson';
                 const activePracticeMode = state.numbersConfig.mode || 'builder';
@@ -204,7 +212,7 @@
                     } else if (e.key === 'Enter') {
                         e.preventDefault();
                         e.stopPropagation();
-                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersDictationChallenge()"]');
+                        const nextBtn = numbersTab.querySelector('button[data-action="nextNumbersDictationChallenge"]');
                         if (nextBtn) {
                             nextBtn.click();
                         } else {
@@ -216,7 +224,7 @@
                     if (e.key === 'Enter') {
                         e.preventDefault();
                         e.stopPropagation();
-                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersLegoChallenge()"]');
+                        const nextBtn = numbersTab.querySelector('button[data-action="nextNumbersLegoChallenge"]');
                         if (nextBtn) {
                             nextBtn.click();
                         } else {
@@ -224,7 +232,7 @@
                         }
                         return;
                     } else if (e.key === 'Backspace') {
-                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersLegoChallenge()"]');
+                        const nextBtn = numbersTab.querySelector('button[data-action="nextNumbersLegoChallenge"]');
                         if (!nextBtn && state.numbersPlacedChips && state.numbersPlacedChips.length > 0) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -237,13 +245,13 @@
 
             // Priority 0B: Time & Hours Tab Active (Builder, Listening, Quiz)
             const timeTab = document.getElementById('tab-time');
-            if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
+            if (timeTab && !timeTab.classList.contains('hidden') && tabModulesReady('time') && state.timeConfig) {
                 const timeMode = state.timeConfig.mode || 'guide';
                 if (timeMode === 'builder') {
                     if (e.key === 'Enter') {
                         e.preventDefault();
                         e.stopPropagation();
-                        const nextBtn = timeTab.querySelector('button[onclick="nextTimeBuilderChallenge()"]');
+                        const nextBtn = timeTab.querySelector('button[data-action="nextTimeBuilderChallenge"]');
                         if (nextBtn) {
                             nextBtn.click();
                         } else if (state.timePlacedChips && state.timePlacedChips.length > 0) {
@@ -251,7 +259,7 @@
                         }
                         return;
                     } else if (e.key === 'Backspace') {
-                        const nextBtn = timeTab.querySelector('button[onclick="nextTimeBuilderChallenge()"]');
+                        const nextBtn = timeTab.querySelector('button[data-action="nextTimeBuilderChallenge"]');
                         if (!nextBtn && state.timePlacedChips && state.timePlacedChips.length > 0) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -272,8 +280,8 @@
             if (optIndex === -1) {
                 // Enter shortcut to advance Quiz / Listening next buttons
                 if (e.key === 'Enter') {
-                    if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
-                        const nextBtn = numbersTab.querySelector('button[onclick="nextNumbersQuizChallenge()"]');
+                    if (numbersTab && !numbersTab.classList.contains('hidden') && tabModulesReady('numbers') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
+                        const nextBtn = numbersTab.querySelector('button[data-action="nextNumbersQuizChallenge"]');
                         if (nextBtn) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -281,8 +289,8 @@
                             return;
                         }
                     }
-                    if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
-                        const nextTimeBtn = timeTab.querySelector('button[onclick="nextTimeListeningChallenge()"], button[onclick="nextTimeQuizChallenge()"]');
+                    if (timeTab && !timeTab.classList.contains('hidden') && tabModulesReady('time') && state.timeConfig) {
+                        const nextTimeBtn = timeTab.querySelector('button[data-action="nextTimeListeningChallenge"], button[data-action="nextTimeQuizChallenge"]');
                         if (nextTimeBtn) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -295,7 +303,7 @@
             }
 
             // Numbers Tab Quiz Mode Option Selection (1..4)
-            if (numbersTab && !numbersTab.classList.contains('hidden') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
+            if (numbersTab && !numbersTab.classList.contains('hidden') && tabModulesReady('numbers') && state.numbersConfig && state.numbersConfig.pillar === 'practice' && state.numbersConfig.mode === 'quiz') {
                 const numQuizGrid = document.getElementById('numbersQuizGrid');
                 if (numQuizGrid) {
                     const quizBtns = numQuizGrid.querySelectorAll('button:not([disabled])');
@@ -309,7 +317,7 @@
             }
 
             // Time Tab Listening / Quiz Mode Option Selection (1..4)
-            if (timeTab && !timeTab.classList.contains('hidden') && state.timeConfig) {
+            if (timeTab && !timeTab.classList.contains('hidden') && tabModulesReady('time') && state.timeConfig) {
                 const timeGridId = state.timeConfig.mode === 'listening'
                     ? 'timeListeningOptionsGrid'
                     : (state.timeConfig.mode === 'quiz' ? 'timeQuizOptionsGrid' : null);
