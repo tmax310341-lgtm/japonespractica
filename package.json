@@ -5,9 +5,11 @@
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --watch",
-    "test": "node tests/progress-merge.test.js && node tests/sw-precache.test.js"
+    "test": "node tests/progress-merge.test.js && node tests/sw-precache.test.js && node tests/romaji.test.js && node tests/data.test.js",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "tailwindcss": "^3.4.19"
   }
 }

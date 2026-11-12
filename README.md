@@ -58,6 +58,23 @@ se sincroniza entre dispositivos (`js/cloud-sync.js`, fusión en `js/progress-me
 Para activarlo, sigue [docs/firebase-setup.md](docs/firebase-setup.md) y pega tu configuración
 en `js/firebase-config.js`. Las pruebas de la fusión se ejecutan con `npm test`.
 
+## Pruebas
+
+GitHub ejecuta todas las pruebas en cada PR (`.github/workflows/tests.yml`). En local:
+
+```bash
+npm test            # lógica y datos (rápido, sin navegador)
+npm run test:e2e    # la app en Chromium: pestañas, clics, navegación, sin conexión y juegos
+```
+
+La primera vez, `npx playwright install chromium` descarga el navegador de pruebas.
+
+- `tests/data.test.js`: silabarios, vocabulario sin repetidas y con rōmaji coherente, Shiritori sin
+  callejones sin salida, lecturas de números, horas y fechas.
+- `tests/romaji.test.js`: qué respuestas en rōmaji se aceptan (ji para ぢ, si para し…).
+- `tests/e2e/`: arranque, las 15 pestañas en hiragana y katakana, menú y botón atrás, modo sin
+  conexión y la lógica de Quiz, Memoria, Etapas y Shiritori.
+
 ## Tailwind
 
 Tailwind ya no se carga desde el CDN, sino que se compila. Después de añadir o cambiar

@@ -216,10 +216,12 @@
 
                 const targetRomaji = state.currentWordObj.romaji.toLowerCase();
                 // Check exact match and standard phonetic variants
-                const isMatch = (userVal === targetRomaji ||
-                    userVal === targetRomaji.replace(/ou/g, 'o') ||
-                    userVal === targetRomaji.replace(/oo/g, 'o') ||
-                    userVal === state.currentWordObj.romaTiles.join('').toLowerCase());
+                const isMatch = [
+                    targetRomaji,
+                    targetRomaji.replace(/ou/g, 'o'),
+                    targetRomaji.replace(/oo/g, 'o'),
+                    state.currentWordObj.romaTiles.join('')
+                ].some(variant => romajiMatches(userVal, variant));
 
                 if (isMatch) {
                     addXP(25);

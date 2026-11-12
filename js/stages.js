@@ -1099,7 +1099,7 @@
                     const inOptions = entry.options && entry.options.includes(targetHira);
                     const isTarget = entry.target === targetHira;
                     if (inOptions || isTarget) {
-                        const candidates = entry.options ? entry.options.filter(h => h !== targetHira) : [];
+                        const candidates = entry.options ? entry.options.filter(h => !areKanaHomophones(h, targetHira)) : [];
                         candidates.forEach(candHira => {
                             if (!lookalikeCandidates.includes(candHira)) {
                                 lookalikeCandidates.push(candHira);
@@ -1128,29 +1128,26 @@
             }
 
             // 2. Completar con kanas del pool de la sesión
-            const poolDistractors = pool.filter(k => 
-                k.hiragana !== targetHira && 
-                !chosen.some(c => c.hiragana === k.hiragana)
-            );
+            // Ni el propio kana ni uno que suene igual (じ/ぢ, ず/づ, お/を)
+            const isUsable = k => !areKanaHomophones(k.hiragana, targetHira) &&
+                !chosen.some(c => areKanaHomophones(c.hiragana, k.hiragana));
+            const poolDistractors = pool.filter(isUsable);
             const shuffledPool = shuffleArray([...poolDistractors]);
             for (const p of shuffledPool) {
-                if (chosen.length < count) {
+                if (chosen.length < count && isUsable(p)) {
                     chosen.push(p);
                 }
             }
 
             // 3. Respaldo general: si aún faltan distractores (ej. pool muy pequeño)
             if (chosen.length < count) {
-                const remainingExternal = activeDataset.filter(k => 
-                    k.hiragana !== targetHira && 
-                    !chosen.some(c => c.hiragana === k.hiragana)
-                );
+                const remainingExternal = activeDataset.filter(isUsable);
                 const seenExternal = remainingExternal.filter(k => activeSrs?.[k.hiragana]?.reviews > 0);
                 const unseenExternal = remainingExternal.filter(k => !activeSrs?.[k.hiragana] || activeSrs[k.hiragana].reviews === 0);
                 const fallbackList = [...shuffleArray(seenExternal), ...shuffleArray(unseenExternal)];
                 
                 for (const fb of fallbackList) {
-                    if (chosen.length < count) {
+                    if (chosen.length < count && isUsable(fb)) {
                         chosen.push(fb);
                     }
                 }
@@ -2352,10 +2349,7 @@
 
             inp.disabled = true;
 
-            const normUser = userVal.replace('si', 'shi').replace('tu', 'tsu').replace('ti', 'chi').replace('hu', 'fu').replace('zi', 'ji');
-            const normTarget = correctRomaji.toLowerCase().replace('si', 'shi').replace('tu', 'tsu').replace('ti', 'chi').replace('hu', 'fu').replace('zi', 'ji');
-
-            const isOk = (userVal === correctRomaji.toLowerCase()) || (normUser === normTarget);
+            const isOk = romajiMatches(userVal, correctRomaji);
             handleStageAnswer(isOk, null, hiragana);
 
             if (isOk) {
@@ -2441,10 +2435,7 @@
             if (!curKana) return;
 
             const userVal = inp.value.trim().toLowerCase();
-            const normUser = userVal.replace('si', 'shi').replace('tu', 'tsu').replace('ti', 'chi').replace('hu', 'fu').replace('zi', 'ji');
-            const normTarget = curKana.romaji.toLowerCase().replace('si', 'shi').replace('tu', 'tsu').replace('ti', 'chi').replace('hu', 'fu').replace('zi', 'ji');
-
-            if (userVal === curKana.romaji.toLowerCase() || normUser === normTarget) {
+            if (romajiMatches(userVal, curKana.romaji)) {
                 playSoundTone(700, 'sine', 0.1);
                 handleStageAnswer(true, null, curKana.hiragana);
 
@@ -2541,10 +2532,7 @@
 
             inp.disabled = true;
 
-            const normUser = userVal.replace(/si/g, 'shi').replace(/tu/g, 'tsu').replace(/ti/g, 'chi').replace(/hu/g, 'fu').replace(/zi/g, 'ji').replace(/\s+/g, '');
-            const normTarget = correctRomaji.toLowerCase().replace(/si/g, 'shi').replace(/tu/g, 'tsu').replace(/ti/g, 'chi').replace(/hu/g, 'fu').replace(/zi/g, 'ji').replace(/\s+/g, '');
-
-            const isOk = (userVal === correctRomaji.toLowerCase()) || (normUser === normTarget);
+            const isOk = romajiMatches(userVal, correctRomaji);
             handleStageAnswer(isOk, null, hiragana[0]);
 
             if (isOk) {
@@ -2770,10 +2758,7 @@
             const userVal = inp.value.trim().toLowerCase();
             if (!userVal) return;
 
-            const normUser = userVal.replace(/si/g, 'shi').replace(/tu/g, 'tsu').replace(/ti/g, 'chi').replace(/hu/g, 'fu').replace(/zi/g, 'ji');
-            const normTarget = item.romaji.toLowerCase().replace(/si/g, 'shi').replace(/tu/g, 'tsu').replace(/ti/g, 'chi').replace(/hu/g, 'fu').replace(/zi/g, 'ji');
-
-            const isMatch = (userVal === item.romaji.toLowerCase() || normUser === normTarget);
+            const isMatch = romajiMatches(userVal, item.romaji);
 
             if (isMatch) {
                 state.stage8RomajiTypedCorrectly = true;

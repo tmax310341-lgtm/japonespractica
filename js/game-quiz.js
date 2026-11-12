@@ -3,7 +3,9 @@
         // QUIZ RÁPIDO
         // ==========================================================
         function initQuizQuestion() {
-            let pool = HIRAGANA_DATA;
+            // Silabario activo (antes siempre era hiragana, aunque estuviera activo katakana)
+            const dataset = getActiveKanaDataset();
+            let pool = dataset;
             if (state.quizCustomPool && state.quizCustomPool.length > 0) {
                 pool = state.quizCustomPool;
             }
@@ -26,7 +28,7 @@
 
             const options = [target.romaji];
             while (options.length < 4) {
-                const randomOption = HIRAGANA_DATA[Math.floor(Math.random() * HIRAGANA_DATA.length)].romaji;
+                const randomOption = dataset[Math.floor(Math.random() * dataset.length)].romaji;
                 if (!options.includes(randomOption)) options.push(randomOption);
             }
             shuffleArray(options);

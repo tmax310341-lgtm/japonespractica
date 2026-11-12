@@ -2,6 +2,17 @@
         // ==========================================================
         // SHIRITORI (PALABRAS ENCADENADAS) - CON GRAN BIBLIOTECA (260+ PALABRAS)
         // ==========================================================
+        // Sílabas con las que puede empezar la siguiente palabra (reglas habituales del shiritori):
+        //   - un kana pequeño final cuenta como grande: でんしゃ → や
+        //   - con dakuten/handakuten también vale la versión sin ellos: ちず → ず o す, きっぷ → ぷ o ふ
+        const SHIRITORI_SMALL_KANA = { 'ぁ': 'あ', 'ぃ': 'い', 'ぅ': 'う', 'ぇ': 'え', 'ぉ': 'お', 'ゃ': 'や', 'ゅ': 'ゆ', 'ょ': 'よ', 'っ': 'つ' };
+
+        function shiritoriAllowedStarts(lastChar) {
+            const base = SHIRITORI_SMALL_KANA[lastChar] || lastChar;
+            const plain = base.normalize('NFD').replace(/[\u3099\u309a]/g, '').normalize('NFC');
+            return plain === base ? [base] : [base, plain];
+        }
+
         function initShiritoriGame() {
             // Start with a safe starter word from EXPANDED_VOCABULARY (e.g. すし)
             const starter = SHIRITORI_WORDS.find(w => w.word === 'すし') || SHIRITORI_WORDS[0];
@@ -20,7 +31,8 @@
 
             const curRomajiEl = document.getElementById('shiritoriCurrentRomaji');
             if (curRomajiEl) {
-                curRomajiEl.innerHTML = `${cur.romaji} (${cur.spanish}) • Conectar con: <span class="font-bold text-sakura-400 font-jp text-2xl">${cur.last}</span>`;
+                const starts = shiritoriAllowedStarts(cur.last).join(' o ');
+                curRomajiEl.innerHTML = `${cur.romaji} (${cur.spanish}) • Conectar con: <span class="font-bold text-sakura-400 font-jp text-2xl">${starts}</span>`;
             }
 
             // Render chain badges
@@ -45,9 +57,25 @@
 
             // Generate 4 candidate words from 260+ library
             const usedSet = new Set(state.shiritoriChain.map(c => c.word));
-            const matchingValid = SHIRITORI_WORDS.filter(w => w.first === cur.last && !usedSet.has(w.word) && !w.endsInN);
-            const matchingTrapN = SHIRITORI_WORDS.filter(w => w.first === cur.last && !usedSet.has(w.word) && w.endsInN);
-            const distractors = SHIRITORI_WORDS.filter(w => w.first !== cur.last && !usedSet.has(w.word));
+            const allowed = shiritoriAllowedStarts(cur.last);
+            const matchingValid = SHIRITORI_WORDS.filter(w => allowed.includes(w.first) && !usedSet.has(w.word) && !w.endsInN);
+            const matchingTrapN = SHIRITORI_WORDS.filter(w => allowed.includes(w.first) && !usedSet.has(w.word) && w.endsInN);
+            const distractors = SHIRITORI_WORDS.filter(w => !allowed.includes(w.first) && !usedSet.has(w.word));
+
+            // Sin ninguna palabra posible, la cadena se da por completada (antes se ofrecían
+            // palabras que no encajaban y no había forma de continuar)
+            if (matchingValid.length === 0 && matchingTrapN.length === 0) {
+                const grid = document.getElementById('shiritoriOptionsGrid');
+                if (grid) {
+                    grid.innerHTML = `<div class="col-span-full text-center p-6 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 font-bold">
+                        🏆 No quedan palabras que empiecen por ${allowed.join(' o ')}. ¡Cadena completada con ${state.shiritoriChain.length} palabras!
+                    </div>`;
+                }
+                addXP(50);
+                showToast(`🏆 ¡Cadena completada con ${state.shiritoriChain.length} palabras! (+50 XP)`, "success");
+                setTimeout(initShiritoriGame, 3000);
+                return;
+            }
 
             const options = [];
             // Pick up to 2 valid continuations
@@ -66,15 +94,6 @@
             for (const d of shuffledDist) {
                 if (options.length >= 4) break;
                 if (!options.some(o => o.word === d.word)) options.push(d);
-            }
-
-            // If still no valid options (rare branch with no available words in dictionary)
-            if (matchingValid.length === 0 && matchingTrapN.length === 0) {
-                // Pick a new bridge word
-                const fallback = SHIRITORI_WORDS.filter(w => !usedSet.has(w.word)).slice(0, 4);
-                fallback.forEach(f => {
-                    if (options.length < 4 && !options.some(o => o.word === f.word)) options.push(f);
-                });
             }
 
             shuffleArray(options);
@@ -106,9 +125,10 @@
             const cur = state.shiritoriCurrentWord;
 
             // 1. Check if word starts with correct kana
-            if (selectedWord.first !== cur.last) {
+            const allowed = shiritoriAllowedStarts(cur.last);
+            if (!allowed.includes(selectedWord.first)) {
                 playSoundTone(220, 'sawtooth', 0.25);
-                showToast(`¡Incorrecto! "${selectedWord.word}" empieza con "${selectedWord.first}", pero debes continuar con "${cur.last}".`, "error");
+                showToast(`¡Incorrecto! "${selectedWord.word}" empieza con "${selectedWord.first}", pero debes continuar con "${allowed.join('" o "')}".`, "error");
                 return;
             }
 

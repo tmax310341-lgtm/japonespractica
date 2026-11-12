@@ -15,6 +15,19 @@
             return dataset.find(k => (k.char || k.katakana || k.hiragana) === char) || null;
         }
 
+        // Kanas que se pronuncian igual: no deben aparecer juntos como opciones de una misma
+        // pregunta (con el audio o el rōmaji no hay forma de distinguirlos).
+        const KANA_HOMOPHONES = { 'ぢ': 'じ', 'づ': 'ず', 'を': 'お', 'ぢゃ': 'じゃ', 'ぢゅ': 'じゅ', 'ぢょ': 'じょ' };
+
+        function kanaSoundKey(char) {
+            const hira = [...String(char || '')].map(c => (c >= 'ァ' && c <= 'ヶ') ? String.fromCharCode(c.charCodeAt(0) - 0x60) : c).join('');
+            return KANA_HOMOPHONES[hira] || hira;
+        }
+
+        function areKanaHomophones(a, b) {
+            return kanaSoundKey(a) === kanaSoundKey(b);
+        }
+
         function getActiveKanaDataset() {
             return state.currentSyllabary === 'katakana' ? KATAKANA_DATA : HIRAGANA_DATA;
         }
