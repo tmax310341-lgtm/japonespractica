@@ -136,7 +136,7 @@
                 state.drawStrokeStates = Array(numStrokes).fill('pending');
                 state.drawIsPeeking = false;
 
-                const item = HIRAGANA_DATA.find(k => k.hiragana === char) || { romaji: char };
+                const item = findKanaByChar(char) || { romaji: char };
                 const elSym = document.getElementById('drawHeaderSymbol');
                 if (elSym) elSym.textContent = char;
                 const elRom = document.getElementById('drawHeaderRomaji');
@@ -539,7 +539,7 @@
                 activeFeedbackModalMode = 'draw';
             }
             const guide = getKanaFeedbackGuide(char);
-            const item = HIRAGANA_DATA.find(k => k.hiragana === char) || { romaji: char };
+            const item = findKanaByChar(char) || { romaji: char };
 
             const displayEl = document.getElementById('modalKanaDisplay');
             const titleEl = document.getElementById('modalKanaTitle');

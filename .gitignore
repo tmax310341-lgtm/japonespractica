@@ -41,3 +41,7 @@ scratch/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Resultados de Playwright
+test-results/
+playwright-report/

@@ -21,8 +21,10 @@
             if (victoryBanner) victoryBanner.classList.add('hidden');
 
             // 1. Obtener pool de kanas según los grupos seleccionados
-            const filteredPool = HIRAGANA_DATA.filter(k => state.memorySelectedGroups.includes(k.group));
-            const activeKanaPool = filteredPool.length > 0 ? filteredPool : HIRAGANA_DATA.filter(k => k.group === 'a');
+            // Silabario activo (antes siempre era hiragana, aunque estuviera activo katakana)
+            const dataset = getActiveKanaDataset();
+            const filteredPool = dataset.filter(k => state.memorySelectedGroups.includes(k.group));
+            const activeKanaPool = filteredPool.length > 0 ? filteredPool : dataset.filter(k => k.group === 'a');
 
             // 2. Determinar número de pares a jugar
             let numPairs = activeKanaPool.length;
