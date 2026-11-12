@@ -223,6 +223,34 @@
                 </button>
             </div>
 
+            <!-- Cuenta de Google y progreso en la nube (visible solo si js/firebase-config.js tiene configuración) -->
+            <div id="cloudAccountCard" class="hidden rounded-2xl border border-slate-800 bg-slate-950/60 p-3 space-y-2">
+                <div id="cloudSignedOut" class="space-y-2">
+                    <p class="text-[11px] text-slate-400 leading-snug">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i>
+                        Inicia sesión para guardar tu progreso en la nube y seguir en otro dispositivo.
+                    </p>
+                    <button type="button" id="cloudSignInBtn" data-action="cloudSignIn"
+                        class="w-full min-h-[44px] px-3 py-2 rounded-xl bg-white text-slate-900 border border-slate-300 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-100 transition active:scale-98 disabled:opacity-50">
+                        <i class="fa-brands fa-google text-sm"></i>
+                        <span>Iniciar sesión con Google</span>
+                    </button>
+                    <p id="cloudSignedOutStatus" class="hidden text-[10px] text-slate-400 leading-snug"></p>
+                </div>
+                <div id="cloudSignedIn" class="hidden flex items-center gap-3">
+                    <img id="cloudUserPhoto" alt="" referrerpolicy="no-referrer"
+                        class="hidden w-9 h-9 rounded-full border border-slate-700 shrink-0">
+                    <div class="min-w-0 flex-1">
+                        <p id="cloudUserName" class="text-xs font-bold text-white truncate"></p>
+                        <p id="cloudSyncStatus" class="text-[10px] text-slate-400 leading-snug"></p>
+                    </div>
+                    <button type="button" data-action="cloudSignOut" title="Cerrar sesión" aria-label="Cerrar sesión"
+                        class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95 shrink-0">
+                        <i class="fa-solid fa-right-from-bracket text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
             <!-- 12 Navigation Items List -->
             <div class="space-y-1" id="drawerNavLinks">
                 <button type="button" data-action="switchTabAndCloseDrawer" data-args='["study"]' id="nav-study"
@@ -2624,6 +2652,9 @@
     <script src="js/time.js"></script>
     <script src="js/parcial.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/progress-merge.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/cloud-sync.js"></script>
 
     <!-- ==========================================================
          MINIVENTANA FLOTANTE & ARRASTRABLE: ORDEN DE TRAZOS ANIMADO

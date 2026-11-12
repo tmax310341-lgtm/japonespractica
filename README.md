@@ -18,6 +18,9 @@ js/
   utils.js            utilidades (shuffleArray: mezcla Fisher–Yates)
   actions.js          delegación de eventos: data-action, data-change, data-input…
   state.js            estado global y guardado en localStorage
+  firebase-config.js  configuración de Firebase (null = sin inicio de sesión)
+  cloud-sync.js       cuenta de Google y sincronización en la nube
+  progress-merge.js   fusión del progreso de dos dispositivos (probada con npm test)
   main.js             inicialización y atajos de teclado
   …                   un archivo por módulo (estudio, trazado, juegos, etapas, números, hora, parcial)
 ```
@@ -36,6 +39,13 @@ En lugar de `onclick="miFuncion('a', 1)"` se usa:
 `js/actions.js` explica los atributos admitidos y los valores especiales
 (`"$this"`, `"$event"`, `"$value"`, `data-stop`). La función debe declararse
 con `function miFuncion() {}` en el nivel superior de algún archivo de `js/`.
+
+## Cuenta de Google y progreso en la nube
+
+Opcional. Con Firebase configurado, el menú ☰ muestra «Iniciar sesión con Google» y el progreso
+se sincroniza entre dispositivos (`js/cloud-sync.js`, fusión en `js/progress-merge.js`).
+Para activarlo, sigue [docs/firebase-setup.md](docs/firebase-setup.md) y pega tu configuración
+en `js/firebase-config.js`. Las pruebas de la fusión se ejecutan con `npm test`.
 
 ## Tailwind
 

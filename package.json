@@ -4,7 +4,8 @@
   "description": "KotoDojo - práctica de japonés (kanas, números, horas y caligrafía)",
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify",
-    "watch:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --watch"
+    "watch:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --watch",
+    "test": "node tests/progress-merge.test.js"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.19"

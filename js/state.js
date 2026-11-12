@@ -204,137 +204,7 @@
             try {
                 const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('hiragana_master_storage_v2');
                 if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (typeof parsed.xp === 'number') state.xp = parsed.xp;
-                    if (parsed.theme) { state.theme = normalizeThemeKey(parsed.theme); applyTheme(state.theme); } else { applyTheme('theme-dark'); }
-                    if (typeof parsed.audioEnabled === 'boolean') state.audioEnabled = parsed.audioEnabled;
-                    if (parsed.voiceConfig && typeof parsed.voiceConfig === 'object') {
-                        state.voiceConfig = {
-                            voiceUri: parsed.voiceConfig.voiceUri || '',
-                            preset: parsed.voiceConfig.preset || 'male',
-                            pitch: typeof parsed.voiceConfig.pitch === 'number' ? parsed.voiceConfig.pitch : 0.80,
-                            rate: typeof parsed.voiceConfig.rate === 'number' ? parsed.voiceConfig.rate : 0.88
-                        };
-                    }
-                    if (typeof parsed.strokeStrictness === 'string') state.strokeStrictness = parsed.strokeStrictness;
-                    if (Array.isArray(parsed.practiceSelectedGroups) && parsed.practiceSelectedGroups.length > 0) {
-                        state.practiceSelectedGroups = parsed.practiceSelectedGroups;
-                    }
-                    if (typeof parsed.sokuonTipDisabled === 'boolean') state.sokuonTipDisabled = parsed.sokuonTipDisabled;
-                    if (typeof parsed.autoAdvanceDrawing === 'boolean') {
-                        state.autoAdvanceDrawing = parsed.autoAdvanceDrawing;
-                    }
-                    if (parsed.stagesLearningMode) {
-                        state.stagesLearningMode = parsed.stagesLearningMode;
-                    }
-                    if (parsed.stagesAutoProgress && typeof parsed.stagesAutoProgress === 'object') {
-                        state.stagesAutoProgress = {
-                            unlockedIndex: typeof parsed.stagesAutoProgress.unlockedIndex === 'number' ? parsed.stagesAutoProgress.unlockedIndex : 0,
-                            masteredLevels: Array.isArray(parsed.stagesAutoProgress.masteredLevels) ? parsed.stagesAutoProgress.masteredLevels : [],
-                            selectedLevelId: parsed.stagesAutoProgress.selectedLevelId || 'a',
-                            levelScores: parsed.stagesAutoProgress.levelScores || {},
-                            kanaMastery: parsed.stagesAutoProgress.kanaMastery || {}
-                        };
-                    }
-                    if (parsed.stagesConfig && typeof parsed.stagesConfig === 'object') {
-                        state.stagesConfig = { ...state.stagesConfig, ...parsed.stagesConfig };
-                    }
-                    if (Array.isArray(parsed.memorySelectedGroups) && parsed.memorySelectedGroups.length > 0) {
-                        state.memorySelectedGroups = parsed.memorySelectedGroups;
-                    }
-                    if (parsed.memoryPairCount) {
-                        state.memoryPairCount = parsed.memoryPairCount;
-                    }
-                    if (parsed.currentSyllabary === 'katakana' || parsed.currentSyllabary === 'hiragana') {
-                        state.currentSyllabary = parsed.currentSyllabary;
-                    }
-                    if (parsed.stagesAutoProgress_katakana && typeof parsed.stagesAutoProgress_katakana === 'object') {
-                        state.stagesAutoProgress_katakana = {
-                            unlockedIndex: typeof parsed.stagesAutoProgress_katakana.unlockedIndex === 'number' ? parsed.stagesAutoProgress_katakana.unlockedIndex : 0,
-                            masteredLevels: Array.isArray(parsed.stagesAutoProgress_katakana.masteredLevels) ? parsed.stagesAutoProgress_katakana.masteredLevels : [],
-                            selectedLevelId: parsed.stagesAutoProgress_katakana.selectedLevelId || 'a',
-                            levelScores: parsed.stagesAutoProgress_katakana.levelScores || {},
-                            kanaMastery: parsed.stagesAutoProgress_katakana.kanaMastery || {}
-                        };
-                    }
-                    if (parsed.srs_katakana && typeof parsed.srs_katakana === 'object') {
-                        state.srs_katakana = parsed.srs_katakana;
-                        Object.values(state.srs_katakana).forEach(s => {
-                            if (s && typeof s.errors !== 'number') {
-                                s.errors = (s.box === 3) ? 0 : (s.box === 2 ? 1 : 0);
-                            }
-                        });
-                    }
-                    if (Array.isArray(parsed.practiceSelectedGroups_katakana) && parsed.practiceSelectedGroups_katakana.length > 0) {
-                        state.practiceSelectedGroups_katakana = parsed.practiceSelectedGroups_katakana;
-                    }
-                    if (parsed.stagesConfig_katakana && typeof parsed.stagesConfig_katakana === 'object') {
-                        state.stagesConfig_katakana = { ...state.stagesConfig_katakana, ...parsed.stagesConfig_katakana };
-                    }
-                    if (parsed.srs && typeof parsed.srs === 'object') {
-                        state.srs = parsed.srs;
-                        // Corrección/migración de datos: asegurar que exista el contador explícito de errores
-                        Object.values(state.srs).forEach(s => {
-                            if (s && typeof s.errors !== 'number') {
-                                if (s.box === 3) {
-                                    s.errors = 0;
-                                } else if (s.box === 2) {
-                                    s.errors = 1;
-                                } else {
-                                    s.errors = (s.reviews > 0) ? Math.max(1, Math.min(2, s.reviews - (s.consecutive || 0))) : 0;
-                                }
-                            }
-                        });
-                    }
-                    if (parsed.timeConfig && typeof parsed.timeConfig === 'object') {
-                        state.timeConfig = {
-                            mode: parsed.timeConfig.mode || 'guide',
-                            guideSubTab: parsed.timeConfig.guideSubTab || 'hours',
-                            scriptMode: parsed.timeConfig.scriptMode || 'kanji',
-                            streak: parsed.timeConfig.streak || 0,
-                            score: parsed.timeConfig.score || 0
-                        };
-                    }
-                    if (parsed.numbersConfig && typeof parsed.numbersConfig === 'object') {
-                        const rawMode = parsed.numbersConfig.mode;
-                        const validPracticeModes = ['builder', 'dictation', 'quiz'];
-                        const migratedPillar = parsed.numbersConfig.pillar ||
-                            ((rawMode === 'guide' || rawMode === 'lesson') ? 'guide' : (validPracticeModes.includes(rawMode) ? 'practice' : 'guide'));
-                        const migratedSubTab = parsed.numbersConfig.guideSubTab ||
-                            (rawMode === 'guide' ? 'mutations' : 'lesson');
-                        state.numbersConfig = {
-                            pillar: ['guide', 'practice', 'translator'].includes(migratedPillar) ? migratedPillar : 'guide',
-                            guideSubTab: ['lesson', 'basics', 'mutations', 'man', 'kanji'].includes(migratedSubTab) ? migratedSubTab : 'lesson',
-                            range: parsed.numbersConfig.range || '10000-plus',
-                            mode: validPracticeModes.includes(rawMode) ? rawMode : 'builder',
-                            lessonStep: parsed.numbersConfig.lessonStep || 1,
-                            scriptMode: parsed.numbersConfig.scriptMode === 'kanji' ? 'kanji' : 'kana',
-                            yenMode: Boolean(parsed.numbersConfig.yenMode),
-                            streak: parsed.numbersConfig.streak || 0,
-                            score: parsed.numbersConfig.score || 0
-                        };
-                    }
-
-                    // Check streak date
-                    const today = getLocalDateString();
-                    if (parsed.lastActiveDate) {
-                        const lastDate = new Date(parsed.lastActiveDate);
-                        const nowDate = new Date(today);
-                        const diffDays = Math.round((nowDate - lastDate) / (1000 * 60 * 60 * 24));
-                        if (diffDays === 1) {
-                            // Consecutive day
-                            state.streak = (parsed.streak || 0) + 1;
-                        } else if (diffDays > 1) {
-                            // Broken streak
-                            state.streak = 1;
-                        } else {
-                            // Same day (or legacy UTC date one day ahead): keep the saved streak
-                            state.streak = parsed.streak || 1;
-                        }
-                    } else if (typeof parsed.streak === 'number') {
-                        state.streak = parsed.streak;
-                    }
-                    state.lastActiveDate = today;
+                    applySavedProgress(JSON.parse(raw));
                 }
             } catch (e) {
                 console.warn("Could not load from localStorage:", e);
@@ -342,38 +212,192 @@
             updateHeaderBadges();
         }
 
+        // Momento (ms) del último guardado local, o 0 si no hay datos guardados.
+        function getLocalSavedAt() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? (JSON.parse(raw).savedAt || 0) : 0;
+            } catch (e) {
+                return 0;
+            }
+        }
+
+        // Aplica al estado un objeto de progreso guardado (de localStorage o de la nube).
+        function applySavedProgress(parsed) {
+            if (parsed && typeof parsed === 'object') {
+                if (typeof parsed.xp === 'number') state.xp = parsed.xp;
+                if (parsed.theme) { state.theme = normalizeThemeKey(parsed.theme); applyTheme(state.theme); } else { applyTheme('theme-dark'); }
+                if (typeof parsed.audioEnabled === 'boolean') state.audioEnabled = parsed.audioEnabled;
+                if (parsed.voiceConfig && typeof parsed.voiceConfig === 'object') {
+                    state.voiceConfig = {
+                        voiceUri: parsed.voiceConfig.voiceUri || '',
+                        preset: parsed.voiceConfig.preset || 'male',
+                        pitch: typeof parsed.voiceConfig.pitch === 'number' ? parsed.voiceConfig.pitch : 0.80,
+                        rate: typeof parsed.voiceConfig.rate === 'number' ? parsed.voiceConfig.rate : 0.88
+                    };
+                }
+                if (typeof parsed.strokeStrictness === 'string') state.strokeStrictness = parsed.strokeStrictness;
+                if (Array.isArray(parsed.practiceSelectedGroups) && parsed.practiceSelectedGroups.length > 0) {
+                    state.practiceSelectedGroups = parsed.practiceSelectedGroups;
+                }
+                if (typeof parsed.sokuonTipDisabled === 'boolean') state.sokuonTipDisabled = parsed.sokuonTipDisabled;
+                if (typeof parsed.autoAdvanceDrawing === 'boolean') {
+                    state.autoAdvanceDrawing = parsed.autoAdvanceDrawing;
+                }
+                if (parsed.stagesLearningMode) {
+                    state.stagesLearningMode = parsed.stagesLearningMode;
+                }
+                if (parsed.stagesAutoProgress && typeof parsed.stagesAutoProgress === 'object') {
+                    state.stagesAutoProgress = {
+                        unlockedIndex: typeof parsed.stagesAutoProgress.unlockedIndex === 'number' ? parsed.stagesAutoProgress.unlockedIndex : 0,
+                        masteredLevels: Array.isArray(parsed.stagesAutoProgress.masteredLevels) ? parsed.stagesAutoProgress.masteredLevels : [],
+                        selectedLevelId: parsed.stagesAutoProgress.selectedLevelId || 'a',
+                        levelScores: parsed.stagesAutoProgress.levelScores || {},
+                        kanaMastery: parsed.stagesAutoProgress.kanaMastery || {}
+                    };
+                }
+                if (parsed.stagesConfig && typeof parsed.stagesConfig === 'object') {
+                    state.stagesConfig = { ...state.stagesConfig, ...parsed.stagesConfig };
+                }
+                if (Array.isArray(parsed.memorySelectedGroups) && parsed.memorySelectedGroups.length > 0) {
+                    state.memorySelectedGroups = parsed.memorySelectedGroups;
+                }
+                if (parsed.memoryPairCount) {
+                    state.memoryPairCount = parsed.memoryPairCount;
+                }
+                if (parsed.currentSyllabary === 'katakana' || parsed.currentSyllabary === 'hiragana') {
+                    state.currentSyllabary = parsed.currentSyllabary;
+                }
+                if (parsed.stagesAutoProgress_katakana && typeof parsed.stagesAutoProgress_katakana === 'object') {
+                    state.stagesAutoProgress_katakana = {
+                        unlockedIndex: typeof parsed.stagesAutoProgress_katakana.unlockedIndex === 'number' ? parsed.stagesAutoProgress_katakana.unlockedIndex : 0,
+                        masteredLevels: Array.isArray(parsed.stagesAutoProgress_katakana.masteredLevels) ? parsed.stagesAutoProgress_katakana.masteredLevels : [],
+                        selectedLevelId: parsed.stagesAutoProgress_katakana.selectedLevelId || 'a',
+                        levelScores: parsed.stagesAutoProgress_katakana.levelScores || {},
+                        kanaMastery: parsed.stagesAutoProgress_katakana.kanaMastery || {}
+                    };
+                }
+                if (parsed.srs_katakana && typeof parsed.srs_katakana === 'object') {
+                    state.srs_katakana = parsed.srs_katakana;
+                    Object.values(state.srs_katakana).forEach(s => {
+                        if (s && typeof s.errors !== 'number') {
+                            s.errors = (s.box === 3) ? 0 : (s.box === 2 ? 1 : 0);
+                        }
+                    });
+                }
+                if (Array.isArray(parsed.practiceSelectedGroups_katakana) && parsed.practiceSelectedGroups_katakana.length > 0) {
+                    state.practiceSelectedGroups_katakana = parsed.practiceSelectedGroups_katakana;
+                }
+                if (parsed.stagesConfig_katakana && typeof parsed.stagesConfig_katakana === 'object') {
+                    state.stagesConfig_katakana = { ...state.stagesConfig_katakana, ...parsed.stagesConfig_katakana };
+                }
+                if (parsed.srs && typeof parsed.srs === 'object') {
+                    state.srs = parsed.srs;
+                    // Corrección/migración de datos: asegurar que exista el contador explícito de errores
+                    Object.values(state.srs).forEach(s => {
+                        if (s && typeof s.errors !== 'number') {
+                            if (s.box === 3) {
+                                s.errors = 0;
+                            } else if (s.box === 2) {
+                                s.errors = 1;
+                            } else {
+                                s.errors = (s.reviews > 0) ? Math.max(1, Math.min(2, s.reviews - (s.consecutive || 0))) : 0;
+                            }
+                        }
+                    });
+                }
+                if (parsed.timeConfig && typeof parsed.timeConfig === 'object') {
+                    state.timeConfig = {
+                        mode: parsed.timeConfig.mode || 'guide',
+                        guideSubTab: parsed.timeConfig.guideSubTab || 'hours',
+                        scriptMode: parsed.timeConfig.scriptMode || 'kanji',
+                        streak: parsed.timeConfig.streak || 0,
+                        score: parsed.timeConfig.score || 0
+                    };
+                }
+                if (parsed.numbersConfig && typeof parsed.numbersConfig === 'object') {
+                    const rawMode = parsed.numbersConfig.mode;
+                    const validPracticeModes = ['builder', 'dictation', 'quiz'];
+                    const migratedPillar = parsed.numbersConfig.pillar ||
+                        ((rawMode === 'guide' || rawMode === 'lesson') ? 'guide' : (validPracticeModes.includes(rawMode) ? 'practice' : 'guide'));
+                    const migratedSubTab = parsed.numbersConfig.guideSubTab ||
+                        (rawMode === 'guide' ? 'mutations' : 'lesson');
+                    state.numbersConfig = {
+                        pillar: ['guide', 'practice', 'translator'].includes(migratedPillar) ? migratedPillar : 'guide',
+                        guideSubTab: ['lesson', 'basics', 'mutations', 'man', 'kanji'].includes(migratedSubTab) ? migratedSubTab : 'lesson',
+                        range: parsed.numbersConfig.range || '10000-plus',
+                        mode: validPracticeModes.includes(rawMode) ? rawMode : 'builder',
+                        lessonStep: parsed.numbersConfig.lessonStep || 1,
+                        scriptMode: parsed.numbersConfig.scriptMode === 'kanji' ? 'kanji' : 'kana',
+                        yenMode: Boolean(parsed.numbersConfig.yenMode),
+                        streak: parsed.numbersConfig.streak || 0,
+                        score: parsed.numbersConfig.score || 0
+                    };
+                }
+
+                // Check streak date
+                const today = getLocalDateString();
+                if (parsed.lastActiveDate) {
+                    const lastDate = new Date(parsed.lastActiveDate);
+                    const nowDate = new Date(today);
+                    const diffDays = Math.round((nowDate - lastDate) / (1000 * 60 * 60 * 24));
+                    if (diffDays === 1) {
+                        // Consecutive day
+                        state.streak = (parsed.streak || 0) + 1;
+                    } else if (diffDays > 1) {
+                        // Broken streak
+                        state.streak = 1;
+                    } else {
+                        // Same day (or legacy UTC date one day ahead): keep the saved streak
+                        state.streak = parsed.streak || 1;
+                    }
+                } else if (typeof parsed.streak === 'number') {
+                    state.streak = parsed.streak;
+                }
+                state.lastActiveDate = today;
+            }
+        }
+
+        // Objeto con todo el progreso y los ajustes que se guardan (en local y en la nube).
+        function buildSaveObject() {
+            return {
+                xp: state.xp,
+                streak: state.streak,
+                lastActiveDate: state.lastActiveDate,
+                strokeStrictness: state.strokeStrictness,
+                practiceSelectedGroups: state.practiceSelectedGroups,
+                autoAdvanceDrawing: state.autoAdvanceDrawing,
+                sokuonTipDisabled: state.sokuonTipDisabled,
+                stagesLearningMode: state.stagesLearningMode,
+                stagesAutoProgress: state.stagesAutoProgress,
+                stagesConfig: state.stagesConfig,
+                theme: state.theme,
+                audioEnabled: state.audioEnabled,
+                voiceConfig: state.voiceConfig,
+                memorySelectedGroups: state.memorySelectedGroups,
+                memoryPairCount: state.memoryPairCount,
+                srs: state.srs,
+                numbersConfig: state.numbersConfig,
+                timeConfig: state.timeConfig,
+                currentSyllabary: state.currentSyllabary,
+                srs_katakana: state.srs_katakana,
+                stagesAutoProgress_katakana: state.stagesAutoProgress_katakana,
+                practiceSelectedGroups_katakana: state.practiceSelectedGroups_katakana,
+                stagesConfig_katakana: state.stagesConfig_katakana
+            };
+        }
+
         function saveStateToStorage() {
             try {
-                const toSave = {
-                    xp: state.xp,
-                    streak: state.streak,
-                    lastActiveDate: state.lastActiveDate,
-                    strokeStrictness: state.strokeStrictness,
-                    practiceSelectedGroups: state.practiceSelectedGroups,
-                    autoAdvanceDrawing: state.autoAdvanceDrawing,
-                    sokuonTipDisabled: state.sokuonTipDisabled,
-                    stagesLearningMode: state.stagesLearningMode,
-                    stagesAutoProgress: state.stagesAutoProgress,
-                    stagesConfig: state.stagesConfig,
-                    theme: state.theme,
-                    audioEnabled: state.audioEnabled,
-                    voiceConfig: state.voiceConfig,
-                    memorySelectedGroups: state.memorySelectedGroups,
-                    memoryPairCount: state.memoryPairCount,
-                    srs: state.srs,
-                    numbersConfig: state.numbersConfig,
-                    timeConfig: state.timeConfig,
-                    currentSyllabary: state.currentSyllabary,
-                    srs_katakana: state.srs_katakana,
-                    stagesAutoProgress_katakana: state.stagesAutoProgress_katakana,
-                    practiceSelectedGroups_katakana: state.practiceSelectedGroups_katakana,
-                    stagesConfig_katakana: state.stagesConfig_katakana
-                };
+                const toSave = buildSaveObject();
+                toSave.savedAt = Date.now();
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
             } catch (e) {
                 console.warn("Could not save to localStorage:", e);
             }
             updateHeaderBadges();
+            // Aviso para la sincronización en la nube (js/cloud-sync.js), si está activa
+            if (typeof onProgressSaved === 'function') onProgressSaved();
         }
 
         function updateHeaderBadges() {
