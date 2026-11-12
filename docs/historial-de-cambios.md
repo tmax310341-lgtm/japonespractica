@@ -8,8 +8,10 @@ Resumen de todo lo que se hizo en esta sesión, en orden: por qué se hizo, qué
 | [#2](https://github.com/tmax310341-lgtm/japonespractica/pull/2) | 12 nov | Iniciar sesión con Google y sincronizar el progreso en la nube |
 | [#3](https://github.com/tmax310341-lgtm/japonespractica/pull/3) | 12 nov | App instalable sin conexión, carga más ligera, accesibilidad y navegación por URL |
 | [#4](https://github.com/tmax310341-lgtm/japonespractica/pull/4) | 12 nov | Pruebas automáticas en GitHub y corrección de 6 errores |
+| [#5](https://github.com/tmax310341-lgtm/japonespractica/pull/5) | 12 nov | Este historial de cambios |
+| — | 12 nov | Protección de `main`: no se puede fusionar si las pruebas no pasan (ajuste de GitHub, sin PR) |
 
-En total: 63 archivos modificados, todos fusionados en `main` y publicados en
+En total: 64 archivos modificados, todos fusionados en `main` y publicados en
 <https://tmax310341-lgtm.github.io/japonespractica/>.
 
 ---
@@ -137,6 +139,21 @@ Para comprobar que las pruebas detectan fallos reales, se reintrodujeron a prop�
 
 ---
 
+## 5. Historial y protección de `main` (PR #5)
+
+### Este documento
+- `docs/historial-de-cambios.md` resume todo lo hecho en la sesión.
+
+### `main` protegida
+- **Por qué:** el PR #5 se fusionó antes de que terminaran las pruebas, porque GitHub no exigía esperarlas. Ese PR solo añadía un documento, pero con un cambio de código podría haberse publicado algo roto.
+- **Qué cambió:** en GitHub se activó la protección de la rama `main` (Settings → Branches):
+  - Para fusionar un PR, la prueba **«pruebas»** de GitHub Actions tiene que estar en verde.
+  - La regla se aplica también a los administradores, así que no se puede saltar por accidente.
+  - No se permite `git push --force` sobre `main` ni borrar la rama.
+- **Consecuencia:** ya no se puede hacer `git push` directamente a `main`. Todo cambio pasa por un PR (ver «Cómo trabajar» más abajo).
+
+---
+
 ## Cómo trabajar con el proyecto a partir de ahora
 
 ### Dónde editar
@@ -152,6 +169,25 @@ npm test                          # pruebas de lógica y datos (rápidas)
 npx playwright install chromium   # solo la primera vez, antes de test:e2e
 npm run test:e2e                  # pruebas en el navegador
 ```
+
+### Subir un cambio (`main` está protegida)
+
+```bash
+git checkout main
+git pull                          # partir de la última versión
+git checkout -b mi-cambio         # rama nueva para el cambio
+# … editar, y luego:
+npm test
+git add -A
+git commit -m "Describe el cambio"
+git push -u origin mi-cambio
+gh pr create                      # o abrir el PR desde la web de GitHub
+```
+
+Cuando el PR muestre el ✓ verde de «pruebas», se fusiona desde GitHub (o con `gh pr merge`).
+Después, en tu carpeta: `git checkout main` y `git pull`.
+
+Si alguna vez hace falta saltarse la regla, se desactiva en GitHub: **Settings → Branches → main**.
 
 ### Reglas que conviene recordar
 1. **Clases de Tailwind nuevas:** ejecuta `npm run build:css` y sube `css/tailwind.css`. GitHub avisa si se te olvida.
