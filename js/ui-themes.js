@@ -366,6 +366,119 @@
             });
         }
 
+        // ==========================================================
+        // NAVEGACIÓN CON LA URL
+        // Cada pestaña tiene su dirección (#etapas, #numeros…): el botón «atrás»
+        // vuelve a la pestaña anterior, al recargar se mantiene la pestaña y los
+        // enlaces llevan directamente a una sección.
+        // ==========================================================
+        const TAB_SLUGS = {
+            study: 'aprender',
+            stages: 'etapas',
+            draw: 'trazado',
+            blinddraw: 'a-ciegas',
+            dictation: 'dictado',
+            lookalikes: 'gemelos',
+            shiritori: 'shiritori',
+            wordbuilder: 'armar-palabras',
+            wordsearch: 'sopa-de-letras',
+            memory: 'memoria',
+            quiz: 'quiz',
+            progress: 'progreso',
+            numbers: 'numeros',
+            time: 'horas',
+            parcial: 'parcial'
+        };
+        let restoringTabFromUrl = false;
+
+        function tabFromHash(hash) {
+            let slug = (hash || '').replace(/^#/, '');
+            try { slug = decodeURIComponent(slug); } catch (e) {}
+            slug = slug.toLowerCase();
+            if (!slug) return null;
+            return Object.keys(TAB_SLUGS).find(id => TAB_SLUGS[id] === slug || id === slug) || null;
+        }
+
+        function updateTabUrl(tabId) {
+            if (restoringTabFromUrl || !TAB_SLUGS[tabId]) return;
+            const current = tabFromHash(location.hash) || 'study';
+            if (current === tabId) return;
+            history.pushState({ tab: tabId }, '', '#' + TAB_SLUGS[tabId]);
+        }
+
+        function showTabFromUrl() {
+            const tabId = tabFromHash(location.hash) || 'study';
+            const visible = document.querySelector('section.tab-content:not(.hidden)');
+            if (visible && visible.id === 'tab-' + tabId) return;
+            restoringTabFromUrl = true;
+            try {
+                switchTab(tabId);
+            } finally {
+                restoringTabFromUrl = false;
+            }
+        }
+
+        // Al abrir la app con una dirección como .../#numeros
+        function restoreTabFromUrl() {
+            if (tabFromHash(location.hash)) showTabFromUrl();
+        }
+
+        window.addEventListener('popstate', () => {
+            closeMobileMenu();
+            showTabFromUrl();
+        });
+
+        // ==========================================================
+        // MÓDULOS BAJO DEMANDA
+        // Las pestañas más pesadas cargan su código la primera vez que se abren,
+        // así el arranque de la app descarga y procesa menos JavaScript.
+        // (sw.js los precarga igualmente para que funcionen sin conexión)
+        // ==========================================================
+        const TAB_MODULES = {
+            numbers: ['js/numbers.js'],
+            time: ['js/time.js'],
+            parcial: ['js/numbers.js', 'js/parcial.js']
+        };
+        const moduleLoads = {};   // src -> Promise
+        const loadedModules = new Set();
+
+        function loadScriptModule(src) {
+            if (!moduleLoads[src]) {
+                moduleLoads[src] = new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = () => { loadedModules.add(src); resolve(); };
+                    script.onerror = () => {
+                        delete moduleLoads[src];
+                        script.remove();
+                        reject(new Error('No se pudo cargar ' + src));
+                    };
+                    document.body.appendChild(script);
+                });
+            }
+            return moduleLoads[src];
+        }
+
+        function tabModulesReady(tabId) {
+            return (TAB_MODULES[tabId] || []).every(src => loadedModules.has(src));
+        }
+
+        // Ejecuta init() en cuanto estén cargados los módulos de la pestaña
+        // (al instante si ya lo estaban).
+        function runWithTabModules(tabId, init) {
+            const modules = TAB_MODULES[tabId] || [];
+            if (tabModulesReady(tabId)) {
+                init();
+                return;
+            }
+            Promise.all(modules.map(loadScriptModule))
+                .then(init)
+                .catch(err => {
+                    console.warn('[Módulos]', err);
+                    showToast('No se pudo cargar esta sección. Revisa tu conexión e inténtalo de nuevo.', 'error');
+                });
+        }
+
         function switchTab(tabId) {
             // Stop any background timers/games and cancel speech
             stopLookalikesGame();
@@ -387,6 +500,7 @@
 
             const activeSection = document.getElementById(`tab-${tabId}`);
             if (activeSection) activeSection.classList.remove('hidden');
+            if (activeSection) updateTabUrl(tabId);
 
             const activeBtn = document.getElementById(`nav-${tabId}`);
             if (activeBtn) {
@@ -421,11 +535,11 @@
             } else if (tabId === 'stages') {
                 initStagesTab();
             } else if (tabId === 'numbers') {
-                initNumbersGame();
+                runWithTabModules('numbers', () => initNumbersGame());
             } else if (tabId === 'time') {
-                initTimeGame();
+                runWithTabModules('time', () => initTimeGame());
             } else if (tabId === 'parcial') {
-                initParcialTab();
+                runWithTabModules('parcial', () => initParcialTab());
             } else if (tabId === 'draw') {
                 initStrokeDrawingMode('draw');
             } else if (tabId === 'blinddraw') {

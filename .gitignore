@@ -19,6 +19,7 @@ material/
 *.jpeg
 *.jpg
 *.png
+!icons/*.png
 
 # Backups, duplicados y archivos comprimidos
 _archivo/

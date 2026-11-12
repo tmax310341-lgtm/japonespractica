@@ -525,7 +525,7 @@
                                     <div class="w-7 h-7 rounded-lg bg-slate-800 text-emerald-400 flex items-center justify-center text-xs">
                                         <i class="fa-solid ${item.icon}"></i>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["${item.kana}"]' title="Pronunciación" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white flex items-center justify-center text-xs transition active:scale-90">
+                                    <button aria-label="Pronunciación" type="button" data-action="speakJapanese" data-args='["${item.kana}"]' title="Pronunciación" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white flex items-center justify-center text-xs transition active:scale-90">
                                         <i class="fa-solid fa-volume-high"></i>
                                     </button>
                                 </div>
@@ -898,7 +898,7 @@
                                 Haz clic en los bloques de abajo en el orden adecuado...
                             </span>
                         ` : state.parcial.q2SelectedChips.map((chip, cIdx) => `
-                            <button type="button" ${isChecked ? 'disabled' : `onclick="removeParcialQ2Chip(${cIdx})"`}
+                            <button type="button" ${isChecked ? 'disabled' : `data-action="removeParcialQ2Chip" data-args='[${cIdx}]'`}
                                 title="${isChecked ? '' : 'Haz clic para retirar'}"
                                 class="px-3.5 py-2.5 rounded-xl ${isChecked ? (isCorrect ? 'bg-emerald-600 text-white border border-emerald-400' : 'bg-rose-600 text-white border border-rose-400') : 'bg-slate-800 hover:bg-rose-900/60 border border-slate-700 hover:border-rose-500 text-white'} font-jp text-base sm:text-lg font-bold shadow transition active:scale-95 flex items-center gap-2 group">
                                 <span>${chip}</span>
@@ -919,7 +919,7 @@
                             ` : (state.parcial.q2AvailableChips.length === 0 ? `
                                 <span class="text-xs text-slate-600 italic">No quedan bloques por colocar</span>
                             ` : state.parcial.q2AvailableChips.map((chip, aIdx) => `
-                                <button type="button" ${isChecked ? 'disabled' : `onclick="addParcialQ2Chip(${aIdx})"`}
+                                <button type="button" ${isChecked ? 'disabled' : `data-action="addParcialQ2Chip" data-args='[${aIdx}]'`}
                                     class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-amber-600 hover:text-white border border-slate-700 text-amber-300 font-jp text-base sm:text-lg font-bold shadow-md transition active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]">
                                     ${chip}
                                 </button>
@@ -1092,7 +1092,7 @@
                     <!-- Audio Trigger Banner -->
                     <div class="py-5 px-4 rounded-2xl bg-gradient-to-r from-sky-950/40 to-slate-950 border border-sky-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg mb-6">
                         <div class="flex items-center gap-3">
-                            <button type="button" data-action="speakJapanese" data-args='["${q.audioText}"]' class="w-12 h-12 rounded-2xl bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center text-lg shadow-lg shadow-sky-500/30 transition active:scale-95 shrink-0">
+                            <button aria-label="Reproducir" type="button" data-action="speakJapanese" data-args='["${q.audioText}"]' class="w-12 h-12 rounded-2xl bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center text-lg shadow-lg shadow-sky-500/30 transition active:scale-95 shrink-0">
                                 <i class="fa-solid fa-play"></i>
                             </button>
                             <div>
@@ -1485,7 +1485,7 @@
                             <span class="px-3 py-1 rounded-full text-xs font-bold ${isFlipped ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
                                 ${isFlipped ? 'Significado en Español' : 'Palabra en Japonés'}
                             </span>
-                            <button type="button" data-action="speakJapanese" data-args='["${card.kana}"]' data-stop title="Escuchar audio" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-emerald-500 text-slate-300 hover:text-white flex items-center justify-center text-sm shadow transition active:scale-90">
+                            <button aria-label="Escuchar audio" type="button" data-action="speakJapanese" data-args='["${card.kana}"]' data-stop title="Escuchar audio" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-emerald-500 text-slate-300 hover:text-white flex items-center justify-center text-sm shadow transition active:scale-90">
                                 <i class="fa-solid fa-volume-high"></i>
                             </button>
                         </div>

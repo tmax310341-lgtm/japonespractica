@@ -920,10 +920,10 @@ const DIGIT_HIRAGANA = {
                                                 <span class="font-jp text-xl font-black text-white">${k}</span>
                                             </div>
                                             <div class="flex items-center gap-1">
-                                                <button type="button" data-action="showKanaStrokeModal" data-args='["${k}"]' class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 flex items-center justify-center transition active:scale-90" title="Ver animación de trazo de ${k}">
+                                                <button aria-label="Ver animación de trazo de ${k}" type="button" data-action="showKanaStrokeModal" data-args='["${k}"]' class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 flex items-center justify-center transition active:scale-90" title="Ver animación de trazo de ${k}">
                                                     <i class="fa-solid fa-paintbrush text-[11px]"></i>
                                                 </button>
-                                                <button type="button" data-action="speakJapanese" data-args='["${d.hira}"]' class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["${d.hira}"]' class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </div>
@@ -976,19 +976,19 @@ const DIGIT_HIRAGANA = {
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div><strong>11:</strong> <span class="font-jp text-amber-300 font-bold">十一</span> <span class="text-slate-300">(じゅういち)</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["じゅういち"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅういち"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div><strong>14:</strong> <span class="font-jp text-amber-300 font-bold">十四</span> <span class="text-slate-300">(じゅうよん)</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["じゅうよん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅうよん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div><strong>17:</strong> <span class="font-jp text-amber-300 font-bold">十七</span> <span class="text-slate-300">(じゅうなな)</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["じゅうなな"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅうなな"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div><strong>19:</strong> <span class="font-jp text-amber-300 font-bold">十九</span> <span class="text-slate-300">(じゅうきゅう)</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["じゅうきゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅうきゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1004,19 +1004,19 @@ const DIGIT_HIRAGANA = {
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>20:</strong> にじゅう <span class="text-[10px] text-slate-500">(2 dieces)</span></span>
-                                    <button type="button" data-action="speakJapanese" data-args='["にじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>30:</strong> さんじゅう</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["さんじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>40:</strong> よんじゅう</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["よんじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["よんじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>70:</strong> ななじゅう</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["ななじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ななじゅう"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1032,11 +1032,11 @@ const DIGIT_HIRAGANA = {
                             <div class="space-y-2 text-xs">
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>47:</strong> 40 (よんじゅう) + 7 (なな) = <strong class="text-white font-jp">よんじゅうなな</strong></span>
-                                    <button type="button" data-action="speakJapanese" data-args='["よんじゅうなな"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["よんじゅうなな"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>83:</strong> 80 (はちじゅう) + 3 (さん) = <strong class="text-white font-jp">はちじゅうさん</strong></span>
-                                    <button type="button" data-action="speakJapanese" data-args='["はちじゅうさん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はちじゅうさん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1090,7 +1090,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">ひゃく</span>
                                         <span class="text-slate-400">(hyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["ひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -1099,7 +1099,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">にひゃく</span>
                                         <span class="text-slate-400">(nihyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["にひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -1108,7 +1108,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">よんひゃく</span>
                                         <span class="text-slate-400">(yonhyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["よんひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["よんひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -1117,7 +1117,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">ごひゃく</span>
                                         <span class="text-slate-400">(gohyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["ごひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ごひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -1126,7 +1126,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">ななひゃく</span>
                                         <span class="text-slate-400">(nanahyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["ななひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ななひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
@@ -1135,7 +1135,7 @@ const DIGIT_HIRAGANA = {
                                         <span class="font-jp text-white font-bold">きゅうひゃく</span>
                                         <span class="text-slate-400">(kyuuhyaku)</span>
                                     </div>
-                                    <button type="button" data-action="speakJapanese" data-args='["きゅうひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["きゅうひゃく"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1166,7 +1166,7 @@ const DIGIT_HIRAGANA = {
                             <div class="p-5 rounded-2xl bg-slate-950 border-2 border-amber-500/40 space-y-3 shadow-lg">
                                 <div class="flex items-center justify-between">
                                     <span class="text-3xl font-black font-mono text-amber-300">300</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["さんびゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                    <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["さんびゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                         <i class="fa-solid fa-volume-high text-sm"></i>
                                     </button>
                                 </div>
@@ -1190,7 +1190,7 @@ const DIGIT_HIRAGANA = {
                             <div class="p-5 rounded-2xl bg-slate-950 border-2 border-amber-500/40 space-y-3 shadow-lg">
                                 <div class="flex items-center justify-between">
                                     <span class="text-3xl font-black font-mono text-amber-300">600</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["ろっぴゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                    <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["ろっぴゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                         <i class="fa-solid fa-volume-high text-sm"></i>
                                     </button>
                                 </div>
@@ -1214,7 +1214,7 @@ const DIGIT_HIRAGANA = {
                             <div class="p-5 rounded-2xl bg-slate-950 border-2 border-amber-500/40 space-y-3 shadow-lg">
                                 <div class="flex items-center justify-between">
                                     <span class="text-3xl font-black font-mono text-amber-300">800</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["はっぴゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                    <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["はっぴゃく"]' class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90" title="Escuchar">
                                         <i class="fa-solid fa-volume-high text-sm"></i>
                                     </button>
                                 </div>
@@ -1295,7 +1295,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border-2 border-amber-500/40 space-y-2.5 shadow-md">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-amber-300">3.000</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -1312,7 +1312,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border-2 border-amber-500/40 space-y-2.5 shadow-md">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-amber-300">8.000</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["はっせん"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はっせん"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition active:scale-90">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -1335,39 +1335,39 @@ const DIGIT_HIRAGANA = {
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>1.000 千:</strong> せん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["せん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["せん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>2.000 二千:</strong> にせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["にせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-between text-amber-300">
                                     <span><strong>3.000 三千:</strong> さんぜん ⭐</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>4.000 四千:</strong> よんせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["よんせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["よんせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>5.000 五千:</strong> ごせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["ごせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ごせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>6.000 六千:</strong> ろくせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["ろくせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ろくせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>7.000 七千:</strong> ななせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["ななせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ななせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-between text-amber-300">
                                     <span><strong>8.000 八千:</strong> はっせん ⭐</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["はっせん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はっせん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
                                     <span><strong>9.000 九千:</strong> きゅうせん</span>
-                                    <button type="button" data-action="speakJapanese" data-args='["きゅうせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["きゅうせん"]' class="text-slate-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1381,14 +1381,14 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
                                     <div class="flex items-center justify-between">
                                         <span class="font-bold text-white">2.500 円 (二千五百円)</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["にせんごひゃくえん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にせんごひゃくえん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                     </div>
                                     <div class="font-jp text-slate-300">にせんごひゃくえんです。</div>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
                                     <div class="flex items-center justify-between">
                                         <span class="font-bold text-white">8.600 円 (八千六百円)</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["はっせんろっぴゃくえん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はっせんろっぴゃくえん"]' class="text-amber-400 hover:text-white"><i class="fa-solid fa-volume-high"></i></button>
                                     </div>
                                     <div class="font-jp text-slate-300">はっせんろっぴゃくえんです。(¡Doble mutación!)</div>
                                 </div>
@@ -1649,7 +1649,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">1 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["いちまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["いちまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1664,7 +1664,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">2 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["にまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["にまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1679,7 +1679,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">5 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["ごまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["ごまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1694,7 +1694,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">10 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["じゅうまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["じゅうまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1709,7 +1709,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">100 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["ひゃくまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["ひゃくまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1724,7 +1724,7 @@ const DIGIT_HIRAGANA = {
                                             </td>
                                             <td class="py-3 px-3 sm:px-4 text-sky-300 font-semibold font-sans">1000 man</td>
                                             <td class="py-3 px-2 sm:px-3 text-center font-sans">
-                                                <button type="button" data-action="speakJapanese" data-args='["いっせんまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
+                                                <button aria-label="Escuchar" type="button" data-action="speakJapanese" data-args='["いっせんまん"]' class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90" title="Escuchar">
                                                     <i class="fa-solid fa-volume-high text-xs"></i>
                                                 </button>
                                             </td>
@@ -1939,14 +1939,14 @@ const DIGIT_HIRAGANA = {
                         data-drop="onNumberLegoDrop"
                         data-dragend="onNumberLegoDragEnd" data-args='["$event", ${idx}]'
                         class="px-2.5 sm:px-3.5 py-2 rounded-2xl bg-amber-500 text-slate-950 font-jp font-black shadow-lg shadow-amber-500/20 flex items-center gap-1.5 cursor-grab active:cursor-grabbing hover:bg-amber-400 transition animate-card-pop select-none group border border-amber-300/40">
-                        <button type="button" data-action="moveNumberLegoChip" data-args='[${idx}, -1]' ${idx === 0 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover hacia la izquierda">
+                        <button aria-label="Mover hacia la izquierda" type="button" data-action="moveNumberLegoChip" data-args='[${idx}, -1]' ${idx === 0 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover hacia la izquierda">
                             <i class="fa-solid fa-arrow-left text-xs"></i>
                         </button>
                         <span class="text-lg sm:text-xl font-bold px-1">${chip.text}</span>
-                        <button type="button" data-action="moveNumberLegoChip" data-args='[${idx}, 1]' ${idx === state.numbersPlacedChips.length - 1 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover hacia la derecha">
+                        <button aria-label="Mover hacia la derecha" type="button" data-action="moveNumberLegoChip" data-args='[${idx}, 1]' ${idx === state.numbersPlacedChips.length - 1 ? 'disabled class="opacity-20 pointer-events-none p-1"' : 'class="p-1 text-slate-900 hover:text-black transition"'} title="Mover hacia la derecha">
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
-                        <button type="button" data-action="removeNumberLegoChip" data-args='[${idx}]' title="Regresar al banco sin borrar el resto"
+                        <button aria-label="Regresar al banco sin borrar el resto" type="button" data-action="removeNumberLegoChip" data-args='[${idx}]' title="Regresar al banco sin borrar el resto"
                             class="w-6 h-6 rounded-lg bg-slate-950/20 hover:bg-rose-600 hover:text-white text-slate-950 flex items-center justify-center transition ml-1 text-xs">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
@@ -2038,7 +2038,7 @@ const DIGIT_HIRAGANA = {
                             <h3 class="text-5xl sm:text-6xl font-black text-white font-mono tracking-tight bg-slate-950 px-6 py-2 rounded-2xl border border-slate-800 shadow-inner">
                                 ${ch.number}
                             </h3>
-                            <button type="button" data-action="speakJapanese" data-args='["${ch.hiragana}"]' title="Escuchar pronunciación"
+                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["${ch.hiragana}"]' title="Escuchar pronunciación"
                                 class="w-12 h-12 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-400 flex items-center justify-center transition active:scale-90 shadow-md">
                                 <i class="fa-solid fa-volume-high text-lg"></i>
                             </button>
@@ -2260,11 +2260,11 @@ const DIGIT_HIRAGANA = {
                             <button type="button" data-action="pressNumbersKeypad" data-args='["7"]' class="h-12 sm:h-14 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-500 text-white font-mono text-2xl font-black shadow-md hover:bg-slate-800 active:scale-95 transition">7</button>
                             <button type="button" data-action="pressNumbersKeypad" data-args='["8"]' class="h-12 sm:h-14 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-500 text-white font-mono text-2xl font-black shadow-md hover:bg-slate-800 active:scale-95 transition">8</button>
                             <button type="button" data-action="pressNumbersKeypad" data-args='["9"]' class="h-12 sm:h-14 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-500 text-white font-mono text-2xl font-black shadow-md hover:bg-slate-800 active:scale-95 transition">9</button>
-                            <button type="button" data-action="pressNumbersKeypad" data-args='["backspace"]' class="h-12 sm:h-14 rounded-2xl bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 text-rose-300 font-bold text-sm shadow-md active:scale-95 transition flex items-center justify-center">
+                            <button aria-label="Borrar" type="button" data-action="pressNumbersKeypad" data-args='["backspace"]' class="h-12 sm:h-14 rounded-2xl bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 text-rose-300 font-bold text-sm shadow-md active:scale-95 transition flex items-center justify-center">
                                 <i class="fa-solid fa-delete-left text-lg"></i>
                             </button>
                             <button type="button" data-action="pressNumbersKeypad" data-args='["0"]' class="h-12 sm:h-14 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-500 text-white font-mono text-2xl font-black shadow-md hover:bg-slate-800 active:scale-95 transition">0</button>
-                            <button type="button" data-action="checkNumbersDictation" class="h-12 sm:h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 text-emerald-300 font-bold text-sm shadow-md active:scale-95 transition flex items-center justify-center">
+                            <button aria-label="Comprobar" type="button" data-action="checkNumbersDictation" class="h-12 sm:h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 text-emerald-300 font-bold text-sm shadow-md active:scale-95 transition flex items-center justify-center">
                                 <i class="fa-solid fa-check text-lg"></i>
                             </button>
                         </div>
@@ -2471,7 +2471,7 @@ const DIGIT_HIRAGANA = {
                             <h3 class="text-4xl sm:text-5xl font-black text-white ${q.qType === 'number_to_hira' ? 'font-mono' : 'font-jp'} tracking-tight bg-slate-950 px-6 py-3 rounded-2xl border border-slate-800 shadow-inner">
                                 ${q.prompt}
                             </h3>
-                            <button type="button" data-action="speakJapanese" data-args='["${q.targetData.hiragana}"]' title="Escuchar pronunciación"
+                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["${q.targetData.hiragana}"]' title="Escuchar pronunciación"
                                 class="w-12 h-12 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-400 flex items-center justify-center transition active:scale-90 shadow-md">
                                 <i class="fa-solid fa-volume-high text-lg"></i>
                             </button>
@@ -2571,7 +2571,7 @@ const DIGIT_HIRAGANA = {
                                             </div>
                                             <div class="text-[11px] font-mono text-slate-400">${d.romaji}${d.alt ? ` <span class="text-amber-400/90 font-bold">/ ${d.alt}</span>` : ''}</div>
                                         </div>
-                                        <button type="button" data-action="speakJapanese" data-args='["${d.hira}"]' class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95 shadow">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["${d.hira}"]' class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95 shadow">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2616,19 +2616,19 @@ const DIGIT_HIRAGANA = {
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
                                     <div><span class="font-mono text-amber-400 font-bold text-sm">14:</span> <span class="font-jp text-white font-bold ml-1">じゅうよん</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["じゅうよん"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅうよん"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
                                     <div><span class="font-mono text-amber-400 font-bold text-sm">20:</span> <span class="font-jp text-white font-bold ml-1">にじゅう</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["にじゅう"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にじゅう"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
                                     <div><span class="font-mono text-amber-400 font-bold text-sm">47:</span> <span class="font-jp text-white font-bold ml-1">よんじゅうなな</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["よんじゅうなな"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["よんじゅうなな"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
                                 <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 flex items-center justify-between">
                                     <div><span class="font-mono text-amber-400 font-bold text-sm">99:</span> <span class="font-jp text-white font-bold ml-1">きゅうじゅうきゅう</span></div>
-                                    <button type="button" data-action="speakJapanese" data-args='["きゅうじゅうきゅう"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                    <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["きゅうじゅうきゅう"]' class="text-slate-400 hover:text-amber-300"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -2665,7 +2665,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-amber-300">300</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["さんびゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんびゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2685,7 +2685,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-amber-300">600</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["ろっぴゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ろっぴゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2705,7 +2705,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-amber-500/30 space-y-2 hover:border-amber-400 transition shadow-sm">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-amber-300">800</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["はっぴゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はっぴゃく"]' class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center justify-center transition">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2733,7 +2733,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-sky-500/30 space-y-2 hover:border-sky-400 transition shadow-sm">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-sky-300">3.000</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["さんぜん"]' class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2753,7 +2753,7 @@ const DIGIT_HIRAGANA = {
                                 <div class="p-4 rounded-2xl bg-slate-950 border border-sky-500/30 space-y-2 hover:border-sky-400 transition shadow-sm">
                                     <div class="flex items-center justify-between">
                                         <span class="text-2xl font-black font-mono text-sky-300">8.000</span>
-                                        <button type="button" data-action="speakJapanese" data-args='["はっせん"]' class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
+                                        <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["はっせん"]' class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 flex items-center justify-center transition">
                                             <i class="fa-solid fa-volume-high text-xs"></i>
                                         </button>
                                     </div>
@@ -2847,7 +2847,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">1 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["いちまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["いちまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-slate-900/50 transition">
@@ -2860,7 +2860,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">2 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["にまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["にまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-slate-900/50 transition">
@@ -2873,7 +2873,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">5 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["ごまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ごまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-slate-900/50 transition">
@@ -2886,7 +2886,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">10 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["じゅうまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["じゅうまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-slate-900/50 transition">
@@ -2899,7 +2899,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">100 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["ひゃくまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["ひゃくまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-slate-900/50 transition">
@@ -2912,7 +2912,7 @@ const DIGIT_HIRAGANA = {
                                         </td>
                                         <td class="py-2.5 px-3 sm:px-4 text-sky-300 font-semibold font-sans">1000 man</td>
                                         <td class="py-2.5 px-2 text-center font-sans">
-                                            <button type="button" data-action="speakJapanese" data-args='["いっせんまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
+                                            <button aria-label="Escuchar pronunciación" type="button" data-action="speakJapanese" data-args='["いっせんまん"]' class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 inline-flex items-center justify-center transition active:scale-90"><i class="fa-solid fa-volume-high text-xs"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
