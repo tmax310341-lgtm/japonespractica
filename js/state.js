@@ -306,6 +306,12 @@
                         }
                     });
                 }
+                if (parsed.parcial2 && typeof parsed.parcial2 === 'object') {
+                    state.parcial2 = {
+                        history: Array.isArray(parsed.parcial2.history) ? parsed.parcial2.history : [],
+                        mistakes: Array.isArray(parsed.parcial2.mistakes) ? parsed.parcial2.mistakes : []
+                    };
+                }
                 if (parsed.timeConfig && typeof parsed.timeConfig === 'object') {
                     state.timeConfig = {
                         mode: parsed.timeConfig.mode || 'guide',
@@ -383,7 +389,8 @@
                 srs_katakana: state.srs_katakana,
                 stagesAutoProgress_katakana: state.stagesAutoProgress_katakana,
                 practiceSelectedGroups_katakana: state.practiceSelectedGroups_katakana,
-                stagesConfig_katakana: state.stagesConfig_katakana
+                stagesConfig_katakana: state.stagesConfig_katakana,
+                parcial2: state.parcial2
             };
         }
 

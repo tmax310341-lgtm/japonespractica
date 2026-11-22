@@ -2461,15 +2461,22 @@
                     <div>
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full stage-theme-pill text-xs font-bold mb-2.5">
                             <i class="fa-solid fa-comments stage-theme-accent-text"></i>
-                            <span>Vocabulario y Frases Cotidianas de Clase</span>
+                            <span id="parcialHeroPill">2.º parcial · Lección 2 (Tobira, págs. 56–57)</span>
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-                            <span>Palabras y Frases de Clase</span>
-                            <span class="font-jp stage-theme-accent-text font-bold text-xl sm:text-2xl">教室の言葉</span>
+                            <span id="parcialHeroTitle">Mi día a día</span>
+                            <span id="parcialHeroJp" class="font-jp stage-theme-accent-text font-bold text-xl sm:text-2xl">まいにちのせいかつ</span>
                         </h2>
-                        <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-                            Afianza las palabras más comunes de clase (objetos escolares, personas, lugares), demostrativos (<span class="stage-theme-accent-text font-bold">これ/それ/あれ &amp; この/その/あの</span>), partículas (<span class="stage-theme-accent-text font-bold">は, も, が, の</span>), precios, edades y diálogos prácticos.
+                        <p id="parcialHeroDesc" class="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+                            Lección 2: horas y días, verbos ru/u/irregulares (〜ます / 〜ません), partículas は, を, に, で, も, が, の, frecuencia, conectores y orden de la oración.
                         </p>
+                        <!-- Selector de examen -->
+                        <div class="mt-4 inline-flex flex-wrap gap-1.5 p-1 rounded-2xl bg-slate-950/70 border border-slate-800" role="group" aria-label="Elegir parcial">
+                            <button type="button" id="btn-parcial-exam-p1" data-action="setParcialExam" data-args='["p1"]' aria-pressed="false"
+                                class="parcial-exam-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition text-slate-400 hover:text-white hover:bg-slate-800">1.er parcial · Lección 1</button>
+                            <button type="button" id="btn-parcial-exam-p2" data-action="setParcialExam" data-args='["p2"]' aria-pressed="true"
+                                class="parcial-exam-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition stage-theme-primary-btn shadow-md">2.º parcial · Lección 2</button>
+                        </div>
                     </div>
 
                     <!-- Metrics Badges (Racha, Aciertos, Precisión) -->
@@ -2491,8 +2498,22 @@
                     </div>
                 </div>
 
-                <!-- Submode Navigation Tabs -->
-                <div class="mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap gap-2">
+                <!-- Modos del 2.º parcial (Lección 2) -->
+                <div id="parcialP2Nav" class="mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap gap-2">
+                    <button type="button" data-action="setParcialMode" data-args='["p2sim"]' id="btn-parcial-mode-p2sim"
+                        class="parcial-mode-tab flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <span>Simulacro y práctica</span>
+                    </button>
+                    <button type="button" data-action="setParcialMode" data-args='["p2guide"]' id="btn-parcial-mode-p2guide"
+                        class="parcial-mode-tab flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent">
+                        <i class="fa-solid fa-book-bookmark text-amber-400"></i>
+                        <span>Guía rápida (págs. 56–57)</span>
+                    </button>
+                </div>
+
+                <!-- Modos del 1.er parcial (Lección 1) -->
+                <div id="parcialP1Nav" class="hidden mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap gap-2">
                     <button type="button" data-action="setParcialMode" data-args='["guide"]' id="btn-parcial-mode-guide"
                         class="parcial-mode-tab flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 stage-theme-primary-btn shadow-md">
                         <i class="fa-solid fa-book-bookmark"></i>
@@ -2653,7 +2674,7 @@
     <script src="js/game-quiz.js"></script>
     <script src="js/progress-srs.js"></script>
     <script src="js/stages.js"></script>
-    <!-- js/numbers.js, js/time.js y js/parcial.js se cargan al abrir su pestaña (ver TAB_MODULES en js/ui-themes.js) -->
+    <!-- js/numbers.js, js/time.js, js/parcial.js, data/parcial2.js y js/parcial2.js se cargan al abrir su pestaña (ver TAB_MODULES en js/ui-themes.js) -->
     <script src="js/main.js"></script>
     <script src="js/progress-merge.js"></script>
     <script src="js/firebase-config.js"></script>
