@@ -404,7 +404,8 @@
         function initParcialTab() {
             if (!state.parcial) {
                 state.parcial = {
-                    mode: 'guide',
+                    // Por defecto se abre el 2.º parcial (Lección 2), que es el próximo examen
+                    mode: 'p2sim',
                     simSubMode: 'q1',
                     guideCategory: 'all',
                     streak: 0,
@@ -429,7 +430,55 @@
                 };
             }
             updateParcialHeaderStats();
-            setParcialMode(state.parcial.mode || 'guide', true);
+            setParcialMode(state.parcial.mode || 'p2sim', true);
+        }
+
+        // ---------- Selector 1.er parcial (Lección 1) / 2.º parcial (Lección 2) ----------
+        const PARCIAL_EXAMS = {
+            p1: {
+                defaultMode: 'guide',
+                pill: 'Vocabulario y Frases Cotidianas de Clase',
+                title: 'Palabras y Frases de Clase',
+                jp: '教室の言葉',
+                desc: 'Lección 1: objetos, personas y lugares de clase, demostrativos (これ/それ/あれ, この/その/あの), partículas は, も, が, の, precios, edades y diálogos.'
+            },
+            p2: {
+                defaultMode: 'p2sim',
+                pill: '2.º parcial · Lección 2 (Tobira, págs. 56–57)',
+                title: 'Mi día a día',
+                jp: 'まいにちのせいかつ',
+                desc: 'Lección 2: horas y días, verbos ru/u/irregulares (〜ます / 〜ません), partículas は, を, に, で, も, が, の, frecuencia, conectores y orden de la oración.'
+            }
+        };
+
+        function parcialExamOf(mode) {
+            return String(mode || '').startsWith('p2') ? 'p2' : 'p1';
+        }
+
+        function setParcialExam(exam) {
+            if (!state.parcial) initParcialTab();
+            setParcialMode(PARCIAL_EXAMS[exam].defaultMode);
+        }
+
+        function updateParcialExamUI(exam) {
+            const info = PARCIAL_EXAMS[exam];
+            const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+            set('parcialHeroPill', info.pill);
+            set('parcialHeroTitle', info.title);
+            set('parcialHeroJp', info.jp);
+            set('parcialHeroDesc', info.desc);
+            const nav1 = document.getElementById('parcialP1Nav');
+            const nav2 = document.getElementById('parcialP2Nav');
+            if (nav1) nav1.classList.toggle('hidden', exam !== 'p1');
+            if (nav2) nav2.classList.toggle('hidden', exam !== 'p2');
+            ['p1', 'p2'].forEach(id => {
+                const btn = document.getElementById('btn-parcial-exam-' + id);
+                if (!btn) return;
+                const active = id === exam;
+                btn.setAttribute('aria-pressed', String(active));
+                btn.className = 'parcial-exam-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition ' +
+                    (active ? 'stage-theme-primary-btn shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800');
+            });
         }
 
         function updateParcialHeaderStats() {
@@ -454,6 +503,7 @@
         function setParcialMode(mode, force) {
             if (!force && state.parcial.mode === mode) return;
             state.parcial.mode = mode;
+            updateParcialExamUI(parcialExamOf(mode));
 
             document.querySelectorAll('.parcial-mode-tab').forEach(btn => {
                 const btnMode = btn.id.replace('btn-parcial-mode-', '');
@@ -480,6 +530,10 @@
                 renderParcialPricesAges(container);
             } else if (mode === 'flashcards') {
                 renderParcialFlashcards(container);
+            } else if (mode === 'p2guide') {
+                renderParcial2Guide(container);
+            } else if (mode === 'p2sim') {
+                renderParcial2Simulator(container);
             }
         }
 

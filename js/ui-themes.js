@@ -437,7 +437,7 @@
         const TAB_MODULES = {
             numbers: ['js/numbers.js'],
             time: ['js/time.js'],
-            parcial: ['js/numbers.js', 'js/parcial.js']
+            parcial: ['js/numbers.js', 'js/parcial.js', 'data/parcial2.js', 'js/parcial2.js']
         };
         const moduleLoads = {};   // src -> Promise
         const loadedModules = new Set();
