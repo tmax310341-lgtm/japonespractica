@@ -309,7 +309,8 @@
                 if (parsed.parcial2 && typeof parsed.parcial2 === 'object') {
                     state.parcial2 = {
                         history: Array.isArray(parsed.parcial2.history) ? parsed.parcial2.history : [],
-                        mistakes: Array.isArray(parsed.parcial2.mistakes) ? parsed.parcial2.mistakes : []
+                        mistakes: Array.isArray(parsed.parcial2.mistakes) ? parsed.parcial2.mistakes : [],
+                        showRomaji: Boolean(parsed.parcial2.showRomaji)
                     };
                 }
                 if (parsed.timeConfig && typeof parsed.timeConfig === 'object') {

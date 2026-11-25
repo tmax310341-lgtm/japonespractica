@@ -127,3 +127,24 @@ test('tarjetas de repaso: voltear, filtrar por tema y avanzar', async ({ page })
     await expect(page.locator('#parcialWorkspaceContainer')).toContainText('Tarjeta 2');
     expectNoErrors(errors);
 });
+
+test('opción de rōmaji: se activa, muestra rōmaji debajo de las palabras, persiste y se desactiva', async ({ page }) => {
+    const errors = await openApp(page);
+    await openTab(page, 'parcial');
+    await page.locator('[data-action="p2StartPractice"][data-args=\'["katakana"]\']').click();
+
+    const toggle = page.locator('#p2RomajiToggleBtn');
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('.p2-romaji')).toHaveCount(0);
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    expect(await page.locator('.p2-romaji').count()).toBeGreaterThan(0);
+    const savedOn = await page.evaluate(() => JSON.parse(localStorage.getItem(STORAGE_KEY)).parcial2.showRomaji);
+    expect(savedOn).toBe(true);
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('.p2-romaji')).toHaveCount(0);
+    expectNoErrors(errors);
+});
