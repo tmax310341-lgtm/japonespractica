@@ -9,7 +9,7 @@ const context = vm.createContext({ console, document: { addEventListener() {} },
 const source = ['js/utils.js', 'data/parcial2.js', 'js/parcial2.js']
     .map(f => fs.readFileSync(path.join(root, f), 'utf8').replace(/^if \(typeof module[\s\S]*$/m, ''))
     .join('\n;\n') +
-    '\n;globalThis.__p2 = { P2_BLOCKS, P2_EXAM, P2_BANK, P2_READINGS, P2_VERBS, P2_VERB_TRAPS, p2Candidates, p2BuildExam, p2Prepare };';
+    '\n;globalThis.__p2 = { P2_BLOCKS, P2_EXAM, P2_BANK, P2_READINGS, P2_VERBS, P2_VERB_TRAPS, P2_KATAKANA, P2_NUMBERS_KANJI, P2_NUMBER_EXAMPLES, P2_MONTHS, P2_CULTURE, P2_SUKI_FORMS, p2Candidates, p2BuildExam, p2Prepare };';
 vm.runInContext(source, context, { filename: 'parcial2.js' });
 const P = context.__p2;
 
@@ -46,9 +46,17 @@ for (const v of P.P2_VERBS) {
     ok(traps && traps.length === 3 && !traps.includes(v.masu), `trampas de ${v.dict}`);
 }
 
+// Nuevos conjuntos de referencia de la guía L2–L3
+ok(Array.isArray(P.P2_KATAKANA) && P.P2_KATAKANA.length >= 15, 'P2_KATAKANA completo');
+ok(Array.isArray(P.P2_NUMBERS_KANJI) && P.P2_NUMBERS_KANJI.length === 13, 'P2_NUMBERS_KANJI con 13 entradas');
+ok(Array.isArray(P.P2_NUMBER_EXAMPLES) && P.P2_NUMBER_EXAMPLES.length >= 6, 'P2_NUMBER_EXAMPLES completo');
+ok(Array.isArray(P.P2_MONTHS) && P.P2_MONTHS.length === 12, 'P2_MONTHS con 12 meses');
+ok(Array.isArray(P.P2_CULTURE) && P.P2_CULTURE.length >= 4, 'P2_CULTURE con aspectos culturales');
+ok(P.P2_SUKI_FORMS && P.P2_SUKI_FORMS.pastNeg === 'すきではありませんでした', 'P2_SUKI_FORMS completo');
+
 // Preguntas generadas: se ejecutan muchas veces para cubrir el azar
 for (let i = 0; i < 400; i++) {
-    for (const block of ['tiempo', 'verbos']) {
+    for (const block of ['tiempo', 'verbos', 'numeros', 'katakana']) {
         for (const c of P.p2Candidates(block, 6).filter(c => c.id.startsWith('g-'))) checkQuestion(c.raw, c.id);
     }
 }

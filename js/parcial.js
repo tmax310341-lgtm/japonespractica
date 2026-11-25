@@ -444,10 +444,10 @@
             },
             p2: {
                 defaultMode: 'p2sim',
-                pill: '2.º parcial · Lección 2 (Tobira, págs. 56–57)',
+                pill: '2.º parcial / Final · Tobira Lecciones 2 y 3',
                 title: 'Mi día a día',
                 jp: 'まいにちのせいかつ',
-                desc: 'Lección 2: horas y días, verbos ru/u/irregulares (〜ます / 〜ません), partículas は, を, に, で, も, が, の, frecuencia, conectores y orden de la oración.'
+                desc: 'Lecciones 2 y 3: katakana, números y kanji (1–10.000+), días y meses, verbos 〜ます (presente y pasado), vocabulario, partículas, conectores y cultura.'
             }
         };
 
@@ -534,6 +534,8 @@
                 renderParcial2Guide(container);
             } else if (mode === 'p2sim') {
                 renderParcial2Simulator(container);
+            } else if (mode === 'p2cards') {
+                renderParcial2Cards(container);
             }
         }
 

@@ -78,13 +78,26 @@ test('repasar errores: las preguntas acertadas salen de la lista', async ({ page
     expectNoErrors(errors);
 });
 
-test('guía rápida y cambio al 1.er parcial', async ({ page }) => {
+test('guía completa, filtros por sección y cambio al 1.er parcial', async ({ page }) => {
     const errors = await openApp(page);
     await openTab(page, 'parcial');
     await page.locator('#btn-parcial-mode-p2guide').click();
-    await expect(page.locator('#parcialWorkspaceContainer')).toContainText('くじ');
-    await expect(page.locator('#parcialWorkspaceContainer')).toContainText('かえります');
-    await expect(page.locator('#parcialWorkspaceContainer')).toContainText('ぜんぜん');
+    const workspace = page.locator('#parcialWorkspaceContainer');
+    await expect(workspace).toContainText('コーヒー');
+    await expect(workspace).toContainText('一万');
+    await expect(workspace).toContainText('月曜日');
+    await expect(workspace).toContainText('しがつ');
+    await expect(workspace).toContainText('くじ');
+    await expect(workspace).toContainText('かえります');
+    await expect(workspace).toContainText('ねました');
+    await expect(workspace).toContainText('すきではありませんでした');
+    await expect(workspace).toContainText('ぜんぜん');
+    await expect(workspace).toContainText('おじぎ');
+
+    // Probar filtro de sección en la guía
+    await page.locator('[data-action="p2SetGuideSection"][data-args=\'["verbos"]\']').click();
+    await expect(workspace).toContainText('べんきょうしませんでした');
+    await page.locator('[data-action="p2SetGuideSection"][data-args=\'["all"]\']').click();
 
     await page.locator('#btn-parcial-exam-p1').click();
     await expect(page.locator('#parcialP1Nav')).toBeVisible();
@@ -94,5 +107,23 @@ test('guía rápida y cambio al 1.er parcial', async ({ page }) => {
     await page.locator('#btn-parcial-exam-p2').click();
     await expect(page.locator('#parcialP2Nav')).toBeVisible();
     await expect(page.locator('#p2StartExamBtn')).toBeVisible();
+    expectNoErrors(errors);
+});
+
+test('tarjetas de repaso: voltear, filtrar por tema y avanzar', async ({ page }) => {
+    const errors = await openApp(page);
+    await openTab(page, 'parcial');
+    await page.locator('#btn-parcial-mode-p2cards').click();
+    await expect(page.locator('#p2CardSurface')).toBeVisible();
+
+    await page.locator('#p2CardFlipBtn').click();
+    await expect(page.locator('#p2CardSurface')).toContainText('Toca para volver al frente');
+
+    await page.locator('[data-action="p2SetCardCategory"][data-args=\'["verbos"]\']').click();
+    await page.locator('#p2CardFlipBtn').click();
+    await expect(page.locator('#p2CardSurface')).toContainText('Pasado +:');
+
+    await page.locator('#p2CardNextBtn').click();
+    await expect(page.locator('#parcialWorkspaceContainer')).toContainText('Tarjeta 2');
     expectNoErrors(errors);
 });
