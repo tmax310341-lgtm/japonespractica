@@ -16,10 +16,210 @@ const P2_LETTERS = ['A', 'B', 'C', 'D'];
 
 // ---------- Progreso guardado (historial y errores) ----------
 function p2Progress() {
-    if (!state.parcial2 || typeof state.parcial2 !== 'object') state.parcial2 = { history: [], mistakes: [] };
+    if (!state.parcial2 || typeof state.parcial2 !== 'object') state.parcial2 = { history: [], mistakes: [], showRomaji: false };
     if (!Array.isArray(state.parcial2.history)) state.parcial2.history = [];
     if (!Array.isArray(state.parcial2.mistakes)) state.parcial2.mistakes = [];
+    if (typeof state.parcial2.showRomaji !== 'boolean') state.parcial2.showRomaji = false;
     return state.parcial2;
+}
+
+// ---------- Conversor a Rōmaji (ayuda opcional para lectura en el parcial) ----------
+const P2_KANJI_ROMAJI = [
+    ['一万二千三百四十五', 'ichiman nisen sanbyaku yonjuugo'],
+    ['五万六百七十八', 'goman roppyaku nanajuuhachi'],
+    ['二十五千', 'nijuugosen'], ['二千五百', 'nisen gohyaku'],
+    ['二万五千', 'niman gosen'], ['五万二千', 'goman nisen'],
+    ['四十五', 'yonjuugo'], ['七十八', 'nanajuuhachi'],
+    ['三百', 'sanbyaku'], ['六百', 'roppyaku'], ['八百', 'happyaku'],
+    ['三千', 'sanzen'], ['八千', 'hassen'],
+    ['一万', 'ichiman'], ['二万', 'niman'], ['五万', 'goman'],
+    ['二千', 'nisen'], ['五千', 'gosen'],
+    ['12月', 'juunigatsu'], ['11月', 'juuichigatsu'], ['10月', 'juugatsu'],
+    ['9月', 'kugatsu'], ['8月', 'hachigatsu'], ['7月', 'shichigatsu'],
+    ['6月', 'rokugatsu'], ['5月', 'gogatsu'], ['4月', 'shigatsu'],
+    ['3月', 'sangatsu'], ['2月', 'nigatsu'], ['1月', 'ichigatsu'],
+    ['月曜日', 'getsuyoubi'], ['火曜日', 'kayoubi'], ['水曜日', 'suiyoubi'],
+    ['木曜日', 'mokuyoubi'], ['金曜日', 'kinyoubi'], ['土曜日', 'doyoubi'], ['日曜日', 'nichiyoubi'],
+    ['曜日', 'youbi'],
+    ['学校生活', 'gakkou seikatsu'], ['図書館', 'toshokan'], ['学校', 'gakkou'],
+    ['今日', 'kyou'], ['昨日', 'kinou'], ['明日', 'ashita'],
+    ['毎朝', 'maiasa'], ['毎晩', 'maiban'], ['毎日', 'mainichi'],
+    ['週末', 'shuumatsu'], ['先週', 'senshuu'], ['来週', 'raishuu'],
+    ['挨拶', 'aisatsu'], ['食事', 'shokuji'], ['今', 'ima'], ['家', 'ie'], ['雨', 'ame'],
+    ['7時', 'shichiji'], ['9時', 'kuji'], ['5時', 'goji'], ['4時', 'yoji'], ['時', 'ji'],
+    ['一', 'ichi'], ['二', 'ni'], ['三', 'san'], ['四', 'yon'], ['五', 'go'],
+    ['六', 'roku'], ['七', 'nana'], ['八', 'hachi'], ['九', 'kyuu'], ['十', 'juu'],
+    ['百', 'hyaku'], ['千', 'sen'], ['万', 'man'],
+    ['月', 'getsu'], ['火', 'ka'], ['水', 'sui'], ['木', 'moku'], ['金', 'kin'], ['土', 'do'], ['日', 'nichi']
+];
+
+const P2_KATA_DIGRAPHS = {
+    'ヴァ': 'va', 'ヴィ': 'vi', 'ヴ': 'vu', 'ヴェ': 've', 'ヴォ': 'vo'
+};
+
+const P2_KANA_DIGRAPHS = {
+    'きゃ': 'kya', 'きゅ': 'kyu', 'きょ': 'kyo',
+    'ぎゃ': 'gya', 'ぎゅ': 'gyu', 'ぎょ': 'gyo',
+    'しゃ': 'sha', 'しゅ': 'shu', 'しょ': 'sho', 'しぇ': 'she',
+    'じゃ': 'ja', 'じゅ': 'ju', 'じょ': 'jo', 'じぇ': 'je',
+    'ちゃ': 'cha', 'ちゅ': 'chu', 'ちょ': 'cho', 'ちぇ': 'che',
+    'てぃ': 'ti', 'でぃ': 'di', 'とぅ': 'tu', 'どぅ': 'du',
+    'にゃ': 'nya', 'にゅ': 'nyu', 'にょ': 'nyo',
+    'ひゃ': 'hya', 'ひゅ': 'hyu', 'ひょ': 'hyo',
+    'びゃ': 'bya', 'びゅ': 'byu', 'びょ': 'byo',
+    'ぴゃ': 'pya', 'ぴゅ': 'pyu', 'ぴょ': 'pyo',
+    'みゃ': 'mya', 'みゅ': 'myu', 'みょ': 'myo',
+    'りゃ': 'rya', 'りゅ': 'ryu', 'りょ': 'ryo',
+    'ふぁ': 'fa', 'ふぃ': 'fi', 'ふぇ': 'fe', 'ふぉ': 'fo',
+    'うぃ': 'wi', 'うぇ': 'we', 'うぉ': 'wo', 'つぁ': 'tsa'
+};
+
+const P2_KANA_SINGLE = {
+    'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o',
+    'ぁ': 'a', 'ぃ': 'i', 'ぅ': 'u', 'ぇ': 'e', 'ぉ': 'o',
+    'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
+    'が': 'ga', 'ぎ': 'gi', 'ぐ': 'gu', 'げ': 'ge', 'ご': 'go',
+    'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so',
+    'ざ': 'za', 'じ': 'ji', 'ず': 'zu', 'ぜ': 'ze', 'ぞ': 'zo',
+    'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to',
+    'だ': 'da', 'ぢ': 'ji', 'づ': 'zu', 'で': 'de', 'ど': 'do',
+    'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no',
+    'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho',
+    'ば': 'ba', 'び': 'bi', 'ぶ': 'bu', 'べ': 'be', 'ぼ': 'bo',
+    'ぱ': 'pa', 'ぴ': 'pi', 'ぷ': 'pu', 'ぺ': 'pe', 'ぽ': 'po',
+    'ま': 'ma', 'み': 'mi', 'む': 'mu', 'め': 'me', 'も': 'mo',
+    'や': 'ya', 'ゆ': 'yu', 'よ': 'yo', 'ゃ': 'ya', 'ゅ': 'yu', 'ょ': 'yo',
+    'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro',
+    'わ': 'wa', 'を': 'wo', 'ん': 'n'
+};
+
+function p2HasJapanese(text) {
+    return /[\u3040-\u30ff\u4e00-\u9faf]/.test(String(text || ''));
+}
+
+function p2NormalizeKanaText(str) {
+    let s = String(str || '');
+    for (const [k, r] of Object.entries(P2_KATA_DIGRAPHS)) {
+        if (s.includes(k)) s = s.split(k).join(r);
+    }
+    for (const [k, r] of P2_KANJI_ROMAJI) {
+        if (s.includes(k)) s = s.split(k).join(r);
+    }
+    return s.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+}
+
+function p2ConvertChunk(rawChunk) {
+    const s = p2NormalizeKanaText(rawChunk);
+    let out = '';
+    for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        if (ch === 'っ') {
+            const pair = s.slice(i + 1, i + 3);
+            const nextRom = P2_KANA_DIGRAPHS[pair] || P2_KANA_SINGLE[s[i + 1]] || '';
+            if (nextRom.startsWith('ch')) out += 't';
+            else if (/^[bcdfghjklmnpqrstvwxyz]/.test(nextRom)) out += nextRom[0];
+            continue;
+        }
+        if (ch === 'ー') {
+            const m = out.match(/[aeiou](?!.*[aeiou])/);
+            out += m ? m[0] : '-';
+            continue;
+        }
+        const pair = s.slice(i, i + 2);
+        if (P2_KANA_DIGRAPHS[pair]) {
+            out += P2_KANA_DIGRAPHS[pair];
+            i++;
+            continue;
+        }
+        if (P2_KANA_SINGLE[ch]) {
+            out += P2_KANA_SINGLE[ch];
+            continue;
+        }
+        out += ch;
+    }
+    return out;
+}
+
+function p2ConvertToken(token) {
+    const norm = String(token || '')
+        .replace(/（[\s\u3000]*）/g, ' ( ) ')
+        .replace(/（/g, '(').replace(/）/g, ')')
+        .replace(/：/g, ': ').replace(/、/g, ', ').replace(/。/g, '.')
+        .replace(/？/g, '?').replace(/！/g, '!')
+        .replace(/・/g, ' · ').replace(/〜/g, '~')
+        .replace(/[「」]/g, '');
+
+    return norm.split(/( +)/).map(part => {
+        if (!part || /^ +$/.test(part)) return part;
+        const m = part.match(/^([(~]*)(.*?)([.,?!:)]*)$/);
+        if (!m) return p2ConvertChunk(part);
+        const [, pre, core, post] = m;
+        if (!core) return pre + post;
+        if (core === 'こんにちは') return pre + 'konnichiwa' + post;
+        if (core === 'こんばんは') return pre + 'konbanwa' + post;
+        if (core === 'は') return pre + 'wa' + post;
+        if (core === 'を') return pre + 'wo' + post;
+        if (core.endsWith('は')) return pre + p2ConvertChunk(core.slice(0, -1)) + ' wa' + post;
+        if (core.endsWith('を')) return pre + p2ConvertChunk(core.slice(0, -1)) + ' wo' + post;
+        if (core.endsWith('で') && core.length >= 3 && !core.endsWith('まで') && core !== 'あとで') {
+            return pre + p2ConvertChunk(core.slice(0, -1)) + ' de' + post;
+        }
+        return pre + p2ConvertChunk(core) + post;
+    }).join('');
+}
+
+function p2ToRomaji(text) {
+    return String(text || '')
+        .split(/ +/)
+        .map(p2ConvertToken)
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .replace(/\s+([.,?!:])/g, '$1')
+        .trim();
+}
+
+function p2WordByWordHtml(jpText) {
+    return String(jpText || '').split(/ +/).filter(Boolean).map(tok => {
+        if (!p2HasJapanese(tok)) {
+            return `<span class="inline-block mr-2 mb-1.5 align-top">${p2Escape(tok)}</span>`;
+        }
+        return `<span class="inline-flex flex-col items-start mr-2 mb-1.5 align-top">
+            <span>${p2Escape(tok)}</span>
+            <span class="p2-romaji text-[11px] sm:text-xs font-mono font-normal text-amber-300 leading-tight mt-0.5">${p2Escape(p2ToRomaji(tok))}</span>
+        </span>`;
+    }).join('');
+}
+
+function p2PromptRomajiHtml(q) {
+    if (!q || !q.q || /¿Cómo se lee/i.test(q.q)) return '';
+    const matches = [...String(q.q).matchAll(/「([^」]+)」/g)]
+        .map(m => m[1])
+        .filter(p2HasJapanese);
+    if (!matches.length) return '';
+    const pairs = matches.map(jp => `${p2Escape(jp)} → ${p2Escape(p2ToRomaji(jp))}`).join(' · ');
+    return `<p class="p2-romaji text-xs font-mono text-amber-300 mt-1">${pairs}</p>`;
+}
+
+function p2ToggleRomaji() {
+    const prog = p2Progress();
+    prog.showRomaji = !prog.showRomaji;
+    saveStateToStorage();
+    if (state.parcial && state.parcial.mode === 'p2cards') {
+        renderParcial2Cards(document.getElementById('parcialWorkspaceContainer'));
+    } else {
+        p2Render();
+    }
+}
+
+function p2RomajiToggleBtnHtml(compact = false) {
+    const on = Boolean(p2Progress().showRomaji);
+    const label = compact ? (on ? 'Rōmaji ON' : 'Rōmaji OFF') : (on ? 'Rōmaji debajo: ON' : 'Mostrar rōmaji: OFF');
+    return `<button type="button" id="p2RomajiToggleBtn" data-action="p2ToggleRomaji" aria-pressed="${on}"
+        title="Mostrar u ocultar la lectura en rōmaji debajo de las palabras japonesas"
+        class="px-3 ${compact ? 'py-1.5 text-xs' : 'py-2.5 text-sm'} rounded-xl font-bold border transition active:scale-95 inline-flex items-center gap-1.5 ${on ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-sm' : 'bg-slate-950/80 border-slate-700 text-slate-300 hover:text-white'}">
+        <i class="fa-solid fa-spell-check"></i>
+        <span>${label}</span>
+    </button>`;
 }
 
 function p2Escape(text) {
@@ -544,7 +744,9 @@ function p2HomeHtml() {
                 <button type="button" data-action="setParcialMode" data-args='["p2cards"]' class="${P2_BTN} bg-slate-800 text-sky-300 hover:bg-slate-700 border border-slate-700">
                     <i class="fa-solid fa-clone mr-1"></i> Tarjetas de repaso
                 </button>
+                ${p2RomajiToggleBtnHtml(false)}
             </div>
+            <p class="text-[11px] text-slate-400 mt-2">Puedes activar o desactivar <strong>Rōmaji</strong> en cualquier momento para ver la pronunciación debajo de cada palabra (hiragana y katakana).</p>
         </div>
         <div class="${P2_CARD}">
             <h3 class="text-base font-black text-white">Práctica por tema</h3>
@@ -575,7 +777,8 @@ function p2QuestionHtml() {
     const block = P2_BLOCKS.find(b => b.id === q.b);
     const reading = q.r ? P2_READINGS[q.r] : null;
     const progressPct = Math.round(((s.index + 1) / s.questions.length) * 100);
-    const hasJpAudio = /[\u3040-\u30ff\u4e00-\u9faf]/.test(q.correct);
+    const hasJpAudio = p2HasJapanese(q.correct);
+    const showRomaji = Boolean(p2Progress().showRomaji);
 
     const options = q.options.map((opt, i) => {
         let style = 'bg-slate-950/60 border-slate-700 text-white hover:border-emerald-500/60';
@@ -588,7 +791,10 @@ function p2QuestionHtml() {
         return `<button type="button" data-action="p2Choose" data-args='[${i}]' id="p2-opt-${i}" ${revealed ? 'disabled' : ''}
             class="w-full flex items-center gap-3 p-3.5 rounded-xl border-2 text-left transition active:scale-98 ${style}">
             <span class="w-7 h-7 shrink-0 rounded-lg bg-slate-800 text-slate-300 text-xs font-black flex items-center justify-center">${P2_LETTERS[i]}</span>
-            <span class="font-jp text-base sm:text-lg font-bold">${p2Escape(opt)}</span>
+            <span class="flex-1 min-w-0">
+                <span class="font-jp text-base sm:text-lg font-bold block">${p2Escape(opt)}</span>
+                ${showRomaji && p2HasJapanese(opt) ? `<span class="p2-romaji block text-xs font-mono font-normal text-amber-300 mt-0.5">${p2Escape(p2ToRomaji(opt))}</span>` : ''}
+            </span>
         </button>`;
     }).join('');
 
@@ -619,7 +825,8 @@ function p2QuestionHtml() {
                 <p class="text-[11px] uppercase tracking-wider font-bold text-slate-400">${p2Escape(s.title)}</p>
                 <p class="text-sm font-bold text-white">Pregunta ${s.index + 1} de ${s.questions.length} · <span class="stage-theme-accent-text">${block ? block.name : ''}</span></p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+                ${p2RomajiToggleBtnHtml(true)}
                 ${isExam ? `<span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 font-mono font-bold text-amber-300" aria-label="Tiempo restante"><i class="fa-solid fa-clock mr-1"></i><span id="p2Timer">${p2FormatTime(s.deadline - Date.now())}</span></span>` : ''}
                 <button type="button" data-action="p2ExitSession" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800">Salir</button>
             </div>
@@ -627,14 +834,19 @@ function p2QuestionHtml() {
         <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden"><div class="h-full bg-emerald-500 transition-all" style="width:${progressPct}%"></div></div>
         ${reading ? `<div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
             <div class="flex items-center justify-between gap-2 mb-1">
-                <p class="text-xs font-bold text-slate-400">Lectura: <span class="font-jp">${p2Escape(reading.title)}</span></p>
+                <p class="text-xs font-bold text-slate-400">Lectura: <span class="font-jp">${p2Escape(reading.title)}</span>${showRomaji ? ` <span class="p2-romaji font-mono font-normal text-amber-300">(${p2Escape(p2ToRomaji(reading.title))})</span>` : ''}</p>
                 ${p2SpeakBtn(reading.text, 'Escuchar lectura')}
             </div>
-            <p class="font-jp text-base leading-loose text-white">${p2Escape(reading.text)}</p>
+            ${showRomaji
+                ? `<div class="font-jp text-base leading-normal text-white flex flex-wrap pt-1">${p2WordByWordHtml(reading.text)}</div>`
+                : `<p class="font-jp text-base leading-loose text-white">${p2Escape(reading.text)}</p>`}
         </div>` : ''}
         <div>
             <p class="text-sm sm:text-base text-slate-200 font-semibold">${p2Escape(q.q)}</p>
-            ${q.s ? `<p class="font-jp text-xl sm:text-2xl font-bold text-white mt-2 leading-relaxed">${p2Escape(q.s)}</p>` : ''}
+            ${showRomaji ? p2PromptRomajiHtml(q) : ''}
+            ${q.s ? (showRomaji
+                ? `<div class="font-jp text-xl sm:text-2xl font-bold text-white mt-2 flex flex-wrap">${p2WordByWordHtml(q.s)}</div>`
+                : `<p class="font-jp text-xl sm:text-2xl font-bold text-white mt-2 leading-relaxed">${p2Escape(q.s)}</p>`) : ''}
         </div>
         <div class="grid gap-2.5">${options}</div>
         <p class="hidden sm:block text-[11px] text-slate-500">Teclado: 1–4 o A–D para responder${isExam ? ', ← → para moverte' : ', Enter para seguir'}.</p>
@@ -657,10 +869,12 @@ function p2ResultsHtml() {
             <div class="h-2 rounded-full bg-slate-800 mt-1 overflow-hidden"><div class="h-full ${pct >= 60 ? 'bg-emerald-500' : 'bg-rose-500'}" style="width:${pct}%"></div></div>
         </div>`;
     }).join('');
+    const showRomaji = Boolean(p2Progress().showRomaji);
     const wrong = s.questions.map((q, i) => ({ q, a: s.answers[i] })).filter(x => x.a !== x.q.correct).map(({ q, a }) => `
         <li class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
             <p class="text-xs text-slate-400">${p2Escape(q.q)}</p>
             ${q.s ? `<p class="font-jp font-bold text-white">${p2Escape(q.s)}</p>` : ''}
+            ${q.s && showRomaji ? `<p class="p2-romaji text-xs font-mono text-amber-300">${p2Escape(p2ToRomaji(q.s))}</p>` : ''}
             <p class="text-sm mt-1"><span class="text-rose-300">Tu respuesta: <span class="font-jp">${a === null ? '(sin responder)' : p2Escape(a)}</span></span> ·
                 <span class="text-emerald-300">Correcta: <span class="font-jp">${p2Escape(q.correct)}</span></span></p>
             <p class="text-xs text-slate-300 mt-1">${p2Escape(q.e)}</p>
@@ -1056,6 +1270,7 @@ function renderParcial2Cards(container) {
     const idx = ((p2CardsState.index % deck.length) + deck.length) % deck.length;
     const card = deck[idx];
     const flipped = p2CardsState.flipped;
+    const showRomaji = Boolean(p2Progress().showRomaji);
 
     const catBar = `<div class="flex flex-wrap gap-1.5 justify-center">
         ${P2_CARD_CATS.map(([id, label]) => `<button type="button" data-action="p2SetCardCategory" data-args='["${id}"]'
@@ -1064,11 +1279,14 @@ function renderParcial2Cards(container) {
 
     container.innerHTML = `<div class="space-y-5 max-w-2xl mx-auto">
         ${catBar}
-        <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 px-1">
             <span>Tarjeta <strong class="text-white">${idx + 1}</strong> de ${deck.length}</span>
-            <button type="button" data-action="p2ShuffleCards" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition">
-                <i class="fa-solid fa-shuffle mr-1"></i>Mezclar
-            </button>
+            <div class="flex items-center gap-2">
+                ${p2RomajiToggleBtnHtml(true)}
+                <button type="button" data-action="p2ShuffleCards" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition">
+                    <i class="fa-solid fa-shuffle mr-1"></i>Mezclar
+                </button>
+            </div>
         </div>
         <div data-action="p2FlipCard" role="button" tabindex="0" aria-label="Voltear tarjeta" id="p2CardSurface"
             class="${P2_CARD} min-h-[240px] flex flex-col items-center justify-center text-center cursor-pointer border-2 ${flipped ? 'border-emerald-500/60' : 'border-slate-700 hover:border-sky-500/50'} select-none space-y-3">
@@ -1080,6 +1298,7 @@ function renderParcial2Cards(container) {
                 <div class="py-4 space-y-2">
                     <div class="font-jp text-3xl sm:text-4xl font-black text-white">${p2Escape(card.front)}</div>
                     ${card.sub ? `<div class="text-sm font-jp text-slate-400">${p2Escape(card.sub)}</div>` : ''}
+                    ${showRomaji && p2HasJapanese(card.front) && (!card.sub || p2HasJapanese(card.sub)) ? `<div class="p2-romaji text-xs font-mono text-amber-300">${p2Escape(p2ToRomaji(card.front))}</div>` : ''}
                 </div>
                 <span class="text-xs text-slate-400"><i class="fa-solid fa-rotate mr-1"></i>Toca la tarjeta o pulsa Espacio para ver el significado</span>
             ` : `
